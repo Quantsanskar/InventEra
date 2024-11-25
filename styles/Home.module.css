@@ -1,0 +1,64 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: #000;
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #1a1a1a;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.login {
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.mainContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.imageContainer {
+  display: flex;
+  flex-direction: column;
+  margin-right: 2rem;
+}
+
+.imageContainer img {
+  width: 200px;
+  height: 300px;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+}
+
+.textContent {
+  text-align: center;
+  max-width: 600px;
+}
+
+.textContent h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.textContent p {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
