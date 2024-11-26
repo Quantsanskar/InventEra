@@ -26,7 +26,7 @@ const Header = () => {
 
     return (
         <header style={styles.header}>
-            <div style={styles.logo}>Inventera</div>
+            <div style={styles.logo}>Inventra</div>
             <div style={styles.login}>login to sage</div>
         </header>
     );
