@@ -29,7 +29,7 @@ const HomePage = () => {
       />
 
       {/* Centered Text */}
-      <div className="relative z-20 flex items-center justify-center h-full">
+      <div className="relative z-9 flex items-center justify-center h-full">
         <div className="text-center">
           <h1
             className="text-6xl md:text-8xl font-bold text-white
@@ -47,7 +47,7 @@ const HomePage = () => {
       </div>
 
       {/* Explore Button */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30">
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-9">
         <button
           className="bg-white bg-opacity-30 hover:bg-opacity-50 text-white font-medium py-3 px-6 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 transition-all duration-300"
           onClick={handleExploreClick}
