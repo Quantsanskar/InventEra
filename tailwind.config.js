@@ -5,6 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors:{
+        'custom-dark': '#212121', 
+      },
       animation: {
         'fade-in': 'fadeIn 1s ease-out',
         'fade-in-delay': 'fadeIn 1s ease-out 0.5s forwards',
