@@ -1,24 +1,14 @@
-/* globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Global dark theme styles */
-:root {
-    --background-color: #000;
-    --text-color: #fff;
-    --secondary-text-color: #c0c0c0;
-    --header-background: #1a1a1a;
-    --shadow-color: rgba(0, 0, 0, 0.2);
-}
-
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: var(--background-color);
-    color: var(--text-color);
-    line-height: 1.6;
+@layer utilities {
+  .animate-fade-in {
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+  }
+  .animate-fade-in-delay {
+    opacity: 0;
+    animation: fadeIn 1s ease-out 0.5s forwards;
+  }
 }

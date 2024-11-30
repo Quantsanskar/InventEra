@@ -1,35 +1,29 @@
 import React from 'react';
+import Link from 'next/link';
 
-const Header = () => {
-    const styles = {
-        header: {
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            padding: '1.5rem 2rem',
-            backgroundColor: 'rgb(10 9 9)',
-            boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-            fontFamily: '"Roboto Mono", monospace',
-            letterSpacing: '1px',
-        },
-        logo: {
-            fontSize: '1.8rem',
-            fontWeight: 'bold',
-        },
-        login: {
-            fontSize: '1.1rem',
-            cursor: 'pointer',
-            transition: 'color 0.3s ease',
-            color: '#c0c0c0',
-        },
-    };
-
+const Header=()=> {
     return (
-        <header style={styles.header}>
-            <div style={styles.logo}>Inventra</div>
-            <div style={styles.login}>login to sage</div>
-        </header>
+        <nav
+            className="fixed top-0 left-0 right-0 z-10 
+      bg-white/30 backdrop-blur-md 
+      shadow-sm transition-all duration-300"
+        >
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex justify-center h-16 items-center">
+                    <div className="flex space-x-8">
+                        <Link href="/" className="text-white hover:text-gray-200 font-medium">
+                            Home
+                        </Link>
+                        <Link href="/about" className="text-white hover:text-gray-200 font-medium">
+                            About
+                        </Link>
+                        <Link href="/contact" className="text-white hover:text-gray-200 font-medium">
+                            Contact
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        </nav>
     );
-};
-
+}
 export default Header;
