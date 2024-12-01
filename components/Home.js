@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { motion } from 'framer-motion';
 import Header from './Header';
 
+
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0, transition: { duration: 0.6 } },
@@ -15,6 +16,10 @@ const stagger = {
     },
   },
 };
+
+const openBuildersSpace=()=>{
+  window.open('https://www.commudle.com/communities/builders-space', '_blank');
+}
 
 const HomePage = () => {
   const bottomRef = useRef(null);
@@ -370,6 +375,7 @@ const HomePage = () => {
               <motion.button
                 className="bg-white bg-opacity-30 hover:bg-opacity-50 text-white font-medium py-3 px-6 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 transition-all duration-300 mt-4"
                 variants={fadeInUp}
+                onClick={openBuildersSpace}
               >
                 👉 Join Builder's Space
               </motion.button>

@@ -33,13 +33,13 @@ const socialLinks = [
     icon: Linkedin,
     color: 'bg-[#0077B5]'
   },
-//   {
-//     name: 'GitHub',
-//     handle: 'builders-space',
-//     url: 'https://github.com/builders-space',
-//     icon: Github,
-//     color: 'bg-gray-800'
-//   },
+  // {
+  //   name: 'GitHub',
+  //   handle: 'builders-space',
+  //   url: 'https://github.com/builders-space',
+  //   icon: Github,
+  //   color: 'bg-gray-800',
+  // },
   {
     name: 'Commudle',
     handle: 'Builders Space',
@@ -50,7 +50,7 @@ const socialLinks = [
   {
     name: 'Email',
     handle: 'hello@buildersspace.com',
-    url: 'mailto:hello@buildersspace.com',
+    url: 'mailto:',
     icon: Send,
     color: 'bg-red-500'
   }
