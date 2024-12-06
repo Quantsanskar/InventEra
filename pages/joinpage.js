@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from '@/components/Header';
+import {useRouter} from 'next/router';
 const JoinPage = () => {
   const [activeSection, setActiveSection] = useState('overview');
-
+  const router=useRouter();
   const pageVariants = {
     initial: { opacity: 0, scale: 0.95 },
     in: { opacity: 1, scale: 1 },
@@ -15,7 +16,12 @@ const JoinPage = () => {
     ease: "anticipate",
     duration: 0.5
   };
+  
 
+  const gotoRegisPage=()=>{
+    router.push('/regispage');
+  }
+  
   const textVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { 
@@ -162,6 +168,7 @@ const JoinPage = () => {
                   variants={textVariants}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  onClick={gotoRegisPage}
                   className="bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg transition"
                 >
                   Join as Member

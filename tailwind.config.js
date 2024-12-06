@@ -5,8 +5,11 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors:{
-        'custom-dark': '#212121', 
+      colors: {
+        'custom-dark': '#212121',
+      },
+      fontFamily: {
+        'caveat': ['Caveat', 'cursive']
       },
       animation: {
         'fade-in': 'fadeIn 1s ease-out',
