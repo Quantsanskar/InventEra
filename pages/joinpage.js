@@ -21,6 +21,9 @@ const JoinPage = () => {
   const gotoRegisPage=()=>{
     router.push('/regispage');
   }
+  const gotoLogin=()=>{
+    router.push('/login');
+  }
   
   const textVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -178,6 +181,7 @@ const JoinPage = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-gray-800 hover:bg-gray-700 text-white py-3 rounded-lg transition"
+                  onClick={gotoLogin}
                 >
                   Login
                 </motion.button>

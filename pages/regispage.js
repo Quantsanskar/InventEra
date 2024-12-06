@@ -20,7 +20,7 @@ const RegistrationPage = () => {
         referralSource: ''
     });
 
-    const [typedText, setTypedText] = useState('');
+    const [typedText, setTypedText] = useState("");
     const [showSuccessPopup, setShowSuccessPopup] = useState(false);
     const communityDescription = "Join a tribe of creators who turn ideas into reality. No limits, just pure potential.";
 
@@ -35,8 +35,9 @@ const RegistrationPage = () => {
             }
         }, 50);
 
-        return () => clearInterval(typingInterval);
+        return () => clearInterval(typingInterval); // Clean up interval on unmount
     }, []);
+
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
