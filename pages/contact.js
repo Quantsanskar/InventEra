@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Header from '@/components/Header';
 import { 
   Instagram, 
   Twitter, 
@@ -81,17 +82,8 @@ const ContactPage = () => {
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4">
-      <motion.div 
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="absolute top-4 left-4 md:top-8 md:left-8"
-      >
-        <Link href="/" className="flex items-center space-x-2 text-white hover:text-gray-300 transition-colors">
-          <ArrowLeft size={24} />
-          <span className="text-base md:text-lg font-medium">Back to Home</span>
-        </Link>
-      </motion.div>
+      <Header/>
+      
 
       {/* Header Section */}
       <motion.div 
@@ -100,7 +92,7 @@ const ContactPage = () => {
         transition={{ duration: 0.5 }}
         className="text-center mb-8 md:mb-12"
       >
-        <h1 className="text-3xl md:text-5xl mt-10 font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-500">
+        <h1 className="text-3xl md:text-5xl mt-20 font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-500">
           Builders' Space
         </h1>
         <p className="text-lg md:text-xl text-gray-300">Connect with us everywhere</p>

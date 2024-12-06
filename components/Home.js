@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import Head from 'next/head';
 import { motion } from 'framer-motion';
 import Header from './Header';
+import { useRouter } from 'next/router';
 
 
 const fadeInUp = {
@@ -17,17 +18,20 @@ const stagger = {
   },
 };
 
-const openBuildersSpace=()=>{
-  window.open('https://www.commudle.com/communities/builders-space', '_blank');
-}
+
 
 const HomePage = () => {
   const bottomRef = useRef(null);
   const additionalContentRef = useRef(null);
+  const router = useRouter();
 
   const handleExploreClick = () => {
     bottomRef.current.scrollIntoView({ behavior: 'smooth' });
   };
+
+  const openBuildersSpace=()=>{
+    router.push('/joinpage');
+  }
 
   const handleAdditionalContentClick = () => {
     additionalContentRef.current.scrollIntoView({ behavior: 'smooth' });
