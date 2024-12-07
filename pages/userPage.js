@@ -15,7 +15,7 @@ const UserPage = () => {
 
         if (!builderProfile) {
             // Redirect to login if no builder profile
-            window.location.href = '/builder-login';
+            window.location.href = '/login';
             return;
         }
 
