@@ -17,6 +17,9 @@ const Header=()=> {
                         <Link href="/joinpage" className="text-white hover:text-gray-200 font-medium">
                             Join Us
                         </Link>
+                        <Link href="/userPage" className="text-white hover:text-gray-200 font-medium">
+                            Builders Network
+                        </Link>
                         <Link href="/contact" className="text-white hover:text-gray-200 font-medium">
                             Contact
                         </Link>
