@@ -146,7 +146,7 @@ const JoinPage = () => {
                 variants={textVariants}
                 className="text-6xl md:text-7xl font-bold text-blue-500"
               >
-                1,247
+                237
               </motion.div>
               <motion.p 
                 variants={textVariants}
@@ -190,14 +190,7 @@ const JoinPage = () => {
           )}
         </AnimatePresence>
 
-        <motion.footer
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="text-center text-gray-500 mt-8 py-4"
-        >
-          <p>© 2024 Builders' Space</p>
-        </motion.footer>
+        
       </div>
     </motion.div>
   );
