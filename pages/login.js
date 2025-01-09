@@ -36,7 +36,7 @@ const BuilderLogin = () => {
         // If no stored profile, fetch existing builders from the backend
         const fetchBuilders = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/builders/');
+                const response = await axios.get('https://sanskar065.pythonanywhere.com/api/builders/');
                 setExistingBuilders(response.data);
             } catch (error) {
                 console.error('Error fetching builders:', error);
