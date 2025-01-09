@@ -109,7 +109,7 @@ const RegisLoginAI = () => {
                             This is the place where people work on ideas they are passionate about.
                         </p>
                     </div>
-                    <div className="space-y-4">
+                    <div className="space-y-4 mb-8">
                         <button className="w-full bg-white text-black py-2 sm:py-3 px-6 rounded-lg text-sm sm:text-base font-medium hover:bg-gray-100 transition">
                             Sign In
                         </button>
