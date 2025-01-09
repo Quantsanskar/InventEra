@@ -24,7 +24,7 @@ const UserPage = () => {
         // Fetch all builder profiles
         const fetchBuilderProfiles = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/builders/');
+                const response = await axios.get('https://sanskar065.pythonanywhere.com/api/builders/');
 
                 // Filter out current builder's profile
                 const filteredBuilders = response.data.filter(
