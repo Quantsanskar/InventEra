@@ -123,7 +123,7 @@ const BuilderLogin = () => {
             const matchedBuilder = existingBuilders.find(builder =>
                 builder.name === formData.name &&
                 builder.email === formData.email &&
-                builder.mobileNumber === `+91${formData.mobileNumber}`
+                builder.mobileNumber === formData.mobileNumber
             );
 
             if (matchedBuilder) {
@@ -209,7 +209,7 @@ const BuilderLogin = () => {
                         {/* Mobile Number Input Field */}
                         <div>
                             <div className="flex items-center">
-                                <span className="text-[#6b6b6b] mr-2">+91</span>
+                                {/* <span className="text-[#6b6b6b] mr-2">+91</span> */}
                                 <input
                                     type="tel"
                                     name="mobileNumber"
