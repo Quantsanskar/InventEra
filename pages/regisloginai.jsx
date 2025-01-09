@@ -8,11 +8,11 @@ const RegisLoginAI = () => {
 
     // Sample data for the carousel
     const mediaItems = [
-        { id: 1, image: '/image1.png' },
-        { id: 2, image: '/image1.png' },
-        { id: 3, image: '/image1.png' },
-        { id: 4, image: '/image1.png' },
-        { id: 5, image: '/image1.png' }
+        { id: 1, image: '/carousel1/dev1.png' },
+        { id: 2, image: '/carousel1/dev2.png' },
+        { id: 3, image: '/carousel1/dev3.png' },
+        { id: 4, image: '/carousel1/dev4.png' },
+        { id: 5, image: '/carousel1/dev5.png' }
     ];
 
     useEffect(() => {
