@@ -42,7 +42,7 @@ const JoinPage = () => {
   const fetchMemberCount = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('/api/member-count');
+      const response = await fetch('http://127.0.0.1:8000/api/member-count/'); // Update URL if needed
       const data = await response.json();
       setMemberCount(data.count);
     } catch (error) {
@@ -52,7 +52,6 @@ const JoinPage = () => {
       setIsLoading(false);
     }
   };
-
   const pageVariants = {
     initial: { opacity: 0, scale: 0.95 },
     in: { opacity: 1, scale: 1 },
