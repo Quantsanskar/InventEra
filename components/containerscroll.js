@@ -11,7 +11,8 @@ export function ScrollDemo() {
           controls
           loop
           playsInline
-          className="w-full h-full object-cover rounded-xl"
+          className="w-full h-full object-cover"
+          style={{ objectFit: 'cover' }}
         >
           <source src="/videos/palak-video.mp4" type="video/mp4" />
           Your browser does not support the video tag.

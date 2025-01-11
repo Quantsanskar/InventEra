@@ -9,7 +9,7 @@ import { FloatingNavbar } from "../components/floatingnavbar";
 import { TechStickyScroll } from "../components/techstickyroll";
 import { FlipWords } from "../components/flipwords";
 import { ScrollDemo } from '../components/containerscroll'
-
+import TextGenerateEffect from "../components/text-gen";
 // Simple NavItem component
 const NavItem = ({ href, children }) => (
     <Link href={href}>
@@ -72,7 +72,6 @@ const EventPage = () => {
 
     const words = [
         "Heyy, welcome to The Nights",
-        "firstly, let's get to know each other",
         "are you ready to build something amazing?",
         "but want a platform and community to help you?",
         "then you're in the right place",
@@ -108,7 +107,7 @@ const EventPage = () => {
                 </div>
             </section>
 
-            <div className="text-center mb-8 md:mb-16 sm:mb-4">
+            {/* <div className="text-center mb-8 md:mb-16 sm:mb-4">
                 <h1 className="text-5xl md:text-6xl font-bold text-white">
                     {" "}
                     <FlipWords
@@ -117,10 +116,13 @@ const EventPage = () => {
                         className="text-blue-400"
                     />
                 </h1>
+            </div> */}
+            <div className="text-center mb-8 md:mb-16 sm:mb-4">
+                <TextGenerateEffect words={words} />
             </div>
 
             <div className="mt-4 md:mt-8 sm:mt-2">
-                <ScrollDemo/>
+                <ScrollDemo />
             </div>
 
             {/* Notion-like Season Description Section */}
@@ -137,116 +139,64 @@ const EventPage = () => {
                     </div>
 
                     {/* Table of Contents */}
-                    <div className="bg-[#212121] rounded-xl p-6 space-y-2">
-                        <h3 className="text-2xl font-semibold mb-4">Quick Navigation</h3>
-                        <div className="grid md:grid-cols-2 gap-4">
-                            {[
-                                "🎯 Program Overview",
-                                "💡 What We Offer",
-                                "📅 Timeline & Schedule",
-                                "🤝 Community Benefits",
-                                "🎨 Who Can Join",
-                                "📍 Important Details"
-                            ].map((item) => (
-                                <div key={item} className="flex items-center space-x-2 text-gray-300 hover:text-blue-400 transition-colors">
-                                    <span className="text-lg">{item}</span>
-                                </div>
-                            ))}
+                    <div className="max-w-4xl mx-auto p-8 bg-[#191919] text-gray-200">
+                        {/* Title Section */}
+                        <div className="mb-12">
+                            <h1 className="text-4xl font-bold mb-4 text-white">The Nights: Season One</h1>
+                            <p className="text-xl text-gray-400">A 3-week journey of creation, collaboration, and community.</p>
                         </div>
-                    </div>
 
-                    {/* Content Sections */}
-                    <div className="space-y-16">
-                        {/* Program Overview */}
-                        <div className="space-y-6">
-                            <h2 className="text-3xl md:text-4xl font-bold text-blue-400">🎯 Program Overview</h2>
-                            <div className="bg-[#212121] rounded-xl p-6 space-y-4">
-                                <p className="text-xl text-gray-300">
-                                    The Nights is a unique 3-week program designed to help creators turn their ideas into reality. 
-                                    Whether you're a developer, designer, artist, or innovator, this is your platform to build, learn, and grow.
+                        {/* Content Sections */}
+                        <div className="space-y-10">
+                            {/* Program Overview */}
+                            <div>
+                                <h2 className="text-2xl font-semibold mb-4 text-white">🎯 Program Overview</h2>
+                                <p className="text-lg leading-relaxed mb-6">
+                                    Welcome to The Nights: Season One, a unique 3-week program designed for creators, developers, artists, and innovators. Whether you're into tech, design, art, music, or any creative pursuit, this is your platform to learn, create, and showcase your work to the world.
                                 </p>
-                                <div className="grid md:grid-cols-3 gap-4 mt-6">
-                                    {[
-                                        { title: "Duration", value: "3 Weeks" },
-                                        { title: "Format", value: "Hybrid (Virtual + Offline)" },
-                                        { title: "Final Event", value: "Demo Day Showcase" }
-                                    ].map((item) => (
-                                        <div key={item.title} className="bg-[#191919] p-4 rounded-lg">
-                                            <h4 className="text-gray-400">{item.title}</h4>
-                                            <p className="text-lg font-semibold text-white">{item.value}</p>
-                                        </div>
-                                    ))}
-                                </div>
+                                <p className="text-lg leading-relaxed">
+                                    Duration: 3 Weeks
+                                    Format: Hybrid (Virtual + Offline)
+                                    Final Event: Demo Day Showcase
+                                </p>
                             </div>
-                        </div>
 
-                        {/* What We Offer */}
-                        <div className="space-y-6">
-                            <h2 className="text-3xl md:text-4xl font-bold text-purple-400">💡 What We Offer</h2>
-                            <div className="grid md:grid-cols-2 gap-6">
-                                {[
-                                    {
-                                        title: "Interactive Workshops",
-                                        description: "Hands-on sessions with industry experts",
-                                        icon: "🎓"
-                                    },
-                                    {
-                                        title: "Speaker Sessions (Labs)",
-                                        description: "Learn from successful builders and creators",
-                                        icon: "🎙️"
-                                    },
-                                    {
-                                        title: "Build Challenges",
-                                        description: "Put your skills to test with real projects",
-                                        icon: "🚀"
-                                    },
-                                    {
-                                        title: "Networking",
-                                        description: "Connect with like-minded creators",
-                                        icon: "🤝"
-                                    }
-                                ].map((item) => (
-                                    <div key={item.title} className="bg-[#212121] p-6 rounded-xl hover:bg-[#252525] transition-colors">
-                                        <div className="text-3xl mb-4">{item.icon}</div>
-                                        <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                                        <p className="text-gray-400">{item.description}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Important Details Card */}
-                        <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-xl p-8 border border-gray-800">
-                            <h3 className="text-3xl font-bold mb-6">📍 Important Details</h3>
-                            <div className="grid md:grid-cols-2 gap-6">
+                            {/* What We Offer */}
+                            <div>
+                                <h2 className="text-2xl font-semibold mb-4 text-white">💡 What We Offer</h2>
                                 <div className="space-y-4">
-                                    <div>
-                                        <h4 className="text-blue-400 text-lg">Start Date</h4>
-                                        <p className="text-xl">January 15th, 2024</p>
-                                    </div>
-                                    <div>
-                                        <h4 className="text-blue-400 text-lg">Contact</h4>
-                                        <p className="text-xl">buildersspace9@gmail.com</p>
-                                    </div>
-                                </div>
-                                <div className="space-y-4">
-                                    <div>
-                                        <h4 className="text-blue-400 text-lg">Format</h4>
-                                        <p className="text-xl">Virtual + Offline Demo Day</p>
-                                    </div>
-                                    <div>
-                                        <h4 className="text-blue-400 text-lg">Website</h4>
-                                        <p className="text-xl">buildersspace.tech</p>
-                                    </div>
+                                    <p className="text-lg leading-relaxed">
+                                        🎓 Interactive Workshops: Hands-on sessions with industry experts where you'll learn practical skills and insights.
+                                    </p>
+                                    <p className="text-lg leading-relaxed">
+                                        🎙️ Speaker Sessions (Labs): Learn directly from successful builders and creators who've been where you are.
+                                    </p>
+                                    <p className="text-lg leading-relaxed">
+                                        🚀 Build Challenges: Put your skills to the test with real projects that matter. Work on what excites you most.
+                                    </p>
+                                    <p className="text-lg leading-relaxed">
+                                        🤝 Networking: Connect with like-minded creators in a supportive community environment.
+                                    </p>
                                 </div>
                             </div>
-                        </div>
 
-                        {/* Footer Quote */}
-                        <div className="text-center border-t border-gray-800 pt-8">
-                            <p className="text-2xl md:text-3xl italic bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
-                                "Where builders create and creators build!"
-                            </p>
+                            {/* Important Details */}
+                            <div>
+                                <h2 className="text-2xl font-semibold mb-4 text-white">📍 Important Details</h2>
+                                <div className="space-y-4">
+                                    <p className="text-lg leading-relaxed">Start Date: January 15th, 2024</p>
+                                    <p className="text-lg leading-relaxed">Contact: buildersspace9@gmail.com</p>
+                                    <p className="text-lg leading-relaxed">Format: Virtual + Offline Demo Day</p>
+                                    {/* <p className="text-lg leading-relaxed">Website: buildersspace.tech</p> */}
+                                </div>
+                            </div>
+
+                            {/* Closing */}
+                            <div className="pt-8 border-t border-gray-800">
+                                <p className="text-xl italic text-gray-400">
+                                    "Where builders create and creators build!"
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>

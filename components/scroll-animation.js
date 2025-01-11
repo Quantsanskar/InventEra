@@ -1,6 +1,5 @@
-// components/ui/container-scroll-animation.js
 "use client";
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
 
 export const ContainerScroll = ({ children }) => {
@@ -9,39 +8,57 @@ export const ContainerScroll = ({ children }) => {
     target: containerRef,
   });
 
-  const [isMobile, setIsMobile] = React.useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [orientation, setOrientation] = useState('portrait');
 
-  React.useEffect(() => {
-    const checkMobile = () => {
+  useEffect(() => {
+    const checkDevice = () => {
       setIsMobile(window.innerWidth <= 768);
+      setOrientation(window.innerHeight > window.innerWidth ? 'portrait' : 'landscape');
     };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
+    
+    checkDevice();
+    window.addEventListener("resize", checkDevice);
+    window.addEventListener("orientationchange", checkDevice);
+    
     return () => {
-      window.removeEventListener("resize", checkMobile);
+      window.removeEventListener("resize", checkDevice);
+      window.removeEventListener("orientationchange", checkDevice);
     };
   }, []);
 
-  const scaleDimensions = () => {
-    return isMobile ? [0.7, 0.9] : [1.05, 1];
+  const getDeviceDimensions = () => {
+    if (isMobile) {
+      return orientation === 'portrait' 
+        ? { width: '320px', height: '640px' }
+        : { width: '640px', height: '320px' };
+    }
+    return { width: '70%', height: '600px' };
   };
 
   const rotate = useTransform(scrollYProgress, [0, 1], [20, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], scaleDimensions());
-  const translate = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
+
+  const dimensions = getDeviceDimensions();
 
   return (
     <div
-      className="h-[60rem] md:h-[65rem] flex items-center justify-center relative p-2 md:p-20"
+      className="h-[40rem] md:h-[50rem] flex items-center justify-center relative p-4 md:p-8"
       ref={containerRef}
     >
       <div
-        className="py-10 md:py-40 w-full relative"
+        className="w-full relative"
         style={{
           perspective: "1000px",
         }}
       >
-        <Card rotate={rotate} scale={scale}>
+        <Card 
+          rotate={rotate} 
+          scale={scale} 
+          dimensions={dimensions}
+          isMobile={isMobile}
+          orientation={orientation}
+        >
           {children}
         </Card>
       </div>
@@ -49,18 +66,42 @@ export const ContainerScroll = ({ children }) => {
   );
 };
 
-const Card = ({ rotate, scale, children }) => {
+const Card = ({ rotate, scale, dimensions, isMobile, orientation, children }) => {
+  const phoneFrame = isMobile ? {
+    borderRadius: '30px',
+    border: '12px solid #333',
+    boxShadow: '0 0 0 2px #222',
+    ...(orientation === 'portrait' ? {
+      width: dimensions.width,
+      height: dimensions.height,
+    } : {
+      width: dimensions.width,
+      height: dimensions.height,
+      transform: `rotate(${90}deg)`,
+    })
+  } : {};
+
   return (
     <motion.div
       style={{
         rotateX: rotate,
         scale,
-        boxShadow:
-          "0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a, 0 233px 65px #00000003",
+        ...phoneFrame,
+        margin: '0 auto',
+        width: dimensions.width,
+        height: dimensions.height,
+        overflow: 'hidden',
       }}
-      className="max-w-5xl mx-auto h-[30rem] md:h-[40rem] w-full border-4 border-[#6C6C6C] p-2 md:p-6 bg-[#222222] rounded-[30px] shadow-2xl"
+      className={`relative border-4 border-[#6C6C6C] bg-[#222222] rounded-[30px] shadow-2xl 
+        ${isMobile ? 'transition-all duration-300' : ''}`}
     >
-      <div className="h-full w-full overflow-hidden rounded-2xl bg-gray-100 dark:bg-zinc-900 md:rounded-2xl md:p-4">
+      {isMobile && (
+        <>
+          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-1/3 h-6 bg-[#222] rounded-b-2xl z-10" />
+          <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-16 h-2 bg-[#333] rounded-full z-20" />
+        </>
+      )}
+      <div className="h-full w-full overflow-hidden rounded-2xl bg-gray-100 dark:bg-zinc-900">
         {children}
       </div>
     </motion.div>
