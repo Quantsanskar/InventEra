@@ -10,6 +10,10 @@ import { TechStickyScroll } from "../components/techstickyroll";
 import { FlipWords } from "../components/flipwords";
 import { ScrollDemo } from '../components/containerscroll'
 import TextGenerateEffect from "../components/text-gen";
+import { Compare } from "../components/compare";
+import HeroParallax from "../components/HeroParallax";
+import MacbookScroll from "../components/macbookgrid";
+import { PageShowcase } from "../components/notionpage";
 // Simple NavItem component
 const NavItem = ({ href, children }) => (
     <Link href={href}>
@@ -23,6 +27,33 @@ const NavItem = ({ href, children }) => (
     </Link>
 );
 
+const eventThemes = [
+    {
+        title: "Artificial Intelligence & Machine Learning",
+        link: "/themes/ai-ml",
+        thumbnail: "/images/theme1.png", // Add your image path here
+    },
+    {
+        title: "Augmented & Virtual Reality",
+        link: "/themes/ar-vr",
+        thumbnail: "/images/theme1.png", // Add your image path here
+    },
+    {
+        title: "Creative Design & Digital Art",
+        link: "/themes/design",
+        thumbnail: "/images/theme1.png", // Add your image path here
+    },
+    {
+        title: "Hardware & IoT Innovation",
+        link: "/themes/hardware",
+        thumbnail: "/images/theme1.png", // Add your image path here
+    },
+    {
+        title: "Web3 & Blockchain",
+        link: "/themes/web3",
+        thumbnail: "/images/theme1.png", // Add your image path here
+    }
+];
 // Simplified Nav component
 const Nav = () => (
     <nav className="relative rounded-full border border-transparent dark:bg-black dark:border-white/[0.2] bg-white shadow-input flex justify-center space-x-8 px-8 py-6">
@@ -78,6 +109,41 @@ const EventPage = () => {
         "we're here to help you grow and succeed",
         "so, let's get started",
     ];
+
+
+    const pages = [
+        {
+            title: "Home",
+            value: "home",
+            description: "Welcome to our platform! Discover our latest features and updates. Our home page showcases everything you need to know about our services and mission.",
+            link: "https://example.com/home"
+        },
+        {
+            title: "About Us",
+            value: "about",
+            description: "Learn about our journey, our team, and our vision for the future. We're committed to delivering excellence in everything we do.",
+            link: "https://example.com/about"
+        },
+        {
+            title: "Services",
+            value: "services",
+            description: "Explore our comprehensive range of services designed to meet your needs. From consulting to implementation, we've got you covered.",
+            link: "https://example.com/services"
+        },
+        {
+            title: "Portfolio",
+            value: "portfolio",
+            description: "Browse through our successful projects and case studies. See how we've helped businesses transform and grow.",
+            link: "https://example.com/portfolio"
+        },
+        {
+            title: "Contact",
+            value: "contact",
+            description: "Get in touch with our team for inquiries, support, or collaboration opportunities. We're here to help you succeed.",
+            link: "https://example.com/contact"
+        }
+    ];
+
 
     return (
         <main className="flex flex-col min-h-screen bg-gradient-to-b from-white to-gray-100 dark:from-black dark:to-gray-900">
@@ -202,9 +268,66 @@ const EventPage = () => {
                 </div>
             </section>
 
-            <div>
-                <TechStickyScroll />
+            <div className="min-h-screen bg-gray-950 py-20 mb-20">
+                <div className="max-w-6xl mx-auto px-4">
+                    <h1 className="text-4xl font-bold text-white mb-12 text-center">Our Pages</h1>
+                    <div className="h-[30rem] md:h-[40rem] [perspective:1000px] relative flex flex-col w-full items-start justify-start">
+                        <PageShowcase
+                            pages={pages}
+                            containerClassName="mb-8"
+                            activePageClassName="bg-gray-800"
+                            pageClassName="hover:text-blue-400 transition-colors"
+                        />
+                    </div>
+                </div>
             </div>
+
+            <div className="min-h-screen w-full bg-black flex items-center justify-center p-8">
+                <div className="flex flex-col items-center gap-8">
+                    <h2 className="text-3xl md:text-4xl font-bold text-white text-center">
+                        Transform Your Journey With Us
+                    </h2>
+                    <div className="relative p-6 rounded-3xl bg-neutral-900/50 border border-neutral-800">
+                        <Compare
+                            firstImage="/images/saddev.png"
+                            secondImage="/images/happydev.png"
+                            firstImageClassName="object-cover rounded-2xl"
+                            secondImageClassname="object-cover rounded-2xl"
+                            className="h-[300px] w-[300px] md:h-[500px] md:w-[500px]"
+                            slideMode="hover"
+                            initialSliderPercentage={50}
+                            autoplay={false}  // Changed to false
+                            autoplayOnHover={true}  // Added new prop
+                            autoplayDuration={3000}
+                        />
+                        <div className="absolute -bottom-12 left-0 right-0 flex justify-between px-4">
+                            <div className="text-center">
+                                <h3 className="text-white font-bold text-lg mb-1">Solo Developer</h3>
+                                <p className="text-neutral-400 text-sm">Working in isolation</p>
+                            </div>
+                            <div className="text-center">
+                                <h3 className="text-white font-bold text-lg mb-1">Community Member</h3>
+                                <p className="text-neutral-400 text-sm">Thriving with support</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p className="text-neutral-400 text-center max-w-lg mt-16 text-sm md:text-base">
+                        Experience the power of community - where solo developers become part of something bigger. Join us to accelerate your growth and unlock your full potential.
+                    </p>
+                </div>
+            </div>
+
+            <div className="bg-black ">
+                <HeroParallax products={eventThemes} />
+            </div>
+
+            <div className="overflow-hidden bg-black w-full min-h-screen">
+                <MacbookScroll src="/images/1372963 (1).png" />
+            </div>
+
+            {/* <div>
+                <TechStickyScroll />
+            </div> */}
         </main>
     );
 };

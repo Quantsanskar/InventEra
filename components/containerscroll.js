@@ -14,7 +14,7 @@ export function ScrollDemo() {
           className="w-full h-full object-cover"
           style={{ objectFit: 'cover' }}
         >
-          <source src="/videos/palak-video.mp4" type="video/mp4" />
+          <source src="/videos/Buildspace intro.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </ContainerScroll>
