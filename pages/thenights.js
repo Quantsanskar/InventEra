@@ -113,34 +113,46 @@ const EventPage = () => {
 
     const pages = [
         {
-            title: "Home",
-            value: "home",
-            description: "Welcome to our platform! Discover our latest features and updates. Our home page showcases everything you need to know about our services and mission.",
-            link: "https://example.com/home"
+            title: "BuilderSpace",
+            value: "builderspace",
+            description: "Welcome to Builder's Space—where innovation meets creativity! We're a platform for tech wizards, artists, and creators of all kinds. No degrees required, just passion and ambition. Join our community to build cool stuff with cooler people, access mentorship, workshops, and showcase opportunities. Whether you're coding the next big app or crafting digital art, this is your launchpad.",
+            link: "/n1"
         },
         {
-            title: "About Us",
-            value: "about",
-            description: "Learn about our journey, our team, and our vision for the future. We're committed to delivering excellence in everything we do.",
-            link: "https://example.com/about"
+            title: "Community",
+            value: "community",
+            description: "Join our vibrant community of creators, developers, artists, and innovators! Nights: Season One offers a 3-week journey of learning, building, and networking. Connect with like-minded individuals, participate in interactive workshops, and showcase your work at our grand finale Demo Day. Experience the power of collaborative learning and creative growth.",
+            link: "/notioncommunity"
         },
         {
-            title: "Services",
-            value: "services",
-            description: "Explore our comprehensive range of services designed to meet your needs. From consulting to implementation, we've got you covered.",
-            link: "https://example.com/services"
+            title: "Sponsors",
+            value: "sponsors",
+            description: "Our sponsors are industry leaders committed to empowering the next generation of creators. They provide essential resources, cutting-edge tools, mentorship opportunities, and valuable connections. Through our sponsorship program, participants gain access to premium technologies and platforms that accelerate their development journey.",
+            link: "/notionsponsors"
         },
         {
-            title: "Portfolio",
-            value: "portfolio",
-            description: "Browse through our successful projects and case studies. See how we've helped businesses transform and grow.",
-            link: "https://example.com/portfolio"
+            title: "Speakers",
+            value: "speakers",
+            description: "Learn from industry experts and thought leaders who share their journey, insights, and expertise. Our speaker series features diverse topics from technical skills to entrepreneurship. Each session is carefully curated to provide practical knowledge and inspiration for your creative journey. Connect with speakers who've walked the path you're on.",
+            link: "/notionspeakers"
         },
         {
-            title: "Contact",
-            value: "contact",
-            description: "Get in touch with our team for inquiries, support, or collaboration opportunities. We're here to help you succeed.",
-            link: "https://example.com/contact"
+            title: "Schedule",
+            value: "schedule",
+            description: "Our 3-week program is carefully structured for maximum impact. Week 1: Foundation & Ideation - discover your path. Week 2: Build & Iterate - bring your ideas to life. Week 3: Polish & Present - prepare for the grand showcase. Each week includes workshops, speaker sessions, build time, and networking opportunities.",
+            link: "/notionschedule"
+        },
+        {
+            title: "Audience",
+            value: "audience",
+            description: "Builder's Space welcomes creators of all backgrounds and skill levels. Whether you're a developer, designer, artist, entrepreneur, or innovator, there's a place for you here. Our community includes students, professionals, and hobbyists united by their passion for building and creating. Join a diverse ecosystem that supports your growth.",
+            link: "/notionsaudience"
+        },
+        {
+            title: "Winner Selection",
+            value: "winner selection",
+            description: "Projects are evaluated based on innovation (40%), technical complexity (30%), execution (20%), and presentation (10%). Our diverse panel of judges provides constructive feedback to help you grow. Winners receive mentorship opportunities, resources for project development, and exposure to industry leaders. Every participant gets valuable feedback.",
+            link: "/notionwinners"
         }
     ];
 
@@ -270,7 +282,7 @@ const EventPage = () => {
 
             <div className="min-h-screen bg-gray-950 py-20 mb-20">
                 <div className="max-w-6xl mx-auto px-4">
-                    <h1 className="text-4xl font-bold text-white mb-12 text-center">Our Pages</h1>
+                    <h1 className="text-4xl font-bold text-white mb-12 text-center">Everything about "The Nights"</h1>
                     <div className="h-[30rem] md:h-[40rem] [perspective:1000px] relative flex flex-col w-full items-start justify-start">
                         <PageShowcase
                             pages={pages}
