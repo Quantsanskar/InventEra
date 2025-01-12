@@ -4,7 +4,7 @@ import React from "react";
 import SparklesCore from "../components/SparklesCore";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { IconHome, IconMusic, IconMail } from "@tabler/icons-react";
+import { IconHome, IconMoonStars, IconMail } from "@tabler/icons-react";
 import { FloatingNavbar } from "../components/floatingnavbar";
 import { TechStickyScroll } from "../components/techstickyroll";
 import { FlipWords } from "../components/flipwords";
@@ -14,6 +14,9 @@ import { Compare } from "../components/compare";
 import HeroParallax from "../components/HeroParallax";
 import MacbookScroll from "../components/macbookgrid";
 import { PageShowcase } from "../components/notionpage";
+import { LayoutGrid } from "../components/gridcomponent";
+import { LampImp } from "../components/lamp";
+import { Footer } from "../components/footer";
 // Simple NavItem component
 const NavItem = ({ href, children }) => (
     <Link href={href}>
@@ -74,7 +77,7 @@ const EventPage = () => {
         },
         {
             title: "The Nights",
-            icon: <IconMusic className="h-full w-full text-neutral-500 dark:text-neutral-300" />,
+            icon: <IconMoonStars className="h-full w-full text-neutral-500 dark:text-neutral-300" />,
             href: "/thenights",
         },
         {
@@ -156,6 +159,79 @@ const EventPage = () => {
         }
     ];
 
+    const CardContent = ({ title, description }) => {
+        return (
+            <div>
+                <p className="font-bold md:text-4xl text-xl text-white">{title}</p>
+                <p className="font-normal text-base my-4 max-w-lg text-neutral-200">
+                    {description}
+                </p>
+            </div>
+        );
+    };
+
+    const cards = [
+        {
+            id: 1,
+            content: (
+                <CardContent
+                    title="Build & Learn"
+                    description="Join hands-on workshops and build real projects with expert guidance."
+                />
+            ),
+            className: "md:col-span-2 row-span-1",
+            media: {
+                type: "gif",
+                src: "/gifs/215739.gif",
+                alt: "Building projects",
+            },
+        },
+        {
+            id: 2,
+            content: (
+                <CardContent
+                    title="Connect & Grow"
+                    description="Network with fellow creators and industry leaders in our vibrant community."
+                />
+            ),
+            className: "md:col-span-1 row-span-1",
+            media: {
+                type: "image",
+                src: "/reference/images (6).jpeg",
+                alt: "Community networking",
+            },
+        },
+        {
+            id: 3,
+            content: (
+                <CardContent
+                    title="Showcase & Shine"
+                    description="Present your work at our Demo Day and get recognition for your creativity."
+                />
+            ),
+            className: "md:col-span-1 row-span-1",
+            media: {
+                type: "image",
+                src: "/reference/images (7).jpeg",
+                alt: "Project showcase",
+            },
+        },
+        {
+            id: 4,
+            content: (
+                <CardContent
+                    title="Innovate & Transform"
+                    description="Turn your ideas into reality with cutting-edge tools and technologies."
+                />
+            ),
+            className: "md:col-span-2 row-span-1",
+            media: {
+                type: "gif",
+                src: "/gifs/222787.gif",
+                alt: "Innovation showcase",
+            },
+        },
+    ];
 
     return (
         <main className="flex flex-col min-h-screen bg-gradient-to-b from-white to-gray-100 dark:from-black dark:to-gray-900">
@@ -329,17 +405,31 @@ const EventPage = () => {
                 </div>
             </div>
 
-            <div className="bg-black ">
+            <div className="bg-black">  {/* Removed extra spacing */}
                 <HeroParallax products={eventThemes} />
             </div>
 
-            <div className="overflow-hidden bg-black w-full min-h-screen">
-                <MacbookScroll src="/images/1372963 (1).png" />
+            <div className="overflow-hidden bg-black w-full min-h-screen -mt-20"> {/* Added negative margin to reduce gap */}
+                <MacbookScroll src="/reference/welcomecard.png" />
             </div>
 
             {/* <div>
                 <TechStickyScroll />
             </div> */}
+
+            <div className="bg-black w-full"> {/* Updated container */}
+                <LayoutGrid 
+                    cards={cards} 
+                    className="grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 p-4 md:p-8"
+                />
+            </div>
+
+            <div className="mb-20">
+                <LampImp/>
+            </div>
+
+            {/* Add Footer */}
+            <Footer />
         </main>
     );
 };
