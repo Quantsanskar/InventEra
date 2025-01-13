@@ -18,7 +18,8 @@ import { LayoutGrid } from "../components/gridcomponent";
 import { LampImp } from "../components/lamp";
 import { Footer } from "../components/footer";
 import { CommunityLamp } from "../components/communityLamp";
-
+import { Carousel } from "../components/MediaCarousel/NightsCarousel";
+import { MediaCard } from "@/components/MediaCarousel/NightsMedia";
 // Simple NavItem component
 const NavItem = ({ href, children }) => (
     <Link href={href}>
@@ -171,7 +172,87 @@ const EventPage = () => {
             </div>
         );
     };
+    const data = [
+        {
+            type: 'image',
+            category: "Featured",
+            title: "Amazing Video Content",
+            src: "/reference/IMG-20250112-WA0010.jpg", // Add your video path
+            // content: <DummyContent />,
+        },
+        {
+            type: 'image',
+            category: "Animation",
+            title: "Engaging GIF Content",
+            src: "/reference/IMG-20250112-WA0011.jpg", // Add your GIF path
+            // content: <DummyContent />,
+        },
 
+        {
+            type: 'image',
+            category: "Featured",
+            title: "Amazing Video Content",
+            src: "/reference/IMG-20250112-WA0013.jpg", // Add your video path
+            // content: <DummyContent />,
+        },
+        {
+            type: 'image',
+            category: "Animation",
+            title: "Engaging GIF Content",
+            src: "/reference/IMG-20250112-WA0014.jpg", // Add your GIF path
+            // content: <DummyContent />,
+        },
+        {
+            type: 'image',
+            category: "Photography",
+            title: "Beautiful Image",
+            src: "/reference/IMG-20250112-WA0015.jpg", // Add your image path
+            // content: <DummyContent />,
+        },
+        {
+            type: 'image',
+            category: "Featured",
+            title: "Amazing Video Content",
+            src: "/reference/IMG-20250112-WA0016.jpg", // Add your video path
+            // content: <DummyContent />,
+        },
+        {
+            type: 'image',
+            category: "Animation",
+            title: "Engaging GIF Content",
+            src: "/reference/IMG-20250112-WA0017.jpg", // Add your GIF path
+            // content: <DummyContent />,
+        },
+        {
+            type: 'image',
+            category: "Photography",
+            title: "Beautiful Image",
+            src: "/reference/IMG-20250112-WA0018.jpg", // Add your image path
+            // content: <DummyContent />,
+        },
+        {
+            type: 'image',
+            category: "Featured",
+            title: "Amazing Video Content",
+            src: "/reference/IMG-20250112-WA0019.jpg", // Add your video path
+            // content: <DummyContent />,
+        },
+        {
+            type: 'image',
+            category: "Animation",
+            title: "Engaging GIF Content",
+            src: "/reference/IMG-20250112-WA0020.jpg", // Add your GIF path
+            // content: <DummyContent />,
+        },
+        {
+            type: 'image',
+            category: "Photography",
+            title: "Beautiful Image",
+            src: "/reference/IMG-20250112-WA0021.jpg", // Add your image path
+            // content: <DummyContent />,
+        },
+        // Add more items as needed
+    ];
     const cards = [
         {
             id: 1,
@@ -235,6 +316,10 @@ const EventPage = () => {
         },
     ];
 
+
+    const mediacards = data.map((card, index) => (
+        <MediaCard key={index} card={card} index={index} />
+    ));
     return (
         <main className="flex flex-col min-h-screen bg-gradient-to-b from-white to-gray-100 dark:from-black dark:to-gray-900">
             {/* Navigation Section */}
@@ -244,7 +329,7 @@ const EventPage = () => {
 
             <FloatingNavbar items={navigationItems} />
             {/* Hero Section with Sparkles */}
-           
+
             <section className="flex-1 w-full bg-black flex flex-col items-center justify-center overflow-hidden">
                 <div className="relative">
                     <h1 className="md:text-8xl text-4xl lg:text-9xl font-bold text-center text-white relative z-20 mt-60 md:mt-60 sm:mt-40">
@@ -277,10 +362,24 @@ const EventPage = () => {
             <div className="text-center mb-8 md:mb-16 sm:mb-4">
                 <TextGenerateEffect words={words} />
             </div>
-
+            <div className="w-full h-full py-20">
+                <h2 className="max-w-7xl pl-4 mx-auto text-xl md:text-5xl font-bold text-neutral-800 dark:text-neutral-200 font-sans text-center">
+                    Our Members
+                </h2>
+                <Carousel items={mediacards} autoScrollInterval={5000} />
+            </div>
+            <div className="bg-black w-full"> {/* Added negative margin to reduce gap */}
+                <MacbookScroll src="/reference/IMG-20241206-WA0010.jpg" />
+            </div>
             <div className="mt-4 md:mt-8 sm:mt-2">
                 <ScrollDemo />
             </div>
+
+
+
+
+
+
 
             {/* Notion-like Season Description Section */}
             <section className="w-full px-4 md:px-8 py-12 bg-[#191919] text-white">
@@ -358,9 +457,7 @@ const EventPage = () => {
                     </div>
                 </div>
             </section>
-            <div className="bg-black w-full"> {/* Added negative margin to reduce gap */}
-                <MacbookScroll src="/reference/IMG-20241206-WA0010.jpg" />
-            </div>
+
 
             <div className="mb-20">
                 <LampImp />
@@ -423,7 +520,7 @@ const EventPage = () => {
                 <HeroParallax products={eventThemes} />
             </div>
 
-            
+
 
             {/* <div>
                 <TechStickyScroll />
