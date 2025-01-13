@@ -141,7 +141,7 @@ const HomePage = () => {
       {/* Additional Content */}
       <div
         ref={additionalContentRef}
-        className="pt-40 pb-80 px-8 md:px-16 bg-custom-dark text-white"
+        className="pt-40 pb-80 px-8 md:px-16 bg-background dark:bg-background text-white"
       >
         <motion.div variants={stagger} initial="initial" whileInView="animate" viewport={{ once: false, amount: 0.1 }}>
           <motion.h1
