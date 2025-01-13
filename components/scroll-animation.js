@@ -92,16 +92,16 @@ const Card = ({ rotate, scale, dimensions, isMobile, orientation, children }) =>
         height: dimensions.height,
         overflow: 'hidden',
       }}
-      className={`relative border-4 border-[#6C6C6C] bg-[#222222] rounded-[30px] shadow-2xl 
+      className={`relative border-4 border-[#6C6C6C] bg-black rounded-[30px] shadow-2xl 
         ${isMobile ? 'transition-all duration-300' : ''}`}
     >
       {isMobile && (
         <>
-          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-1/3 h-6 bg-[#222] rounded-b-2xl z-10" />
-          <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-16 h-2 bg-[#333] rounded-full z-20" />
+          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-1/3 h-6 bg-black rounded-b-2xl z-10" />
+          <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-16 h-2 bg-black rounded-full z-20" />
         </>
       )}
-      <div className="h-full w-full overflow-hidden rounded-2xl bg-gray-100 dark:bg-zinc-900">
+      <div className="h-full w-full overflow-hidden rounded-2xl bg-black dark:bg-black">
         {children}
       </div>
     </motion.div>

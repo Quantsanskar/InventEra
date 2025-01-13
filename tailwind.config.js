@@ -4,26 +4,40 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
-  // darkMode: 'class',
+  darkMode: 'class', // Enable dark mode
   theme: {
     extend: {
       colors: {
-        'custom-dark': '#212121',
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        // Base colors - always dark
+        background: {
+          DEFAULT: '#171717',
+          dark: '#171717',
+          light: '#171717' // Keep dark even in light mode
+        },
+        // Text colors
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: '#ffffff',
+          dark: '#ffffff',
+          light: '#ffffff'
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: '#9ca3af',
+          dark: '#9ca3af',
+          light: '#9ca3af'
         },
+        // Accent colors remain the same for visual hierarchy
+        accent: {
+          DEFAULT: '#8b5cf6',
+          dark: '#a78bfa',
+          light: '#8b5cf6'
+        },
+        // Border colors
+        border: {
+          DEFAULT: '#374151',
+          dark: '#374151',
+          light: '#374151'
+        }
       },
-
       fontFamily: {
         'caveat': ['Caveat', 'cursive'],
         'sans': ['Plus Jakarta Sans', 'sans-serif'],

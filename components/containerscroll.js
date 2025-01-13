@@ -5,7 +5,7 @@ import { ContainerScroll } from "./scroll-animation";
 
 export function ScrollDemo() {
   return (
-    <div className="flex flex-col overflow-hidden">
+    <div className="flex flex-col overflow-hidden bg-black dark:bg-black">
       <ContainerScroll>
         <video
           controls

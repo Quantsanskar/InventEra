@@ -321,7 +321,7 @@ const EventPage = () => {
         <MediaCard key={index} card={card} index={index} />
     ));
     return (
-        <main className="flex flex-col min-h-screen bg-gradient-to-b from-white to-gray-100 dark:from-black dark:to-gray-900">
+        <main className="flex flex-col min-h-screen bg-black dark:bg-black">
             {/* Navigation Section */}
             {/* <section className="w-full flex items-center justify-center py-8">
                 <Nav />
@@ -362,8 +362,8 @@ const EventPage = () => {
             <div className="text-center mb-8 md:mb-16 sm:mb-4">
                 <TextGenerateEffect words={words} />
             </div>
-            <div className="w-full h-full py-20">
-                <h2 className="max-w-7xl pl-4 mx-auto text-xl md:text-5xl font-bold text-neutral-800 dark:text-neutral-200 font-sans text-center">
+            <div className="w-full h-full py-20 bg-black">
+                <h2 className="max-w-7xl pl-4 mx-auto text-xl md:text-5xl font-bold text-white dark:text-white font-sans text-center">
                     Our Members
                 </h2>
                 <Carousel items={mediacards} autoScrollInterval={5000} />
@@ -382,10 +382,10 @@ const EventPage = () => {
 
 
             {/* Notion-like Season Description Section */}
-            <section className="w-full px-4 md:px-8 py-12 bg-[#191919] text-white">
-                <div className="max-w-5xl mx-auto space-y-12">
+            <section className="w-full px-4 md:px-8 py-12 bg-black dark:bg-black text-white dark:text-white">
+                <div className="max-w-5xl mx-auto space-y-12 bg-black dark:bg-black text-white dark:text-white">
                     {/* Header */}
-                    <div className="border-b border-gray-800 pb-8">
+                    <div className="border-b border-gray-800 pb-8 bg-black dark:bg-black">
                         <h1 className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
                             The Nights: Season One
                         </h1>
@@ -395,7 +395,7 @@ const EventPage = () => {
                     </div>
 
                     {/* Table of Contents */}
-                    <div className="max-w-4xl mx-auto p-8 bg-[#191919] text-gray-200">
+                    <div className="max-w-4xl mx-auto p-8 bg-[#191919] text-gray-200 bg-black dark:bg-black">
                         {/* Title Section */}
                         <div className="mb-12">
                             <h1 className="text-4xl font-bold mb-4 text-white">The Nights: Season One</h1>
@@ -440,7 +440,7 @@ const EventPage = () => {
                             <div>
                                 <h2 className="text-2xl font-semibold mb-4 text-white">📍 Important Details</h2>
                                 <div className="space-y-4">
-                                    <p className="text-lg leading-relaxed">Start Date: January 15th, 2024</p>
+                                    <p className="text-lg leading-relaxed">Start Date: January 15th, 4</p>
                                     <p className="text-lg leading-relaxed">Contact: buildersspace9@gmail.com</p>
                                     <p className="text-lg leading-relaxed">Format: Virtual + Offline Demo Day</p>
                                     {/* <p className="text-lg leading-relaxed">Website: buildersspace.tech</p> */}
@@ -467,7 +467,7 @@ const EventPage = () => {
                 <CommunityLamp />
             </div>
 
-            <div className="min-h-screen bg-gray-950 py-20 mb-20">
+            <div className="min-h-screen bg-black dark:bg-black py-20 mb-20">
                 <div className="max-w-6xl mx-auto px-4">
                     <h1 className="text-4xl font-bold text-white mb-12 text-center">Everything about "The Nights"</h1>
                     <div className="h-[30rem] md:h-[40rem] [perspective:1000px] relative flex flex-col w-full items-start justify-start">
@@ -481,7 +481,7 @@ const EventPage = () => {
                 </div>
             </div>
 
-            <div className="min-h-screen w-full bg-black flex items-center justify-center p-8">
+            <div className="min-h-screen w-full bg-black dark:bg-black flex items-center justify-center p-8">
                 <div className="flex flex-col items-center gap-8">
                     <h2 className="text-3xl md:text-4xl font-bold text-white text-center">
                         Transform Your Journey With Us
@@ -516,7 +516,7 @@ const EventPage = () => {
                 </div>
             </div>
 
-            <div className="bg-black">  {/* Removed extra spacing */}
+            <div className="bg-black dark:bg-black text-white dark:text-white">  {/* Removed extra spacing */}
                 <HeroParallax products={eventThemes} />
             </div>
 
@@ -526,7 +526,7 @@ const EventPage = () => {
                 <TechStickyScroll />
             </div> */}
 
-            <div className="bg-black w-full"> {/* Updated container */}
+            <div className="bg-background w-full"> {/* Updated container */}
                 <LayoutGrid
                     cards={cards}
                     className="grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 p-4 md:p-8"
