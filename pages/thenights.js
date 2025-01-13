@@ -19,7 +19,9 @@ import { LampImp } from "../components/lamp";
 import { Footer } from "../components/footer";
 import { CommunityLamp } from "../components/communityLamp";
 import { Carousel } from "../components/MediaCarousel/NightsCarousel";
-import { MediaCard } from "@/components/MediaCarousel/NightsMedia";
+import { MediaCard } from "../components/MediaCarousel/NightsMedia";
+import MacWindow from '../components/macbooktab';
+
 // Simple NavItem component
 const NavItem = ({ href, children }) => (
     <Link href={href}>
@@ -361,12 +363,57 @@ const EventPage = () => {
             </div> */}
             <div className="text-center mb-8 md:mb-16 sm:mb-4">
                 <TextGenerateEffect words={words} />
+                
             </div>
             <div className="w-full h-full py-20 bg-black">
                 <h2 className="max-w-7xl pl-4 mx-auto text-xl md:text-5xl font-bold text-white dark:text-white font-sans text-center">
                     Our Members
                 </h2>
                 <Carousel items={mediacards} autoScrollInterval={5000} />
+            </div>
+            <div className="min-h-screen bg-black dark:black text-white dark:text-white p-8">
+                <MacWindow title="Welcome to The Nights">
+                    <div className="space-y-4">
+                        <h1 className="text-2xl font-bold">IMAGINE A PLACE WHERE:</h1>
+
+                        <div className="space-y-2">
+                            <p className="text-lg">ARTISTS VIBE WITH DEVELOPERS.</p>
+                            <p className="text-lg">HACKERS TEAM UP WITH CHEFS.</p>
+                            <p className="text-lg">GAMERS SHARE TIPS WITH FILMMAKERS.</p>
+                        </div>
+
+                        <p className="text-lg mt-6">
+                            YOU BRING THE SPARK, WE BRING THE FUEL (AND THE PIZZA 🍕).
+                            IT&apos;S ALL ABOUT COLLABORATION, CREATIVITY, AND A LITTLE BIT OF CHAOS.
+                        </p>
+
+                        <div className="mt-8 flex justify-center">
+                            <a
+                                href="https://your-registration-link.com"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="group relative px-8 py-3 bg-neutral-800/50 rounded-lg
+                overflow-hidden backdrop-blur-sm border border-neutral-700
+                transition-all duration-300 ease-out
+                hover:bg-neutral-700/60 hover:border-neutral-600 hover:scale-105
+                hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]
+                active:scale-95"
+                            >
+                                {/* Gradient overlay */}
+                                <div className="absolute inset-0 opacity-0 group-hover:opacity-100
+                bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10
+                transition-opacity duration-300 ease-out"
+                                />
+
+                                {/* Button text */}
+                                <span className="relative font-medium text-neutral-200
+                group-hover:text-white transition-colors duration-300">
+                                    Register here
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </MacWindow>
             </div>
             <div className="bg-black w-full"> {/* Added negative margin to reduce gap */}
                 <MacbookScroll src="/reference/IMG-20241206-WA0010.jpg" />

@@ -149,33 +149,14 @@ const MacbookScroll = ({ src }) => {
 
                         {/* Updated Trackpad with Register Button */}
                         <div
-                            className="absolute bottom-2 sm:bottom-3 md:bottom-4 left-1/2 -translate-x-1/2 w-[45%] h-20 sm:h-24 md:h-32 rounded-xl flex items-center justify-center overflow-hidden cursor-pointer"
+                            className="absolute bottom-2 sm:bottom-3 md:bottom-4 left-1/2 -translate-x-1/2 w-[45%] h-20 sm:h-24 md:h-32 rounded-xl flex items-center justify-center overflow-hidden"
                             style={{
                                 background: "linear-gradient(to bottom right, #272729, #1a1a1a)",
                                 boxShadow: "0px 0px 1px 1px #ffffff10 inset, 0 0 2px rgba(255,255,255,0.05)",
                             }}
                         >
-                            {/* Register Button */}
-                            <motion.a
-                                href="https://www.commudle.com/communities/builders-space/events/the-nights-s1"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="relative px-6 py-2 rounded-lg text-white text-sm sm:text-base md:text-lg font-medium group transition-transform duration-300"
-                                whileHover={{ scale: 1.05 }}
-                            >
-                                {/* Button Background */}
-                                <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-gray-900 to-black" />
+                            
 
-                                {/* Button Text */}
-                                <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-gray-200 to-white group-hover:from-white group-hover:to-blue-100 transition-all duration-300">
-                                    Register Here
-                                </span>
-
-                                {/* Glow Effect */}
-                                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <div className="absolute inset-0 bg-blue-500/20 blur-xl" />
-                                </div>
-                            </motion.a>
                         </div>
 
 
