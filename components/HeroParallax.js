@@ -10,8 +10,7 @@ const Header = () => {
                 Explore Our <br className="hidden sm:block" /> Event Themes
             </h1>
             <p className="max-w-2xl text-sm sm:text-base md:text-xl mt-4 dark:text-neutral-200">
-                Dive into cutting-edge technology domains featuring AI/ML, AR/VR, Creative Design,
-                Hardware Innovation, and more.
+                Dive into cutting-edge technology & other domains featuring Technology, Enterpreneurship & Management, Science & Research, Creative Stuff and Others.
             </p>
         </div>
     );

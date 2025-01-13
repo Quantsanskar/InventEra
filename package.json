@@ -23,6 +23,7 @@
     "next": "15.0.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-intersection-observer": "^9.14.1",
     "selenium-webdriver": "^4.27.0",
     "tailwind-merge": "^2.6.0"
   },

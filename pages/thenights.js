@@ -17,6 +17,8 @@ import { PageShowcase } from "../components/notionpage";
 import { LayoutGrid } from "../components/gridcomponent";
 import { LampImp } from "../components/lamp";
 import { Footer } from "../components/footer";
+import { CommunityLamp } from "../components/communityLamp";
+
 // Simple NavItem component
 const NavItem = ({ href, children }) => (
     <Link href={href}>
@@ -32,29 +34,29 @@ const NavItem = ({ href, children }) => (
 
 const eventThemes = [
     {
-        title: "Artificial Intelligence & Machine Learning",
-        link: "/themes/ai-ml",
-        thumbnail: "/images/theme1.png", // Add your image path here
+        title: "Tech Domains",
+        link: "/static/TechDomain.html",
+        thumbnail: "/images/TechDomain.png", // Add your image path here
     },
     {
-        title: "Augmented & Virtual Reality",
-        link: "/themes/ar-vr",
-        thumbnail: "/images/theme1.png", // Add your image path here
+        title: "Science & Research Domains",
+        link: "/static/Science.html",
+        thumbnail: "/images/Science.png", // Add your image path here
     },
     {
-        title: "Creative Design & Digital Art",
-        link: "/themes/design",
-        thumbnail: "/images/theme1.png", // Add your image path here
+        title: "Creative Domains",
+        link: "/static/Creative_Domains.html",
+        thumbnail: "/images/CreativeDomain.png", // Add your image path here
     },
     {
-        title: "Hardware & IoT Innovation",
-        link: "/themes/hardware",
-        thumbnail: "/images/theme1.png", // Add your image path here
+        title: "Enterpreneurship & Management",
+        link: "/static/Management.html",
+        thumbnail: "/images/Enterpreneurship.png", // Add your image path here
     },
     {
-        title: "Web3 & Blockchain",
-        link: "/themes/web3",
-        thumbnail: "/images/theme1.png", // Add your image path here
+        title: "Other Domains",
+        link: "/static/Others.html",
+        thumbnail: "/images/Others.png", // Add your image path here
     }
 ];
 // Simplified Nav component
@@ -242,6 +244,7 @@ const EventPage = () => {
 
             <FloatingNavbar items={navigationItems} />
             {/* Hero Section with Sparkles */}
+           
             <section className="flex-1 w-full bg-black flex flex-col items-center justify-center overflow-hidden">
                 <div className="relative">
                     <h1 className="md:text-8xl text-4xl lg:text-9xl font-bold text-center text-white relative z-20 mt-60 md:mt-60 sm:mt-40">
@@ -355,6 +358,17 @@ const EventPage = () => {
                     </div>
                 </div>
             </section>
+            <div className="bg-black w-full"> {/* Added negative margin to reduce gap */}
+                <MacbookScroll src="/reference/IMG-20241206-WA0010.jpg" />
+            </div>
+
+            <div className="mb-20">
+                <LampImp />
+            </div>
+
+            <div className="mb-20">
+                <CommunityLamp />
+            </div>
 
             <div className="min-h-screen bg-gray-950 py-20 mb-20">
                 <div className="max-w-6xl mx-auto px-4">
@@ -409,24 +423,20 @@ const EventPage = () => {
                 <HeroParallax products={eventThemes} />
             </div>
 
-            <div className="overflow-hidden bg-black w-full min-h-screen -mt-20"> {/* Added negative margin to reduce gap */}
-                <MacbookScroll src="/reference/welcomecard.png" />
-            </div>
+            
 
             {/* <div>
                 <TechStickyScroll />
             </div> */}
 
             <div className="bg-black w-full"> {/* Updated container */}
-                <LayoutGrid 
-                    cards={cards} 
+                <LayoutGrid
+                    cards={cards}
                     className="grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 p-4 md:p-8"
                 />
             </div>
 
-            <div className="mb-20">
-                <LampImp/>
-            </div>
+
 
             {/* Add Footer */}
             <Footer />
