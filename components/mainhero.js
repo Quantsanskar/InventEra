@@ -22,25 +22,41 @@ const BuildersSpaceHero = () => {
                 {/* Title */}
                 <div className="absolute bottom-0 left-8 transform translate-y-1/2">
                     <h1 className="text-6xl font-bold text-white leading-tight">
-                        Builder's<br />Space
+                        Builder's<br /><span className='font-bold z-20 text-white bg-black bg-opacity-100 px-2'></span>
                     </h1>
                 </div>
             </div>
 
-            {/* Content Section */}
-            <div className="px-8 pt-20 pb-12 bg-black text-white">
+            {/* Content Section with Background Image and Gradient */}
+            <div
+                className="relative px-8 pt-20 z-1 pb-12 text-white opacity-100"
+                style={{
+                    backgroundImage: `url('/reference/wp14028114-alone-at-night-wallpapers.jpg')`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundBlendMode: 'overlay',
+                    // backgroundColor: 'rgba(0, 0, 0, 0.8)'
+                }}
+            >
+
+                <h1 className="text-6xl font-bold text-white leading-tight -mt-20" >
+                    <span className="font-bold text-white" style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)' }}>Space</span>
+                </h1>
+
+
                 {/* Tagline */}
-                <p className="text-orange-500 text-xl mb-8">
+                <p className="relative text-orange-500 font-bold text-xl mb-8 mt-10">
                     BUILD COOL STUFF, WITH COOLER PEOPLE.
                 </p>
 
                 {/* "What is this" Section */}
-                <h2 className="text-4xl mb-8 mt-10 text-center">Okay, so...what is this?</h2>
+                <h2 className="relative text-4xl mb-8 mt-10 text-center">Okay, so...what is this?</h2>
 
                 {/* Info Card Container */}
-                <div className="flex justify-center items-center">
+                <div className="relative flex justify-center items-center">
+
                     {/* Info Card */}
-                    <div className="bg-white text-black p-8 rounded-3xl max-w-2xl">
+                    <div className="bg-black dark:bg-black text-white dark:text-white p-8 rounded-3xl max-w-2xl">
                         {/* Window Controls */}
                         <div className="flex gap-2 mb-6">
                             <div className="w-3 h-3 rounded-full bg-[#FF5F57] border border-[#E0443E]"></div>
@@ -50,6 +66,7 @@ const BuildersSpaceHero = () => {
 
                         {/* Card Content */}
                         <div className="space-y-6 font-medium">
+
                             <p>
                                 WE'RE BUILDER'S SPACE—A PLATFORM WHERE ANYONE FROM TECH WIZARDS TO
                                 PAINTBRUSH-WIELDING MANIACS CAN BUILD, SHOWCASE, AND SHARE THEIR WILDEST
@@ -67,6 +84,7 @@ const BuildersSpaceHero = () => {
                                 PASSION, AND A GANG OF EQUALLY AMBITIOUS MISFITS.
                             </p>
                         </div>
+
                     </div>
                 </div>
             </div>

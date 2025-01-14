@@ -5,9 +5,9 @@ const VibeSection = () => {
         <div className="relative min-h-screen bg-gradient-to-b from-blue-900 via-purple-900 to-purple-800 px-4 py-16">
             {/* Background blur effect for crowd image */}
             <div
-                className="absolute inset-0 bg-cover bg-center opacity-20 mix-blend-overlay"
+                className="absolute inset-0 bg-cover bg-center opacity-100 mix-blend-overlay"
                 style={{
-                    backgroundImage: "url('/images/crowd-background.jpg')"
+                    backgroundImage: "url('/reference/342413.jpg')"
                 }}
             />
 

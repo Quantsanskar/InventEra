@@ -5,20 +5,20 @@ const ContactFooter = () => {
         <footer className="relative bg-gradient-to-b from-blue-900 via-purple-900 to-purple-800 px-4 py-16">
             {/* Background blur effect */}
             <div
-                className="absolute inset-0 bg-cover bg-center opacity-20 mix-blend-overlay"
+                className="absolute inset-0 bg-cover bg-center opacity-100 mix-blend-overlay"
                 style={{
-                    backgroundImage: "url('/images/blur-background.jpg')"
+                    backgroundImage: "url('/reference/2140357.jpg')"
                 }}
             />
 
             {/* Content container */}
             <div className="relative max-w-3xl mx-auto">
                 <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-12">
-                    CONTACT AND REGISTRATION
+                    CONTACT INFORMATION
                 </h2>
 
                 {/* Register Now Window */}
-                <div className="bg-gray-900 rounded-[2rem] p-1.5 shadow-2xl mb-8">
+                {/* <div className="bg-gray-900 rounded-[2rem] p-1.5 shadow-2xl mb-8">
                     <div className="bg-black p-6 rounded-[1.85rem]">
                         <div className="flex items-center gap-4 mb-4">
                             <div className="flex gap-2">
@@ -39,7 +39,7 @@ const ContactFooter = () => {
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Contact Us Window */}
                 <div className="bg-gray-900 rounded-[2rem] p-1.5 shadow-2xl mb-8">
