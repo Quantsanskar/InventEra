@@ -179,7 +179,7 @@ const EventPage = () => {
             type: 'image',
             category: "Featured",
             title: "Amazing Video Content",
-            src: "/reference/IMG-20250112-WA0010.jpg", // Add your video path
+            src: "/reference/WhatsApp Image 2025-01-12 at 10.02.27 PM - Yogesh Vashisth.jpeg", // Add your video path
             // content: <DummyContent />,
         },
         {

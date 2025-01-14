@@ -20,7 +20,7 @@ const stagger = {
 
 
 
-const HomePage = () => {
+const MainPage = () => {
   const bottomRef = useRef(null);
   const additionalContentRef = useRef(null);
   const router = useRouter();
@@ -398,4 +398,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default MainPage;

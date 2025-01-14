@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import Header from '../components/Header';
 import MainContent from '../components/MainContent';
-import HomePage from '../components/Home';
 import BuildersSpaceHero from '../components/mainhero';
 import VibeSection from '../components/mainsecond';
 import WhatYouGetSection from '../components/mainthird';
@@ -10,6 +9,7 @@ import TheNights from '../components/main5th';
 import EventHighlights from '../components/main6th';
 import NetworkingLounges from '../components/main7th';
 import ContactFooter from '../components/mainlast';
+import MainPage from '../components/Home';
 export default function Home() {
   return (
     <div>
@@ -20,14 +20,16 @@ export default function Home() {
       </Head>
 
       {/* <HomePage/> */}
-      <BuildersSpaceHero/>
+      {/* <BuildersSpaceHero/>
       <VibeSection/>
       <WhatYouGetSection/>
       <BuilderSpacePlans/>
       <TheNights/>
       <EventHighlights/>
       <NetworkingLounges/>  
-      <ContactFooter/>
+      <ContactFooter/> */}
+      <MainPage/>
+
     </div>
   );
 }
