@@ -186,7 +186,7 @@ const EventPage = () => {
             type: 'image',
             category: "Animation",
             title: "Engaging GIF Content",
-            src: "/reference/IMG-20250112-WA0011.jpg", // Add your GIF path
+            src: "/reference/IMG_9723 - Ali Nasir.PNG", // Add your GIF path
             // content: <DummyContent />,
         },
 
@@ -194,63 +194,63 @@ const EventPage = () => {
             type: 'image',
             category: "Featured",
             title: "Amazing Video Content",
-            src: "/reference/IMG-20250112-WA0013.jpg", // Add your video path
+            src: "/reference/IMG_1692 - Vishal Kumar Singh.png", // Add your video path
             // content: <DummyContent />,
         },
         {
             type: 'image',
             category: "Animation",
             title: "Engaging GIF Content",
-            src: "/reference/IMG-20250112-WA0014.jpg", // Add your GIF path
+            src: "/reference/IMG_20250112_222134 - SWATI JHA.jpg", // Add your GIF path
             // content: <DummyContent />,
         },
         {
             type: 'image',
             category: "Photography",
             title: "Beautiful Image",
-            src: "/reference/IMG-20250112-WA0015.jpg", // Add your image path
+            src: "/reference/IMG_20250113_115206 - Shreya Shristi.jpg", // Add your image path
             // content: <DummyContent />,
         },
         {
             type: 'image',
             category: "Featured",
             title: "Amazing Video Content",
-            src: "/reference/IMG-20250112-WA0016.jpg", // Add your video path
+            src: "/reference/IMG-20250114-WA0003 - Mohd. Zubair.jpg", // Add your video path
             // content: <DummyContent />,
         },
         {
             type: 'image',
             category: "Animation",
             title: "Engaging GIF Content",
-            src: "/reference/IMG-20250112-WA0017.jpg", // Add your GIF path
+            src: "/reference/Picsart_25-01-12_22-09-42-955 - Jack Sparrow.jpg", // Add your GIF path
             // content: <DummyContent />,
         },
         {
             type: 'image',
             category: "Photography",
             title: "Beautiful Image",
-            src: "/reference/IMG-20250112-WA0018.jpg", // Add your image path
+            src: "/reference/this is me_20250113_010118_0000 - Abhinav Maurya.jpg", // Add your image path
             // content: <DummyContent />,
         },
         {
             type: 'image',
             category: "Featured",
             title: "Amazing Video Content",
-            src: "/reference/IMG-20250112-WA0019.jpg", // Add your video path
+            src: "/reference/IMG-20250113-WA0005 - Kirti Goel.jpg", // Add your video path
             // content: <DummyContent />,
         },
         {
             type: 'image',
             category: "Animation",
             title: "Engaging GIF Content",
-            src: "/reference/IMG-20250112-WA0020.jpg", // Add your GIF path
+            src: "/reference/ANSH - ANSH KUMAR.jpg", // Add your GIF path
             // content: <DummyContent />,
         },
         {
             type: 'image',
             category: "Photography",
             title: "Beautiful Image",
-            src: "/reference/IMG-20250112-WA0021.jpg", // Add your image path
+            src: "/reference/aayushi - ANSH KUMAR.jpg", // Add your image path
             // content: <DummyContent />,
         },
         // Add more items as needed
