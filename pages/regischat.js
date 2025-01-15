@@ -19,6 +19,14 @@ const BuilderRegistrationPage = () => {
         referralSource: ''
     });
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -60,10 +68,10 @@ const BuilderRegistrationPage = () => {
 
             // Send email using EmailJS
             await emailjs.send(
-                'service_btwf50p', // Your EmailJS service ID
-                'template_jfai29o', // Your EmailJS template ID
+                'service_btwf50p',
+                'template_jfai29o',
                 templateParams,
-                '39GutgomRT0mW-frk' // Your EmailJS public key
+                '39GutgomRT0mW-frk'
             );
 
             // Make the API call to your backend
@@ -106,9 +114,6 @@ const BuilderRegistrationPage = () => {
         }
     };
 
-
-
-
     return (
         <div className="min-h-screen bg-purple-900 relative">
             {/* Background Image with Opacity */}
@@ -136,8 +141,6 @@ const BuilderRegistrationPage = () => {
                     </div>
                 </div>
 
-                {/* <h2 className="text-4xl text-white text-center mb-8">pls introduce yourself</h2> */}
-
                 {/* Browser Window Form */}
                 <div className="max-w-4xl mx-auto bg-gray-900 rounded-lg overflow-hidden shadow-2xl">
                     {/* Browser Bar */}
@@ -156,6 +159,7 @@ const BuilderRegistrationPage = () => {
                                 <input
                                     type="text"
                                     name="name"
+                                    value={formData.name}
                                     placeholder="Full Name"
                                     className="w-full bg-transparent border-b-2 border-purple-500/50 px-4 py-2 text-white placeholder-purple-300/50 focus:outline-none focus:border-purple-500"
                                     onChange={handleChange}
@@ -168,6 +172,7 @@ const BuilderRegistrationPage = () => {
                                 <input
                                     type="email"
                                     name="email"
+                                    value={formData.email}
                                     placeholder="Email Address"
                                     className="w-full bg-transparent border-b-2 border-purple-500/50 px-4 py-2 text-white placeholder-purple-300/50 focus:outline-none focus:border-purple-500"
                                     onChange={handleChange}
@@ -180,6 +185,7 @@ const BuilderRegistrationPage = () => {
                                 <input
                                     type="tel"
                                     name="mobileNumber"
+                                    value={formData.mobileNumber}
                                     placeholder="Mobile Number"
                                     className="w-full bg-transparent border-b-2 border-purple-500/50 px-4 py-2 text-white placeholder-purple-300/50 focus:outline-none focus:border-purple-500"
                                     onChange={handleChange}
@@ -194,6 +200,7 @@ const BuilderRegistrationPage = () => {
                                 <MapPin className="text-purple-400" />
                                 <textarea
                                     name="address"
+                                    value={formData.address}
                                     placeholder="Address"
                                     className="w-full bg-transparent border-b-2 border-purple-500/50 px-4 py-2 text-white placeholder-purple-300/50 focus:outline-none focus:border-purple-500"
                                     onChange={handleChange}
@@ -206,6 +213,7 @@ const BuilderRegistrationPage = () => {
                                 <input
                                     type="text"
                                     name="city"
+                                    value={formData.city}
                                     placeholder="City"
                                     className="w-full bg-transparent border-b-2 border-purple-500/50 px-4 py-2 text-white placeholder-purple-300/50 focus:outline-none focus:border-purple-500"
                                     onChange={handleChange}
@@ -214,6 +222,7 @@ const BuilderRegistrationPage = () => {
                                 <input
                                     type="text"
                                     name="pincode"
+                                    value={formData.pincode}
                                     placeholder="Pincode"
                                     className="w-full bg-transparent border-b-2 border-purple-500/50 px-4 py-2 text-white placeholder-purple-300/50 focus:outline-none focus:border-purple-500"
                                     onChange={handleChange}
@@ -222,6 +231,7 @@ const BuilderRegistrationPage = () => {
                                 <input
                                     type="text"
                                     name="country"
+                                    value={formData.country}
                                     placeholder="Country"
                                     className="w-full bg-transparent border-b-2 border-purple-500/50 px-4 py-2 text-white placeholder-purple-300/50 focus:outline-none focus:border-purple-500"
                                     onChange={handleChange}
@@ -237,6 +247,7 @@ const BuilderRegistrationPage = () => {
                                 <input
                                     type="url"
                                     name="githubUrl"
+                                    value={formData.githubUrl}
                                     placeholder="GitHub URL"
                                     className="w-full bg-transparent border-b-2 border-purple-500/50 px-4 py-2 text-white placeholder-purple-300/50 focus:outline-none focus:border-purple-500"
                                     onChange={handleChange}
@@ -248,6 +259,7 @@ const BuilderRegistrationPage = () => {
                                 <input
                                     type="url"
                                     name="linkedinUrl"
+                                    value={formData.linkedinUrl}
                                     placeholder="LinkedIn URL"
                                     className="w-full bg-transparent border-b-2 border-purple-500/50 px-4 py-2 text-white placeholder-purple-300/50 focus:outline-none focus:border-purple-500"
                                     onChange={handleChange}
@@ -259,6 +271,7 @@ const BuilderRegistrationPage = () => {
                                 <input
                                     type="url"
                                     name="instagramUrl"
+                                    value={formData.instagramUrl}
                                     placeholder="Instagram URL"
                                     className="w-full bg-transparent border-b-2 border-purple-500/50 px-4 py-2 text-white placeholder-purple-300/50 focus:outline-none focus:border-purple-500"
                                     onChange={handleChange}
@@ -270,6 +283,7 @@ const BuilderRegistrationPage = () => {
                                 <input
                                     type="url"
                                     name="twitterUrl"
+                                    value={formData.twitterUrl}
                                     placeholder="Twitter URL"
                                     className="w-full bg-transparent border-b-2 border-purple-500/50 px-4 py-2 text-white placeholder-purple-300/50 focus:outline-none focus:border-purple-500"
                                     onChange={handleChange}
@@ -284,6 +298,7 @@ const BuilderRegistrationPage = () => {
                                 <input
                                     type="url"
                                     name="topProjectLink"
+                                    value={formData.topProjectLink}
                                     placeholder="Top Project Link"
                                     className="w-full bg-transparent border-b-2 border-purple-500/50 px-4 py-2 text-white placeholder-purple-300/50 focus:outline-none focus:border-purple-500"
                                     onChange={handleChange}
@@ -295,6 +310,7 @@ const BuilderRegistrationPage = () => {
                                 <input
                                     type="text"
                                     name="referralSource"
+                                    value={formData.referralSource}
                                     placeholder="How did you hear about us?"
                                     className="w-full bg-transparent border-b-2 border-purple-500/50 px-4 py-2 text-white placeholder-purple-300/50 focus:outline-none focus:border-purple-500"
                                     onChange={handleChange}
