@@ -19,10 +19,6 @@ const BuilderRegistrationPage = () => {
         referralSource: ''
     });
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -45,11 +41,11 @@ const BuilderRegistrationPage = () => {
 
             // Prepare EmailJS template parameters
             const templateParams = {
-                to_name: formData.name,
-                from_name: "Builder's Space",
-                from_email: "buildersspace9@gmail.com",
-                phone: "7289939775",
-                message: `We're excited to welcome you to Builder's Space! Your registration details have been received.
+                to_name: "Sanskar",
+                from_name: formData.name,
+                from_email: formData.email,
+                phone: formData.mobileNumber,
+                message: `New Registration.
                 
                 Address: ${formData.address}, ${formData.city}, ${formData.pincode}, ${formData.country}
                 Social Links:
@@ -85,7 +81,96 @@ const BuilderRegistrationPage = () => {
             }
 
             // Handle successful registration
-            alert('Registration successful! Please check your email for confirmation.');
+            alert('Registration successful!');
+
+            // Reset the form data
+            setFormData({
+                name: '',
+                email: '',
+                mobileNumber: '',
+                address: '',
+                city: '',
+                pincode: '',
+                country: '',
+                githubUrl: '',
+                linkedinUrl: '',
+                instagramUrl: '',
+                twitterUrl: '',
+                topProjectLink: '',
+                referralSource: ''
+            });
+
+        } catch (error) {
+            console.error('Registration error:', error);
+            alert('Registration failed: ' + (error.message || 'Please try again later'));
+        }
+    };
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            // Basic validation
+            const requiredFields = ['name', 'email', 'mobileNumber', 'address', 'city', 'pincode', 'country'];
+            const missingFields = requiredFields.filter(field => !formData[field]);
+
+            if (missingFields.length > 0) {
+                alert(`Please fill in all required fields: ${missingFields.join(', ')}`);
+                return;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(formData.email)) {
+                alert('Please enter a valid email address');
+                return;
+            }
+
+            // Prepare EmailJS template parameters
+            const templateParams = {
+                to_name: "Sanskar",
+                from_name: formData.name,
+                from_email: formData.email,
+                phone: formData.mobileNumber,
+                message: `New Registration.
+                
+                Address: ${formData.address}, ${formData.city}, ${formData.pincode}, ${formData.country}
+                Social Links:
+                GitHub: ${formData.githubUrl || 'Not provided'}
+                LinkedIn: ${formData.linkedinUrl || 'Not provided'}
+                Instagram: ${formData.instagramUrl || 'Not provided'}
+                Twitter: ${formData.twitterUrl || 'Not provided'}
+                Top Project: ${formData.topProjectLink || 'Not provided'}
+                Referral Source: ${formData.referralSource || 'Not provided'}`,
+                reply_to: formData.email
+            };
+
+            // Send email using EmailJS
+            await emailjs.send(
+                'service_btwf50p', // Your EmailJS service ID
+                'template_jfai29o', // Your EmailJS template ID
+                templateParams,
+                '39GutgomRT0mW-frk' // Your EmailJS public key
+            );
+
+            // Make the API call to your backend
+            const response = await fetch('https://sanskar065.pythonanywhere.com/api/builders/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Registration failed');
+            }
+
+            // Handle successful registration
+            alert('Registration successful!');
+
 
             // Clear the form
             setFormData({
