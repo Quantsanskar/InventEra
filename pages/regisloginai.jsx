@@ -5,7 +5,9 @@ const RegisLoginAI = () => {
     const [searchText, setSearchText] = useState('');
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const carouselRef = useRef(null);
-
+    const gotoregister = () => {
+        window.location.href = "/regischat";
+    }
     // Sample data for the carousel
     const mediaItems = [
         { id: 1, image: '/carousel1/dev1.png' },
@@ -110,10 +112,10 @@ const RegisLoginAI = () => {
                         </p>
                     </div>
                     <div className="space-y-4 mb-8">
-                        <button className="w-full bg-white text-black py-2 sm:py-3 px-6 rounded-lg text-sm sm:text-base font-medium hover:bg-gray-100 transition">
+                        {/* <button className="w-full bg-white text-black py-2 sm:py-3 px-6 rounded-lg text-sm sm:text-base font-medium hover:bg-gray-100 transition">
                             Sign In
-                        </button>
-                        <button className="w-full bg-zinc-800 text-white py-2 sm:py-3 px-6 rounded-lg text-sm sm:text-base font-medium hover:bg-zinc-700 transition">
+                        </button> */}
+                        <button className="w-full bg-zinc-800 text-white py-2 sm:py-3 px-6 rounded-lg text-sm sm:text-base font-medium hover:bg-zinc-700 transition" onClick={gotoregister}>
                             Register
                         </button>
                     </div>
@@ -142,7 +144,7 @@ const RegisLoginAI = () => {
                                     type="text"
                                     value={searchText}
                                     onChange={(e) => setSearchText(e.target.value)}
-                                    placeholder="Find or Ask AI..."
+                                    placeholder="Find or Ask AI...(temporary disabled)"
                                     className="w-full bg-zinc-800 border border-zinc-700 rounded-lg py-2 sm:py-3 px-4 pr-10 text-base sm:text-lg focus:outline-none focus:border-zinc-600"
                                 />
                                 <ChevronRight className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
