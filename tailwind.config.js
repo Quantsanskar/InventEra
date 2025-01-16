@@ -39,9 +39,11 @@ module.exports = {
         }
       },
       fontFamily: {
+        'manrope': ['var(--font-manrope)', 'sans-serif'],
         'caveat': ['Caveat', 'cursive'],
         'sans': ['Plus Jakarta Sans', 'sans-serif'],
       },
+     
       animation: {
         'fade-in': 'fadeIn 1s ease-out',
         'fade-in-delay': 'fadeIn 1s ease-out 0.5s forwards',

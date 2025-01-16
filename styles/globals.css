@@ -12,3 +12,11 @@
     animation: fadeIn 1s ease-out 0.5s forwards;
   }
 }
+
+:root {
+  --font-manrope: 'Manrope', sans-serif;
+}
+
+body {
+  font-family: var(--font-manrope);
+}
