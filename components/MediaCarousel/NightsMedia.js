@@ -77,7 +77,7 @@ const CrewCarousel = ({ cards = [] }) => {
             await controls.start({
                 x: [-viewportWidth, -containerWidth],
                 transition: {
-                    duration: 20,
+                    duration: 60, // Reduced speed by increasing duration
                     ease: "linear",
                     repeat: Infinity,
                 }
@@ -86,6 +86,26 @@ const CrewCarousel = ({ cards = [] }) => {
 
         startAnimation()
     }, [controls])
+
+    // Function to pause animation
+    const handleMouseEnter = () => {
+        controls.stop()
+    }
+
+    // Function to resume animation
+    const handleMouseLeave = () => {
+        const containerWidth = containerRef.current?.scrollWidth || 0
+        const viewportWidth = containerRef.current?.offsetWidth || 0
+
+        controls.start({
+            x: [-viewportWidth, -containerWidth],
+            transition: {
+                duration: 60, // Keep the slow speed
+                ease: "linear",
+                repeat: Infinity,
+            }
+        })
+    }
 
     // Double the cards array to create a seamless loop
     const extendedCards = [...cards, ...cards]
@@ -104,7 +124,12 @@ const CrewCarousel = ({ cards = [] }) => {
                     <div className="absolute right-0 top-0 bottom-0 w-32 z-10 bg-gradient-to-l from-[#0A0A0A] to-transparent" />
 
                     {/* Carousel Container */}
-                    <div ref={containerRef} className="relative overflow-hidden">
+                    <div
+                        ref={containerRef}
+                        className="relative overflow-hidden"
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                    >
                         <motion.div
                             className="flex"
                             animate={controls}
@@ -121,4 +146,3 @@ const CrewCarousel = ({ cards = [] }) => {
 }
 
 export default CrewCarousel
-
