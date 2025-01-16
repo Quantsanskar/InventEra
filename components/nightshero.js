@@ -1,76 +1,123 @@
 'use client'
 
-import { motion } from "framer-motion"
-// import SparklesCore from "./SparklesCore"
+import { motion, useScroll, useTransform } from "framer-motion"
+import { useRef } from "react"
+import StarryCanvas from "./StarryCanvas"
 
 export default function HeroSection() {
+    const containerRef = useRef(null)
+    const { scrollY } = useScroll()
+    const opacity = useTransform(scrollY, [0, 300], [1, 0])
+
+    // Text animation variants
+    const textVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: (i) => ({
+            opacity: 1,
+            y: 0,
+            transition: {
+                delay: i * 0.1,
+                duration: 1,
+                ease: [0.33, 1, 0.68, 1]
+            }
+        })
+    }
+
     return (
-        <section className="relative w-full min-h-screen overflow-hidden">
-            {/* Background Image with Gradient Overlay */}
-            <div
-                className="absolute inset-0 w-full h-full bg-cover opacity-40 bg-center z-0"
-                style={{
-                    backgroundImage: `url('/reference/NightsSky.jpg')`,
-                    backgroundPosition: 'center 55%', // Adjusted to shift the image upwards
-                }}
-            >
-                <div className="absolute inset-0 bg-gradient-to-b from-purple-900/50 via-purple-800/30 to-black/80 mix-blend-multiply" />
+        <section ref={containerRef} className="relative w-full min-h-screen overflow-hidden">
+            {/* Background Elements */}
+            <div className="absolute inset-0 bg-black">
+                <StarryCanvas />
+                <div
+                    className="absolute inset-0 bg-gradient-to-b from-purple-900/30 via-blue-900/20 to-black/90"
+                    style={{
+                        backgroundImage: `url(${encodeURI('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-6g5XeDcrJOrrcOzWyAZ6rVfsaMGgl8.png')})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        opacity: 0.3,
+                        mixBlendMode: 'soft-light'
+                    }}
+                />
             </div>
 
             {/* Content Container */}
-            <div className="relative z-10 w-full h-screen flex flex-col items-center justify-center">
-                {/* Main Heading with Rise Animation */}
+            <motion.div
+                style={{ opacity }}
+                className="relative z-10 w-full h-screen flex flex-col items-center justify-center"
+            >
+                {/* Main Title */}
                 <motion.div
-                    initial={{ y: "100%" }}
-                    animate={{ y: 0 }}
-                    transition={{
-                        duration: 1.5,
-                        ease: [0.33, 1, 0.68, 1],
-                    }}
-                    className="relative"
+                    initial="hidden"
+                    animate="visible"
+                    className="relative mb-8"
                 >
-                    <h1 className="text-5xl md:text-8xl font-bold text-center leading-tight">
-                        <span className="bg-gradient-to-r text-white bg-clip-text text-transparent">
-                            The Nights
+                    <motion.h1
+                        variants={textVariants}
+                        custom={0}
+                        className="text-6xl md:text-9xl font-bold text-center"
+                    >
+                        <span className="relative inline-block">
+                            <span className="relative z-10 bg-gradient-to-b from-white via-white to-purple-200 bg-clip-text text-transparent">
+                                The Nights
+                            </span>
+                            <span className="absolute inset-0 animate-pulse blur-2xl bg-gradient-to-r from-purple-500 via-blue-500 to-purple-500 opacity-30" />
                         </span>
-
-
-                    </h1>
-
+                    </motion.h1>
                 </motion.div>
 
-                {/* Sparkles Effect */}
-                {/* <div className="w-full h-40 relative mt-8">
-                    <SparklesCore
-                        background="transparent"
-                        minSize={0.4}
-                        maxSize={1}
-                        particleDensity={1200}
-                        className="w-full h-full"
-                        particleColor="#FFF"
-                    />
-                </div> */}
-
-                {/* Subtitle with Fade In Animation */}
-                <motion.h2
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                        duration: 1,
-                        delay: 1,
-                        ease: "easeOut"
-                    }}
-                    className="text-2xl md:text-3xl text-white/90 text-center mt-8 max-w-3xl mx-auto px-4"
+                {/* Tagline */}
+                <motion.p
+                    variants={textVariants}
+                    custom={1}
+                    initial="hidden"
+                    animate="visible"
+                    className="text-xl md:text-2xl text-center max-w-2xl mx-auto px-4 text-purple-100/90"
                 >
-                    Let&apos;s build something amazing together!
-                </motion.h2>
+                    Where your skills illuminate the darkness and your knowledge shapes the future
+                </motion.p>
 
-                {/* Additional Gradient Lines */}
-                <div className="absolute inset-x-25 top-1/2 bg-gradient-to-r from-transparent via-purple-500 to-transparent h-[4px] w-3/4 blur-sm" />
-                <div className="absolute inset-x-25 top-1/2 bg-gradient-to-r from-transparent via-purple-500 to-transparent h-2px w-3/4" />
-                <div className="absolute inset-x-65 top-1/2 bg-gradient-to-r from-transparent via-purple-400 to-transparent h-[10px] w-1/4 blur-sm" />
-                <div className="absolute inset-x-65 top-1/2 bg-gradient-to-r from-transparent via-purple-400 to-transparent h-2px w-1/4" />
-            </div>
+                {/* CTA Button */}
+                <motion.div
+                    variants={textVariants}
+                    custom={2}
+                    initial="hidden"
+                    animate="visible"
+                    className="mt-12"
+                >
+                    <button className="group relative px-8 py-3 text-lg font-medium">
+                        <span className="relative z-10 text-white">
+                            Begin Your Journey
+                        </span>
+                        <div className="absolute inset-0 transform -skew-x-12 bg-gradient-to-r from-purple-600 to-blue-600 opacity-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-105" />
+                        <div className="absolute inset-0 transform -skew-x-12 bg-gradient-to-r from-purple-600 to-blue-600 blur-xl opacity-50 transition-all duration-300 group-hover:opacity-75" />
+                    </button>
+                </motion.div>
+
+                {/* Floating Elements */}
+                <div className="absolute inset-0 pointer-events-none">
+                    {[...Array(3)].map((_, i) => (
+                        <motion.div
+                            key={i}
+                            className="absolute w-2 h-2 bg-purple-400 rounded-full"
+                            animate={{
+                                y: [0, -20, 0],
+                                opacity: [0.5, 1, 0.5],
+                                scale: [1, 1.2, 1]
+                            }}
+                            transition={{
+                                duration: 3,
+                                delay: i * 0.5,
+                                repeat: Infinity,
+                                ease: "easeInOut"
+                            }}
+                            style={{
+                                left: `${30 + i * 20}%`,
+                                top: '40%'
+                            }}
+                        />
+                    ))}
+                </div>
+            </motion.div>
         </section>
     )
 }
