@@ -10,8 +10,8 @@ export default function HeroSection() {
             <div
                 className="absolute inset-0 w-full h-full bg-cover opacity-50 bg-center z-0"
                 style={{
-                    backgroundImage: `url('/reference/Nightshift (2).jpeg')`,
-                    backgroundPosition: 'center 60%', // Adjusted to shift the image upwards
+                    backgroundImage: `url('/reference/Nightshift.jpeg')`,
+                    backgroundPosition: 'center 25%', // Adjusted to shift the image upwards
                 }}
             >
                 <div className="absolute inset-0 bg-gradient-to-b from-purple-900/50 via-purple-800/30 to-black/80 mix-blend-multiply" />
