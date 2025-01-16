@@ -5,7 +5,7 @@ import { useRef } from "react"
 export default function HeroSection() {
     const containerRef = useRef(null)
     const { scrollY } = useScroll()
-    const opacity = useTransform(scrollY, [0, 300], [1, 0])
+    const opacity = useTransform(scrollY, [0, 900], [1, 0])
 
     const textVariants = {
         hidden: { opacity: 0, y: 20 },
