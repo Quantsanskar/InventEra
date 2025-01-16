@@ -1,17 +1,17 @@
 'use client'
 
 import { motion } from "framer-motion"
-import SparklesCore from "./SparklesCore"
+// import SparklesCore from "./SparklesCore"
 
 export default function HeroSection() {
     return (
         <section className="relative w-full min-h-screen overflow-hidden">
             {/* Background Image with Gradient Overlay */}
             <div
-                className="absolute inset-0 w-full h-full bg-cover opacity-50 bg-center z-0"
+                className="absolute inset-0 w-full h-full bg-cover opacity-40 bg-center z-0"
                 style={{
-                    backgroundImage: `url('/reference/Nightshift.jpeg')`,
-                    backgroundPosition: 'center 25%', // Adjusted to shift the image upwards
+                    backgroundImage: `url('/reference/NightsSky.jpg')`,
+                    backgroundPosition: 'center 55%', // Adjusted to shift the image upwards
                 }}
             >
                 <div className="absolute inset-0 bg-gradient-to-b from-purple-900/50 via-purple-800/30 to-black/80 mix-blend-multiply" />
@@ -30,7 +30,7 @@ export default function HeroSection() {
                     className="relative"
                 >
                     <h1 className="text-5xl md:text-8xl font-bold text-center leading-tight">
-                        <span className="bg-gradient-to-r from-cyan-400 via-cyan-200 to-cyan-400 bg-clip-text text-transparent">
+                        <span className="bg-gradient-to-r text-white bg-clip-text text-transparent">
                             The Nights
                         </span>
 
@@ -66,10 +66,10 @@ export default function HeroSection() {
                 </motion.h2>
 
                 {/* Additional Gradient Lines */}
-                <div className="absolute inset-x-25 top-1/2 bg-gradient-to-r from-transparent via-cyan-500 to-transparent h-[2px] w-3/4 blur-sm" />
-                <div className="absolute inset-x-25 top-1/2 bg-gradient-to-r from-transparent via-cyan-500 to-transparent h-px w-3/4" />
-                <div className="absolute inset-x-65 top-1/2 bg-gradient-to-r from-transparent via-cyan-400 to-transparent h-[5px] w-1/4 blur-sm" />
-                <div className="absolute inset-x-65 top-1/2 bg-gradient-to-r from-transparent via-cyan-400 to-transparent h-px w-1/4" />
+                <div className="absolute inset-x-25 top-1/2 bg-gradient-to-r from-transparent via-purple-500 to-transparent h-[4px] w-3/4 blur-sm" />
+                <div className="absolute inset-x-25 top-1/2 bg-gradient-to-r from-transparent via-purple-500 to-transparent h-2px w-3/4" />
+                <div className="absolute inset-x-65 top-1/2 bg-gradient-to-r from-transparent via-purple-400 to-transparent h-[10px] w-1/4 blur-sm" />
+                <div className="absolute inset-x-65 top-1/2 bg-gradient-to-r from-transparent via-purple-400 to-transparent h-2px w-1/4" />
             </div>
         </section>
     )
