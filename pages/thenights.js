@@ -18,11 +18,11 @@ import { LayoutGrid } from "../components/gridcomponent";
 import { LampImp } from "../components/lamp";
 import { Footer } from "../components/footer";
 import { CommunityLamp } from "../components/communityLamp";
-import { Carousel } from "../components/MediaCarousel/NightsCarousel";
-import { MediaCard } from "../components/MediaCarousel/NightsMedia";
 import MacWindow from '../components/macbooktab';
 import HeroSection from "../components/nightshero";
 import WelcomeCard from "../components/nightswelcomecard";
+import CrewSection from "../components/MediaCarousel/NightsMedia";
+import WhoAreWe from "../components/nightsintro";
 // Simple NavItem component
 const NavItem = ({ href, children }) => (
     <Link href={href}>
@@ -181,14 +181,12 @@ const EventPage = () => {
             category: "Featured",
             title: "Amazing Video Content",
             src: "/reference/WhatsApp Image 2025-01-12 at 10.02.27 PM - Yogesh Vashisth.jpeg", // Add your video path
-            // content: <DummyContent />,
         },
         {
             type: 'image',
             category: "Animation",
             title: "Engaging GIF Content",
             src: "/reference/IMG_9723 - Ali Nasir.PNG", // Add your GIF path
-            // content: <DummyContent />,
         },
 
         {
@@ -196,63 +194,54 @@ const EventPage = () => {
             category: "Featured",
             title: "Amazing Video Content",
             src: "/reference/IMG_1692 - Vishal Kumar Singh.png", // Add your video path
-            // content: <DummyContent />,
         },
         {
             type: 'image',
             category: "Animation",
             title: "Engaging GIF Content",
             src: "/reference/IMG_20250112_222134 - SWATI JHA.jpg", // Add your GIF path
-            // content: <DummyContent />,
         },
         {
             type: 'image',
             category: "Photography",
             title: "Beautiful Image",
             src: "/reference/IMG_20250113_115206 - Shreya Shristi.jpg", // Add your image path
-            // content: <DummyContent />,
         },
         {
             type: 'image',
             category: "Featured",
             title: "Amazing Video Content",
             src: "/reference/IMG-20250114-WA0003 - Mohd. Zubair.jpg", // Add your video path
-            // content: <DummyContent />,
         },
         {
             type: 'image',
             category: "Animation",
             title: "Engaging GIF Content",
             src: "/reference/Picsart_25-01-12_22-09-42-955 - Jack Sparrow.jpg", // Add your GIF path
-            // content: <DummyContent />,
         },
         {
             type: 'image',
             category: "Photography",
             title: "Beautiful Image",
             src: "/reference/this is me_20250113_010118_0000 - Abhinav Maurya.jpg", // Add your image path
-            // content: <DummyContent />,
         },
         {
             type: 'image',
             category: "Featured",
             title: "Amazing Video Content",
             src: "/reference/IMG-20250113-WA0005 - Kirti Goel.jpg", // Add your video path
-            // content: <DummyContent />,
         },
         {
             type: 'image',
             category: "Animation",
             title: "Engaging GIF Content",
             src: "/reference/ANSH - ANSH KUMAR.jpg", // Add your GIF path
-            // content: <DummyContent />,
         },
         {
             type: 'image',
             category: "Photography",
             title: "Beautiful Image",
             src: "/reference/aayushi - ANSH KUMAR.jpg", // Add your image path
-            // content: <DummyContent />,
         },
         // Add more items as needed
     ];
@@ -321,7 +310,7 @@ const EventPage = () => {
 
 
     const mediacards = data.map((card, index) => (
-        <MediaCard key={index} card={card} index={index} />
+        <CrewSection key={index} card={card} index={index} />
     ));
     return (
         <main className="flex flex-col min-h-screen bg-black dark:bg-black">
@@ -352,74 +341,22 @@ const EventPage = () => {
                 </div>
             </section> */}
 
-            {/* <div className="text-center mb-8 md:mb-16 sm:mb-4">
-                <h1 className="text-5xl md:text-6xl font-bold text-white">
-                    {" "}
-                    <FlipWords
-                        words={words}
-                        duration={3000}
-                        className="text-blue-400"
-                    />
-                </h1>
-            </div> */}
-            <div><WelcomeCard/></div>
+
+            <div><WelcomeCard /></div>
             {/* <div className="text-center mb-8 md:mb-16 sm:mb-4">
                 <TextGenerateEffect words={words} />
 
             </div> */}
-            <div className="w-full h-full py-20 bg-black">
+            {/* <div className="w-full h-full py-20 bg-black">
                 <h2 className="max-w-7xl pl-4 mx-auto text-xl md:text-5xl font-bold text-white dark:text-white font-sans text-center">
                     Our Members
                 </h2>
                 <Carousel items={mediacards} autoScrollInterval={5000} />
-            </div>
-            <div className="min-h-screen bg-black dark:black text-white dark:text-white p-8">
-                <MacWindow title="Welcome to The Nights">
-                    <div className="space-y-4">
-                        <h1 className="text-2xl font-bold">IMAGINE A PLACE WHERE:</h1>
+            </div> */}
 
-                        <div className="space-y-2">
-                            <p className="text-lg">ARTISTS VIBE WITH DEVELOPERS.</p>
-                            <p className="text-lg">HACKERS TEAM UP WITH CHEFS.</p>
-                            <p className="text-lg">GAMERS SHARE TIPS WITH FILMMAKERS.</p>
-                        </div>
+            <div><CrewSection cards={data} /></div>
 
-                        <p className="text-lg mt-6">
-                            YOU BRING THE SPARK, WE BRING THE FUEL (AND THE PIZZA 🍕).
-                            IT&apos;S ALL ABOUT COLLABORATION, CREATIVITY, AND A LITTLE BIT OF CHAOS.
-                        </p>
 
-                        <div className="mt-8 flex justify-center">
-                            <a
-                                href="https://your-registration-link.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group relative px-8 py-3 bg-neutral-800/50 rounded-lg
-                overflow-hidden backdrop-blur-sm border border-neutral-700
-                transition-all duration-300 ease-out
-                hover:bg-neutral-700/60 hover:border-neutral-600 hover:scale-105
-                hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]
-                active:scale-95"
-                            >
-                                {/* Gradient overlay */}
-                                <div className="absolute inset-0 opacity-0 group-hover:opacity-100
-                bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10
-                transition-opacity duration-300 ease-out"
-                                />
-
-                                {/* Button text */}
-                                <span className="relative font-medium text-neutral-200
-                group-hover:text-white transition-colors duration-300">
-                                    Register here
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                </MacWindow>
-            </div>
-            <div className="bg-black w-full"> {/* Added negative margin to reduce gap */}
-                <MacbookScroll src="/reference/IMG-20241206-WA0010.jpg" />
-            </div>
             <div className="mt-4 md:mt-8 sm:mt-2">
                 <ScrollDemo />
             </div>
@@ -428,7 +365,7 @@ const EventPage = () => {
 
 
 
-
+            {/* <div><WhoAreWe /></div> */}
 
             {/* Notion-like Season Description Section */}
             <section className="w-full px-4 md:px-8 py-12 bg-black dark:bg-black text-white dark:text-white">
@@ -530,40 +467,7 @@ const EventPage = () => {
                 </div>
             </div>
 
-            <div className="min-h-screen w-full bg-black dark:bg-black flex items-center justify-center p-8">
-                <div className="flex flex-col items-center gap-8">
-                    <h2 className="text-3xl md:text-4xl font-bold text-white text-center">
-                        Transform Your Journey With Us
-                    </h2>
-                    <div className="relative p-6 rounded-3xl bg-neutral-900/50 border border-neutral-800">
-                        <Compare
-                            firstImage="/images/saddev.png"
-                            secondImage="/images/happydev.png"
-                            firstImageClassName="object-cover rounded-2xl"
-                            secondImageClassname="object-cover rounded-2xl"
-                            className="h-[300px] w-[300px] md:h-[500px] md:w-[500px]"
-                            slideMode="hover"
-                            initialSliderPercentage={50}
-                            autoplay={false}  // Changed to false
-                            autoplayOnHover={true}  // Added new prop
-                            autoplayDuration={3000}
-                        />
-                        <div className="absolute -bottom-12 left-0 right-0 flex justify-between px-4">
-                            <div className="text-center">
-                                <h3 className="text-white font-bold text-lg mb-1">Solo Developer</h3>
-                                <p className="text-neutral-400 text-sm">Working in isolation</p>
-                            </div>
-                            <div className="text-center">
-                                <h3 className="text-white font-bold text-lg mb-1">Community Member</h3>
-                                <p className="text-neutral-400 text-sm">Thriving with support</p>
-                            </div>
-                        </div>
-                    </div>
-                    <p className="text-neutral-400 text-center max-w-lg mt-16 text-sm md:text-base">
-                        Experience the power of community - where solo developers become part of something bigger. Join us to accelerate your growth and unlock your full potential.
-                    </p>
-                </div>
-            </div>
+
 
             <div className="bg-black dark:bg-black text-white dark:text-white">  {/* Removed extra spacing */}
                 <HeroParallax products={eventThemes} />
