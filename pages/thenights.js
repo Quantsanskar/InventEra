@@ -22,6 +22,7 @@ import { Carousel } from "../components/MediaCarousel/NightsCarousel";
 import { MediaCard } from "../components/MediaCarousel/NightsMedia";
 import MacWindow from '../components/macbooktab';
 import HeroSection from "../components/nightshero";
+import WelcomeCard from "../components/nightswelcomecard";
 // Simple NavItem component
 const NavItem = ({ href, children }) => (
     <Link href={href}>
@@ -361,10 +362,11 @@ const EventPage = () => {
                     />
                 </h1>
             </div> */}
-            <div className="text-center mb-8 md:mb-16 sm:mb-4">
+            <div><WelcomeCard/></div>
+            {/* <div className="text-center mb-8 md:mb-16 sm:mb-4">
                 <TextGenerateEffect words={words} />
 
-            </div>
+            </div> */}
             <div className="w-full h-full py-20 bg-black">
                 <h2 className="max-w-7xl pl-4 mx-auto text-xl md:text-5xl font-bold text-white dark:text-white font-sans text-center">
                     Our Members
