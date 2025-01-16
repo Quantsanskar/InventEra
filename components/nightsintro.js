@@ -3,7 +3,7 @@
 
 import { Montserrat } from 'next/font/google';
 import { motion } from 'framer-motion';
-import { exp } from '@tensorflow/tfjs';
+//import { exp } from '@tensorflow/tfjs';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 
