@@ -22,7 +22,7 @@ import MacWindow from '../components/macbooktab';
 import HeroSection from "../components/nightshero";
 import WelcomeCard from "../components/nightswelcomecard";
 import CrewSection from "../components/MediaCarousel/NightsMedia";
-import WhoAreWe from "../components/nightsintro";
+import WhoAreWe from "../components/who-are-we";
 // Simple NavItem component
 const NavItem = ({ href, children }) => (
     <Link href={href}>
@@ -365,12 +365,12 @@ const EventPage = () => {
 
 
 
-            {/* <div><WhoAreWe /></div> */}
+            <div><WhoAreWe /></div>
 
             {/* Notion-like Season Description Section */}
-            <section className="w-full px-4 md:px-8 py-12 bg-black dark:bg-black text-white dark:text-white">
+            {/* <section className="w-full px-4 md:px-8 py-12 bg-black dark:bg-black text-white dark:text-white">
                 <div className="max-w-5xl mx-auto space-y-12 bg-black dark:bg-black text-white dark:text-white">
-                    {/* Header */}
+               
                     <div className="border-b border-gray-800 pb-8 bg-black dark:bg-black">
                         <h1 className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
                             The Nights: Season One
@@ -380,17 +380,16 @@ const EventPage = () => {
                         </p>
                     </div>
 
-                    {/* Table of Contents */}
                     <div className="max-w-4xl mx-auto p-8 bg-[#191919] text-gray-200 bg-black dark:bg-black">
-                        {/* Title Section */}
+         
                         <div className="mb-12">
                             <h1 className="text-4xl font-bold mb-4 text-white">The Nights: Season One</h1>
                             <p className="text-xl text-gray-400">A 3-week journey of creation, collaboration, and community.</p>
                         </div>
 
-                        {/* Content Sections */}
+            
                         <div className="space-y-10">
-                            {/* Program Overview */}
+                 
                             <div>
                                 <h2 className="text-2xl font-semibold mb-4 text-white">🎯 Program Overview</h2>
                                 <p className="text-lg leading-relaxed mb-6">
@@ -403,7 +402,6 @@ const EventPage = () => {
                                 </p>
                             </div>
 
-                            {/* What We Offer */}
                             <div>
                                 <h2 className="text-2xl font-semibold mb-4 text-white">💡 What We Offer</h2>
                                 <div className="space-y-4">
@@ -422,18 +420,18 @@ const EventPage = () => {
                                 </div>
                             </div>
 
-                            {/* Important Details */}
+                           
                             <div>
                                 <h2 className="text-2xl font-semibold mb-4 text-white">📍 Important Details</h2>
                                 <div className="space-y-4">
                                     <p className="text-lg leading-relaxed">Start Date: January 15th, 4</p>
                                     <p className="text-lg leading-relaxed">Contact: buildersspace9@gmail.com</p>
                                     <p className="text-lg leading-relaxed">Format: Virtual + Offline Demo Day</p>
-                                    {/* <p className="text-lg leading-relaxed">Website: buildersspace.tech</p> */}
+                                 
                                 </div>
                             </div>
 
-                            {/* Closing */}
+                     
                             <div className="pt-8 border-t border-gray-800">
                                 <p className="text-xl italic text-gray-400">
                                     "Where builders create and creators build!"
@@ -442,7 +440,7 @@ const EventPage = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
 
 
             <div className="mb-20">
