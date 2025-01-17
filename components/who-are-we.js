@@ -125,7 +125,7 @@ const WhoAreWe = () => {
             {/* Enhanced Content Section with Glass Effect */}
             <motion.div
                 variants={contentVariants}
-                className="relative max-w-4xl mx-auto px-8 pb-16 text-white mt-16 z-10"
+                className="relative max-w-4xl mx-auto px-8 pb-16 text-white mt-[-60px] z-10"
             >
                 <motion.div
                     className="space-y-8 backdrop-blur-md bg-black/20 p-8 rounded-2xl shadow-[0_0_25px_rgba(0,0,0,0.3)] border border-white/10"
