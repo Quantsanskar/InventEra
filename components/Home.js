@@ -29,12 +29,14 @@ const MainPage = () => {
     bottomRef.current.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const openBuildersSpace=()=>{
-    router.push('/joinpage');
+  const openBuildersSpace = () => {
+    // router.push('/joinpage');
+    window.location.href = 'https://www.commudle.com/communities/builders-space';
   }
 
   const handleAdditionalContentClick = () => {
-    additionalContentRef.current.scrollIntoView({ behavior: 'smooth' });
+    // additionalContentRef.current.scrollIntoView({ behavior: 'smooth' });
+    window.location.href = '/thenights';
   };
 
   return (
@@ -92,6 +94,14 @@ const MainPage = () => {
       <div
         ref={bottomRef}
         className="pt-40 pb-80 px-8 md:px-16 bg-gray-900 text-white"
+        style={{
+          background: `
+          linear-gradient(45deg, rgba(10,10,15,1) 0%, rgba(17,17,22,0.98) 25%, rgba(22,22,29,0.95) 50%, rgba(25,25,35,0.98) 75%, rgba(30,30,45,1) 100%),
+          linear-gradient(135deg, rgba(20,20,30,0.9) 0%, rgba(25,25,40,0.8) 50%, rgba(30,30,50,0.9) 100%),
+          linear-gradient(225deg, rgba(15,15,25,0.95) 0%, rgba(20,20,35,0.9) 50%, rgba(25,25,45,0.95) 100%),
+          radial-gradient(circle at 50% 50%, rgba(40,40,60,0.5) 0%, rgba(20,20,30,0.7) 100%),
+          conic-gradient(from 45deg at 50% 50%, rgba(60,60,90,0.2) 0%, rgba(30,30,45,0.2) 25%, rgba(40,40,60,0.2) 50%, rgba(30,30,45,0.2) 75%, rgba(60,60,90,0.2) 100%)
+      `}}
       >
         <motion.div variants={stagger} initial="initial" whileInView="animate" viewport={{ once: false, amount: 0.1 }}>
           <motion.h1
@@ -141,7 +151,15 @@ const MainPage = () => {
       {/* Additional Content */}
       <div
         ref={additionalContentRef}
-        className="pt-40 pb-80 px-8 md:px-16 bg-background dark:bg-background text-white"
+        className="pt-40 pb-80 px-8 md:px-16  text-white"
+        style={{
+          background: `
+          linear-gradient(45deg, rgba(5,5,10,1) 0%, rgba(12,12,17,0.98) 25%, rgba(17,17,24,0.95) 50%, rgba(20,20,30,0.98) 75%, rgba(25,25,40,1) 100%),
+          linear-gradient(135deg, rgba(15,15,25,0.9) 0%, rgba(20,20,35,0.8) 50%, rgba(25,25,45,0.9) 100%),
+          linear-gradient(225deg, rgba(10,10,20,0.95) 0%, rgba(15,15,30,0.9) 50%, rgba(20,20,40,0.95) 100%),
+          radial-gradient(circle at 50% 50%, rgba(35,35,55,0.5) 0%, rgba(15,15,25,0.7) 100%),
+          conic-gradient(from 45deg at 50% 50%, rgba(55,55,85,0.2) 0%, rgba(25,25,40,0.2) 25%, rgba(35,35,55,0.2) 50%, rgba(25,25,40,0.2) 75%, rgba(55,55,85,0.2) 100%)
+        `}}
       >
         <motion.div variants={stagger} initial="initial" whileInView="animate" viewport={{ once: false, amount: 0.1 }}>
           <motion.h1
