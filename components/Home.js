@@ -137,7 +137,7 @@ const MainPage = () => {
           </motion.ul>
         </motion.div>
 
-        {/* Additional Content Button */}
+   
         <div className="mt-12 flex justify-center">
           <button
             className="bg-white bg-opacity-30 hover:bg-opacity-50 text-white font-medium py-3 px-6 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 transition-all duration-300"
