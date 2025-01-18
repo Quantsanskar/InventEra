@@ -39,28 +39,28 @@ const NavItem = ({ href, children }) => (
 const eventThemes = [
     {
         title: "Tech Domains",
-        link: "/static/TechDomain.html",
-        thumbnail: "/images/TechDomain.png", // Add your image path here
+        link: "/404",
+        thumbnail: "/reference/ComingSoonThumb.png", // Add your image path here
     },
     {
         title: "Science & Research Domains",
-        link: "/static/Science.html",
-        thumbnail: "/images/Science.png", // Add your image path here
+        link: "/404",
+        thumbnail: "/reference/ComingSoonThumb.png", // Add your image path here
     },
     {
         title: "Creative Domains",
-        link: "/static/Creative_Domains.html",
-        thumbnail: "/images/CreativeDomain.png", // Add your image path here
+        link: "/404",
+        thumbnail: "/reference/ComingSoonThumb.png", // Add your image path here
     },
     {
         title: "Enterpreneurship & Management",
-        link: "/static/Management.html",
-        thumbnail: "/images/Enterpreneurship.png", // Add your image path here
+        link: "/404",
+        thumbnail: "/reference/ComingSoonThumb.png", // Add your image path here
     },
     {
         title: "Other Domains",
-        link: "/static/Others.html",
-        thumbnail: "/images/Others.png", // Add your image path here
+        link: "/404",
+        thumbnail: "/reference/ComingSoonThumb.png", // Add your image path here
     }
 ];
 // Simplified Nav component
@@ -272,7 +272,7 @@ const EventPage = () => {
             className: "md:col-span-1 row-span-1",
             media: {
                 type: "image",
-                src: "/reference/images (6).jpeg",
+                src: "/reference/Nightshift.jpeg",
                 alt: "Community networking",
             },
         },
@@ -287,7 +287,7 @@ const EventPage = () => {
             className: "md:col-span-1 row-span-1",
             media: {
                 type: "image",
-                src: "/reference/images (7).jpeg",
+                src: "/reference/Nightshift (2).jpeg",
                 alt: "Project showcase",
             },
         },
