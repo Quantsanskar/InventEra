@@ -84,44 +84,13 @@ const WhoAreWe = () => {
 
             {/* Responsive Image and SVG Container */}
             <div className="flex flex-row justify-center items-center gap-4 px-4 w-full mb-8 mt-4 flex-wrap lg:flex-nowrap">
-                {/* SVG Container */}
-
-
-                {/* <div className="w-full lg:w-1/2 max-w-[300px] lg:max-w-[400px]">
-                    <CardContainer className="inter-var">
-                        <CardBody>
-                            <CardItem translateZ="100" className="w-full">
-                                <Image
-                                    src="/reference/who-are-we.svg"
-                                    height="600"
-                                    width="600"
-                                    className="w-full h-auto  sm:ml-[-40px] rounded-xl group-hover/card:shadow-xl"
-                                    alt="Decorative SVG"
-                                />
-                            </CardItem>
-                        </CardBody>
-                    </CardContainer>
-                </div> */}
-                {/* <div className="w-full lg:w-1/2 max-w-[300px] lg:max-w-[400px]">
-                    <CardContainer className="inter-var">
-                        <CardBody>
-                            <CardItem translateZ="100" className="w-full">
-                                <Image
-                                    src="/reference/Astro.e0080d97.svg"
-                                    height="600"
-                                    width="600"
-                                    className="w-full h-auto  sm:ml-[-40px] rounded-xl group-hover/card:shadow-xl"
-                                    alt="Decorative SVG"
-                                />
-                            </CardItem>
-                        </CardBody>
-                    </CardContainer>
-                </div> */}
+             
+              
 
                 {/* Who Are We Image */}
                 <div className="w-full lg:w-1/2 max-w-[300px] lg:max-w-[400px]">
                     <CardContainer className="inter-var">
-                        <CardBody className={"mb-[-100px] lg:mb-[-90px]"}>
+                        <CardBody>
                             <CardItem translateZ="100" className="w-full flex flex-row lg:gap-60">
                                 <Image
                                     src="/reference/WHO ARE WE.png"
@@ -137,16 +106,7 @@ const WhoAreWe = () => {
                                     className="max-w-[60%] lg:ml-[-240px] h-auto object-contain rounded-xl group-hover/card:shadow-xl"
                                     alt="Who Are We?"
                                 />
-                                {/* <h2 className="text-4xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-white via-white/90 to-white/80 drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]">
-                                    TheㅤNightsㅤ:ㅤSeasonㅤOne
-                                </h2> */}
-                                {/* <Image
-                                    src="/reference/nightS1.svg"
-                                    height="600"
-                                    width="600"
-                                    className="w-full h-auto  sm:ml-[-40px] rounded-xl group-hover/card:shadow-xl"
-                                    alt="Decorative SVG"
-                                /> */}
+                              
 
                             </CardItem>
                         </CardBody>
@@ -164,20 +124,13 @@ const WhoAreWe = () => {
             >
                 <motion.div
                     className="space-y-8  p-8 rounded-2xl bg-transparent"
-                    // whileHover={{
-                    //     boxShadow: "0 0 30px rgba(0,0,0,0.4)",
-                    //     borderColor: "rgba(255,255,255,0.15)",
-                    //     transition: { duration: 0.3 }
-                    // }}
+                 
                 >
                     {/* Title Section with enhanced styling */}
                     <motion.div
                         variants={contentVariants}
                         className="mb-12 lg:mt-20"
-                        // whileHover={{
-                        //     scale: 1.01,
-                        //     transition: { duration: 0.2 }
-                        // }}
+                      
                     >
                         <h2 className="text-4xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-white via-white/90 to-white/80 drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]">
                             The Nights: Season One
@@ -191,7 +144,7 @@ const WhoAreWe = () => {
                     <motion.div
                         variants={contentVariants}
                         className="transform hover:scale-[1.02] transition-all duration-300 p-4 rounded-xl "
-                        // whileHover={{ y: -2 }}
+       
                     >
                         <h3 className="text-2xl font-semibold mb-3 text-white/90"> Program Overview</h3>
                         <p className="text-gray-200/90">
@@ -203,11 +156,11 @@ const WhoAreWe = () => {
                     <motion.div
                         variants={contentVariants}
                         className="transform hover:scale-[1.02] transition-all duration-300 p-4 rounded-xl "
-                        // whileHover={{ y: -2 }}
+      
                     >
                         <h3 className="text-2xl font-semibold mb-3 text-white/90"> What We Offer</h3>
                         <ul className="space-y-3 text-gray-200/90">
-                            {/* {['Interactive Workshops', 'Speaker Sessions (Labs)', 'Build Challenges', 'Networking']. */}
+          
                             <motion.li  className="transition-transform">
                                 Interactive Workshops
                             </motion.li>
@@ -227,7 +180,7 @@ const WhoAreWe = () => {
                     <motion.div
                         variants={contentVariants}
                         className="transform hover:scale-[1.02] transition-all duration-300 p-4 rounded-xl"
-                        // whileHover={{ y: -2 }}
+   
                     >
                         <h3 className="text-2xl font-semibold mb-3 text-white/90"> Important Details</h3>
                         <ul className="space-y-2 text-gray-200/90">
@@ -247,7 +200,7 @@ const WhoAreWe = () => {
                     <motion.div
                         variants={contentVariants}
                         className="pt-6"
-                        // whileHover={{ scale: 1.02 }}
+          
                     >
                         <p className="text-xl font-semibold text-center italic bg-clip-text text-transparent bg-gradient-to-r from-white via-white/90 to-white/80 drop-shadow-[0_0_8px_rgba(255,255,255,0.1)]">
                             "Where builders create and creators build!"
