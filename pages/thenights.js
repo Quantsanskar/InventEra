@@ -39,28 +39,28 @@ const NavItem = ({ href, children }) => (
 const eventThemes = [
   {
     title: "Tech Domains",
-    link: "/static/TechDomain.html",
-    thumbnail: "/images/TechDomain.png", // Add your image path here
+    link: "/404",
+    thumbnail: "/reference/ComingSoonThumb.png", // Add your image path here
   },
   {
     title: "Science & Research Domains",
-    link: "/static/Science.html",
-    thumbnail: "/images/Science.png", // Add your image path here
+    link: "/404",
+    thumbnail: "/reference/ComingSoonThumb.png", // Add your image path here
   },
   {
     title: "Creative Domains",
-    link: "/static/Creative_Domains.html",
-    thumbnail: "/images/CreativeDomain.png", // Add your image path here
+    link: "/404",
+    thumbnail: "/reference/ComingSoonThumb.png", // Add your image path here
   },
   {
     title: "Enterpreneurship & Management",
-    link: "/static/Management.html",
-    thumbnail: "/images/Enterpreneurship.png", // Add your image path here
+    link: "/404",
+    thumbnail: "/reference/ComingSoonThumb.png", // Add your image path here
   },
   {
     title: "Other Domains",
-    link: "/static/Others.html",
-    thumbnail: "/images/Others.png", // Add your image path here
+    link: "/404",
+    thumbnail: "/reference/ComingSoonThumb.png", // Add your image path here
   },
 ];
 // Simplified Nav component
@@ -132,13 +132,13 @@ const EventPage = () => {
         "Join our vibrant community of creators, developers, artists, and innovators! Nights: Season One offers a 3-week journey of learning, building, and networking. Connect with like-minded individuals, participate in interactive workshops, and showcase your work at our grand finale Demo Day. Experience the power of collaborative learning and creative growth.",
       link: "/notioncommunity",
     },
-    {
-      title: "Sponsors",
-      value: "sponsors",
-      description:
-        "Our sponsors are industry leaders committed to empowering the next generation of creators. They provide essential resources, cutting-edge tools, mentorship opportunities, and valuable connections. Through our sponsorship program, participants gain access to premium technologies and platforms that accelerate their development journey.",
-      link: "/notionsponsors",
-    },
+    // {
+    //   title: "Sponsors",
+    //   value: "sponsors",
+    //   description:
+    //     "Our sponsors are industry leaders committed to empowering the next generation of creators. They provide essential resources, cutting-edge tools, mentorship opportunities, and valuable connections. Through our sponsorship program, participants gain access to premium technologies and platforms that accelerate their development journey.",
+    //   link: "/notionsponsors",
+    // },
     {
       title: "Speakers",
       value: "speakers",
@@ -274,7 +274,7 @@ const EventPage = () => {
       className: "md:col-span-1 row-span-1",
       media: {
         type: "image",
-        src: "/reference/images (6).jpeg",
+        src: "/reference/Nightshift (2).jpeg",
         alt: "Community networking",
       },
     },
@@ -289,7 +289,7 @@ const EventPage = () => {
       className: "md:col-span-1 row-span-1",
       media: {
         type: "image",
-        src: "/reference/images (7).jpeg",
+        src: "/reference/Nightshift.jpeg",
         alt: "Project showcase",
       },
     },
@@ -347,16 +347,8 @@ const EventPage = () => {
       <div>
         <WelcomeCard />
       </div>
-      {/* <div className="text-center mb-8 md:mb-16 sm:mb-4">
-                <TextGenerateEffect words={words} />
 
-            </div> */}
-      {/* <div className="w-full h-full py-20 bg-black">
-                <h2 className="max-w-7xl pl-4 mx-auto text-xl md:text-5xl font-bold text-white dark:text-white font-sans text-center">
-                    Our Members
-                </h2>
-                <Carousel items={mediacards} autoScrollInterval={5000} />
-            </div> */}
+
 
       <div>
         <CrewSection cards={data} />
@@ -368,8 +360,8 @@ const EventPage = () => {
 
       <div><WhoAreWe /></div>
 
-      {/* Notion-like Season Description Section */}
-      
+
+
 
       <div className="mb-20">
         <LampImp />
@@ -401,9 +393,7 @@ const EventPage = () => {
         <HeroParallax products={eventThemes} />
       </div>
 
-      {/* <div>
-                <TechStickyScroll />
-            </div> */}
+
 
       <div className="bg-background w-full">
         {" "}

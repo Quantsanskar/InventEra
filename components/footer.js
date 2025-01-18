@@ -2,14 +2,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { IconBrandGithub, IconBrandTwitter, IconBrandLinkedin, IconMail, IconBrandDiscord, IconMapPin } from '@tabler/icons-react';
+import { IconBrandGithub, IconBrandTwitter, IconBrandLinkedin, IconMail, IconBrandDiscord, IconMapPin, IconBrandInstagram, IconBrandPatreon, IconBrandLinktree, IconBrandWhatsapp } from '@tabler/icons-react';
 
 const FooterLink = ({ href, children }) => (
-  <Link 
-    href={href} 
+  <Link
+    href={href}
     className="group relative inline-block"
   >
-    <motion.span 
+    <motion.span
       className="text-neutral-300 hover:text-cyan-400 transition-colors relative inline-block"
       whileHover={{ y: -2 }}
       transition={{ duration: 0.2 }}
@@ -61,10 +61,13 @@ export const Footer = () => {
               Join our community of creators, developers, and innovators. Build something amazing together.
             </p>
             <div className="flex space-x-4">
-              <SocialIcon href="https://github.com" icon={IconBrandGithub} label="GitHub" />
-              <SocialIcon href="https://twitter.com" icon={IconBrandTwitter} label="Twitter" />
-              <SocialIcon href="https://linkedin.com" icon={IconBrandLinkedin} label="LinkedIn" />
-              <SocialIcon href="https://discord.gg" icon={IconBrandDiscord} label="Discord" />
+              {/* <SocialIcon href="https://github.com" icon={IconBrandGithub} label="GitHub" /> */}
+              {/* <SocialIcon href="https://twitter.com" icon={IconBrandTwitter} label="Twitter" /> */}
+              <SocialIcon href="https://www.linkedin.com/company/builder-s-space/" icon={IconBrandLinkedin} label="LinkedIn" />
+              <SocialIcon href="https://www.instagram.com/builders.space/" icon={IconBrandInstagram} label="Instagram" />
+              <SocialIcon href="https://linktr.ee/Builders_Space" icon={IconBrandLinktree} label="LinkTree" />
+              <SocialIcon href="https://chat.whatsapp.com/IXlpRAi0BJKD99DSCY3j4j" icon={IconBrandWhatsapp} label="WhatsApp" />
+              {/* <SocialIcon href="https://discord.gg" icon={IconBrandDiscord} label="Discord" /> */}
             </div>
           </div>
 
@@ -72,10 +75,10 @@ export const Footer = () => {
           <nav className="space-y-6">
             <h3 className="text-white font-semibold">Quick Links</h3>
             <ul className="space-y-3">
-              <li><FooterLink href="/about">About Us</FooterLink></li>
-              <li><FooterLink href="/events">Events</FooterLink></li>
-              <li><FooterLink href="/blog">Blog</FooterLink></li>
-              <li><FooterLink href="/careers">Careers</FooterLink></li>
+              <li><FooterLink href="/">Home</FooterLink></li>
+              <li><FooterLink href="/thenights">The Nights</FooterLink></li>
+              <li><FooterLink href="/contact">Contact</FooterLink></li>
+
             </ul>
           </nav>
 

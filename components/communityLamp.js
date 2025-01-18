@@ -27,25 +27,41 @@ const CommunityCard = ({ name, logo, description }) => (
 
 const communities = [
   {
+    // name: "GDG Community",
+    logo: "/Communities/1.jpg",
+    // description: "A community of passionate developers building the future."
+  },
+  {
+    // name: "GDG Community",
+    logo: "/Communities/2.png",
+    // description: "A community of passionate developers building the future."
+  },
+  {
+    // name: "GDG Community",
+    logo: "/Communities/3.png",
+    // description: "A community of passionate developers building the future."
+  },
+  {
+    // name: "GDG Community",
+    logo: "/Communities/4.png",
+    // description: "A community of passionate developers building the future."
+  },
+  {
+    // name: "GDG Community",
+    logo: "/Communities/5.jpg",
+    // description: "A community of passionate developers building the future."
+  },
+  {
+    // name: "GDG Community",
+    logo: "/Communities/6.png",
+    // description: "A community of passionate developers building the future."
+  },
+  {
     name: "GDG Community",
-    logo: "/reference/GDG.png",
+    logo: "/Communities/7.jpg",
     description: "A community of passionate developers building the future."
   },
-  {
-    name: "Kotlin Community",
-    logo: "/reference/Kotlin.png",
-    description: "Creative minds collaborating on innovative design solutions."
-  },
-  {
-    name: "WEB 3 Community",
-    logo: "/reference/web3.png",
-    description: "Pushing boundaries in technology and innovation."
-  },
-  {
-    name: "Creator Space",
-    logo: "/Community.png",
-    description: "Where creators come together to build amazing projects."
-  }
+ 
 ];
 
 const CommunityLampContainer = ({ children }) => (

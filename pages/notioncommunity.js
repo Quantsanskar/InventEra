@@ -99,7 +99,7 @@ export default function CommunityPage() {
                             <div className="bg-zinc-900 p-6 rounded-lg">
                                 <ul className="space-y-4">
                                     <li className="text-lg">
-                                        <strong>Kickoff Date:</strong> 15th January
+                                        <strong>Kickoff Date:</strong> March
                                     </li>
                                     <li className="text-lg">
                                         <strong>Duration:</strong> 3 Weeks

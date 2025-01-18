@@ -137,9 +137,9 @@ export default function WinnerSelectionPage() {
                         <h2 className="text-3xl font-bold mb-6">Important Dates</h2>
                         <div className="bg-zinc-900 p-6 rounded-lg">
                             <div className="space-y-4">
-                                <p className="text-lg"><strong>Event Date:</strong> [Insert Date]</p>
-                                <p className="text-lg"><strong>Voting Period:</strong> [Insert Date]</p>
-                                <p className="text-lg"><strong>Announcement of Winners:</strong> [Insert Date]</p>
+                                <p className="text-lg"><strong>Event Date:</strong> March</p>
+                                <p className="text-lg"><strong>Voting Period:</strong> TBD</p>
+                                <p className="text-lg"><strong>Announcement of Winners:</strong> TBD</p>
                             </div>
                         </div>
                     </section>

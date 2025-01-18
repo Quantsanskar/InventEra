@@ -84,8 +84,8 @@ const WhoAreWe = () => {
 
             {/* Responsive Image and SVG Container */}
             <div className="flex flex-row justify-center items-center gap-4 px-4 w-full mb-8 mt-4 flex-wrap lg:flex-nowrap">
-             
-              
+
+
 
                 {/* Who Are We Image */}
                 <div className="w-full lg:w-1/2 max-w-[300px] lg:max-w-[400px]">
@@ -106,7 +106,7 @@ const WhoAreWe = () => {
                                     className="max-w-[60%] lg:ml-[-280px] max-h-[200px] ml-[-60px] mt-[200px] lg:mt-[100px] object-contain rounded-xl group-hover/card:shadow-xl"
                                     alt="Who Are We?"
                                 />
-                              
+
 
                             </CardItem>
                         </CardBody>
@@ -124,19 +124,20 @@ const WhoAreWe = () => {
             >
                 <motion.div
                     className="space-y-8  p-8 rounded-2xl bg-transparent"
-                 
+
                 >
                     {/* Title Section with enhanced styling */}
                     <motion.div
                         variants={contentVariants}
                         className="mb-12 lg:mt-20"
-                      
+
                     >
                         <h2 className="text-4xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-white via-white/90 to-white/80 drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]">
                             The Nights: Season One
+
                         </h2>
                         <p className="text-xl text-gray-200/90">
-                            A 3-week journey of creation, collaboration, and community 
+                            A 3-week rollercoaster of creativity, code, and connections
                         </p>
                     </motion.div>
 
@@ -144,11 +145,13 @@ const WhoAreWe = () => {
                     <motion.div
                         variants={contentVariants}
                         className="transform hover:scale-[1.02] transition-all duration-300 p-4 rounded-xl "
-       
+
                     >
                         <h3 className="text-2xl font-semibold mb-3 text-white/90"> Program Overview</h3>
                         <p className="text-gray-200/90">
-                            Welcome to The Nights: Season One, a unique 3-week program designed for creators, developers, artists, and innovators. This is your platform to learn, create, and showcase your work to the world.
+                            Welcome to the coolest way to kick off 2024!
+                            The Nights: Season One is a one-of-a-kind 3-week program where creators, developers, artists, and innovators come together to learn, build, and show off their awesomeness. Think of it as a mashup of work, fun, and "look what I made!" moments.
+
                         </p>
                     </motion.div>
 
@@ -156,41 +159,85 @@ const WhoAreWe = () => {
                     <motion.div
                         variants={contentVariants}
                         className="transform hover:scale-[1.02] transition-all duration-300 p-4 rounded-xl "
-      
+
                     >
-                        <h3 className="text-2xl font-semibold mb-3 text-white/90"> What We Offer</h3>
-                        <ul className="space-y-3 text-gray-200/90">
-          
-                            <motion.li  className="transition-transform">
-                                Interactive Workshops
-                            </motion.li>
-                            <motion.li  className="transition-transform">
-                                Speaker Sessions (Labs)
-                            </motion.li>
-                            <motion.li  className="transition-transform">
-                                Build Challenges
-                            </motion.li>
-                            <motion.li  className="transition-transform">
-                                Networking
-                            </motion.li>
-                        </ul>
+                        <h3 className="text-2xl font-semibold mb-3 text-white/90">What We Offer</h3>
+                        <div className="space-y-8 text-gray-200/90">
+                            {/* Workshops */}
+                            <motion.div
+                                className="space-y-2"
+                                whileHover={{ scale: 1.02 }}
+                                transition={{ duration: 0.2 }}
+                            >
+                                <h4 className="text-lg font-semibold text-white/90">Workshops that won't put you to sleep</h4>
+                                <p className="text-sm">Hands-on sessions to sharpen your skills.</p>
+                            </motion.div>
+
+                            {/* Speaker Labs */}
+                            <motion.div
+                                className="space-y-2"
+                                whileHover={{ scale: 1.02 }}
+                                transition={{ duration: 0.2 }}
+                            >
+                                <h4 className="text-lg font-semibold text-white/90">Speaker Labs</h4>
+                                <p className="text-sm">Talks by people who know their stuff and will inspire you to create better.</p>
+                            </motion.div>
+
+                            {/* Build Challenges */}
+                            <motion.div
+                                className="space-y-2"
+                                whileHover={{ scale: 1.02 }}
+                                transition={{ duration: 0.2 }}
+                            >
+                                <h4 className="text-lg font-semibold text-white/90">Build Challenges</h4>
+                                <p className="text-sm">Think hackathons, but cooler.</p>
+                            </motion.div>
+
+                            {/* Networking */}
+                            <motion.div
+                                className="space-y-2"
+                                whileHover={{ scale: 1.02 }}
+                                transition={{ duration: 0.2 }}
+                            >
+                                <h4 className="text-lg font-semibold text-white/90">Networking</h4>
+                                <p className="text-sm">Meet people who are just as passionate (or nerdy) as you!</p>
+                            </motion.div>
+
+                            {/* The Plan */}
+                            <motion.div
+                                className="space-y-4 mt-8 pt-8 border-t border-white/10"
+                            >
+                                <h4 className="text-xl font-semibold text-white/90">The Plan</h4>
+                                <div className="space-y-4">
+                                    <div>
+                                        <h5 className="text-lg font-medium text-white/90">3 Weeks of Virtual Magic</h5>
+                                        <p className="text-sm">From the comfort of your couch, desk, or wherever you vibe best.</p>
+                                    </div>
+                                    <div>
+                                        <h5 className="text-lg font-medium text-white/90">The Grand Finale: Offline Demo Day</h5>
+                                        <p className="text-sm">A real-world gathering to showcase what you've built and cheer for others.</p>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </div>
                     </motion.div>
 
                     {/* Important Details with enhanced styling */}
                     <motion.div
                         variants={contentVariants}
                         className="transform hover:scale-[1.02] transition-all duration-300 p-4 rounded-xl"
-   
+
                     >
                         <h3 className="text-2xl font-semibold mb-3 text-white/90"> Important Details</h3>
                         <ul className="space-y-2 text-gray-200/90">
-                            <motion.li  className="transition-transform">
-                                Start Date: January 15th, 2024
+                            <motion.li className="transition-transform">
+                                Start Date: March 15th, 2025
                             </motion.li>
-                            <motion.li  className="transition-transform">
-                                Format: Virtual + Offline Demo Day
+                            <motion.li className="transition-transform">
+                                Format: Virtual (3 weeks) + Offline Demo Day (get ready to shine in person!)
+
                             </motion.li>
-                            <motion.li  className="transition-transform">
+                            <motion.li className="transition-transform">
                                 Contact: buildersspace9@gmail.com
                             </motion.li>
                         </ul>
@@ -200,10 +247,19 @@ const WhoAreWe = () => {
                     <motion.div
                         variants={contentVariants}
                         className="pt-6"
-          
+
                     >
                         <p className="text-xl font-semibold text-center italic bg-clip-text text-transparent bg-gradient-to-r from-white via-white/90 to-white/80 drop-shadow-[0_0_8px_rgba(255,255,255,0.1)]">
-                            "Where builders create and creators build!"
+                            Because at The Nights, “Builders create, and creators build!”
+
+                            PS: No coding or art skills? No worries. Bring your enthusiasm; we’ve got the rest. 🛠🎨
+                            Stay in the Loop!  </p>
+                        <p className="text-xl font-semibold text-center italic bg-clip-text text-transparent bg-gradient-to-r from-white via-white/90 to-white/80 drop-shadow-[0_0_8px_rgba(255,255,255,0.1)]">
+                            For updates, behind-the-scenes sneak peeks, and all the buzz, join us on our socials:
+
+                            📱 [Insert Social Media Handles Here]
+
+                            Don’t miss out – be part of the journey!
                         </p>
                     </motion.div>
                 </motion.div>
@@ -239,5 +295,5 @@ const WhoAreWe = () => {
     )
 }
 
-export default WhoAreWe
+export default WhoAreWe;
 

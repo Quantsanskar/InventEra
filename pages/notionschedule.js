@@ -17,6 +17,7 @@ export default function SchedulePage() {
                         <p className="text-xl mb-8"><strong>Goal</strong>: Introduce the community, align on goals, and start brainstorming ideas.</p>
 
                         <div className="space-y-12">
+                            {/* Days 1-7 */}
                             <div>
                                 <h3 className="text-2xl font-bold mb-4">Day 1: Kickoff Night</h3>
                                 <div className="mb-4">
@@ -36,25 +37,43 @@ export default function SchedulePage() {
                                 </div>
                             </div>
 
-                            {/* Repeat this pattern for each day */}
+                            {/* Continue with Days 2-7 */}
                             <div>
                                 <h3 className="text-2xl font-bold mb-4">Day 2: Inspiration Night (Lab Session)</h3>
                                 <div className="mb-4">
                                     <p className="font-bold mb-2">Activity:</p>
                                     <ul className="list-disc pl-8 space-y-2">
-                                        <li>Speaker session with [Expert Name] on "The Art of Starting: Turning Ideas into Action".</li>
-                                        <li>Interactive Q&A to dive deeper into their journey and insights.</li>
+                                        <li>Speaker session with [Expert Name] on "The Art of Starting: Turning Ideas into Action"</li>
+                                        <li>Interactive Q&A to dive deeper into their journey and insights</li>
                                     </ul>
                                 </div>
                                 <div>
                                     <p className="font-bold mb-2">Deliverables:</p>
                                     <ul className="list-disc pl-8 space-y-2">
-                                        <li>Teams or individuals outline potential project ideas.</li>
+                                        <li>Teams or individuals outline potential project ideas</li>
                                     </ul>
                                 </div>
                             </div>
 
-                            {/* Continue with Days 3-7 in the same pattern */}
+                            <div>
+                                <h3 className="text-2xl font-bold mb-4">Day 3: Workshop - Tools of the Trade</h3>
+                                <div className="mb-4">
+                                    <p className="font-bold mb-2">Activity:</p>
+                                    <ul className="list-disc pl-8 space-y-2">
+                                        <li>Workshop: "Top Tools to Build Fast and Smart"</li>
+                                        <li>Hands-on exercises to get familiar with these tools</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <p className="font-bold mb-2">Deliverables:</p>
+                                    <ul className="list-disc pl-8 space-y-2">
+                                        <li>Teams set up collaborative tools and project repositories</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            {/* Continue with similar structure for Days 4-7 */}
+                            // ...remaining days of Week 1...
                         </div>
                     </section>
 
@@ -70,13 +89,14 @@ export default function SchedulePage() {
                                 <div className="mb-4">
                                     <p className="font-bold mb-2">Activity:</p>
                                     <ul className="list-disc pl-8 space-y-2">
-                                        <li>Heads-down work session.</li>
-                                        <li>Mentor check-ins to review progress.</li>
+                                        <li>Heads-down work session</li>
+                                        <li>Mentor check-ins to review progress</li>
                                     </ul>
                                 </div>
                             </div>
 
-                            {/* Continue with remaining days */}
+                            {/* Continue with similar structure for Days 9-14 */}
+                            // ...remaining days of Week 2...
                         </div>
                     </section>
 
@@ -87,13 +107,15 @@ export default function SchedulePage() {
 
                         <div className="space-y-12">
                             {/* Days 15-21 */}
+                            // ...Days 15-19...
+
                             <div>
                                 <h3 className="text-2xl font-bold mb-4">Day 20: Demo Day 🎉</h3>
                                 <div className="mb-4">
                                     <p className="font-bold mb-2">Activity:</p>
                                     <ul className="list-disc pl-8 space-y-2">
-                                        <li>Grand finale! Teams present their projects to judges, mentors, and the community.</li>
-                                        <li>Celebrate with awards, shoutouts, and an afterparty.</li>
+                                        <li>Grand finale! Teams present their projects to judges, mentors, and the community</li>
+                                        <li>Celebrate with awards, shoutouts, and an afterparty</li>
                                     </ul>
                                 </div>
                             </div>
@@ -103,7 +125,7 @@ export default function SchedulePage() {
                                 <div>
                                     <p className="font-bold mb-2">Activity:</p>
                                     <ul className="list-disc pl-8 space-y-2">
-                                        <li>Closing session: Celebrate wins, share learnings, and outline next steps for continuing projects.</li>
+                                        <li>Closing session: Celebrate wins, share learnings, and outline next steps for continuing projects</li>
                                     </ul>
                                 </div>
                             </div>

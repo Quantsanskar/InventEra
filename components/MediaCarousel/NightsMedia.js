@@ -114,7 +114,7 @@ const CrewCarousel = ({ cards = [] }) => {
         <section className="py-20 bg-[#0A0A0A] overflow-hidden">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-16 space-y-4">
-                    <h2 className="text-5xl font-bold text-white">OUR CREW</h2>
+                    <h2 className="text-5xl font-bold text-white">ORGANISERS</h2>
                     <p className="text-2xl text-white/80">Get to know the faces of The Nights.</p>
                 </div>
 
