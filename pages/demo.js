@@ -4,9 +4,10 @@ import { FeaturesSectionWithHoverEffectsDemo } from "@/components/homepage/Featu
 import Navigation from "@/components/homepage/Navigation";
 import DynamicMarquee from "@/components/homepage/ScrollBar";
 import ScrollReveal from "@/components/homepage/ScrollReveal";
-
+import { TimeLine } from "@/components/homepage/TimeLine";
 
 import { Hero } from "@/components/ui/animated-hero";
+import { Footerdemo } from "@/components/ui/footer-section";
 import { TextRevealByWord } from "@/components/ui/text-reveal";
 
 export default function demo() {
@@ -19,7 +20,9 @@ export default function demo() {
       <AboutPage />
       <FeaturesSectionWithHoverEffectsDemo />
       <CTA />
-   
+      <TimeLine />
+      <DynamicMarquee />
+      <Footerdemo />
     </div>
   );
 }
