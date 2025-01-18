@@ -103,7 +103,7 @@ const WhoAreWe = () => {
                                     src="/reference/_.png"
                                     height="400"
                                     width="400"
-                                    className="max-w-[60%] lg:ml-[-240px] h-auto object-contain rounded-xl group-hover/card:shadow-xl"
+                                    className="max-w-[60%] lg:ml-[-240px] ml:[-20px] h-auto object-contain rounded-xl group-hover/card:shadow-xl"
                                     alt="Who Are We?"
                                 />
                               
