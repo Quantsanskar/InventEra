@@ -22,7 +22,7 @@ import MacWindow from "../components/macbooktab";
 import HeroSection from "../components/nightshero";
 import WelcomeCard from "../components/nightswelcomecard";
 import CrewSection from "../components/MediaCarousel/NightsMedia";
-import WhoAreWe from "../components/nightsintro";
+import WhoAreWe from "../components/who-are-we";
 // Simple NavItem component
 const NavItem = ({ href, children }) => (
   <Link href={href}>

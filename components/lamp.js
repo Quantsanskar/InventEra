@@ -10,7 +10,7 @@ const SponsorCard = ({ name, logo, description }) => (
     whileInView={{ opacity: 1, y: 0 }}
     whileHover={{ scale: 1.05 }}
     transition={{ duration: 0.5 }}
-    className="relative p-6 bg-black/50 backdrop-blur-sm rounded-xl border border-neutral-800 group hover:border-cyan-500/50 transition-all"
+    className="relative p-6 bg-black/20 backdrop-blur-sm rounded-xl border border-neutral-800 group hover:border-cyan-800/100 transition-all"
   >
     <div className="relative w-full h-40 mb-4">
       <Image
@@ -28,24 +28,24 @@ const SponsorCard = ({ name, logo, description }) => (
 
 const sponsors = [
   {
-    name: "TechCorp",
-    logo: "/reference/images (1).jpeg", // Add your sponsor logos
-    description: "Leading technology solutions provider and innovation partner."
+    name: "Sponsor 1(searching)",
+    logo: "/reference/SponsorsCall.jpg", // Add your sponsor logos
+    description: "..."
   },
   {
-    name: "InnovateLabs",
-    logo: "/reference/images (2).jpeg",
-    description: "Empowering next-gen developers with cutting-edge tools."
+    name: "Sponsor 2(searching)",
+    logo: "/reference/SponsorsCall.jpg",
+    description: "..."
   },
   {
-    name: "BuilderHub",
-    logo: "/reference/images (3).jpeg",
-    description: "Creating opportunities for builders and creators worldwide."
+    name: "Sponsor 3(searching)",
+    logo: "/reference/SponsorsCall.jpg",
+    description: "..."
   },
   {
-    name: "DevPartners",
-    logo: "/reference/images (6).jpeg",
-    description: "Supporting developer growth and community initiatives."
+    name: "Sponsor 4(searching)",
+    logo: "/reference/SponsorsCall.jpg",
+    description: "..."
   }
 ];
 
