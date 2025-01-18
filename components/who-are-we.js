@@ -121,8 +121,8 @@ const WhoAreWe = () => {
                 {/* Who Are We Image */}
                 <div className="w-full lg:w-1/2 max-w-[300px] lg:max-w-[400px]">
                     <CardContainer className="inter-var">
-                        <CardBody>
-                            <CardItem translateZ="100" className="w-full flex flex-row lg:gap-50">
+                        <CardBody className={"mb-[-100px] lg:mb-[-90px]"}>
+                            <CardItem translateZ="100" className="w-full flex flex-row lg:gap-60">
                                 <Image
                                     src="/reference/WHO ARE WE.png"
                                     height="400"
@@ -160,7 +160,7 @@ const WhoAreWe = () => {
             {/* Enhanced Content Section with Glass Effect */}
             <motion.div
                 variants={contentVariants}
-                className="relative max-w-4xl mx-auto px-8 pb-16 text-white lg:mt-[-60px] z-10"
+                className="relative max-w-4xl mx-auto px-8 pb-16 text-white mt-[-60px] z-10"
             >
                 <motion.div
                     className="space-y-8  p-8 rounded-2xl bg-transparent"
