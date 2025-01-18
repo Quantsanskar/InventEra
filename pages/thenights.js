@@ -22,7 +22,7 @@ import MacWindow from "../components/macbooktab";
 import HeroSection from "../components/nightshero";
 import WelcomeCard from "../components/nightswelcomecard";
 import CrewSection from "../components/MediaCarousel/NightsMedia";
-import WhoAreWe from "../components/who-are-we";
+import WhoAreWe from "@/components/who-are-we";
 // Simple NavItem component
 const NavItem = ({ href, children }) => (
   <Link href={href}>
@@ -366,92 +366,10 @@ const EventPage = () => {
         <ScrollDemo />
       </div>
 
-      {/* <div><WhoAreWe /></div> */}
+      <div><WhoAreWe /></div>
 
       {/* Notion-like Season Description Section */}
-      <section className="w-full px-4 md:px-8 py-12 bg-black dark:bg-black text-white dark:text-white">
-        <div className="max-w-5xl mx-auto space-y-12 bg-black dark:bg-black text-white dark:text-white">
-          {/* Header */}
-          <div className="border-b border-gray-800 pb-8 bg-black dark:bg-black">
-            <h1 className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
-              The Nights: Season One
-            </h1>
-            <p className="text-gray-400 text-xl md:text-2xl mt-4">
-              A 3-week journey of creation, collaboration, and community 🚀
-            </p>
-          </div>
-
-          {/* Table of Contents */}
-          <div className="max-w-4xl mx-auto p-8 bg-[#191919] text-gray-200 bg-black dark:bg-black">
-            {/* Title Section */}
-            <div className="mb-12">
-              <h1 className="text-4xl font-bold mb-4 text-white">The Nights: Season One</h1>
-              <p className="text-xl text-gray-400">
-                A 3-week journey of creation, collaboration, and community.
-              </p>
-            </div>
-
-            {/* Content Sections */}
-            <div className="space-y-10">
-              {/* Program Overview */}
-              <div>
-                <h2 className="text-2xl font-semibold mb-4 text-white">🎯 Program Overview</h2>
-                <p className="text-lg leading-relaxed mb-6">
-                  Welcome to The Nights: Season One, a unique 3-week program designed for creators,
-                  developers, artists, and innovators. Whether you're into tech, design, art, music,
-                  or any creative pursuit, this is your platform to learn, create, and showcase your
-                  work to the world.
-                </p>
-                <p className="text-lg leading-relaxed">
-                  Duration: 3 Weeks Format: Hybrid (Virtual + Offline) Final Event: Demo Day
-                  Showcase
-                </p>
-              </div>
-
-              {/* What We Offer */}
-              <div>
-                <h2 className="text-2xl font-semibold mb-4 text-white">💡 What We Offer</h2>
-                <div className="space-y-4">
-                  <p className="text-lg leading-relaxed">
-                    🎓 Interactive Workshops: Hands-on sessions with industry experts where you'll
-                    learn practical skills and insights.
-                  </p>
-                  <p className="text-lg leading-relaxed">
-                    🎙️ Speaker Sessions (Labs): Learn directly from successful builders and creators
-                    who've been where you are.
-                  </p>
-                  <p className="text-lg leading-relaxed">
-                    🚀 Build Challenges: Put your skills to the test with real projects that matter.
-                    Work on what excites you most.
-                  </p>
-                  <p className="text-lg leading-relaxed">
-                    🤝 Networking: Connect with like-minded creators in a supportive community
-                    environment.
-                  </p>
-                </div>
-              </div>
-
-              {/* Important Details */}
-              <div>
-                <h2 className="text-2xl font-semibold mb-4 text-white">📍 Important Details</h2>
-                <div className="space-y-4">
-                  <p className="text-lg leading-relaxed">Start Date: January 15th, 4</p>
-                  <p className="text-lg leading-relaxed">Contact: buildersspace9@gmail.com</p>
-                  <p className="text-lg leading-relaxed">Format: Virtual + Offline Demo Day</p>
-                  {/* <p className="text-lg leading-relaxed">Website: buildersspace.tech</p> */}
-                </div>
-              </div>
-
-              {/* Closing */}
-              <div className="pt-8 border-t border-gray-800">
-                <p className="text-xl italic text-gray-400">
-                  "Where builders create and creators build!"
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      
 
       <div className="mb-20">
         <LampImp />

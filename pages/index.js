@@ -1,14 +1,13 @@
 import Head from 'next/head';
-import Header from '../components/Header';
-import MainContent from '../components/MainContent';
-import BuildersSpaceHero from '../components/mainhero';
-import VibeSection from '../components/mainsecond';
-import WhatYouGetSection from '../components/mainthird';
-import BuilderSpacePlans from '../components/main4th';
-import TheNights from '../components/main5th';
-import EventHighlights from '../components/main6th';
-import NetworkingLounges from '../components/main7th';
-import ContactFooter from '../components/mainlast';
+import { AboutPage } from "@/components/homepage/AboutPage";
+import CTA from "@/components/homepage/call-to-action";
+import { FeaturesSectionWithHoverEffectsDemo } from "@/components/homepage/FeaturesSectionWithHoverEffectsDemo";
+import Navigation from "@/components/homepage/Navigation";
+import DynamicMarquee from "@/components/homepage/ScrollBar";
+import ScrollReveal from "@/components/homepage/ScrollReveal";
+import { TimeLine } from "@/components/homepage/TimeLine";
+import { Hero } from "@/components/ui/animated-hero";
+import { Footerdemo } from "@/components/ui/footer-section";
 import MainPage from '../components/Home';
 export default function Home() {
   return (
@@ -20,15 +19,17 @@ export default function Home() {
       </Head>
 
       {/* <HomePage/> */}
-      {/* <BuildersSpaceHero/>
-      <VibeSection/>
-      <WhatYouGetSection/>
-      <BuilderSpacePlans/>
-      <TheNights/>
-      <EventHighlights/>
-      <NetworkingLounges/>  
-      <ContactFooter/> */}
-      <MainPage/>
+      <Navigation />
+      <Hero />
+      <DynamicMarquee />
+      <ScrollReveal />
+      <AboutPage />
+      <FeaturesSectionWithHoverEffectsDemo />
+      <CTA />
+      <TimeLine />
+      <DynamicMarquee />
+      <Footerdemo />
+      
 
     </div>
   );
