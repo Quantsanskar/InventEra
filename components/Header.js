@@ -14,9 +14,9 @@ const Header=()=> {
                         <Link href="/" className="text-white hover:text-gray-200 font-medium">
                             Home
                         </Link>
-                        <Link href="/regisloginai" className="text-white hover:text-gray-200 font-medium">
+                        {/* <Link href="/regisloginai" className="text-white hover:text-gray-200 font-medium">
                             Join Us
-                        </Link>
+                        </Link> */}
                         <Link href="/thenights" className="text-white hover:text-gray-200 font-medium">
                             The Nights
                         </Link>
