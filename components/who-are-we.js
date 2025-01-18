@@ -85,7 +85,24 @@ const WhoAreWe = () => {
             {/* Responsive Image and SVG Container */}
             <div className="flex flex-row justify-center items-center gap-4 px-4 w-full mb-8 mt-4 flex-wrap lg:flex-nowrap">
                 {/* SVG Container */}
-                <div className="w-full lg:w-1/2 max-w-[300px] lg:max-w-[400px]">
+
+
+                {/* <div className="w-full lg:w-1/2 max-w-[300px] lg:max-w-[400px]">
+                    <CardContainer className="inter-var">
+                        <CardBody>
+                            <CardItem translateZ="100" className="w-full">
+                                <Image
+                                    src="/reference/who-are-we.svg"
+                                    height="600"
+                                    width="600"
+                                    className="w-full h-auto  sm:ml-[-40px] rounded-xl group-hover/card:shadow-xl"
+                                    alt="Decorative SVG"
+                                />
+                            </CardItem>
+                        </CardBody>
+                    </CardContainer>
+                </div> */}
+                {/* <div className="w-full lg:w-1/2 max-w-[300px] lg:max-w-[400px]">
                     <CardContainer className="inter-var">
                         <CardBody>
                             <CardItem translateZ="100" className="w-full">
@@ -99,20 +116,38 @@ const WhoAreWe = () => {
                             </CardItem>
                         </CardBody>
                     </CardContainer>
-                </div>
+                </div> */}
 
                 {/* Who Are We Image */}
                 <div className="w-full lg:w-1/2 max-w-[300px] lg:max-w-[400px]">
                     <CardContainer className="inter-var">
-                        <CardBody>
-                            <CardItem translateZ="100" className="w-full">
+                        <CardBody className={"mb-[-100px] lg:mb-[-90px]"}>
+                            <CardItem translateZ="100" className="w-full flex flex-row lg:gap-60">
                                 <Image
-                                    src="/reference/who-are-we.png"
+                                    src="/reference/WHO ARE WE.png"
                                     height="400"
                                     width="400"
-                                    className="w-full h-auto object-contain rounded-xl group-hover/card:shadow-xl"
+                                    className="max-w-[95%] ml-2 sm:max-w-[85%] sm:ml-4 md:max-w-[75%] md:ml-[-40px] lg:max-w-[65%] lg:ml-[-160px] xl:max-w-[60%] xl:ml-[-240px] 2xl:max-w-[55%] 2xl:ml-[-320px] h-auto object-contain rounded-xl group-hover/card:shadow-xl"
                                     alt="Who Are We?"
                                 />
+                                <Image
+                                    src="/reference/_.png"
+                                    height="400"
+                                    width="400"
+                                    className="max-w-[60%] lg:ml-[-240px] h-auto object-contain rounded-xl group-hover/card:shadow-xl"
+                                    alt="Who Are We?"
+                                />
+                                {/* <h2 className="text-4xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-white via-white/90 to-white/80 drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]">
+                                    TheㅤNightsㅤ:ㅤSeasonㅤOne
+                                </h2> */}
+                                {/* <Image
+                                    src="/reference/nightS1.svg"
+                                    height="600"
+                                    width="600"
+                                    className="w-full h-auto  sm:ml-[-40px] rounded-xl group-hover/card:shadow-xl"
+                                    alt="Decorative SVG"
+                                /> */}
+
                             </CardItem>
                         </CardBody>
                     </CardContainer>
@@ -128,37 +163,37 @@ const WhoAreWe = () => {
                 className="relative max-w-4xl mx-auto px-8 pb-16 text-white mt-[-60px] z-10"
             >
                 <motion.div
-                    className="space-y-8 backdrop-blur-md bg-black/20 p-8 rounded-2xl shadow-[0_0_25px_rgba(0,0,0,0.3)] border border-white/10"
-                    whileHover={{
-                        boxShadow: "0 0 30px rgba(0,0,0,0.4)",
-                        borderColor: "rgba(255,255,255,0.15)",
-                        transition: { duration: 0.3 }
-                    }}
+                    className="space-y-8  p-8 rounded-2xl bg-transparent"
+                    // whileHover={{
+                    //     boxShadow: "0 0 30px rgba(0,0,0,0.4)",
+                    //     borderColor: "rgba(255,255,255,0.15)",
+                    //     transition: { duration: 0.3 }
+                    // }}
                 >
                     {/* Title Section with enhanced styling */}
                     <motion.div
                         variants={contentVariants}
                         className="mb-12 lg:mt-20"
-                        whileHover={{
-                            scale: 1.01,
-                            transition: { duration: 0.2 }
-                        }}
+                        // whileHover={{
+                        //     scale: 1.01,
+                        //     transition: { duration: 0.2 }
+                        // }}
                     >
                         <h2 className="text-4xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-white via-white/90 to-white/80 drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]">
                             The Nights: Season One
                         </h2>
                         <p className="text-xl text-gray-200/90">
-                            A 3-week journey of creation, collaboration, and community 🚀
+                            A 3-week journey of creation, collaboration, and community 
                         </p>
                     </motion.div>
 
                     {/* Program Overview with enhanced styling */}
                     <motion.div
                         variants={contentVariants}
-                        className="transform hover:scale-[1.02] transition-all duration-300 p-4 rounded-xl hover:bg-white/5"
-                        whileHover={{ y: -2 }}
+                        className="transform hover:scale-[1.02] transition-all duration-300 p-4 rounded-xl "
+                        // whileHover={{ y: -2 }}
                     >
-                        <h3 className="text-2xl font-semibold mb-3 text-white/90">🎯 Program Overview</h3>
+                        <h3 className="text-2xl font-semibold mb-3 text-white/90"> Program Overview</h3>
                         <p className="text-gray-200/90">
                             Welcome to The Nights: Season One, a unique 3-week program designed for creators, developers, artists, and innovators. This is your platform to learn, create, and showcase your work to the world.
                         </p>
@@ -167,40 +202,42 @@ const WhoAreWe = () => {
                     {/* What We Offer with enhanced styling */}
                     <motion.div
                         variants={contentVariants}
-                        className="transform hover:scale-[1.02] transition-all duration-300 p-4 rounded-xl hover:bg-white/5"
-                        whileHover={{ y: -2 }}
+                        className="transform hover:scale-[1.02] transition-all duration-300 p-4 rounded-xl "
+                        // whileHover={{ y: -2 }}
                     >
-                        <h3 className="text-2xl font-semibold mb-3 text-white/90">💡 What We Offer</h3>
+                        <h3 className="text-2xl font-semibold mb-3 text-white/90"> What We Offer</h3>
                         <ul className="space-y-3 text-gray-200/90">
-                            {['Interactive Workshops', 'Speaker Sessions (Labs)', 'Build Challenges', 'Networking'].map((item, index) => (
-                                <motion.li
-                                    key={index}
-                                    className="flex items-center gap-2 hover:translate-x-1 transition-transform"
-                                    whileHover={{ x: 4 }}
-                                >
-                                    {['🎓', '🎙️', '🚀', '🤝'][index]}
-                                    <span className="font-semibold">{item.split(':')[0]}:</span>
-                                    {item.includes(':') && item.split(':')[1]}
-                                </motion.li>
-                            ))}
+                            {/* {['Interactive Workshops', 'Speaker Sessions (Labs)', 'Build Challenges', 'Networking']. */}
+                            <motion.li  className="transition-transform">
+                                Interactive Workshops
+                            </motion.li>
+                            <motion.li  className="transition-transform">
+                                Speaker Sessions (Labs)
+                            </motion.li>
+                            <motion.li  className="transition-transform">
+                                Build Challenges
+                            </motion.li>
+                            <motion.li  className="transition-transform">
+                                Networking
+                            </motion.li>
                         </ul>
                     </motion.div>
 
                     {/* Important Details with enhanced styling */}
                     <motion.div
                         variants={contentVariants}
-                        className="transform hover:scale-[1.02] transition-all duration-300 p-4 rounded-xl hover:bg-white/5"
-                        whileHover={{ y: -2 }}
+                        className="transform hover:scale-[1.02] transition-all duration-300 p-4 rounded-xl"
+                        // whileHover={{ y: -2 }}
                     >
-                        <h3 className="text-2xl font-semibold mb-3 text-white/90">📍 Important Details</h3>
+                        <h3 className="text-2xl font-semibold mb-3 text-white/90"> Important Details</h3>
                         <ul className="space-y-2 text-gray-200/90">
-                            <motion.li whileHover={{ x: 4 }} className="transition-transform">
+                            <motion.li  className="transition-transform">
                                 Start Date: January 15th, 2024
                             </motion.li>
-                            <motion.li whileHover={{ x: 4 }} className="transition-transform">
+                            <motion.li  className="transition-transform">
                                 Format: Virtual + Offline Demo Day
                             </motion.li>
-                            <motion.li whileHover={{ x: 4 }} className="transition-transform">
+                            <motion.li  className="transition-transform">
                                 Contact: buildersspace9@gmail.com
                             </motion.li>
                         </ul>
@@ -210,7 +247,7 @@ const WhoAreWe = () => {
                     <motion.div
                         variants={contentVariants}
                         className="pt-6"
-                        whileHover={{ scale: 1.02 }}
+                        // whileHover={{ scale: 1.02 }}
                     >
                         <p className="text-xl font-semibold text-center italic bg-clip-text text-transparent bg-gradient-to-r from-white via-white/90 to-white/80 drop-shadow-[0_0_8px_rgba(255,255,255,0.1)]">
                             "Where builders create and creators build!"
