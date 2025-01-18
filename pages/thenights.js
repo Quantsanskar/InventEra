@@ -365,7 +365,7 @@ const EventPage = () => {
 
 
 
-            <div><WhoAreWe /></div>
+            <div className="lg:mt-[0px] mt-[40px] mb-[40px] lg:mb-[80px]"><WhoAreWe/></div>
 
             {/* Notion-like Season Description Section */}
             {/* <section className="w-full px-4 md:px-8 py-12 bg-black dark:bg-black text-white dark:text-white">
