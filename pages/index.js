@@ -15,7 +15,7 @@ import { TextRevealByWord } from "@/components/ui/text-reveal";
 export default function demo() {
   return (
     <div className="block bg-black">
-      <Navigation />
+      <Navigation/>
       <Hero />
       <DynamicMarquee />
       <ScrollReveal />
