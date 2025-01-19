@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { usePathname } from 'next/navigation';
+import { usePathname } from "next/navigation";
 
 export function NavBar({ items, className }) {
   const pathname = usePathname();
@@ -14,7 +14,7 @@ export function NavBar({ items, className }) {
 
   // Update activeTab when pathname changes
   useEffect(() => {
-    const currentItem = items.find(item => item.active);
+    const currentItem = items.find((item) => item.active);
     if (currentItem) {
       setActiveTab(currentItem.name);
     }
@@ -31,10 +31,12 @@ export function NavBar({ items, className }) {
   }, []);
 
   return (
-    <div className={cn(
-      "fixed bottom-0 h-10 sm:top-0 left-1/2 transform -translate-x-1/2 text-gray-300 z-50 mb-6 sm:pt-6",
-      className
-    )}>
+    <div
+      className={cn(
+        "fixed bottom-0 h-10 sm:top-0 left-1/2 transform -translate-x-1/2 text-gray-300 z-50 mb-6 sm:pt-6",
+        className
+      )}
+    >
       <div className="flex items-center gap-3 bg-background/10 border border-border backdrop-blur-lg py-1 px-1 rounded-full shadow-lg">
         {items.map((item) => {
           const Icon = item.icon;
@@ -60,7 +62,7 @@ export function NavBar({ items, className }) {
                   transition={{
                     type: "spring",
                     bounce: 0.2,
-                    duration: 0.6
+                    duration: 0.6,
                   }}
                 />
               )}
