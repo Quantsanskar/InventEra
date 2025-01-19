@@ -5,7 +5,7 @@ import { Timeline } from "@/components/ui/timeline";
 export function TimeLine() {
   const data = [
     {
-      title: "Mission",
+      title: "Week 1",
       content: (
         <div>
           <p className=" text-neutral-200 text-2xl md:text-2xl font-bold  mb-8">
@@ -45,7 +45,7 @@ export function TimeLine() {
       ),
     },
     {
-      title: "Features & Benifits",
+      title: "Week 2",
       content: (
         <div>
           <p className=" text-neutral-200 text-2xl md:text-2xl font-bold  mb-8">
@@ -85,7 +85,7 @@ export function TimeLine() {
       ),
     },
     {
-      title: "Vision 2025",
+      title: "Week 3",
       content: (
         <div>
           <p className=" text-neutral-200 text-2xl md:text-2xl font-bold  mb-8">
@@ -143,7 +143,7 @@ export function TimeLine() {
     },
   ];
   return (
-    <div className="h-full w-full relative text-white  z-50 flex flex-col items-center justify-center">
+    <div className="h-full w-full relative text-white  z-30 flex flex-col items-center justify-center">
       <div className="relative top-0 left-0 w-full">
         <Timeline data={data} />
       </div>

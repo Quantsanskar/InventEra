@@ -1,12 +1,15 @@
-import { Home, User, Briefcase, FileText } from "lucide-react";
+import { Home, User, Briefcase, FileText, Eclipse, Handshake, Phone } from "lucide-react";
 import { NavBar } from "@/components/ui/tubelight-navbar";
+import { usePathname } from "next/navigation";
 
 export default function Navigation() {
+  const pathname = usePathname();
+
   const navItems = [
-    { name: "Home", url: "#", icon: Home },
-    { name: "Join Us", url: "#", icon: User },
-    { name: "Nights", url: "#", icon: Briefcase },
-    { name: "Contact", url: "#", icon: FileText },
+    { name: "Home", url: "/", icon: Home, active: pathname === "/" },
+    { name: "Join Us", url: "#", icon: Handshake, active: pathname === "/join" },
+    { name: "Nights", url: "/thenights", icon: Eclipse, active: pathname === "/thenights" },
+    { name: "Contact", url: "#", icon: Phone, active: pathname === "/contact" },
   ];
 
   return <NavBar items={navItems} />;
