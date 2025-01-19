@@ -15,7 +15,8 @@ import HeroParallax from "../components/HeroParallax";
 import MacbookScroll from "../components/macbookgrid";
 import { PageShowcase } from "../components/notionpage";
 import { LayoutGrid } from "../components/gridcomponent";
-import { LampImp } from "../components/lamp";
+import SponsorsCarousel from "../components/sponsorscarousel";
+// import { LampImp } from "../components/lamp";
 import { Footer } from "../components/footer";
 import { CommunityLamp } from "../components/communityLamp";
 import MacWindow from "../components/macbooktab";
@@ -79,17 +80,23 @@ const EventPage = () => {
   const navigationItems = [
     {
       title: "Home",
-      icon: <IconHome className="h-full w-full text-neutral-500 dark:text-neutral-300" />,
+      icon: (
+        <IconHome className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+      ),
       href: "/",
     },
     {
       title: "The Nights",
-      icon: <IconMoonStars className="h-full w-full text-neutral-500 dark:text-neutral-300" />,
+      icon: (
+        <IconMoonStars className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+      ),
       href: "/thenights",
     },
     {
       title: "Contact",
-      icon: <IconMail className="h-full w-full text-neutral-500 dark:text-neutral-300" />,
+      icon: (
+        <IconMail className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+      ),
       href: "/contact",
     },
   ];
@@ -176,7 +183,9 @@ const EventPage = () => {
     return (
       <div>
         <p className="font-bold md:text-4xl text-xl text-white">{title}</p>
-        <p className="font-normal text-base my-4 max-w-lg text-neutral-200">{description}</p>
+        <p className="font-normal text-base my-4 max-w-lg text-neutral-200">
+          {description}
+        </p>
       </div>
     );
   };
@@ -322,6 +331,7 @@ const EventPage = () => {
 
       <Navigation />
 
+
       <div>
         <HeroSection />
       </div>
@@ -357,7 +367,9 @@ const EventPage = () => {
 
 
 
+
       {/* <BackgroundImage imagePath="/reference/Gradient1.png">
+
         <CrewSection cards={data} />
       </BackgroundImage> */}
 
@@ -365,13 +377,12 @@ const EventPage = () => {
         <ScrollDemo />
       </div>
 
-      <div><WhoAreWe /></div>
-
-
-
-
       <div className="mb-20">
-        <LampImp />
+        <WhoAreWe />
+      </div>
+
+      <div className="">
+        <SponsorsCarousel />
       </div>
 
       <div className="mb-20">
@@ -399,8 +410,6 @@ const EventPage = () => {
         {/* Removed extra spacing */}
         <HeroParallax products={eventThemes} />
       </div>
-
-
 
       <div className="bg-background w-full">
         {" "}
