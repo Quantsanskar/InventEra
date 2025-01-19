@@ -44,13 +44,21 @@ export function InfiniteSliderVertical() {
           alt="You can't tell me - People Make the World Go Round"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[350px] rounded-[4px] object-cover"
         />
-        <img src="/carousel/10.jpg" alt="ye - Kanye West" className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[350px] rounded-[4px] object-cover" />
+        <img
+          src="/carousel/10.jpg"
+          alt="ye - Kanye West"
+          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[350px] rounded-[4px] object-cover"
+        />
         <img
           src="/carousel/11.jpg"
           alt="Slime Season 3 - Young Thug"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[350px] rounded-[4px] object-cover"
         />
-        <img src="/carousel/12.jpeg" alt="SWAG - 8ruki" className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[350px] rounded-[4px] object-cover" />
+        <img
+          src="/carousel/12.jpeg"
+          alt="SWAG - 8ruki"
+          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[350px] rounded-[4px] object-cover"
+        />
       </InfiniteSlider>
       <InfiniteSlider direction="vertical" reverse>
         <img
@@ -93,13 +101,21 @@ export function InfiniteSliderVertical() {
           alt="You can't tell me - People Make the World Go Round"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[350px] rounded-[4px] object-cover"
         />
-        <img src="/carousel/10.jpg" alt="ye - Kanye West" className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[350px] rounded-[4px] object-cover" />
+        <img
+          src="/carousel/10.jpg"
+          alt="ye - Kanye West"
+          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[350px] rounded-[4px] object-cover"
+        />
         <img
           src="/carousel/11.jpg"
           alt="Slime Season 3 - Young Thug"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[350px] rounded-[4px] object-cover"
         />
-        <img src="/carousel/12.jpeg" alt="SWAG - 8ruki" className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[350px] rounded-[4px] object-cover" />
+        <img
+          src="/carousel/12.jpeg"
+          alt="SWAG - 8ruki"
+          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[350px] rounded-[4px] object-cover"
+        />
       </InfiniteSlider>
     </div>
   );
