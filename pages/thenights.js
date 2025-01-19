@@ -27,6 +27,7 @@ import WhoAreWe from "@/components/who-are-we";
 import Navigation from "@/components/homepage/Navigation";
 import DynamicMarquee from "@/components/homepage/ScrollNights"
 import { TextRevealByWord } from "@/components/ui/text-reveal";
+import CommunityCarousel from "@/components/communitycarousel";
 // Simple NavItem component
 const NavItem = ({ href, children }) => (
   <Link href={href}>
@@ -386,7 +387,8 @@ const EventPage = () => {
       </div>
 
       <div className="mb-20">
-        <CommunityLamp />
+        {/* <CommunityLamp /> */}
+        <CommunityCarousel/>
       </div>
 
       <div className="min-h-screen bg-black dark:bg-black py-20 mb-20">

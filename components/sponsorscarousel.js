@@ -33,53 +33,48 @@ const SponsorsCarousel = () => {
     {
       name: "Sponsor 1",
       url: "https://example.com",
-      imageUrl: "/images/sponsors/sponsor1.jpg",
+      imageUrl: "/reference/SponsorsCall.jpg",
     },
     {
       name: "Sponsor 2",
       url: "https://example.com",
-      imageUrl: "/images/sponsors/sponsor2.jpg",
+      imageUrl: "/reference/SponsorsCall.jpg",
     },
     {
       name: "Sponsor 3",
       url: "https://example.com",
-      imageUrl: "/images/sponsors/sponsor3.jpg",
+      imageUrl: "/reference/SponsorsCall.jpg",
     },
     {
       name: "Sponsor 4",
       url: "https://example.com",
-      imageUrl: "/images/sponsors/sponsor4.jpg",
+      imageUrl: "/reference/SponsorsCall.jpg",
     },
+   
     {
       name: "Sponsor 5",
       url: "https://example.com",
-      imageUrl: "/images/sponsors/sponsor5.jpg",
+      imageUrl: "/reference/SponsorsCall.jpg",
     },
+   
     {
       name: "Sponsor 6",
       url: "https://example.com",
-      imageUrl: "/images/sponsors/sponsor6.jpg",
+      imageUrl: "/reference/SponsorsCall.jpg",
     },
+   
     {
       name: "Sponsor 7",
       url: "https://example.com",
-      imageUrl: "/images/sponsors/sponsor7.jpg",
+      imageUrl: "/reference/SponsorsCall.jpg",
     },
+   
     {
       name: "Sponsor 8",
       url: "https://example.com",
-      imageUrl: "/images/sponsors/sponsor8.jpg",
+      imageUrl: "/reference/SponsorsCall.jpg",
     },
-    {
-      name: "Sponsor 9",
-      url: "https://example.com",
-      imageUrl: "/images/sponsors/sponsor9.jpg",
-    },
-    {
-      name: "Sponsor 10",
-      url: "https://example.com",
-      imageUrl: "/images/sponsors/sponsor10.jpg",
-    },
+   
   ];
 
   const itemsToShow = width <= 640 ? 1 : width <= 1024 ? 3 : 5;
