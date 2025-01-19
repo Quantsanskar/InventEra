@@ -23,6 +23,7 @@ import HeroSection from "../components/nightshero";
 import WelcomeCard from "../components/nightswelcomecard";
 import CrewSection from "../components/MediaCarousel/NightsMedia";
 import WhoAreWe from "@/components/who-are-we";
+import Navigation from "@/components/homepage/Navigation";
 // Simple NavItem component
 const NavItem = ({ href, children }) => (
   <Link href={href}>
@@ -320,7 +321,7 @@ const EventPage = () => {
                 <Nav />
             </section> */}
 
-      <FloatingNavbar items={navigationItems} />
+   <Navigation/>
       {/* Hero Section with Sparkles */}
       <div>
         <HeroSection />

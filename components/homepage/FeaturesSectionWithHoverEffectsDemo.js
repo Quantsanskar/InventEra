@@ -16,8 +16,8 @@ function FeaturesSectionWithHoverEffectsDemo() {
       <div className="w-full">
         <FeaturesSectionWithHoverEffects />
       </div>
-      <p className="text-lg text-gray-400 tracking-wide text-muted-foreground mt-8">
-        We bring the fuel (and the pizza 🍕). You bring the spark.
+      <p className="text-lg text-gray-400  text-center tracking-wide text-muted-foreground my-8 mb-8">
+        We bring the fuel (and the pizza ). You bring the spark.
       </p>
     </div>
   );
