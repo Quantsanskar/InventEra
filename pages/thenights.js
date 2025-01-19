@@ -24,6 +24,8 @@ import WelcomeCard from "../components/nightswelcomecard";
 import CrewSection from "../components/MediaCarousel/NightsMedia";
 import WhoAreWe from "@/components/who-are-we";
 import Navigation from "@/components/homepage/Navigation";
+import DynamicMarquee from "@/components/homepage/ScrollNights"
+import { TextRevealByWord } from "@/components/ui/text-reveal";
 // Simple NavItem component
 const NavItem = ({ href, children }) => (
   <Link href={href}>
@@ -315,17 +317,16 @@ const EventPage = () => {
     <CrewSection key={index} card={card} index={index} />
   ));
   return (
-    <main className="flex flex-col min-h-screen bg-black dark:bg-black">
-      {/* Navigation Section */}
-      {/* <section className="w-full flex items-center justify-center py-8">
-                <Nav />
-            </section> */}
+    <div className="flex flex-col min-h-screen bg-black dark:bg-black">
 
-   <Navigation/>
-      {/* Hero Section with Sparkles */}
+
+      <Navigation />
+
       <div>
         <HeroSection />
       </div>
+      <div><DynamicMarquee /></div>
+      
       {/* <section className="flex-1 w-full bg-black flex flex-col items-center justify-center overflow-hidden">
                 <div className="relative">
                     <h1 className="md:text-8xl text-4xl lg:text-9xl font-bold text-center text-white relative z-20 mt-60 md:mt-60 sm:mt-40">
@@ -345,15 +346,20 @@ const EventPage = () => {
                 </div>
             </section> */}
 
+
+
+
       <div>
         <WelcomeCard />
       </div>
 
 
 
-      <div>
+
+
+      {/* <BackgroundImage imagePath="/reference/Gradient1.png">
         <CrewSection cards={data} />
-      </div>
+      </BackgroundImage> */}
 
       <div className="mt-4 md:mt-8 sm:mt-2">
         <ScrollDemo />
@@ -407,7 +413,7 @@ const EventPage = () => {
 
       {/* Add Footer */}
       <Footer />
-    </main>
+    </div>
   );
 };
 
