@@ -9,7 +9,7 @@ body{
   }
   
   .card:hover {
-    box-shadow: 0 0 20px rgb(177, 12, 12);
+    box-shadow: 0 0 20px #ff7e5f;
     transform: translateY(-15px);
   }
   
@@ -42,7 +42,7 @@ body{
   }
   
 .heading{
-    background-color: rgb(177, 12, 12) !important;
+    background-color: rgb(10, 10, 63) !important;
     margin-top: 20px;
     width: 100%;
     height:100px; 
@@ -50,7 +50,7 @@ body{
     align-items: center;
     justify-content: space-around;
     justify-content: center;
-    box-shadow: 2px 2px 25px rgb(177, 12, 12) !important;
+    box-shadow: 2px 2px 25px rgb(29, 29, 121)!important;
     
 }
 .head_content{
@@ -62,7 +62,7 @@ body{
     
 }
 .card{
-    width: 42%;
+    width: 43%;
     margin: 50px;
     height: 100%;
     background-color:#191919;
@@ -72,13 +72,12 @@ body{
     color: white;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: 600;
-    
+
     
 }
 .card:hover{
-    box-shadow: 2px 2px 25px rgb(177, 12, 12) !important;
+    box-shadow: 2px 2px 25px rgb(41, 41, 225)!important;
 }
-
 .image{
     background-size: cover !important;
     height: 300px;
@@ -93,4 +92,11 @@ body{
 }
 .card-text{
     font-weight: 700;
+}
+.cards_sm{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    justify-content: space-around !important;
+    align-items: center;
 }
