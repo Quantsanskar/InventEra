@@ -186,7 +186,7 @@ const SponsorsCarousel = () => {
                       <motion.img
                         src={sponsor.imageUrl}
                         alt={sponsor.name}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain"
                         loading="lazy"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
