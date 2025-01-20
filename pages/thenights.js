@@ -28,6 +28,8 @@ import Navigation from "@/components/homepage/Navigation";
 import DynamicMarquee from "@/components/homepage/ScrollNights"
 import { TextRevealByWord } from "@/components/ui/text-reveal";
 import CommunityCarousel from "@/components/communitycarousel";
+import BackgroundImage from "@/components/ui/Gradient";
+import DynamicMarqueeSponsComm from "@/components/homepage/ScrollSponsors";
 // Simple NavItem component
 const NavItem = ({ href, children }) => (
   <Link href={href}>
@@ -337,7 +339,7 @@ const EventPage = () => {
         <HeroSection />
       </div>
       <div><DynamicMarquee /></div>
-      
+
       {/* <section className="flex-1 w-full bg-black flex flex-col items-center justify-center overflow-hidden">
                 <div className="relative">
                     <h1 className="md:text-8xl text-4xl lg:text-9xl font-bold text-center text-white relative z-20 mt-60 md:mt-60 sm:mt-40">
@@ -378,40 +380,41 @@ const EventPage = () => {
         <ScrollDemo />
       </div>
 
-      <div className="mb-20">
+      <div className="">
         <WhoAreWe />
       </div>
-
+<div><DynamicMarqueeSponsComm/></div>
       <div className="">
         <SponsorsCarousel />
       </div>
 
-      <div className="mb-20">
+      <div className="">
         {/* <CommunityLamp /> */}
-        <CommunityCarousel/>
+        <CommunityCarousel />
       </div>
-
-      <div className="min-h-screen bg-black dark:bg-black py-20 mb-20">
-        <div className="max-w-6xl mx-auto px-4">
-          <h1 className="text-4xl font-bold text-white mb-12 text-center">
-            Everything about "The Nights"
-          </h1>
-          <div className="h-[30rem] md:h-[40rem] [perspective:1000px] relative flex flex-col w-full items-start justify-start">
-            <PageShowcase
-              pages={pages}
-              containerClassName="mb-8"
-              activePageClassName="bg-gray-800"
-              pageClassName="hover:text-blue-400 transition-colors"
-            />
+      <BackgroundImage imagePath="/reference/Gradient1.png">
+        <div className="min-h-screen py-20 mb-20">
+          <div className="max-w-6xl mx-auto px-4">
+            <h1 className="text-4xl font-bold text-white mb-12 text-center">
+              Everything about "The Nights"
+            </h1>
+            <div className="h-[30rem] md:h-[40rem] [perspective:1000px] relative flex flex-col w-full items-start justify-start">
+              <PageShowcase
+                pages={pages}
+                containerClassName="mb-8"
+                activePageClassName="bg-gray-800"
+                pageClassName="hover:text-blue-400 transition-colors"
+              />
+            </div>
           </div>
         </div>
-      </div>
+      </BackgroundImage>
+      <BackgroundImage imagePath="/reference/Gradient1.png">
+      <div className="text-white dark:text-white">
 
-      <div className="bg-black dark:bg-black text-white dark:text-white">
-        {" "}
-        {/* Removed extra spacing */}
         <HeroParallax products={eventThemes} />
       </div>
+      </BackgroundImage>
 
       <div className="bg-background w-full">
         {" "}

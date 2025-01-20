@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { motion, useInView, useAnimation, AnimatePresence } from 'framer-motion'
 import { ParticleEffect } from './particles'
 import { CardBody, CardContainer, CardItem } from "./ui/3d-card";
+import BackgroundImage from './ui/Gradient'
 const WhoAreWe = () => {
     const ref = useRef(null)
     const isInView = useInView(ref, { once: true, margin: "-100px" })
@@ -55,6 +56,7 @@ const WhoAreWe = () => {
     }
 
     return (
+        <BackgroundImage imagePath="/reference/Gradient1.png">
         <motion.div
             ref={ref}
             initial="hidden"
@@ -292,6 +294,7 @@ const WhoAreWe = () => {
                 }}
             />
         </motion.div>
+        </BackgroundImage>
     )
 }
 

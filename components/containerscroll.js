@@ -2,10 +2,11 @@
 "use client";
 import React from "react";
 import { ContainerScroll } from "./scroll-animation";
-
+import BackgroundImage from "./ui/Gradient";
 export function ScrollDemo() {
   return (
-    <div className="flex flex-col overflow-hidden bg-black dark:bg-black">
+    <BackgroundImage imagePath="/reference/Gradient1.png">
+    <div className="flex flex-col overflow-hidden ">
       <ContainerScroll>
         <video
           controls
@@ -19,5 +20,6 @@ export function ScrollDemo() {
         </video>
       </ContainerScroll>
     </div>
+    </BackgroundImage>  
   );
 }
