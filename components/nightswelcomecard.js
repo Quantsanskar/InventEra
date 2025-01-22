@@ -60,10 +60,19 @@ export default function WelcomeCard() {
                   </motion.div>
                 </div>
 
-                <div>
+                <div className='text-center mb-[-4rem]'>
                   <TextRevealByWord
                     text="Build Cool Stuff. With Cooler People. 🛠Welcome to Builder's Space—where creativity meets chaos! Think Hogwarts for creators, but with fewer owls and way more memes. "
                   />
+                  <button className="relative p-[0.1em]  " onClick={() => { window.location.href = 'https://www.commudle.com/communities/builders-space/events/the-nights-s1' }}>
+                    <span className="relative flex justify-center items-center -bottom-[-0.8em] w-[8.25em] h-[2.5em] mx-auto bg-black rounded-lg border-2 border-white text-white text-base 
+                shadow-[0_0.4em_0.1em_0.019em_#fff,0_8px_16px_rgba(255,255,255,0.1)] 
+                transition-all duration-300 
+                hover:translate-y-[0.4em] hover:shadow-[0_0_0_0_#fff,0_4px_8px_rgba(255,255,255,0.2)]
+                before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-gradient-to-b before:from-white/10 before:to-transparent before:rounded-lg mt-[-8rem]">
+                      Get Started
+                    </span>
+                  </button>
                 </div>
 
               </motion.div>

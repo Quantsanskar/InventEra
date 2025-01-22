@@ -2,6 +2,8 @@
 
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useRef } from "react"
+import { Handshake, MoveRight, PhoneCall } from "lucide-react";
+import { Button } from "./ui/button";
 
 export default function HeroSection() {
     const containerRef = useRef(null)
@@ -9,8 +11,8 @@ export default function HeroSection() {
     const opacity = useTransform(scrollY, [0, 900], [1, 0])
 
     const titleVariants = {
-        hidden: { 
-            opacity: 0, 
+        hidden: {
+            opacity: 0,
             y: 200,
             scale: 1.2,
         },
@@ -28,9 +30,9 @@ export default function HeroSection() {
     }
 
     const taglineVariants = {
-        hidden: { 
+        hidden: {
             opacity: 0,
-            y: 20 
+            y: 20
         },
         visible: {
             opacity: 1,
@@ -44,9 +46,9 @@ export default function HeroSection() {
     }
 
     const backgroundVariants = {
-        hidden: { 
+        hidden: {
             opacity: 0.3,
-            scale: 1.1 
+            scale: 1.1
         },
         visible: {
             opacity: 1,
@@ -61,7 +63,7 @@ export default function HeroSection() {
     return (
         <section ref={containerRef} className="relative w-full min-h-screen overflow-hidden">
             {/* Animated Background */}
-            <motion.div 
+            <motion.div
                 variants={backgroundVariants}
                 initial="hidden"
                 animate="visible"
@@ -77,7 +79,7 @@ export default function HeroSection() {
                         mixBlendMode: 'soft-light'
                     }}
                 />
-                <motion.div 
+                <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 0.7 }}
                     transition={{ duration: 2, delay: 1 }}
@@ -116,8 +118,17 @@ export default function HeroSection() {
                     Let's Build Something Amazing Together
                 </motion.p>
 
-          
-              
+                <motion.div
+                    variants={taglineVariants}
+                    initial="hidden"
+                    animate="visible" className="flex flex-row gap-3">
+                    <Button size="lg" className="gap-4 mt-[4rem] bg-gray-900 text-white" variant="outline" onClick={() => window.location.href = "https://www.commudle.com/communities/builders-space/events/the-nights-s1"}>
+                        Join Us Now <Handshake className="w-4 h-4" />
+                    </Button>
+                </motion.div>
+
+
+
             </motion.div>
         </section>
     )

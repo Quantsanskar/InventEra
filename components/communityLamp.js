@@ -27,22 +27,22 @@ const CommunityCard = ({ name, logo, description }) => (
 
 const communities = [
   {
-    // name: "GDG Community",
+    name: "Eventsinfo",
     logo: "/Communities/1.jpg",
     // description: "A community of passionate developers building the future."
   },
   {
-    // name: "GDG Community",
+    name: "Kotlin Delhi NCR",
     logo: "/Communities/2.png",
     // description: "A community of passionate developers building the future."
   },
   {
-    // name: "GDG Community",
+    name: "DEVSource",
     logo: "/Communities/3.png",
     // description: "A community of passionate developers building the future."
   },
   {
-    // name: "GDG Community",
+    name: "GDG Community",
     logo: "/Communities/4.png",
     // description: "A community of passionate developers building the future."
   },
@@ -52,14 +52,14 @@ const communities = [
     // description: "A community of passionate developers building the future."
   },
   {
-    // name: "GDG Community",
+    name: "theDevArmy",
     logo: "/Communities/6.png",
     // description: "A community of passionate developers building the future."
   },
   {
-    name: "GDG Community",
+    name: "SheBuilds",
     logo: "/Communities/7.jpg",
-    description: "A community of passionate developers building the future."
+    // description: "A community of passionate developers building the future."
   },
  
 ];

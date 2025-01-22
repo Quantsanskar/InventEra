@@ -83,7 +83,7 @@ function CTA() {
             </motion.h3>
             <motion.p className="text-lg leading-relaxed tracking-wide text-zinc-400 max-w-xl">
               <span className="text-white">Yes, you can!</span> • Don't know how to build? We'll teach you. 
-              • Already a pro? Come show off your skills. If you've got ideas and a desire to create, you're in—whether you're
+              • Already a pro? Come show off your skills. If you've got ideas and a desire to create, you're in—whether you're a seasoned developer or just starting out.
             </motion.p>
           </motion.div>
 
@@ -93,6 +93,7 @@ function CTA() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400 }}
+              onClick={() => window.location.href = "/thenights"}
             >
               Join Now
             </motion.button>

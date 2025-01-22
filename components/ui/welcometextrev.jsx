@@ -23,7 +23,7 @@ const TextRevealByWord = ({ text, className }) => {
         <p
           ref={targetRef}
           className={
-            "flex flex-wrap w-full p-2 text-2xl font-bold text-white/20 md:p-8 md:text-2xl lg:p-5 lg:text-3xl xl:text-4xl"
+            "flex flex-wrap w-full p-0.5 text-2xl font-bold text-white/20 md:p-3 md:text-2xl lg:p-3 lg:text-2xl xl:text-2xl"
           }
         >
           {words.map((word, i) => {

@@ -23,13 +23,28 @@ const buttonVariants = (variant, size) => {
   return `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]}`
 }
 
-const Button = React.forwardRef(({ className, variant = "default", size = "default", ...props }, ref) => (
-  <button
-    className={cn(buttonVariants(variant, size), className)}
-    ref={ref}
-    {...props}
-  />
-))
+const Button = React.forwardRef(({ className, variant = "default", size = "default", onClick, ...props }, ref) => {
+  const handleClick = (event) => {
+    // If an onClick prop is provided, call it
+    if (onClick) {
+      onClick(event);
+    }
+
+    // If you want to handle URL redirection within this component:
+    if (props.url) {
+      window.location.href = props.url; // Redirect to the specified URL
+    }
+  };
+
+  return (
+    <button
+      className={cn(buttonVariants(variant, size), className)}
+      ref={ref}
+      onClick={handleClick}
+      {...props}
+    />
+  );
+});
 
 Button.displayName = "Button"
 

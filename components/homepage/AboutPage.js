@@ -23,7 +23,7 @@ function AboutPage() {
               </p>
             </div>
             <div className="flex flex-row gap-6 sm:gap-8">
-              <Button size="lg" className="gap-6 sm:gap-8" variant="outline">
+              <Button size="lg" className="gap-6 sm:gap-8" variant="outline" onClick={() => window.location.href = "/thenights"}>
                 Join Us Now
                 <Handshake className="w-4 h-4" />
               </Button>

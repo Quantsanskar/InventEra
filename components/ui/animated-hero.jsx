@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Handshake, MoveRight, PhoneCall } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import TheNights from "../main5th";
 
 function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
@@ -17,7 +18,7 @@ function Hero() {
     }, 2000);
     return () => clearTimeout(timeoutId);
   }, [titleNumber, titles]);
-
+ 
   return (
     <div
       className="w-full h-screen z-40 bg-no-repeat bg-cover text-white relative"
@@ -27,7 +28,8 @@ function Hero() {
       <div className="container mx-auto h-full relative z-10">
         <div className="flex gap-8 py-20 lg:py-40 items-center justify-center flex-col h-full">
           <div>
-            <Button size="sm" className="gap-4 bg-black text-white hover:text-black">
+            <Button size="sm" className="gap-4 bg-black text-white hover:text-black" onClick={() => window.location.href = "/thenights"}>
+
               Welcome to the
               <MoveRight className="w-4 h-4" />
             </Button>
@@ -46,13 +48,13 @@ function Hero() {
                     animate={
                       titleNumber === index
                         ? {
-                            y: 0,
-                            opacity: 1,
-                          }
+                          y: 0,
+                          opacity: 1,
+                        }
                         : {
-                            y: titleNumber > index ? -150 : 150,
-                            opacity: 0,
-                          }
+                          y: titleNumber > index ? -150 : 150,
+                          opacity: 0,
+                        }
                     }
                   >
                     {title}
@@ -62,15 +64,15 @@ function Hero() {
             </h1>
 
             <p className="text-lg md:text-xl leading-relaxed tracking-normal text-muted-foreground max-w-2xl text-center text-white">
-             we believe in empowering every dreamer to become a builder and every
+              we believe in empowering every dreamer to become a builder and every
               creator to shape the future. Together, we build, learn, and thrive.
             </p>
           </div>
           <div className="flex flex-row gap-3">
-            <Button size="lg" className="gap-4" variant="outline">
+            <Button size="lg" className="gap-4" variant="outline" onClick={() => window.location.href = "/thenights"}>
               Join Us Now <Handshake className="w-4 h-4" />
             </Button>
-            <Button size="lg" className="gap-4 text-black">
+            <Button size="lg" className="gap-4 text-black" onClick={() => window.location.href = "/thenights"}>
               Explore More <MoveRight className="w-4 h-4" />
             </Button>
           </div>

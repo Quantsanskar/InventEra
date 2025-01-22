@@ -16,7 +16,7 @@ import MacbookScroll from "../components/macbookgrid";
 import { PageShowcase } from "../components/notionpage";
 import { LayoutGrid } from "../components/gridcomponent";
 import SponsorsCarousel from "../components/sponsorscarousel";
-// import { LampImp } from "../components/lamp";
+import { LampImp } from "../components/lamp";
 import { Footer } from "../components/footer";
 import { CommunityLamp } from "../components/communityLamp";
 import MacWindow from "../components/macbooktab";
@@ -30,6 +30,7 @@ import { TextRevealByWord } from "@/components/ui/text-reveal";
 import CommunityCarousel from "@/components/communitycarousel";
 import BackgroundImage from "@/components/ui/Gradient";
 import DynamicMarqueeSponsComm from "@/components/homepage/ScrollSponsors";
+import CTA from "@/components/homepage/ctanights";
 // Simple NavItem component
 const NavItem = ({ href, children }) => (
   <Link href={href}>
@@ -70,39 +71,9 @@ const eventThemes = [
     thumbnail: "/reference/ComingSoonThumb.png", // Add your image path here
   },
 ];
-// Simplified Nav component
-const Nav = () => (
-  <nav className="relative rounded-full border border-transparent dark:bg-black dark:border-white/[0.2] bg-white shadow-input flex justify-center space-x-8 px-8 py-6">
-    <NavItem href="/">Home</NavItem>
-    <NavItem href="/the-nights">The Nights</NavItem>
-    <NavItem href="/contact">Contact</NavItem>
-  </nav>
-);
 
 const EventPage = () => {
-  const navigationItems = [
-    {
-      title: "Home",
-      icon: (
-        <IconHome className="h-full w-full text-neutral-500 dark:text-neutral-300" />
-      ),
-      href: "/",
-    },
-    {
-      title: "The Nights",
-      icon: (
-        <IconMoonStars className="h-full w-full text-neutral-500 dark:text-neutral-300" />
-      ),
-      href: "/thenights",
-    },
-    {
-      title: "Contact",
-      icon: (
-        <IconMail className="h-full w-full text-neutral-500 dark:text-neutral-300" />
-      ),
-      href: "/contact",
-    },
-  ];
+ 
   // Memoize gradient elements
   const GradientOverlays = (
     <>
@@ -121,15 +92,7 @@ const EventPage = () => {
     particleColor: "#FFFFFF",
   };
 
-  const words = [
-    "Heyy, welcome to The Nights",
-    "are you ready to build something amazing?",
-    "but want a platform and community to help you?",
-    "then you're in the right place",
-    "we're here to help you grow and succeed",
-    "so, let's get started",
-  ];
-
+ 
   const pages = [
     {
       title: "BuilderSpace",
@@ -145,13 +108,7 @@ const EventPage = () => {
         "Join our vibrant community of creators, developers, artists, and innovators! Nights: Season One offers a 3-week journey of learning, building, and networking. Connect with like-minded individuals, participate in interactive workshops, and showcase your work at our grand finale Demo Day. Experience the power of collaborative learning and creative growth.",
       link: "/notioncommunity",
     },
-    // {
-    //   title: "Sponsors",
-    //   value: "sponsors",
-    //   description:
-    //     "Our sponsors are industry leaders committed to empowering the next generation of creators. They provide essential resources, cutting-edge tools, mentorship opportunities, and valuable connections. Through our sponsorship program, participants gain access to premium technologies and platforms that accelerate their development journey.",
-    //   link: "/notionsponsors",
-    // },
+
     {
       title: "Speakers",
       value: "speakers",
@@ -383,14 +340,12 @@ const EventPage = () => {
       <div className="">
         <WhoAreWe />
       </div>
-<div><DynamicMarqueeSponsComm/></div>
+      <div><DynamicMarqueeSponsComm /></div>
+    
+      <div className=""><LampImp /></div>
       <div className="">
-        <SponsorsCarousel />
-      </div>
-
-      <div className="">
-        {/* <CommunityLamp /> */}
-        <CommunityCarousel />
+        <CommunityLamp />
+        {/* <CommunityCarousel /> */}
       </div>
       <BackgroundImage imagePath="/reference/Gradient1.png">
         <div className="min-h-screen py-20 mb-20">
@@ -409,11 +364,12 @@ const EventPage = () => {
           </div>
         </div>
       </BackgroundImage>
+      <div><CTA /></div>
       <BackgroundImage imagePath="/reference/Gradient1.png">
-      <div className="text-white dark:text-white">
+        <div className="text-white dark:text-white">
 
-        <HeroParallax products={eventThemes} />
-      </div>
+          <HeroParallax products={eventThemes} />
+        </div>
       </BackgroundImage>
 
       <div className="bg-background w-full">

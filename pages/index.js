@@ -9,15 +9,21 @@ import { TimeLine } from "@/components/homepage/TimeLine";
 
 import { Hero } from "@/components/ui/animated-hero";
 import AnimatedCoolText from "@/components/ui/AnimatedCoolText";
-import { Footerdemo } from "@/components/ui/footer-section";
+// import { Footerdemo } from "@/components/ui/footer-section";
 import { TextRevealByWord } from "@/components/ui/text-reveal";
 
+import { Footer } from "@/components/footer";
+
+
 export default function demo() {
+
   return (
+
     <div className="block bg-black">
-      <Navigation/>
+      <Navigation />
       <Hero />
       <DynamicMarquee />
+
       <ScrollReveal />
       <AboutPage />
       <CTA />
@@ -25,7 +31,8 @@ export default function demo() {
       <AnimatedCoolText />
       <TimeLine />
       <DynamicMarquee />
-      <Footerdemo />
+      {/* <Footerdemo /> */}
+      <Footer />
     </div>
   );
 }

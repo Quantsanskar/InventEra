@@ -7,9 +7,8 @@ export default function Navigation() {
 
   const navItems = [
     { name: "Home", url: "/", icon: Home, active: pathname === "/" },
-    { name: "Join Us", url: "#", icon: Handshake, active: pathname === "/join" },
     { name: "Nights", url: "/thenights", icon: Eclipse, active: pathname === "/thenights" },
-    { name: "Contact", url: "#", icon: Phone, active: pathname === "/contact" },
+    { name: "Contact", url: "/contact", icon: Phone, active: pathname === "/contact" },
   ];
 
   return <NavBar items={navItems} />;
