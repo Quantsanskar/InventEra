@@ -2,17 +2,25 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Header from '../components/Header';
-import { 
-  Instagram, 
-  Twitter, 
-  Linkedin, 
-  Github, 
-  Globe, 
-  Send, 
-  ArrowLeft 
+import { IconBrandWhatsapp } from '@tabler/icons-react';
+import {
+  Instagram,
+  Twitter,
+  Linkedin,
+  Github,
+  Globe,
+  Send,
+  ArrowLeft
 } from 'lucide-react';
 
 const socialLinks = [
+  {
+    name: 'Commudle',
+    handle: 'Builders Space',
+    url: "https://www.commudle.com/communities/builders-space",
+    icon: Globe,
+    color: 'bg-gradient-to-r from-green-400 to-blue-500'
+  },
   {
     name: 'Instagram',
     handle: '@buildersspace',
@@ -20,13 +28,13 @@ const socialLinks = [
     icon: Instagram,
     color: 'bg-gradient-to-r from-purple-500 to-pink-500'
   },
-  {
-    name: 'Twitter/X',
-    handle: '@builders_space',
-    url: 'https://twitter.com/builders_space',
-    icon: Twitter,
-    color: 'bg-[#1DA1F2]'
-  },
+  // {
+  //   name: 'Twitter/X',
+  //   handle: '@builders_space',
+  //   url: 'https://twitter.com/builders_space',
+  //   icon: Twitter,
+  //   color: 'bg-[#1DA1F2]'
+  // },
   {
     name: 'LinkedIn',
     handle: 'Builders Space',
@@ -41,20 +49,21 @@ const socialLinks = [
   //   icon: Github,
   //   color: 'bg-gray-800',
   // },
+ 
   {
-    name: 'Commudle',
-    handle: 'Builders Space',
-    url: "https://www.commudle.com/communities/builders-space",
-    icon: Globe,
-    color: 'bg-gradient-to-r from-green-400 to-blue-500'
+    name: 'WhatsApp',
+    handle: 'Chat with Builders Space',
+    url: 'https://chat.whatsapp.com/IXlpRAi0BJKD99DSCY3j4j',
+    icon: IconBrandWhatsapp,
+    color: 'bg-[#25D366]' // WhatsApp's official green color
   },
-  {
-    name: 'Email',
-    handle: 'hello@buildersspace.com',
-    url: 'mailto:',
-    icon: Send,
-    color: 'bg-red-500'
-  }
+  // {
+  //   name: 'Email',
+  //   handle: 'hello@buildersspace.com',
+  //   url: 'mailto:',
+  //   icon: Send,
+  //   color: 'bg-red-500'
+  // }
 ];
 
 const ContactPage = () => {
@@ -82,11 +91,11 @@ const ContactPage = () => {
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4">
-      <Header/>
-      
+      <Header />
+
 
       {/* Header Section */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
@@ -99,7 +108,7 @@ const ContactPage = () => {
       </motion.div>
 
 
-      <motion.div 
+      <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -136,7 +145,7 @@ const ContactPage = () => {
         ))}
       </motion.div>
 
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.6 }}
