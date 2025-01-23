@@ -14,18 +14,9 @@ const TextRevealByWord = ({ text, className }) => {
   const words = text.split(" ");
 
   return (
-    <div ref={targetRef} className={cn("relative z-0 h-[200vh] w-full ", className)}>
-      <div
-        className={
-          "sticky top-0 flex h-[50%] w-full items-center bg-transparent px-[1rem] py-[2rem]"
-        }
-      >
-        <p
-          ref={targetRef}
-          className={
-            "flex flex-wrap w-full p-0.5 text-2xl font-bold text-white/20 md:p-3 md:text-2xl lg:p-3 lg:text-2xl xl:text-2xl"
-          }
-        >
+    <div ref={targetRef} className={cn("relative z-0 h-[120vh] w-full", className)}>
+      <div className="sticky top-0 flex h-[40%] w-full items-center bg-transparent px-2">
+        <p ref={targetRef} className="flex flex-wrap w-full mt-[10vh] lg:[mt-40] text-2xl lg:text-3xl font-bold text-white/20">
           {words.map((word, i) => {
             const start = i / words.length;
             const end = start + 1 / words.length;
@@ -44,13 +35,15 @@ const TextRevealByWord = ({ text, className }) => {
 const Word = ({ children, progress, range }) => {
   const opacity = useTransform(progress, range, [0, 1]);
   return (
-    <span className="xl:lg-3 relative mx-1 lg:mx-2.5 ">
-      <span className={"absolute opacity-30"}>{children}</span>
-      <motion.span style={{ opacity: opacity }} className={"text-white "}>
+    <span className="relative mx-0.5">
+      <span className="absolute opacity-30">{children}</span>
+      <motion.span style={{ opacity: opacity }} className="text-white">
         {children}
       </motion.span>
     </span>
   );
 };
+
+
 
 export { TextRevealByWord };

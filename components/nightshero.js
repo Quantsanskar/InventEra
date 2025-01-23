@@ -72,11 +72,11 @@ export default function HeroSection() {
                 <div
                     className="absolute inset-0 bg-gradient-to-b from-[#1a365d]/80 via-[#1e3a8a]/70 to-[#0a1128]"
                     style={{
-                        backgroundImage: `url(${encodeURI('/reference/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg')})`,
+                        backgroundImage: `url(${encodeURI('/reference/NightsTree.png')})`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                         opacity: 100,
-                        mixBlendMode: 'soft-light'
+                        // mixBlendMode: 'soft-light'
                     }}
                 />
                 <motion.div
@@ -101,7 +101,7 @@ export default function HeroSection() {
                 >
                     <h1 className="text-6xl md:text-9xl font-bold text-center">
                         <span className="relative inline-block">
-                            <span className="relative z-10 bg-gradient-to-b from-[#ffd700] via-[#fff8c4] to-[#fff] bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(255,215,0,0.3)]">
+                            <span className="relative z-10 text-[#F9F9F9] drop-shadow-[0_0_15px_rgba(255,215,0,0.3)]">
                                 The Nights
                             </span>
                         </span>

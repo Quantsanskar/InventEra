@@ -14,11 +14,11 @@ export default function WelcomeCard() {
               <InfiniteSliderVertical />
             </div>
 
-            <div className="min-h-screen w-full flex flex-col items-center justify-start p-4 relative">
+            <div className="min-h-screen w-full flex flex-col items-center justify-start p-2 relative">
               {/* SVG Container - Centered */}
 
               <motion.div
-                className="relative w-[95%] max-w-3xl rounded-[32px] bg-[#0C0C0C] p-8 sm:p-10 md:p-12 backdrop-blur-sm"
+                className="relative w-[95%] max-w-3xl rounded-[32px] bg-[#0C0C0C] p-2 backdrop-blur-sm"
                 initial={{
                   boxShadow: `
             0 0 100px -15px rgba(66, 71, 112, 0.3),
@@ -43,33 +43,33 @@ export default function WelcomeCard() {
                   duration: 0.3,
                   ease: "easeOut"
                 }}
-              ><div className="w-full flex justify-center mb-8">
+              ><div className="w-full flex justify-center">
                   <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    className="relative"
+                    transition={{ duration: 0.5 }}
+                    className="relative h-full w-full flex items-center justify-center"
                   >
                     <img
                       src="/reference/WELCOME !.svg"
                       height="400"
                       width="400"
                       className="max-h-[200px] object-contain"
-                      alt="Who Are We?"
+                      alt="WELCOME!"
                     />
                   </motion.div>
                 </div>
 
-                <div className='text-center mb-[-4rem]'>
+                <div className='text-center'>
                   <TextRevealByWord
                     text="Build Cool Stuff. With Cooler People. 🛠Welcome to Builder's Space—where creativity meets chaos! Think Hogwarts for creators, but with fewer owls and way more memes. "
                   />
-                  <button className="relative p-[0.1em]  " onClick={() => { window.location.href = 'https://www.commudle.com/communities/builders-space/events/the-nights-s1' }}>
-                    <span className="relative flex justify-center items-center -bottom-[-0.8em] w-[8.25em] h-[2.5em] mx-auto bg-black rounded-lg border-2 border-white text-white text-base 
+                  <button className="relative p-[0.1em]  h-[2.5em]" onClick={() => { window.location.href = 'https://www.commudle.com/communities/builders-space/events/the-nights-s1' }}>
+                    <span className="relative flex justify-center items-center -bottom-[2.2em] w-[8.25em] h-[2.5em] mx-auto bg-black rounded-lg border-2 border-white text-white text-base 
                 shadow-[0_0.4em_0.1em_0.019em_#fff,0_8px_16px_rgba(255,255,255,0.1)] 
                 transition-all duration-300 
                 hover:translate-y-[0.4em] hover:shadow-[0_0_0_0_#fff,0_4px_8px_rgba(255,255,255,0.2)]
-                before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-gradient-to-b before:from-white/10 before:to-transparent before:rounded-lg mt-[-8rem]">
+                before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-gradient-to-b before:from-white/10 before:to-transparent before:rounded-lg mt-[1rem] lg:mt-[-2rem]">
                       Get Started
                     </span>
                   </button>
