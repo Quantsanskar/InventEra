@@ -78,18 +78,6 @@ const HeroSection = () => {
     }),
   }
 
-  const parallaxVariants = {
-    animate: (i) => ({
-      x: mousePosition.x * 0.02 * i,
-      y: mousePosition.y * 0.02 * i,
-      transition: {
-        type: "spring",
-        stiffness: 50,
-        damping: 30,
-      },
-    }),
-  }
-
   return (
     <section ref={containerRef} className="relative w-full min-h-screen overflow-hidden bg-[#0a1128]">
       {/* Animated Background */}
@@ -132,40 +120,6 @@ const HeroSection = () => {
           </motion.div>
         ))}
       </motion.div>
-
-      {/* Parallax Layers */}
-      {[1, 2, 3].map((layer) => (
-        <motion.div
-          key={layer}
-          className="absolute inset-0 pointer-events-none"
-          animate={{
-            x: mousePosition.x * 0.02 * layer,
-            y: mousePosition.y * 0.02 * layer,
-          }}
-          transition={{ type: "spring", stiffness: 50, damping: 30 }}
-        >
-          {[...Array(5)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-2 h-2 bg-white rounded-full"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                opacity: Math.random() * 0.5 + 0.3,
-              }}
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.7, 1, 0.7],
-              }}
-              transition={{
-                duration: Math.random() * 2 + 1,
-                repeat: Number.POSITIVE_INFINITY,
-                ease: "easeInOut",
-              }}
-            />
-          ))}
-        </motion.div>
-      ))}
 
       {/* Content Container */}
       <motion.div
