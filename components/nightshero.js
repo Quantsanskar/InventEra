@@ -128,7 +128,7 @@ const HeroSection = () => {
       >
         {/* Main Title with Sunrise Animation */}
         <motion.div variants={titleVariants} initial="hidden" animate="visible" className="relative mb-8">
-          <h1 className="text-6xl md:text-9xl font-bold text-center">
+          <h1 className="text-5xl font-bold text-center">
             {["T", "H", "E", " ", "N", "I", "G", "H", "T", "S"].map((letter, index) => (
               <motion.span
                 key={index}
