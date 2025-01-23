@@ -101,9 +101,17 @@ export default function HeroSection() {
                 >
                     <h1 className="text-6xl md:text-9xl font-bold text-center">
                         <span className="relative inline-block">
-                            <span className="relative z-10 text-[#F9F9F9] drop-shadow-[0_0_15px_rgba(255,215,0,0.3)]">
-                                The Nights
-                            </span>
+                            <h1 className="text-6xl md:text-9xl font-bold text-center relative">
+                                <span className="text-[#A2D2FF] drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">T</span>
+                                <span className="text-[#A2D2FF] drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">H</span>
+                                <span className="text-[#A2D2FF] drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">E</span>
+                                <span className="ml-4 text-[#A2D2FF] drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">N</span>
+                                <span className="text-[#A2D2FF] drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">I</span>
+                                <span className="text-[#A2D2FF] drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">G</span>
+                                <span className="text-[#A2D2FF] drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">H</span>
+                                <span className="text-[#A2D2FF] drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">T</span>
+                                <span className="text-[#A2D2FF] drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">S</span>
+                            </h1>
                         </span>
                     </h1>
                 </motion.div>
