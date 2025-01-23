@@ -23,7 +23,7 @@ import MacWindow from "../components/macbooktab";
 import HeroSection from "../components/nightshero";
 import WelcomeCard from "../components/nightswelcomecard";
 import CrewSection from "../components/MediaCarousel/NightsMedia";
-import WhoAreWe from "@/components/who-are-we";
+// import WhoAreWe from "@/components/who-are-we";
 import Navigation from "@/components/homepage/Navigation";
 import DynamicMarquee from "@/components/homepage/ScrollNights"
 import { TextRevealByWord } from "@/components/ui/text-reveal";
@@ -31,6 +31,7 @@ import CommunityCarousel from "@/components/communitycarousel";
 import BackgroundImage from "@/components/ui/Gradient";
 import DynamicMarqueeSponsComm from "@/components/homepage/ScrollSponsors";
 import CTA from "@/components/homepage/ctanights";
+import WhoAreWe from "@/components/newwhoarewe";
 // Simple NavItem component
 const NavItem = ({ href, children }) => (
   <Link href={href}>
@@ -338,7 +339,8 @@ const EventPage = () => {
       </div>
 
       <div className="">
-        <WhoAreWe />
+        {/* <WhoAreWe /> */}
+        <WhoAreWe/>
       </div>
       <div><DynamicMarqueeSponsComm /></div>
     

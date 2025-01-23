@@ -7,6 +7,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -18,6 +19,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -34,24 +36,28 @@
     opacity: 0;
     animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
-  
+
   .animate-fade-in-delay {
     opacity: 0;
     animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
   }
-  
+
   .delay-100 {
     animation-delay: 100ms;
   }
+
   .delay-200 {
     animation-delay: 200ms;
   }
+
   .delay-300 {
     animation-delay: 300ms;
   }
+
   .delay-500 {
     animation-delay: 500ms;
   }
+
   .delay-700 {
     animation-delay: 700ms;
   }
@@ -76,5 +82,17 @@
   .dark {
     --brand: 31 97% 72%;
     --brand-foreground: 27 96% 61%;
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-thumb-gray-400::-webkit-scrollbar-thumb {
+    background-color: #9ca3af;
+  }
+
+  .scrollbar-track-gray-900::-webkit-scrollbar-track {
+    background-color: #111827;
   }
 }
