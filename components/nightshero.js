@@ -71,7 +71,7 @@ const HeroSection = () => {
       y: [0, -10, 0],
       x: [0, i * 5, 0],
       transition: {
-        duration: 4 + i,
+        duration: 8 + i * 2, // Increased from 4 + i to 8 + i * 2
         repeat: Number.POSITIVE_INFINITY,
         ease: "easeInOut",
       },
@@ -84,7 +84,7 @@ const HeroSection = () => {
       <motion.div variants={backgroundVariants} initial="hidden" animate="visible" className="absolute inset-0">
         <motion.div
           animate={{
-            backgroundPosition: `${mousePosition.x * 0.05}px ${mousePosition.y * 0.05}px`,
+            backgroundPosition: `${mousePosition.x * 0.005}px ${mousePosition.y * 0.005}px`,
           }}
           className="absolute inset-0 bg-gradient-to-b from-[#1a365d]/80 via-[#1e3a8a]/70 to-[#0a1128]"
           style={{
