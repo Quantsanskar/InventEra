@@ -33,6 +33,7 @@ import DynamicMarqueeSponsComm from "@/components/homepage/ScrollSponsors";
 import CTA from "@/components/homepage/ctanights";
 import WhoAreWe from "@/components/newwhoarewe";
 import WelcomeSection from "@/components/hogwarts-welcome";
+import WelcomePage from "@/components/Welc-Hogw";
 // Simple NavItem component
 const NavItem = ({ href, children }) => (
   <Link href={href}>
@@ -368,8 +369,8 @@ const EventPage = () => {
         </div>
       </BackgroundImage>
       <div><CTA /></div>
-
-      <div className="w-full h-full"><WelcomeSection /></div>
+<div><WelcomePage/></div>
+      {/* <div className="w-full h-full"><WelcomeSection /></div> */}
       <BackgroundImage imagePath="/reference/Gradient1.png">
         <div className="text-white dark:text-white">
 

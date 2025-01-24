@@ -31,7 +31,7 @@
   position: relative;
   text-align: center;
   padding: 2rem;
-  background: rgba(0, 0, 0, 0.7);
+  background: #676767A6;
   backdrop-filter: blur(2px);
   border-radius: 2rem;
   border: 2px solid rgba(255, 215, 0, 0.3);
@@ -45,7 +45,7 @@
   font-family: "Cinzel", serif;
   font-size: clamp(2rem, 5vw + 1rem, 4rem);
   font-weight: 700;
-  color: #ffd700;
+  color: #cac299;
   margin-bottom: 1rem;
   text-shadow: 0 0 10px rgba(255, 215, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.3), 0 0 30px rgba(255, 215, 0, 0.2);
 }

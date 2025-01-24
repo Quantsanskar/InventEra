@@ -6,9 +6,12 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          
+
           <link rel="preconnect" href="https://fonts.googleapis.com"></link>
           <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin></link>
+          <head>
+            <link href="https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap" rel="stylesheet" />
+          </head>
           <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet" />
           <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Nanum+Gothic+Coding&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet"></link>
         </Head>
