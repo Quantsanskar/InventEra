@@ -24,79 +24,94 @@ export default function WhoAreWe() {
                         <Image
                             src="/reference/_.svg"
                             alt="Question mark"
-                            height={140}
-                            width={140}
-                            className="object-contain absolute -right-12 top-[55%] transform rotate-6"
+                            height={180}
+                            width={180}
+                            className="h-[200px] md:h-[260px] lg:h-[260px] w-[200px] md:w-[260px] lg:w-[260px] object-contain absolute -right-24 top-[44%] md:-right-40 md:top-[35%] lg:-right-40 lg:top-[35%] transform rotate-[3deg]"
                             priority
                         />
                     </div>
                 </div>
 
                 {/* Right Column - Text Content */}
+                {/* Right Column - Text Content */}
                 <div className="w-full lg:w-2/3 max-w-3xl h-[calc(100vh-2rem)] lg:h-[calc(100vh-6rem)]">
                     <div className="rounded-3xl bg-black/70 p-4 sm:p-6 lg:p-8 backdrop-blur-sm h-full overflow-hidden">
                         <div className="prose prose-invert max-w-none h-full overflow-y-auto scrollbar-thin text-white scrollbar-thumb-gray-400 scrollbar-track-gray-900">
-                            <h1 className="text-3xl font-bold mb-4 text-center">The Nights: Season One</h1>
-                            <h2 className="text-xl font-semibold mb-2 text-center">
-                                A 3-week rollercoaster of creativity, code, and connections
-                            </h2>
+                            <h1 className="text-3xl font-bold mb-4 text-center">What is The Nights Season 1?</h1>
 
-                            <h3 className="text-lg font-semibold mt-6 mb-2">Program Overview</h3>
-                            <p>
-                                Welcome to the coolest way to kick off 2024! The Nights: Season One is a one-of-a-kind 3-week program
-                                where creators, developers, artists, and innovators come together to learn, build, and show off their
-                                awesomeness. Think of it as a mashup of work, fun, and "look what I made!" moments.
+                            <p className="text-center font-semibold mb-4">
+                                Nights Season 1 is an exciting event where people from all fields come together to work on their ideas and create amazing projects. Whether you're into tech, design, business, entertainment, or robotics, there's a theme (or house) for everyone!
                             </p>
 
-                            <h3 className="text-lg font-semibold mt-6 mb-2">What We Offer</h3>
-                            <ul>
+                            <h2 className="text-xl font-semibold mt-6 mb-2">How It Works</h2>
+                            <ol className="list-decimal pl-6">
                                 <li>
-                                    <strong>Workshops that won't put you to sleep:</strong> Hands-on sessions to sharpen your skills.
+                                    <strong>Choose Your Theme (House):</strong>
+                                    <p>Pick a theme that matches your interest and skills, like Tech, Creative Arts, Entrepreneurship, Robotics, or Entertainment.</p>
                                 </li>
                                 <li>
-                                    <strong>Speaker Labs:</strong> Talks by people who know their stuff and will inspire you to create
-                                    better.
+                                    <strong>Work on Your Idea:</strong>
+                                    <p>Over 3 weeks, you will work virtually on a project or idea that fits your theme. Your goal is to turn your idea into a real project by the end of the event.</p>
                                 </li>
                                 <li>
-                                    <strong>Build Challenges:</strong> Think hackathons, but cooler.
+                                    <strong>Weekly Labs & Mentorship:</strong>
+                                    <p>Each week, you'll attend <strong>speaker sessions</strong> and <strong>mentorship labs</strong> to help you develop your project. Mentors will guide you, provide feedback, and share valuable insights.</p>
                                 </li>
                                 <li>
-                                    <strong>Networking:</strong> Meet people who are just as passionate (or nerdy) as you!
+                                    <strong>Submit Weekly Reports:</strong>
+                                    <p>At the end of each week, submit a short report showing your progress. This helps track your journey and keeps you on track.</p>
+                                </li>
+                                <li>
+                                    <strong>Demo Day:</strong>
+                                    <p>After 3 weeks, there will be an <strong>offline Demo Day</strong> where you'll present your project. Pitch your idea to an audience, including experts and judges, and showcase what you've created.</p>
+                                </li>
+                            </ol>
+
+                            <h2 className="text-xl font-semibold mt-6 mb-2">Why Join Nights Season 1?</h2>
+                            <ul className="list-disc pl-6">
+                                <li>
+                                    <strong>Learn and Grow:</strong>
+                                    <p>Gain hands-on experience in your field. Learn from top speakers and mentors.</p>
+                                </li>
+                                <li>
+                                    <strong>Build Something Amazing:</strong>
+                                    <p>Turn your idea into a real project. Collaborate with like-minded people.</p>
+                                </li>
+                                <li>
+                                    <strong>Showcase Your Work:</strong>
+                                    <p>Present your project on Demo Day. Get feedback from experts and recognition for your hard work.</p>
+                                </li>
+                                <li>
+                                    <strong>Have Fun!</strong>
+                                    <p>Be part of an inspiring community. Make new friends and enjoy the creative process.</p>
                                 </li>
                             </ul>
 
-                            <h3 className="text-lg font-semibold mt-6 mb-2">The Plan</h3>
-                            <ul>
-                                <li>
-                                    <strong>3 Weeks of Virtual Magic:</strong> From the comfort of your couch, desk, or wherever you vibe
-                                    best.
-                                </li>
-                                <li>
-                                    <strong>The Grand Finale: Offline Demo Day:</strong> A real-world gathering to showcase what you've
-                                    built and cheer for others.
-                                </li>
+                            <h2 className="text-xl font-semibold mt-6 mb-2">Key Highlights</h2>
+                            <ul className="list-disc pl-6">
+                                <li><strong>3 Weeks of Creation:</strong> Work virtually at your own pace with the support of mentors.</li>
+                                <li><strong>Weekly Labs:</strong> Interactive sessions to learn and improve.</li>
+                                <li><strong>Offline Demo Day:</strong> Showcase your work and pitch your idea in person.</li>
+                                <li><strong>Themes for Everyone:</strong> Choose from diverse themes (houses) to match your passion.</li>
                             </ul>
+
+                            <h2 className="text-xl font-semibold mt-6 mb-2 text-center">Ready to Join?</h2>
+                            <p className="text-center">
+                                Get ready to unleash your creativity, build amazing projects, and make unforgettable memories at Nights Season 1. No matter your field or experience, there's a place for you here. Let's make something incredible together!
+                            </p>
 
                             <h3 className="text-lg font-semibold mt-6 mb-2 text-center">Important Details</h3>
-                            <ul className="text-center">
+                            <ul className="text-center list-none">
                                 <li>
                                     <strong>Start Date:</strong> March 15th, 2025
                                 </li>
                                 <li>
-                                    <strong>Format:</strong> Virtual (3 weeks) + Offline Demo Day (get ready to shine in person!)
+                                    <strong>Format:</strong> Virtual (3 weeks) + Offline Demo Day
                                 </li>
                                 <li>
-                                    <strong>Contact : </strong> buildersspace9@gmail.com
+                                    <strong>Contact:</strong> buildersspace9@gmail.com
                                 </li>
                             </ul>
-
-                            <p className="mt-6 text-center">
-                                Because at The Nights, "Builders create, and creators build!" PS: No coding or art skills? No worries.
-                                Bring your enthusiasm; we've got the rest. 🛠🎨
-                            </p>
-
-                            <h3 className="text-lg text-center font-semibold mt-6 mb-2">Stay in the Loop!</h3>
-                            <p className="text-center">Don't miss out – be part of the journey!</p>
                         </div>
                     </div>
                 </div>
