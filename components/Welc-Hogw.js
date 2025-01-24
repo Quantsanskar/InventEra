@@ -40,7 +40,7 @@ export default function WelcomePage() {
                             filter: "drop-shadow(5px 7px 4px rgba(0, 0, 0, 0.58))",
                         }}
                     >
-                        WELCOME TO HOGWARTS
+                        THE HOUSE OF NIGHT
                     </h1>
                 </div>
             </div>
