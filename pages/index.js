@@ -6,7 +6,7 @@ import { Nights } from "@/components/homepage/Nights";
 import DynamicMarquee from "@/components/homepage/ScrollBar";
 import ScrollReveal from "@/components/homepage/ScrollReveal";
 import { TimeLine } from "@/components/homepage/TimeLine";
-
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Hero } from "@/components/ui/animated-hero";
 import AnimatedCoolText from "@/components/ui/AnimatedCoolText";
 // import { Footerdemo } from "@/components/ui/footer-section";
@@ -20,6 +20,7 @@ export default function demo() {
   return (
 
     <div className="block bg-black">
+      <SpeedInsights/>
       <Navigation />
       <Hero />
       <DynamicMarquee />
