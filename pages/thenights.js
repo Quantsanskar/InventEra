@@ -32,6 +32,7 @@ import BackgroundImage from "@/components/ui/Gradient";
 import DynamicMarqueeSponsComm from "@/components/homepage/ScrollSponsors";
 import CTA from "@/components/homepage/ctanights";
 import WhoAreWe from "@/components/newwhoarewe";
+import WelcomeSection from "@/components/hogwarts-welcome";
 // Simple NavItem component
 const NavItem = ({ href, children }) => (
   <Link href={href}>
@@ -74,7 +75,7 @@ const eventThemes = [
 ];
 
 const EventPage = () => {
- 
+
   // Memoize gradient elements
   const GradientOverlays = (
     <>
@@ -93,7 +94,7 @@ const EventPage = () => {
     particleColor: "#FFFFFF",
   };
 
- 
+
   const pages = [
     {
       title: "BuilderSpace",
@@ -340,10 +341,10 @@ const EventPage = () => {
 
       <div className="">
         {/* <WhoAreWe /> */}
-        <WhoAreWe/>
+        <WhoAreWe />
       </div>
       <div><DynamicMarqueeSponsComm /></div>
-    
+
       <div className=""><LampImp /></div>
       <div className="">
         <CommunityLamp />
@@ -367,6 +368,8 @@ const EventPage = () => {
         </div>
       </BackgroundImage>
       <div><CTA /></div>
+
+      <div className="w-full h-full"><WelcomeSection /></div>
       <BackgroundImage imagePath="/reference/Gradient1.png">
         <div className="text-white dark:text-white">
 
@@ -374,14 +377,13 @@ const EventPage = () => {
         </div>
       </BackgroundImage>
 
-      <div className="bg-background w-full">
-        {" "}
-        {/* Updated container */}
+      {/* <div className="bg-background w-full">
+       
         <LayoutGrid
           cards={cards}
           className="grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 p-4 md:p-8"
         />
-      </div>
+      </div> */}
 
       {/* Add Footer */}
       <Footer />
