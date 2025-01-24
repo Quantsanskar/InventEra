@@ -4,6 +4,9 @@ module.exports = {
   darkMode: "class", // Enable dark mode
   theme: {
     extend: {
+      transitionTimingFunction: {
+        "in-out-cubic": "cubic-bezier(0.65, 0, 0.35, 1)",
+      },
       colors: {
         // Base colors - always dark
         background: {
@@ -49,6 +52,7 @@ module.exports = {
         "float-slow": "float-slow 8s ease-in-out infinite",
         "float-medium": "float-medium 6s ease-in-out infinite",
         "float-fast": "float-fast 4s ease-in-out infinite",
+        "rotate": "rotate 15s linear infinite",
       },
       keyframes: {
         gradient: {
@@ -83,8 +87,13 @@ module.exports = {
             "50%": { opacity: 0.7 },
           },
         },
+
+        rotate: {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
 };
