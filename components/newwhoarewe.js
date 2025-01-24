@@ -86,7 +86,7 @@ export default function WhoAreWe() {
                                     <strong>Format:</strong> Virtual (3 weeks) + Offline Demo Day (get ready to shine in person!)
                                 </li>
                                 <li>
-                                    <strong>Contact:</strong> buildersspace9@gmail.com
+                                    <strong>Contact : </strong> buildersspace9@gmail.com
                                 </li>
                             </ul>
 
