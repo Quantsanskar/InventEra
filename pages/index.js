@@ -9,8 +9,7 @@ import { TimeLine } from "@/components/homepage/TimeLine";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Hero } from "@/components/ui/animated-hero";
 import AnimatedCoolText from "@/components/ui/AnimatedCoolText";
-// import { Footerdemo } from "@/components/ui/footer-section";
-import { TextRevealByWord } from "@/components/ui/text-reveal";
+import { Analytics } from "@vercel/analytics/react"
 
 import { Footer } from "@/components/footer";
 
@@ -21,6 +20,7 @@ export default function demo() {
 
     <div className="block bg-black">
       <SpeedInsights/>
+      <Analytics/>
       <Navigation />
       <Hero />
       <DynamicMarquee />
