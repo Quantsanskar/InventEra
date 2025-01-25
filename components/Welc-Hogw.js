@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
-import RotatingCarousel from "./CircularCarousel"
+import RotatingCarousel from "../components/CircularCarousel"
 
 export default function WelcomePage() {
   useEffect(() => {
@@ -38,18 +38,18 @@ export default function WelcomePage() {
         backgroundImage: "url(/reference/hogwarts_bg2.jpg)",
       }}
     >
-      <div className="absolute inset-0 flex items-center justify-center pt-10">
+      <div className="absolute inset-0 flex items-center justify-center pt-4 md:pt-10">
         <div
           className="rounded-lg border border-[#FEFEFE] flex flex-col items-center relative"
           style={{
-            width: "90%",
-            height: "90vh",
+            width: "95%",
+            height: "95vh",
             backgroundColor: "#676767A6",
             backdropFilter: "blur(2px)",
           }}
         >
           <h1
-            className="text-center mt-0 text-[60px]"
+            className="text-center mt-2 md:mt-0 text-3xl md:text-5xl lg:text-[60px]"
             style={{
               fontFamily: "Irish Grover, cursive",
               fontWeight: 400,
