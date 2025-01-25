@@ -24,55 +24,55 @@ const RotatingCarousel = ({ items }) => {
   const houseContent = [
     {
       words: [
-        { text: "Development", top: { sm: 10, md: 15 }, left: { sm: 10, md: 25 }, size: "small" },
-        { text: "Web 3", top: { sm: 25, md: 35 }, left: { sm: 70, md: 75 }, size: "medium" },
-        { text: "Cybersecurity", top: { sm: 40, md: 50 }, left: { sm: 65, md: 75 }, size: "small" },
-        { text: "Game Dev", top: { sm: 55, md: 66 }, left: { sm: 50, md: 60 }, size: "small" },
-        { text: "AI/ML", top: { sm: 30, md: 36 }, left: { sm: 15, md: 20 }, size: "medium" },
-        { text: "Data Science", top: { sm: 45, md: 50 }, left: { sm: 5, md: 6 }, size: "small" },
-        { text: "Analytics", top: { sm: 60, md: 56 }, left: { sm: 20, md: 6 }, size: "small" },
-        { text: "AR/VR", top: { sm: 70, md: 40 }, left: { sm: 60, md: 45 }, size: "medium" },
+        { text: "", top: { sm: 10, md: 15 }, left: { sm: 10, md: 25 }, size: "small" },
+        { text: "", top: { sm: 25, md: 35 }, left: { sm: 70, md: 75 }, size: "medium" },
+        { text: "", top: { sm: 40, md: 50 }, left: { sm: 65, md: 75 }, size: "small" },
+        { text: "", top: { sm: 55, md: 66 }, left: { sm: 50, md: 60 }, size: "small" },
+        { text: "", top: { sm: 30, md: 36 }, left: { sm: 15, md: 20 }, size: "medium" },
+        { text: "", top: { sm: 45, md: 50 }, left: { sm: 5, md: 6 }, size: "small" },
+        { text: "", top: { sm: 60, md: 56 }, left: { sm: 20, md: 6 }, size: "small" },
+        { text: "", top: { sm: 70, md: 40 }, left: { sm: 60, md: 45 }, size: "medium" },
       ],
-      svg: "/reference/harry.svg",
+      svg: "/reference/none.svg",
       gradient: "linear-gradient(to bottom, #FFD700, #8B0000)",
     },
     {
       words: [
-        { text: "Ambition", top: { sm: 15, md: 20 }, left: { sm: 20, md: 30 }, size: "large" },
-        { text: "Cunning", top: { sm: 35, md: 40 }, left: { sm: 65, md: 70 }, size: "medium" },
-        { text: "Power", top: { sm: 55, md: 60 }, left: { sm: 15, md: 25 }, size: "large" },
-        { text: "Legacy", top: { sm: 65, md: 70 }, left: { sm: 60, md: 65 }, size: "medium" },
-        { text: "Pride", top: { sm: 30, md: 35 }, left: { sm: 40, md: 45 }, size: "small" },
+        { text: "", top: { sm: 15, md: 20 }, left: { sm: 20, md: 30 }, size: "large" },
+        { text: "", top: { sm: 35, md: 40 }, left: { sm: 65, md: 70 }, size: "medium" },
+        { text: "", top: { sm: 55, md: 60 }, left: { sm: 15, md: 25 }, size: "large" },
+        { text: "", top: { sm: 65, md: 70 }, left: { sm: 60, md: 65 }, size: "medium" },
+        { text: "", top: { sm: 30, md: 35 }, left: { sm: 40, md: 45 }, size: "small" },
       ],
       svg: "/reference/slytherin-crest.svg",
       gradient: "linear-gradient(to bottom, #1a472a, #2a623d)",
     },
     {
       words: [
-        { text: "Wisdom", top: { sm: 20, md: 25 }, left: { sm: 15, md: 20 }, size: "large" },
-        { text: "Learning", top: { sm: 40, md: 45 }, left: { sm: 70, md: 75 }, size: "medium" },
-        { text: "Wit", top: { sm: 65, md: 70 }, left: { sm: 25, md: 30 }, size: "small" },
-        { text: "Knowledge", top: { sm: 60, md: 65 }, left: { sm: 55, md: 60 }, size: "large" },
-        { text: "Creativity", top: { sm: 25, md: 30 }, left: { sm: 45, md: 50 }, size: "medium" },
+        { text: "", top: { sm: 20, md: 25 }, left: { sm: 15, md: 20 }, size: "large" },
+        { text: "", top: { sm: 40, md: 45 }, left: { sm: 70, md: 75 }, size: "medium" },
+        { text: "", top: { sm: 65, md: 70 }, left: { sm: 25, md: 30 }, size: "small" },
+        { text: "", top: { sm: 60, md: 65 }, left: { sm: 55, md: 60 }, size: "large" },
+        { text: "", top: { sm: 25, md: 30 }, left: { sm: 45, md: 50 }, size: "medium" },
       ],
       svg: "/reference/ravenclaw-crest.svg",
       gradient: "linear-gradient(to bottom, #0e1a40, #222f5b)",
     },
     {
       words: [
-        { text: "UI/UX", top: { sm: 50, md: 56 }, left: { sm: 5, md: 7 }, size: "small" },
-        { text: "Design", top: { sm: 55, md: 60 }, left: { sm: 20, md: 7 }, size: "small" },
-        { text: "Video", top: { sm: 15, md: 16 }, left: { sm: 10, md: 14 }, size: "small" },
-        { text: "Production", top: { sm: 20, md: 16 }, left: { sm: 45, md: 50 }, size: "small" },
-        { text: "Content", top: { sm: 30, md: 36 }, left: { sm: 15, md: 6 }, size: "small" },
-        { text: "Blogging", top: { sm: 35, md: 40 }, left: { sm: 30, md: 6 }, size: "small" },
-        { text: "Cinema", top: { sm: 40, md: 44 }, left: { sm: 45, md: 6 }, size: "small" },
-        { text: "Animation", top: { sm: 45, md: 52 }, left: { sm: 65, md: 70 }, size: "small" },
-        { text: "Motion", top: { sm: 50, md: 56 }, left: { sm: 80, md: 65 }, size: "small" },
-        { text: "Music", top: { sm: 60, md: 38 }, left: { sm: 55, md: 65 }, size: "small" },
-        { text: "Writing", top: { sm: 70, md: 64 }, left: { sm: 70, md: 68 }, size: "small" },
+        { text: "", top: { sm: 50, md: 56 }, left: { sm: 5, md: 7 }, size: "small" },
+        { text: "", top: { sm: 55, md: 60 }, left: { sm: 20, md: 7 }, size: "small" },
+        { text: "", top: { sm: 15, md: 16 }, left: { sm: 10, md: 14 }, size: "small" },
+        { text: "", top: { sm: 20, md: 16 }, left: { sm: 45, md: 50 }, size: "small" },
+        { text: "", top: { sm: 30, md: 36 }, left: { sm: 15, md: 6 }, size: "small" },
+        { text: "", top: { sm: 35, md: 40 }, left: { sm: 30, md: 6 }, size: "small" },
+        { text: "", top: { sm: 40, md: 44 }, left: { sm: 45, md: 6 }, size: "small" },
+        { text: "", top: { sm: 45, md: 52 }, left: { sm: 65, md: 70 }, size: "small" },
+        { text: "", top: { sm: 50, md: 56 }, left: { sm: 80, md: 65 }, size: "small" },
+        { text: "", top: { sm: 60, md: 38 }, left: { sm: 55, md: 65 }, size: "small" },
+        { text: "", top: { sm: 70, md: 64 }, left: { sm: 70, md: 68 }, size: "small" },
       ],
-      svg: "/reference/hermione.png",
+      // svg: "/reference/hermione.png",
       gradient: "linear-gradient(to bottom, #ecb939, #f0c75e)",
     },
   ]
@@ -80,8 +80,8 @@ const RotatingCarousel = ({ items }) => {
   // Background images for each house
   const bgImages = [
     "url(/reference/Gryffindor-bg.png)",
-    "url(/reference/Slytherin-bg.png)",
-    "url(/reference/Ravenclaw-bg.png)",
+    "url(/reference/Slytherine-bg.png)",
+    "url(/reference/RavenClaw-bg.png)",
     "url(/reference/HufflePuff-bg.png)",
   ]
 
@@ -178,7 +178,7 @@ const RotatingCarousel = ({ items }) => {
                         transform: `scale(${isActive ? 1.1 : 1})`,
                       }}
                     >
-                      {item.title}
+                      {/* {item.title} */}
                     </h2>
                     {/* House crest SVG */}
                     <div
