@@ -158,7 +158,7 @@ const RotatingCarousel = ({ items }) => {
 
       {/* Rotating Carousel */}
       <div
-        className={`${isMobile ? "w-full h-full mr-[3rem]" : "fixed right-2 bottom-4 lg:bottom-0 h-full md:w-[30vw] md:h-[8vw] lg:w-[43vw] xl:w-[48vw] 2xl:w-[52vw]  3xl:w-[56vw]"}`}
+        className={`${isMobile ? "w-full h-full mr-[3rem]" : "fixed right-8 bottom-4 lg:bottom-0 h-full md:w-[30vw] md:h-[8vw] lg:w-[43vw] xl:w-[48vw] 2xl:w-[52vw]  3xl:w-[56vw]"}`}
       >
         <div className="relative w-full h-full">
           {items.map((item, index) => {
