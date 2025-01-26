@@ -256,7 +256,7 @@ export default function WelcomePage() {
           }}
         >
           <h1
-            className="text-center mt-2 lg:ml-[-24rem] md:text-[68px] lg:text-[52px]"
+            className="text-center mt-2 lg:ml-[-24rem] text-[40px] md:text-[68px] lg:text-[52px]"
             style={{
               fontFamily: "Irish Grover, cursive",
               fontWeight: 400,
