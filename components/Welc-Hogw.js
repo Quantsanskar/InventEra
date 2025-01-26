@@ -158,7 +158,7 @@ const RotatingCarousel = ({ items }) => {
 
       {/* Rotating Carousel */}
       <div
-        className={`${isMobile ? "w-full h-full" : "fixed right-2 bottom-4 lg:bottom-0 h-full md:w-[30vw] md:h-[8vw] lg:w-[43vw] xl:w-[48vw] 2xl:w-[52vw]  3xl:w-[56vw]"}`}
+        className={`${isMobile ? "w-full h-full mr-[3rem]" : "fixed right-2 bottom-4 lg:bottom-0 h-full md:w-[30vw] md:h-[8vw] lg:w-[43vw] xl:w-[48vw] 2xl:w-[52vw]  3xl:w-[56vw]"}`}
       >
         <div className="relative w-full h-full">
           {items.map((item, index) => {
@@ -177,8 +177,8 @@ const RotatingCarousel = ({ items }) => {
                 <div
                   className={`rounded-full transition-all duration-500 flex items-center justify-center relative overflow-hidden`}
                   style={{
-                    width: isActive ? (isMobile ? "330px" : "560px") : isMobile ? "240px" : "400px",
-                    height: isActive ? (isMobile ? "330px" : "560px") : isMobile ? "240px" : "400px",
+                    width: isActive ? (isMobile ? "310px" : "560px") : isMobile ? "240px" : "400px",
+                    height: isActive ? (isMobile ? "310px" : "560px") : isMobile ? "240px" : "400px",
                     backgroundImage: bgImages[index],
                     backgroundSize: "cover",
                     backgroundPosition: "center",
