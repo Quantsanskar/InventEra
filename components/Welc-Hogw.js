@@ -99,7 +99,7 @@ const RotatingCarousel = ({ items }) => {
   const bgImages = [
     "url(/reference/Gryffindor-bg.png)",
     "url(/reference/Slytherine-bg.png)",
-    "url(/reference/Ravenclaw-bg.png)",
+    "url(/reference/RavenClaw-bg.png)",
     "url(/reference/HufflePuff-bg.png)",
     "url(/reference/Phoenix-bg.png)", // Add this line
   ]
