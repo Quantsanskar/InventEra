@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Header from '../components/Header';
 import Navigation from "@/components/homepage/Navigation";
 import { IconBrandWhatsapp } from '@tabler/icons-react';
+import { Footer } from "../components/footer";
 import {
   Instagram,
   Twitter,
@@ -50,7 +51,7 @@ const socialLinks = [
   //   icon: Github,
   //   color: 'bg-gray-800',
   // },
- 
+
   {
     name: 'WhatsApp',
     handle: 'Chat with Builders Space',
@@ -156,6 +157,7 @@ const ContactPage = () => {
           Let's build something awesome together
         </p>
       </motion.div>
+      <Footer />
     </div>
   );
 };
