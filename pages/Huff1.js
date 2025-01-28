@@ -22,10 +22,11 @@ export default function Home() {
                     <video
                         autoPlay
                         muted
+                        loop
                         playsInline
                         className="object-cover w-full h-full"
                     >
-                        <source src="/videos/Huff1.mp4" type="video/mp4" />
+                        <source src="/videos/Huff7.mp4" type="video/mp4" />
                     </video>
                 );
 
