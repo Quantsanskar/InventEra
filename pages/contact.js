@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Header from '../components/Header';
+import Navigation from "@/components/homepage/Navigation";
 import { IconBrandWhatsapp } from '@tabler/icons-react';
 import {
   Instagram,
@@ -91,7 +92,7 @@ const ContactPage = () => {
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4">
-      <Header />
+      <Navigation />
 
 
       {/* Header Section */}

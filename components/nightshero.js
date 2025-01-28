@@ -180,6 +180,9 @@ const HeroSection = () => {
             size="lg"
             className="gap-4 bg-transparent text-white border-white hover:bg-white hover:text-gray-900 transition-all duration-300"
             variant="outline"
+            onClick={() =>
+              (window.location.href = "https://www.commudle.com/communities/builders-space")
+            }
           >
             Learn More <MoveRight className="w-4 h-4" />
           </Button>
