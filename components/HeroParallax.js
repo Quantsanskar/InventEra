@@ -49,11 +49,36 @@ const ProductCard = ({ product, translate }) => {
 };
 
 const HeroParallax = ({ products }) => {
-    const rows = {
-        row1: products.slice(0, 2),
-        row2: products.slice(2, 4),
-        row3: products.slice(3, 5)
-    };
+    const [isSmallScreen, setIsSmallScreen] = React.useState(false);
+
+    // Detect screen size and update state
+    React.useEffect(() => {
+        const updateScreenSize = () => {
+            setIsSmallScreen(window.innerWidth < 640); // sm breakpoint (Tailwind's default)
+        };
+
+        updateScreenSize();
+        window.addEventListener("resize", updateScreenSize);
+
+        return () => {
+            window.removeEventListener("resize", updateScreenSize);
+        };
+    }, []);
+
+    // Dynamically create rows based on screen size
+    const rows = React.useMemo(() => {
+        if (isSmallScreen) {
+            // Single product per row on small screens
+            return products.map((product, index) => [product]); // Each row has one product
+        } else {
+            // Default slicing for larger screens
+            return {
+                row1: products.slice(0, 2),
+                row2: products.slice(2, 4),
+                row3: products.slice(4, 5),
+            };
+        }
+    }, [isSmallScreen, products]);
 
     const ref = React.useRef(null);
     const { scrollYProgress } = useScroll({
@@ -62,13 +87,27 @@ const HeroParallax = ({ products }) => {
     });
 
     const springConfig = { stiffness: 300, damping: 40, bounce: 0 };
-
+    const isSmall = typeof window !== "undefined" && window.innerWidth < 640;
     const translateX = useSpring(
-        useTransform(scrollYProgress, [0, 1], [0, 200]),
+        useTransform(
+            scrollYProgress,
+            [0, 1],
+            isSmall ? [0, 50] : [0, 200] // Reduced range for sm screens
+        ),
         springConfig
     );
     const translateXReverse = useSpring(
-        useTransform(scrollYProgress, [0, 1], [0, -200]),
+        useTransform(
+            scrollYProgress,
+            [0, 1],
+            isSmall ? [0, -50] : [0, -200] // Reduced range for sm screens
+        ),
+        springConfig
+    );
+
+    // Adjusted translateXReverse for the last row on lg screens
+    const lastRowTranslateXReverse = useSpring(
+        useTransform(scrollYProgress, [0, 1], [0, -600]), // Adjusted value for lg screens
         springConfig
     );
 
@@ -90,7 +129,7 @@ const HeroParallax = ({ products }) => {
     );
 
     return (
-        <div ref={ref} className="h-[200vh] sm:h-[250vh] py-5 sm:py-10 overflow-hidden antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]">
+        <div ref={ref} className="lg:h-[300vh] h-[250vh] py-5 sm:py-10 overflow-hidden antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]">
             <Header />
             <motion.div
                 style={{
@@ -99,35 +138,37 @@ const HeroParallax = ({ products }) => {
                     translateY,
                     opacity,
                 }}
-                className="flex flex-col gap-8 sm:gap-12 md:gap-16 sticky top-0 pt-10 sm:pt-20 pb-10 sm:pb-20"
+                className="flex flex-col mt-32 lg:mt-20 gap-8 sm:gap-12 md:gap-16 sticky top-0 pt-10 sm:pt-20 pb-10 sm:pb-20"
             >
-                <motion.div className="flex justify-center sm:justify-end space-x-6 sm:space-x-8 md:space-x-12 px-4 sm:px-8 md:px-10">
-                    {rows.row1.map((product) => (
-                        <ProductCard
-                            product={product}
-                            translate={translateX}
-                            key={product.title}
-                        />
-                    ))}
-                </motion.div>
-                <motion.div className="flex justify-center sm:justify-start space-x-6 sm:space-x-8 md:space-x-12 px-4 sm:px-8 md:px-10 ml-0 sm:ml-[5%]">
-                    {rows.row2.map((product) => (
-                        <ProductCard
-                            product={product}
-                            translate={translateXReverse}
-                            key={product.title}
-                        />
-                    ))}
-                </motion.div>
-                <motion.div className="flex justify-center sm:justify-end space-x-6 sm:space-x-8 md:space-x-12 px-4 sm:px-8 md:px-10">
-                    {rows.row3.map((product) => (
-                        <ProductCard
-                            product={product}
-                            translate={translateX}
-                            key={product.title}
-                        />
-                    ))}
-                </motion.div>
+                {Object.values(rows).map((row, rowIndex) => {
+                    // Determine translate value for each row
+                    const isLastRow =
+                        rowIndex === Object.values(rows).length - 1;
+                    const translate =
+                        isLastRow && typeof window !== "undefined" && window.innerWidth >= 1024
+                            ? lastRowTranslateXReverse
+                            : rowIndex % 2 === 0
+                                ? translateXReverse
+                                : translateX;
+
+                    return (
+                        <motion.div
+                            key={rowIndex}
+                            className={`flex justify-center ${rowIndex % 2 === 0 ? "sm:justify-end" : "sm:justify-start"
+                                } space-x-6 sm:space-x-8 md:space-x-12 px-4 sm:px-8 md:px-10`}
+                        >
+                            {row.map((product) => (
+                                <ProductCard
+                                    product={product}
+                                    translate={translate}
+                                    key={product.title}
+                                />
+                            ))}
+                        </motion.div>
+                    );
+                })}
+
+
             </motion.div>
         </div>
     );

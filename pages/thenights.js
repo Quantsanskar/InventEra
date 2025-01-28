@@ -369,7 +369,7 @@ const EventPage = () => {
         </div>
       </BackgroundImage>
       <div><CTA /></div>
-<div><WelcomePage/></div>
+      <div><WelcomePage /></div>
       {/* <div className="w-full h-full"><WelcomeSection /></div> */}
       <BackgroundImage imagePath="/reference/Gradient1.png">
         <div className="text-white dark:text-white">
@@ -378,13 +378,13 @@ const EventPage = () => {
         </div>
       </BackgroundImage>
 
-      {/* <div className="bg-background w-full">
+      <div className="bg-background w-full">
        
         <LayoutGrid
           cards={cards}
           className="grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 p-4 md:p-8"
         />
-      </div> */}
+      </div>
 
       {/* Add Footer */}
       <Footer />
