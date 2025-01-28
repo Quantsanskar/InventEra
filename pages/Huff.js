@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 export default function Home() {
   // Change this to 'video', 'image', or 'gif' to switch background type
-  const [bgType, setBgType] = useState('video');
+  const [bgType, setBgType] = useState('gif');
 
   useEffect(() => {
     const heading = document.querySelector('.hero-heading');
@@ -41,7 +41,7 @@ export default function Home() {
       case 'gif':
         return (
           <img 
-            src="/gifs/Huff2.gif"
+            src="/gifs/Huff3.gif"
             alt="Background GIF" 
             className="object-cover w-full h-full"
           />
