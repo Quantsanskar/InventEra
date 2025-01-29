@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import MagicalCarousel from "@/components/RavenCarousel"
 export default function Home() {
   const [bgType, setBgType] = useState("image")
   const [loaded, setLoaded] = useState(false)
