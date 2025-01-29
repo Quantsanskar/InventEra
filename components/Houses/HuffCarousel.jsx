@@ -1,9 +1,8 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
-import { gsap } from "gsap"
 
 const slides = [
     {
@@ -31,47 +30,24 @@ const slides = [
         title: "Blogs & Articles",
         description: "efwkfniwnfwnfwjnfijwjqwjwje wnjenjwnvwfwenfnfenieniene nienfienfeniefenfnenef",
     },
-    // Add more slides as needed
 ]
 
 export default function Carousel() {
     const [currentSlide, setCurrentSlide] = useState(0)
     const totalSlides = slides.length
-    const slideRef = useRef(null)
-    const textRef = useRef(null)
-
-    const nextSlide = () => {
-        setCurrentSlide((prev) => (prev + 1) % totalSlides)
-    }
 
     useEffect(() => {
-        const interval = setInterval(nextSlide, 5000) // Change slide every 5 seconds
+        const interval = setInterval(() => {
+            setCurrentSlide((prev) => (prev + 1) % totalSlides)
+        }, 5000)
 
         return () => clearInterval(interval)
-    }, [nextSlide]) // Added nextSlide to dependencies
-
-    useEffect(() => {
-        // GSAP animations
-        gsap.to(slideRef.current, {
-            opacity: 0,
-            duration: 0.5,
-            onComplete: () => {
-                gsap.to(slideRef.current, { opacity: 1, duration: 0.5 })
-            },
-        })
-
-        gsap.from(textRef.current, {
-            y: 20,
-            opacity: 0,
-            duration: 0.5,
-            delay: 0.2,
-        })
-    }, [currentSlide])
+    }, [totalSlides])
 
     return (
-        <div className="relative w-full max-w-5xl mx-auto overflow-hidden rounded-2xl bg-[#1a1a1a] p-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 ">
-                <div ref={slideRef} className="relative aspect-square rounded-lg overflow-hidden">
+        <div className="relative w-full max-w-5xl mx-auto overflow-hidden rounded-2xl bg-[#1a1a1a] p-8 border-2 border-[#A26427] shadow-lg shadow-[#A26427]/20">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="relative aspect-square rounded-lg overflow-hidden transition-opacity duration-300">
                     <Image
                         src={slides[currentSlide].image || "/placeholder.svg"}
                         alt={slides[currentSlide].title}
@@ -81,7 +57,7 @@ export default function Carousel() {
                     />
                 </div>
 
-                <div ref={textRef} className="text-white space-y-6">
+                <div className="text-white space-y-6">
                     <h2 className="text-4xl font-light text-center">{slides[currentSlide].title}</h2>
                     <div className="space-y-4 text-gray-300">
                         <p className="font-light">{slides[currentSlide].description}</p>
@@ -106,4 +82,3 @@ export default function Carousel() {
         </div>
     )
 }
-
