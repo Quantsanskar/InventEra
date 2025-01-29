@@ -208,13 +208,13 @@ const Home = () => {
       </motion.div>
 
       {/* Custom Cursor */}
-      <motion.div
+      {/* <motion.div
         className="fixed w-6 h-6 rounded-full border-2 border-[#FFD700] pointer-events-none z-50 mix-blend-difference"
         style={{
           left: cursorXSpring,
           top: cursorYSpring,
         }}
-      />
+      /> */}
 
       <style jsx global>{`
         @import url('https://fonts.googleapis.com/css2?family=Irish+Grover&family=Cinzel:wght@400;700&display=swap');
