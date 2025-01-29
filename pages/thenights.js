@@ -371,12 +371,12 @@ const EventPage = () => {
       <div><CTA /></div>
       <div><WelcomePage /></div>
       {/* <div className="w-full h-full"><WelcomeSection /></div> */}
-      <BackgroundImage imagePath="/reference/Gradient1.png">
+      {/* <BackgroundImage imagePath="/reference/Gradient1.png">
         <div className="text-white dark:text-white">
 
           <HeroParallax products={eventThemes} />
         </div>
-      </BackgroundImage>
+      </BackgroundImage> */}
 
       <div className="bg-background w-full">
        
