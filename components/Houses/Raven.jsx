@@ -43,7 +43,7 @@ const Home = () => {
     };
 
     return (
-        <div className="relative h-screen w-full overflow-hidden">
+        <div className="relative h-screen w-full overflow-hidden mb-16">
             <div className="absolute inset-0">
                 <BackgroundMedia />
                 <div className="absolute inset-0" />
