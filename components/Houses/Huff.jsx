@@ -130,7 +130,7 @@ const Home = () => {
         {/* Main Title with Animation */}
         <motion.div variants={titleVariants} initial="hidden" animate="visible" className="relative mb-8">
           <h1
-            className="font-bold text-4xl md:text-7xl lg:text-8xl text-center"
+            className="font-bold text-3xl md:text-7xl lg:text-8xl text-center"
             style={{ fontFamily: "Irish Grover, cursive" }}
           >
             {[
