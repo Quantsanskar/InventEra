@@ -4,6 +4,7 @@ import Navigation from "@/components/homepage/Navigation";
 import HeroParallax from "@/components/Houses/HeroParallax";
 import { Footer } from "@/components/footer";
 import BackgroundImage from "@/components/ui/Gradient";
+import CategoriesSection from "@/components/Houses/Hufflethemes";
 export default function HufflePuff() {
     const eventThemes = [
         {
@@ -36,6 +37,7 @@ export default function HufflePuff() {
         <div className="min-h-screen bg-[#121212]">
             <Navigation />
             <Home />
+            <CategoriesSection/>
             <Carousel />
 
 
