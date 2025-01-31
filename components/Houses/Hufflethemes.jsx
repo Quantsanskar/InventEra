@@ -14,15 +14,15 @@ const CategoriesSection = () => {
         <div className="flex flex-col items-center md:items-start">
           {/* SVG Section */}
           <div className="relative z-10 flex justify-end">
-  <img
-    src="/houses/HufflePuff/huff_svg (1).svg"
-    alt="SVG"
-    className="w-[280px] sm:w-[350px] md:w-[400px] h-auto mb-[-45%]"
-  />
-</div>
+            <img
+              src="/houses/HufflePuff/huff_svg (1).svg"
+              alt="SVG"
+              className="w-[280px] sm:w-[350px] md:w-[400px] h-auto mb-[-43%]"
+            />
+          </div>
 
           {/* Videos Section - Directly Below SVG */}
-          <div className="relative w-full aspect-[4/3] md:aspect-[16/9] bg-[#111111] rounded-2xl border border-[#222222] flex items-center justify-center mt-4">
+          <div className="relative w-full aspect-[4/3] md:aspect-[16/9] bg-[#111111] rounded-2xl border border-[#222222] flex items-center justify-center">
             <p className="text-white text-base sm:text-lg md:text-xl lg:text-2xl px-4 text-center z-10">
               videos here..
             </p>
