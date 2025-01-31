@@ -7,7 +7,12 @@ import { cn } from "@/lib/utils"
 const slides = [
     {
         image: "/houses/HufflePuff/Ui-Ux.png",
-        title: "Ui/Ux & Graphic Design",
+        title: "Ui/Ux",
+        description: "efwkfniwnfwnfwjnfijwjqwjwje wnjenjwnvwfwenfnfenieniene nienfienfeniefenfnenef",
+    },
+    {
+        image: "/houses/HufflePuff/Ui-Ux.png",
+        title: "Graphic Design",
         description: "efwkfniwnfwnfwjnfijwjqwjwje wnjenjwnvwfwenfnfenieniene nienfienfeniefenfnenef",
     },
     {
@@ -66,7 +71,7 @@ export default function Carousel() {
             </div>
 
             {/* Navigation Dots */}
-            <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2">
+            <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">
                 {slides.map((_, index) => (
                     <button
                         key={index}
