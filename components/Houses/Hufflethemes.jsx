@@ -18,7 +18,7 @@ const CategoriesSection = () => {
                         <img
                             src="/houses/HufflePuff/Group 95.svg"
                             alt="SVG"
-                            className="w-[270px] md:w-[340px] mb-[-20%] h-auto"
+                            className="w-[270px] md:w-[340px] mb-[-10%] h-auto"
                         />
                     </div>
 
