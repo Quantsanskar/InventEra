@@ -1,9 +1,9 @@
-import Home from "@/components/Houses/Raven";
-import Carousel from "@/components/Houses/RavenCaousel";
+import Home from "@/components/Houses/RavenClaw/Raven";
+import Carousel from "@/components/Houses/RavenClaw/RavenCaousel";
 import Navigation from "@/components/homepage/Navigation";
 import HeroParallax from "@/components/Houses/HeroParallax";
 import { Footer } from "@/components/footer";
-import BackgroundImage from "@/components/ui/Gradient";
+import CategoriesSection from "@/components/Houses/RavenClaw/Raventhemes";
 export default function HufflePuff() {
     const eventThemes = [
         {
@@ -36,6 +36,7 @@ export default function HufflePuff() {
         <div className="min-h-screen bg-[#121212]">
             <Navigation />
             <Home />
+            <CategoriesSection />
             <Carousel />
 
 
