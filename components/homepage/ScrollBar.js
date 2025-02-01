@@ -62,7 +62,7 @@ const DynamicMarquee = () => {
         <div id="move" style={styles.move}>
           {Array.from({ length: 10 }).map((_, index) => (
             <div key={index} className="marquee" style={styles.marquee}>
-              <h1 className="text-6xl">BUILDER'S SPACE</h1>
+              <h1 className="text-6xl text-black">BUILDER'S SPACE</h1>
               <img
                 src="https://www.brandium.nl/wp-content/uploads/2023/07/arrow-br.svg"
                 alt="Arrow"
