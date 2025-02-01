@@ -24,7 +24,7 @@ const CategoriesSection = () => {
           {/* Videos Section - Directly Below SVG */}
           <div className="relative w-full aspect-[4/3] md:aspect-[16/9] bg-[#111111] rounded-2xl border border-[#222222] flex items-center justify-center">
             <p className="text-white text-base sm:text-lg md:text-xl lg:text-2xl px-4 text-center z-10">
-              videos here..
+              video coming soon..
             </p>
           </div>
         </div>
@@ -35,7 +35,7 @@ const CategoriesSection = () => {
           {/* Content */}
           <div className="relative z-10 flex flex-col items-center space-y-3">
             {/* SVG Decoration */}
-            <div className="relative w-[90%] sm:w-[508px] h-auto flex justify-center">
+            <div className="relative lg:w-[85%] w-[80%] h-auto flex justify-center">
               <img
                 src="/houses/HufflePuff/Huff_Categ.svg"
                 alt="Category Heading Decoration"
