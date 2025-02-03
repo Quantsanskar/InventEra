@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Home from "@/components/Houses/Huff";
 import Carousel from "@/components/Houses/HuffCarousel";
 import Navigation from "@/components/homepage/Navigation";
@@ -33,18 +34,21 @@ export default function HufflePuff() {
             thumbnail: "/reference/ComingSoonThumb.png", // Add your image path here
         },
     ];
+
+
+    const [currentSlide, setCurrentSlide] = useState(0)
     return (
         <div className="min-h-screen bg-[#121212]">
             <Navigation />
             <Home />
-            <CategoriesSection/>
-            <Carousel />
+            <CategoriesSection setCurrentSlide={setCurrentSlide} />
+            <Carousel currentSlide={currentSlide} setCurrentSlide={setCurrentSlide} />
 
 
-                <div className="text-white dark:text-white">
+            <div className="text-white dark:text-white">
 
-                    <HeroParallax products={eventThemes} />
-                </div>
+                <HeroParallax products={eventThemes} />
+            </div>
 
             <Footer />
         </div>

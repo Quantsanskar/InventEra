@@ -1,12 +1,14 @@
 "use client"
 
 import { ChevronRight } from "lucide-react"
-import Link from "next/link"
 
-const categories = ["Animation", "Graphic Design", "Motion Graphic", "Music Production", "UI/UX", "Blogging"]
+const categories = ["Ui/UX", "Graphic Design", "Motion Graphic", "Post Production", "Music Production", "Blogs & Articles"]
 
-
-const CategoriesSection = () => {
+const CategoriesSection = ({ setCurrentSlide }) => {
+    const handleCategoryClick = (index) => {
+        setCurrentSlide(index)
+        document.getElementById('carousel')?.scrollIntoView({ behavior: 'smooth' })
+    }
     return (
         <main className="min-h-screen bg-black p-4 md:p-8">
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -44,26 +46,30 @@ const CategoriesSection = () => {
                         />
                     </div>
 
-                    {/* Category List - Flex Grow for Equal Spacing */}
+                    {/* Updated Category List */}
                     <div className="flex-1 flex flex-col justify-center gap-2 md:gap-6 w-full max-w-sm mt-6 mx-auto">
-                        {categories.map((category) => (
-                            <Link
+                        {categories.map((category, index) => (
+                            <button
                                 key={category}
-                                href={`/category/${category.toLowerCase().replace(/\s+/g, "-")}`}
-                                className="group flex items-center justify-between bg-black/90 hover:bg-black/80 text-white rounded-full px-6 py-4 transition-all duration-200 transform hover:scale-[1.02]"
+                                onClick={() => handleCategoryClick(index)}
+                                className="group flex items-center justify-between bg-black/90 hover:bg-black/80 text-white rounded-full px-6 py-4 transition-all duration-200 transform hover:scale-[1.02] w-full"
                             >
                                 <span className="text-base md:text-lg lg:text-xl font-medium flex-1 text-center">
                                     {category}
                                 </span>
                                 <ChevronRight className="w-8 h-8 md:w-10 md:h-10 transition-transform duration-200 group-hover:translate-x-1" />
-                            </Link>
+                            </button>
                         ))}
                     </div>
-
                 </div>
             </div>
-        </main >
+        </main>
     )
 };
+{/* import PropTypes from 'prop-types';
+
+CategoriesSection.propTypes = {
+    setCurrentSlide: PropTypes.func.isRequired
+}; */}
 
 export default CategoriesSection;
