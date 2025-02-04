@@ -1,11 +1,9 @@
-import { useState } from "react";
-import Home from "@/components/Houses/HufflePuff/Huff";
-import Carousel from "@/components/Houses/HufflePuff/HuffCarousel";
+import Home from "@/components/Houses/Phoenix/Phoe";
+import Carousel from "@/components/Houses/Phoenix/PhoeCarousel";
 import Navigation from "@/components/homepage/Navigation";
 import HeroParallax from "@/components/Houses/HeroParallax";
 import { Footer } from "@/components/footer";
-import BackgroundImage from "@/components/ui/Gradient";
-import CategoriesSection from "@/components/Houses/HufflePuff/Hufflethemes";
+import CategoriesSection from "@/components/Houses/Phoenix/PhoeThemes";
 export default function HufflePuff() {
     const eventThemes = [
         {
@@ -34,21 +32,18 @@ export default function HufflePuff() {
             thumbnail: "/reference/ComingSoonThumb.png", // Add your image path here
         },
     ];
-
-
-    const [currentSlide, setCurrentSlide] = useState(0)
     return (
         <div className="min-h-screen bg-[#121212]">
             <Navigation />
             <Home />
-            <CategoriesSection setCurrentSlide={setCurrentSlide} />
-            <Carousel currentSlide={currentSlide} setCurrentSlide={setCurrentSlide} />
+            <CategoriesSection />
+            <Carousel />
 
 
-            <div className="text-white dark:text-white">
+                <div className="text-white dark:text-white">
 
-                <HeroParallax products={eventThemes} />
-            </div>
+                    <HeroParallax products={eventThemes} />
+                </div>
 
             <Footer />
         </div>

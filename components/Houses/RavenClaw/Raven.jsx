@@ -1,78 +1,84 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 const Home = () => {
-    const [bgType, setBgType] = useState('image');
-    const [loaded, setLoaded] = useState(false);
+  const [bgType, setBgType] = useState("image");
+  const [loaded, setLoaded] = useState(false);
 
-    useEffect(() => {
-        const heading = document.querySelector('.hero-heading');
-        const tagline = document.querySelector('.hero-tagline');
+  useEffect(() => {
+    const heading = document.querySelector(".hero-heading");
+    const tagline = document.querySelector(".hero-tagline");
 
-        setLoaded(true);
+    setLoaded(true);
 
-        setTimeout(() => {
-            tagline.classList.add('animate-fade-in');
-        }, 2000);
-    }, []);
+    setTimeout(() => {
+      tagline.classList.add("animate-fade-in");
+    }, 2000);
+  }, []);
 
-    const BackgroundMedia = () => {
-        switch (bgType) {
-            case 'video':
-                return (
-                    <video
-                        autoPlay
-                        muted
-                        playsInline
-                        className="object-cover w-full h-full"
-                    >
-                        <source src="/videos/Raven1.mp4" type="video/mp4" />
-                    </video>
-                );
+  const BackgroundMedia = () => {
+    switch (bgType) {
+      case "video":
+        return (
+          <video
+            autoPlay
+            muted
+            playsInline
+            className="object-cover w-full h-full"
+          >
+            <source src="/videos/Raven1.mp4" type="video/mp4" />
+          </video>
+        );
 
-            case 'image':
-                return (
-                    <img
-                        src="/images/Huff8.jpeg"
-                        alt="Background"
-                        className="object-cover w-full h-full"
-                    />
-                );
+      case "image":
+        return (
+          <img
+            src="/images/Huff8.jpeg"
+            alt="Background"
+            className="object-cover w-full h-full"
+          />
+        );
 
-            default:
-                return null;
-        }
-    };
+      default:
+        return null;
+    }
+  };
 
-    return (
-        <div className="relative h-screen w-full overflow-hidden mb-16">
-            <div className="absolute inset-0">
-                <BackgroundMedia />
-                <div className="absolute inset-0" />
-            </div>
+  return (
+    <div className="relative h-screen w-full overflow-hidden mb-16">
+      <div className="absolute inset-0">
+        <BackgroundMedia />
+        <div className="absolute inset-0" />
+      </div>
 
-            <div className="relative z-10 h-full flex flex-col items-center justify-center text-white px-4">
-                <div className={`hero-heading-wrapper ${loaded ? 'loaded' : ''}`}>
-                    <h1 className="hero-heading text-6xl md:text-8xl font-bold mb-6 tracking-wider" style={{ fontFamily: 'Irish Grover, cursive' }}>
-                        {"Welcome To Ravenclaw".split('').map((char, index) => (
-                            <span
-                                key={index}
-                                className="inline-block hover-char"
-                                style={{
-                                    animationDelay: `${index * 0.1}s`,
-                                }}
-                            >
-                                {char}
-                            </span>
-                        ))}
-                    </h1>
-                </div>
+      <div className="relative z-10 h-full flex flex-col items-center justify-center text-white px-4">
+        <div className={`hero-heading-wrapper ${loaded ? "loaded" : ""}`}>
+          <h1
+            className="hero-heading text-6xl md:text-8xl font-bold mb-6 tracking-wider"
+            style={{ fontFamily: "Irish Grover, cursive" }}
+          >
+            {"Welcome To Ravenclaw".split("").map((char, index) => (
+              <span
+                key={index}
+                className="inline-block hover-char"
+                style={{
+                  animationDelay: `${index * 0.1}s`,
+                }}
+              >
+                {char}
+              </span>
+            ))}
+          </h1>
+        </div>
 
-                <p className="hero-tagline opacity-0 text-xl md:text-2xl text-center max-w-2xl" style={{ fontFamily: 'Cinzel, serif' }}>
-                    Where wit and wisdom shape the brightest minds of tomorrow.
-                </p>
-            </div>
+        <p
+          className="hero-tagline opacity-0 text-xl md:text-2xl text-center max-w-2xl"
+          style={{ fontFamily: "Cinzel, serif" }}
+        >
+          Where wit and wisdom shape the brightest minds of tomorrow.
+        </p>
+      </div>
 
-            <style jsx>{`
-        @import url('https://fonts.googleapis.com/css2?family=Irish+Grover&family=Cinzel:wght@400;700&display=swap');
+      <style jsx>{`
+        @import url("https://fonts.googleapis.com/css2?family=Irish+Grover&family=Cinzel:wght@400;700&display=swap");
         .hero-heading-wrapper {
           position: relative;
           transform-style: preserve-3d;
@@ -97,65 +103,50 @@ const Home = () => {
           animation: float-in 0.5s ease-out forwards;
           opacity: 0;
           background: linear-gradient(
-            135deg, 
-            #0066E6 0%,    /* Ravenclaw Blue */
-            #FFFFFF 25%,   /* White */
-            #946B2D 50%,   /* Ravenclaw Bronze */
-            #FFFFFF 75%,   /* White */
-            #0066E6 100%   /* Ravenclaw Blue */
+            135deg,
+            #0066e6 0%,
+            /* Ravenclaw Blue */ #ffffff 25%,
+            /* White */ #946b2d 50%,
+            /* Ravenclaw Bronze */ #ffffff 75%,
+            /* White */ #0066e6 100% /* Ravenclaw Blue */
           );
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;
-          text-shadow: 
-            2px 2px 0 rgba(0, 0, 0, 0.3),
-            0 0 20px rgba(0, 102, 230, 0.5),
-            0 0 40px rgba(0, 102, 230, 0.3),
+          text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3),
+            0 0 20px rgba(0, 102, 230, 0.5), 0 0 40px rgba(0, 102, 230, 0.3),
             0 0 60px rgba(0, 102, 230, 0.2);
           filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.3));
         }
 
         .hover-char:hover {
-          transform: 
-            translateZ(20px) 
-            rotateX(10deg) 
-            rotateY(10deg);
+          transform: translateZ(20px) rotateX(10deg) rotateY(10deg);
           background: linear-gradient(
-            135deg, 
-            #0066E6 0%,    /* Ravenclaw Blue */
-            #FFFFFF 50%,   /* White */
-            #946B2D 100%   /* Ravenclaw Bronze */
+            135deg,
+            #0066e6 0%,
+            /* Ravenclaw Blue */ #ffffff 50%,
+            /* White */ #946b2d 100% /* Ravenclaw Bronze */
           );
           -webkit-background-clip: text;
           background-clip: text;
-          text-shadow: 
-            2px 2px 0 rgba(0, 0, 0, 0.5),
-            4px 4px 0 rgba(0, 102, 230, 0.4),
-            0 0 20px rgba(0, 102, 230, 0.6),
-            0 0 40px rgba(0, 102, 230, 0.4),
-            0 0 60px rgba(0, 102, 230, 0.2);
+          text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5),
+            4px 4px 0 rgba(0, 102, 230, 0.4), 0 0 20px rgba(0, 102, 230, 0.6),
+            0 0 40px rgba(0, 102, 230, 0.4), 0 0 60px rgba(0, 102, 230, 0.2);
         }
 
         .hero-tagline {
-          text-shadow: 
-            2px 2px 4px rgba(0, 0, 0, 0.5),
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5),
             0 0 20px rgba(0, 102, 230, 0.4);
         }
 
         @keyframes float-in {
           0% {
             opacity: 0;
-            transform: 
-              translateY(100px) 
-              translateZ(-50px) 
-              rotateX(-45deg);
+            transform: translateY(100px) translateZ(-50px) rotateX(-45deg);
           }
           100% {
             opacity: 1;
-            transform: 
-              translateY(0) 
-              translateZ(0) 
-              rotateX(0);
+            transform: translateY(0) translateZ(0) rotateX(0);
           }
         }
 
@@ -174,10 +165,8 @@ const Home = () => {
           animation: fadeIn 1s ease-out forwards;
         }
       `}</style>
-
-
-        </div>
-    );
-}
+    </div>
+  );
+};
 
 export default Home;
