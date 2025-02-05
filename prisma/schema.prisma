@@ -1,0 +1,111 @@
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["improvedQueryRaw"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum AuthProvider {
+  GITHUB
+  GOOGLE
+  EMAIL
+}
+
+enum House {
+  GRYFFINDOR
+  HUFFLEPUFF
+  RAVENCLAW
+  PHOENIX
+}
+
+model User {
+  id              String         @id @default(uuid())
+  email           String         @unique
+  password        String?        @db.VarChar(256)
+  provider        AuthProvider   @default(EMAIL)
+  providerId      String?        // OAuth provider ID (e.g., GitHub ID)
+  username        String         @unique
+  displayName     String
+  bio             String?
+  location        String?
+  githubUrl       String?
+  linkedinUrl     String?
+  projectVideoUrl String?
+  house           House?
+  category        String?        // Category within house (e.g., "AI" for Gryffindor)
+  profileComplete Boolean        @default(false)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  sentInvitations     Invitation[] @relation("Inviter")
+  receivedInvitations Invitation[] @relation("Invitee")
+  projects        Project[]     @relation("ProjectMembers")
+  ownedProjects   Project[]     @relation("ProjectOwner")
+  votes           Vote[]
+
+  notifications   Notification[]
+
+  @@index([username])
+  @@index([email])
+}
+
+model Project {
+  id          String       @id @default(uuid())
+  title       String
+  description String
+  house       House
+  category    String
+  videoUrl    String       // Required video URL
+  owner     User   @relation("ProjectOwner", fields: [ownerId], references: [id])
+  members   User[] @relation("ProjectMembers")
+  ownerId     String
+  invitations   Invitation[]  // Add this line
+  votes       Vote[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@index([house])
+  @@index([category])
+}
+
+model Vote {
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  project   Project  @relation(fields: [projectId], references: [id])
+  projectId String
+  createdAt DateTime @default(now())
+
+  @@unique([userId, projectId])
+}
+
+model Invitation {
+  id          String     @id @default(uuid())
+  project     Project    @relation(fields: [projectId], references: [id])
+  projectId   String
+  
+  // Invitee side (recipient)
+  inviteeId   String
+  invitee     User       @relation("Invitee", fields: [inviteeId], references: [id])
+  
+  // Inviter side (sender)
+  inviterId   String
+  inviter     User       @relation("Inviter", fields: [inviterId], references: [id])
+  
+  status      String     @default("PENDING")
+  expiresAt   DateTime   @default(now())
+  createdAt   DateTime   @default(now())
+}
+
+model Notification {
+  id          String     @id @default(uuid())
+  user        User       @relation(fields: [userId], references: [id])
+  userId      String
+  type        String     // INVITATION, VOTE, SYSTEM
+  message     String
+  referenceId String?    // Project/Invitation ID
+  read        Boolean    @default(false)
+  createdAt   DateTime   @default(now())
+}
