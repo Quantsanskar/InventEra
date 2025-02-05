@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Handshake, MoveRight, PhoneCall } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import TheNights from "../main5th";
 
 function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
