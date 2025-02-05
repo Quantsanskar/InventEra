@@ -1,8 +1,8 @@
 import { AboutPage } from "@/components/homepage/AboutPage";
 import CTA from "@/components/homepage/call-to-action";
 import { FeaturesSectionWithHoverEffectsDemo } from "@/components/homepage/FeaturesSectionWithHoverEffectsDemo";
-import Navigation from "../components/homepage/Navigation";
-import DynamicMarquee from "@/components/homepage/ScrollBar";
+import Navigation from "@/components/homepage/Navigation";
+import DynamicMarquee from "@/components/homepage/ScrollBar"
 import ScrollReveal from "@/components/homepage/ScrollReveal";
 import { TimeLine } from "@/components/homepage/TimeLine";
 import { SpeedInsights } from "@vercel/speed-insights/next"
