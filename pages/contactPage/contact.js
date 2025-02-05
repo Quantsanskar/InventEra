@@ -2,8 +2,8 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
-import Navigation from '@/components/homepage/Navigation'
-import { Footer } from '@/components/footer'
+import Navigation from '../components/homepage/Navigation'
+import { Footer } from '../components/footer'
 import { SocialLink } from './socialLink'
 import { Instagram, Linkedin, Globe } from 'lucide-react'
 import { IconBrandWhatsapp } from '@tabler/icons-react'
