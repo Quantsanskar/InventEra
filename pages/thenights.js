@@ -8,11 +8,11 @@ import { Footer } from "../components/footer";
 import { CommunityLamp } from "../components/nightsPage/communityLamp";
 import HeroSection from "../components/nightsPage/nightshero";
 import WelcomeCard from "@/components/nightsPage/nightswelcomecard";
-import Navigation from "@/components/homepage/Navigation";
+import Navigation from "../components/homepage/Navigation";
 import DynamicMarquee from "@/components/homepage/ScrollNights"
 import BackgroundImage from "@/components/ui/Gradient";
 import DynamicMarqueeSponsComm from "@/components/nightsPage/ScrollSponsors";
-import CTA from "@/components/homepage/ctanights";
+import CTA from "../components/homepage/ctanights";
 import WhoAreWe from "@/components/nightsPage/newwhoarewe";
 import WelcomePage from "@/components/nightsPage/Welc-Hogw";
 
