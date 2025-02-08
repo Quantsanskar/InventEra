@@ -147,6 +147,11 @@ export function InfiniteSliderVertical() {
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-cover"
         />
         <img
+          src="/carousel/SANSKAR.png"
+          alt="You can't tell me - People Make the World Go Round"
+          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-cover"
+        />
+        <img
           src="/carousel/10.png"
           alt="ye - Kanye West"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-cover"
@@ -182,12 +187,17 @@ export function InfiniteSliderVertical() {
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-cover"
         />
         <img
+          src="/carousel/ragini.png"
+          alt="SWAG - 8ruki"
+          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-cover"
+        />
+        <img
           src="/carousel/17.png"
           alt="SWAG - 8ruki"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-cover"
         />
         <img
-          src="/carousel/18.png"
+          src="/carousel/18.jpg"
           alt="SWAG - 8ruki"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-cover"
         />

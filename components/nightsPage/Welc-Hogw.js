@@ -19,65 +19,7 @@ const RotatingCarousel = ({ items }) => {
   const handleButtonClick = (index) => {
     setActiveIndex(index)
   }
-
-  // House-specific content with responsive positioning
-  const houseContent = [
-    {
-      words: [
-        { text: "Courage", top: { sm: 10, md: 15 }, left: { sm: 10, md: 25 }, size: "small" },
-        { text: "Bravery", top: { sm: 25, md: 35 }, left: { sm: 70, md: 75 }, size: "medium" },
-        { text: "Honor", top: { sm: 40, md: 50 }, left: { sm: 65, md: 75 }, size: "small" },
-        { text: "Strength", top: { sm: 55, md: 66 }, left: { sm: 50, md: 60 }, size: "small" },
-        { text: "Noble", top: { sm: 70, md: 40 }, left: { sm: 60, md: 45 }, size: "medium" },
-      ],
-      svg: "/reference/gryffindor-crest.svg",
-      gradient: "linear-gradient(to bottom, #FFD700, #8B0000)",
-    },
-    {
-      words: [
-        { text: "Ambition", top: { sm: 15, md: 20 }, left: { sm: 20, md: 30 }, size: "large" },
-        { text: "Cunning", top: { sm: 35, md: 40 }, left: { sm: 65, md: 70 }, size: "medium" },
-        { text: "Power", top: { sm: 55, md: 60 }, left: { sm: 15, md: 25 }, size: "large" },
-        { text: "Legacy", top: { sm: 65, md: 70 }, left: { sm: 60, md: 65 }, size: "medium" },
-        { text: "Pride", top: { sm: 30, md: 35 }, left: { sm: 40, md: 45 }, size: "small" },
-      ],
-      svg: "/reference/slytherin-crest.svg",
-      gradient: "linear-gradient(to bottom, #1a472a, #2a623d)",
-    },
-    {
-      words: [
-        { text: "Wisdom", top: { sm: 20, md: 25 }, left: { sm: 15, md: 20 }, size: "large" },
-        { text: "Learning", top: { sm: 40, md: 45 }, left: { sm: 70, md: 75 }, size: "medium" },
-        { text: "Wit", top: { sm: 65, md: 70 }, left: { sm: 25, md: 30 }, size: "small" },
-        { text: "Knowledge", top: { sm: 60, md: 65 }, left: { sm: 55, md: 60 }, size: "large" },
-        { text: "Creativity", top: { sm: 25, md: 30 }, left: { sm: 45, md: 50 }, size: "medium" },
-      ],
-      svg: "/reference/ravenclaw-crest.svg",
-      gradient: "linear-gradient(to bottom, #0e1a40, #222f5b)",
-    },
-    {
-      words: [
-        { text: "Loyalty", top: { sm: 15, md: 16 }, left: { sm: 10, md: 14 }, size: "small" },
-        { text: "Patience", top: { sm: 30, md: 36 }, left: { sm: 15, md: 6 }, size: "small" },
-        { text: "Justice", top: { sm: 45, md: 52 }, left: { sm: 65, md: 70 }, size: "small" },
-        { text: "Kindness", top: { sm: 60, md: 38 }, left: { sm: 55, md: 65 }, size: "small" },
-        { text: "Hard Work", top: { sm: 70, md: 64 }, left: { sm: 70, md: 68 }, size: "small" },
-      ],
-      svg: "/reference/hufflepuff-crest.svg",
-      gradient: "linear-gradient(to bottom, #ecb939, #f0c75e)",
-    },
-    {
-      words: [
-        { text: "Rebirth", top: { sm: 15, md: 20 }, left: { sm: 10, md: 15 }, size: "large" },
-        { text: "Renewal", top: { sm: 35, md: 40 }, left: { sm: 70, md: 75 }, size: "medium" },
-        { text: "Healing", top: { sm: 55, md: 60 }, left: { sm: 20, md: 25 }, size: "small" },
-        { text: "Immortality", top: { sm: 70, md: 75 }, left: { sm: 60, md: 65 }, size: "medium" },
-        { text: "Hope", top: { sm: 40, md: 45 }, left: { sm: 40, md: 45 }, size: "large" },
-      ],
-      svg: "/reference/phoenix-crest.svg",
-      gradient: "linear-gradient(to bottom, #FFA500, #FF4500)",
-    },
-  ]
+  
 
   // Background images for each house
   const bgImages = [
@@ -180,27 +122,13 @@ const RotatingCarousel = ({ items }) => {
                     }}
                   />
 
-                  {/* Floating words */}
-                  {/* {houseContent[index].words.map((word, i) => (
-                    <FloatingWord
-                      key={i}
-                      delay={i * 0.5}
-                      top={word.top}
-                      left={word.left}
-                      size={word.size}
-                      isMobile={isMobile}
-                    >
-                      {word.text}
-                    </FloatingWord>
-                  ))} */}
-
+                
                   {/* Central content */}
                   <div className="relative z-10 flex flex-col items-center">
                     <h2
                       className={`text-3xl md:text-6xl mt-12 md:mt-28 transition-all duration-500`}
                       style={{
                         fontFamily: "Irish Grover, cursive",
-                        background: houseContent[index].gradient,
                         WebkitBackgroundClip: "text",
                         WebkitTextFillColor: "transparent",
                         textShadow: "2px 2px 4px rgba(0,0,0,0.3)",
@@ -213,7 +141,6 @@ const RotatingCarousel = ({ items }) => {
                     <div
                       className={`w-40 h-40 md:w-80 md:h-80 transition-all duration-500 transform`}
                       style={{
-                        backgroundImage: `url(${houseContent[index].svg})`,
                         backgroundSize: "contain",
                         backgroundPosition: "center",
                         backgroundRepeat: "no-repeat",
