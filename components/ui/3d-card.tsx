@@ -1,4 +1,4 @@
-"use client";;
+"use client";
 import { cn } from "@/lib/utils";
 import React, {
   createContext,
@@ -8,31 +8,35 @@ import React, {
   useEffect,
 } from "react";
 
-const MouseEnterContext = createContext(undefined);
-
+const MouseEnterContext = createContext<[boolean, React.Dispatch<React.SetStateAction<boolean>>] | undefined>(undefined);
 export const CardContainer = ({
   children,
   className,
   containerClassName
 }) => {
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [isMouseEntered, setIsMouseEntered] = useState(false);
 
-  const handleMouseMove = (e) => {
+  interface MousePosition {
+    clientX: number;
+    clientY: number;
+  }
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>): void => {
     if (!containerRef.current) return;
-    const { left, top, width, height } =
+    const { left, top, width, height }:DOMRect =
       containerRef.current.getBoundingClientRect();
-    const x = (e.clientX - left - width / 2) / 25;
-    const y = (e.clientY - top - height / 2) / 25;
+    const x: number = (e.clientX - left - width / 2) / 25;
+    const y: number = (e.clientY - top - height / 2) / 25;
     containerRef.current.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
   };
 
-  const handleMouseEnter = (e) => {
+  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>): void => {
     setIsMouseEntered(true);
     if (!containerRef.current) return;
   };
 
-  const handleMouseLeave = (e) => {
+  const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>): void => {
     if (!containerRef.current) return;
     setIsMouseEntered(false);
     containerRef.current.style.transform = `rotateY(0deg) rotateX(0deg)`;
@@ -101,7 +105,7 @@ export const CardItem = ({
   rotateZ?: number;
   [key: string]: any;
 }) => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
   const [isMouseEntered] = useMouseEnter();
 
   useEffect(() => {
