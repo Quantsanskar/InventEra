@@ -4,7 +4,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import Navigation from '@/components/homepage/Navigation'
 import { Footer } from '@/components/footer'
-import { SocialLink } from './socialLink'
+import SocialLink from "../../components/contactPage/social"
 import { Instagram, Linkedin, Globe } from 'lucide-react'
 import { IconBrandWhatsapp } from '@tabler/icons-react'
 const SOCIAL_LINKS = [
