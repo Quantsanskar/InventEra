@@ -40,7 +40,7 @@ export function InfiniteSliderVertical() {
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
         />
         <img
-          src="/carousel/9.png"
+          src="/carousel/SANSKAR.png"
           alt="You can't tell me - People Make the World Go Round"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
         />
@@ -80,12 +80,17 @@ export function InfiniteSliderVertical() {
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
         />
         <img
+          src="/carousel/ragini.png"
+          alt="SWAG - 8ruki"
+          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
+        />
+        <img
           src="/carousel/17.png"
           alt="SWAG - 8ruki"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
         />
         <img
-          src="/carousel/18.png"
+          src="/carousel/18.jpg"
           alt="SWAG - 8ruki"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
         />
