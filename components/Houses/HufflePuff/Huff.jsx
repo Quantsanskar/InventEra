@@ -89,7 +89,7 @@ const Home = () => {
           }}
           className="absolute inset-0 bg-gradient-to-b from-[#372e29]/80 via-[#5c4f3c]/70 to-[#372e29]"
           style={{
-            backgroundImage: `url(${encodeURI("/houses/HufflePuff/Huff-bg.png")})`,
+            backgroundImage: `url(${encodeURI("/houses/HufflePuff/Huff-Hero-Bg.png")})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             opacity: 100,

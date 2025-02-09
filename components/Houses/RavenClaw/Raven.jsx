@@ -89,7 +89,7 @@ const Home = () => {
           }}
           className="absolute inset-0 bg-gradient-to-b from-[#372e29]/80 via-[#5c4f3c]/70 to-[#372e29]"
           style={{
-            backgroundImage: `url(${encodeURI("/images/Huff8.jpeg")})`,
+            backgroundImage: `url(${encodeURI("/houses/RavenClaw/Raven-Hero-Bg.png")})`,
             backgroundSize: "cover",
             backgroundPosition: "bottom",
             opacity: 100,
