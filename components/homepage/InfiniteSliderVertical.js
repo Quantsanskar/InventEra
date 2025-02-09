@@ -19,11 +19,11 @@ export function InfiniteSliderVertical() {
           alt="Yung Lean - Stardust"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
         />
-        <img
+        {/* <img
           src="/carousel/4.png"
           alt="Lana Del Rey - Ultraviolence"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
-        />
+        /> */}
         <img
           src="/carousel/5.png"
           alt="A$AP Rocky - Tailor Swif"
@@ -39,9 +39,24 @@ export function InfiniteSliderVertical() {
           alt="You're in My System - TORYONTHEBEAT"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
         />
+         <img
+          src="/carousel/ANUBHAV.png"
+          alt="ANUBHAV-organiser"
+          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-cover"
+        />
         <img
-          src="/carousel/9.png"
-          alt="You can't tell me - People Make the World Go Round"
+          src="/carousel/SANSKAR.png"
+          alt="SANSKAR-Organiser"
+          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
+        />
+          <img
+          src="/carousel/PIHU.png"
+          alt="PIHU-Organiser"
+          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
+        />
+        <img
+          src="/carousel/AYAN.png"
+          alt="AYAN-Oraganiser"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
         />
         <img
@@ -80,25 +95,21 @@ export function InfiniteSliderVertical() {
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
         />
         <img
+          src="/carousel/ragini.png"
+          alt="Ragini"
+          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
+        />
+        <img
           src="/carousel/17.png"
           alt="SWAG - 8ruki"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
         />
         <img
-          src="/carousel/18.png"
+          src="/carousel/18.jpg"
           alt="SWAG - 8ruki"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
         />
-        <img
-          src="/carousel/19.jpg"
-          alt="SWAG - 8ruki"
-          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
-        />
-        <img
-          src="/carousel/20.jpg"
-          alt="SWAG - 8ruki"
-          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
-        />
+      
       </InfiniteSlider>
       <InfiniteSlider direction="vertical" reverse>
         <img
@@ -116,11 +127,11 @@ export function InfiniteSliderVertical() {
           alt="Yung Lean - Stardust"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-cover"
         />
-        <img
+        {/* <img
           src="/carousel/4.png"
           alt="Lana Del Rey - Ultraviolence"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-cover"
-        />
+        /> */}
         <img
           src="/carousel/5.png"
           alt="A$AP Rocky - Tailor Swif"
@@ -142,6 +153,26 @@ export function InfiniteSliderVertical() {
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-cover"
         />
         <img
+          src="/carousel/ANUBHAV.png"
+          alt="ANUBHAV-organiser"
+          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-cover"
+        />
+        <img
+          src="/carousel/SANSKAR.png"
+          alt="SANSKAR-organiser"
+          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-cover"
+        />
+        <img
+          src="/carousel/PIHU.png"
+          alt="PIHU-orgainser"
+          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
+        />
+        <img
+          src="/carousel/AYAN.png"
+          alt="AYAN-organiser"
+          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
+        />
+        <img
           src="/carousel/10.png"
           alt="ye - Kanye West"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-cover"
@@ -177,25 +208,21 @@ export function InfiniteSliderVertical() {
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-cover"
         />
         <img
+          src="/carousel/ragini.png"
+          alt="RAGNINI"
+          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-cover"
+        />
+        <img
           src="/carousel/17.png"
           alt="SWAG - 8ruki"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-cover"
         />
         <img
-          src="/carousel/18.png"
+          src="/carousel/18.jpg"
           alt="SWAG - 8ruki"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-cover"
         />
-        <img
-          src="/carousel/19.jpg"
-          alt="SWAG - 8ruki"
-          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
-        />
-        <img
-          src="/carousel/20.jpg"
-          alt="SWAG - 8ruki"
-          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
-        />
+        
       </InfiniteSlider>
     </div>
   );
