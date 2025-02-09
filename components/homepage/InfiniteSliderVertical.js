@@ -39,9 +39,24 @@ export function InfiniteSliderVertical() {
           alt="You're in My System - TORYONTHEBEAT"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
         />
+         <img
+          src="/carousel/ANUBHAV.png"
+          alt="ANUBHAV-organiser"
+          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-cover"
+        />
         <img
           src="/carousel/SANSKAR.png"
-          alt="You can't tell me - People Make the World Go Round"
+          alt="SANSKAR-Organiser"
+          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
+        />
+          <img
+          src="/carousel/PIHU.png"
+          alt="PIHU-Organiser"
+          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
+        />
+        <img
+          src="/carousel/AYAN.png"
+          alt="AYAN-Oraganiser"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
         />
         <img
@@ -81,7 +96,7 @@ export function InfiniteSliderVertical() {
         />
         <img
           src="/carousel/ragini.png"
-          alt="SWAG - 8ruki"
+          alt="Ragini"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
         />
         <img
@@ -94,16 +109,7 @@ export function InfiniteSliderVertical() {
           alt="SWAG - 8ruki"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
         />
-        <img
-          src="/carousel/19.jpg"
-          alt="SWAG - 8ruki"
-          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
-        />
-        <img
-          src="/carousel/20.jpg"
-          alt="SWAG - 8ruki"
-          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
-        />
+      
       </InfiniteSlider>
       <InfiniteSlider direction="vertical" reverse>
         <img
@@ -147,9 +153,24 @@ export function InfiniteSliderVertical() {
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-cover"
         />
         <img
-          src="/carousel/SANSKAR.png"
-          alt="You can't tell me - People Make the World Go Round"
+          src="/carousel/ANUBHAV.png"
+          alt="ANUBHAV-organiser"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-cover"
+        />
+        <img
+          src="/carousel/SANSKAR.png"
+          alt="SANSKAR-organiser"
+          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-cover"
+        />
+        <img
+          src="/carousel/PIHU.png"
+          alt="PIHU-orgainser"
+          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
+        />
+        <img
+          src="/carousel/AYAN.png"
+          alt="AYAN-organiser"
+          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
         />
         <img
           src="/carousel/10.png"
@@ -188,7 +209,7 @@ export function InfiniteSliderVertical() {
         />
         <img
           src="/carousel/ragini.png"
-          alt="SWAG - 8ruki"
+          alt="RAGNINI"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-cover"
         />
         <img
@@ -201,16 +222,7 @@ export function InfiniteSliderVertical() {
           alt="SWAG - 8ruki"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-cover"
         />
-        <img
-          src="/carousel/19.jpg"
-          alt="SWAG - 8ruki"
-          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
-        />
-        <img
-          src="/carousel/20.jpg"
-          alt="SWAG - 8ruki"
-          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
-        />
+        
       </InfiniteSlider>
     </div>
   );

@@ -29,7 +29,7 @@ function AboutPage() {
               </Button>
             </div>
           </div>
-          <div className="bg-muted rounded-md aspect-square mt-8 lg:mt-0">
+          <div className="bg-muted rounded-md aspect-square mt-8 lg:mr-8 lg:mt-0">
             <InfiniteSliderVertical />
           </div>
         </div>
