@@ -1,11 +1,11 @@
 import { useState } from "react";
-import Home from "@/components/Houses/Huff";
-import Carousel from "@/components/Houses/HuffCarousel";
+import Home from "@/components/Houses/HufflePuff/Huff";
+import Carousel from "@/components/Houses/HufflePuff/HuffCarousel";
 import Navigation from "@/components/homepage/Navigation";
 import HeroParallax from "@/components/Houses/HeroParallax";
 import { Footer } from "@/components/footer";
 import BackgroundImage from "@/components/ui/Gradient";
-import CategoriesSection from "@/components/Houses/Hufflethemes";
+import CategoriesSection from "@/components/Houses/HufflePuff/Hufflethemes";
 export default function HufflePuff() {
     const eventThemes = [
         {

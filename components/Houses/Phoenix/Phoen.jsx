@@ -3,6 +3,7 @@
 import React, { useRef, useState, useEffect } from "react"
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion"
 import { Star, Dot } from "lucide-react"
+import Tagline from "../Tagline"
 
 const Home = () => {
   const containerRef = useRef(null)
@@ -23,9 +24,9 @@ const Home = () => {
     return () => window.removeEventListener("mousemove", handleMouseMove)
   }, [cursorX, cursorY]) // Added cursorX and cursorY as dependencies
 
-  const springConfig = { stiffness: 1000, damping: 100 }
-  const cursorXSpring = useSpring(cursorX, springConfig)
-  const cursorYSpring = useSpring(cursorY, springConfig)
+  // const springConfig = { stiffness: 1000, damping: 100 }
+  // const cursorXSpring = useSpring(cursorX, springConfig)
+  // const cursorYSpring = useSpring(cursorY, springConfig)
 
   const titleVariants = {
     hidden: { opacity: 0, y: 200, scale: 1.2 },
@@ -42,18 +43,18 @@ const Home = () => {
     },
   }
 
-  const taglineVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: 1.5,
-        duration: 1.5,
-        ease: [0.33, 1, 0.68, 1],
-      },
-    },
-  }
+  // const taglineVariants = {
+  //   hidden: { opacity: 0, y: 20 },
+  //   visible: {
+  //     opacity: 1,
+  //     y: 0,
+  //     transition: {
+  //       delay: 1.5,
+  //       duration: 1.5,
+  //       ease: [0.33, 1, 0.68, 1],
+  //     },
+  //   },
+  // }
 
   const backgroundVariants = {
     hidden: { opacity: 0.3, scale: 1.1 },
@@ -191,18 +192,8 @@ const Home = () => {
                      </motion.div>
              
                      {/* Animated Tagline */}
-                     <motion.p
-                       variants={taglineVariants}
-                       initial="hidden"
-                       animate="visible"
-                       className="text-xl md:text-2xl text-center max-w-2xl mx-auto px-4 text-[#FFFFFF]"
-                       style={{
-                         fontFamily: "Cinzel, serif",
-                         textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 20px rgba(223, 23, 16, 0.4)",
-                       }}
-                     >
-                       Where hard work and loyalty forge unbreakable bonds.
-                     </motion.p>
+                     <Tagline text="Where hard work and loyalty forge unbreakable bonds." />
+
                    </motion.div>
              
                    {/* Custom Cursor */}

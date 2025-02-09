@@ -3,6 +3,7 @@
 import React, { useRef, useState, useEffect } from "react"
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion"
 import { Star, Dot } from "lucide-react"
+import Tagline from "../Tagline"
 
 const Home = () => {
   const containerRef = useRef(null)
@@ -23,9 +24,9 @@ const Home = () => {
     return () => window.removeEventListener("mousemove", handleMouseMove)
   }, [cursorX, cursorY]) // Added cursorX and cursorY as dependencies
 
-  const springConfig = { stiffness: 1000, damping: 100 }
-  const cursorXSpring = useSpring(cursorX, springConfig)
-  const cursorYSpring = useSpring(cursorY, springConfig)
+  // const springConfig = { stiffness: 1000, damping: 100 }
+  // const cursorXSpring = useSpring(cursorX, springConfig)
+  // const cursorYSpring = useSpring(cursorY, springConfig)
 
   const titleVariants = {
     hidden: { opacity: 0, y: 200, scale: 1.2 },
@@ -42,18 +43,18 @@ const Home = () => {
     },
   }
 
-  const taglineVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: 1.5,
-        duration: 1.5,
-        ease: [0.33, 1, 0.68, 1],
-      },
-    },
-  }
+  // const taglineVariants = {
+  //   hidden: { opacity: 0, y: 20 },
+  //   visible: {
+  //     opacity: 1,
+  //     y: 0,
+  //     transition: {
+  //       delay: 1.5,
+  //       duration: 1.5,
+  //       ease: [0.33, 1, 0.68, 1],
+  //     },
+  //   },
+  // }
 
   const backgroundVariants = {
     hidden: { opacity: 0.3, scale: 1.1 },
@@ -162,22 +163,22 @@ const Home = () => {
                              style={{
                                animationDelay: `${index * 0.1}s`,
                                background: `linear-gradient(
-                                 135deg, 
-rgb(255, 25, 0) 0%,
-rgb(206, 122, 122) 25%,
-                                 #000000 50%,
-rgb(177, 133, 133) 75%,
-rgb(220, 11, 11) 100%
-                               )`,
+                                135deg, 
+                                rgb(255, 223, 0) 0%,
+                                rgb(255, 193, 7) 25%,
+                                rgb(139, 0, 0) 50%,
+                                rgb(178, 34, 34) 75%,
+                                rgb(220, 20, 60) 100%
+                              )`,
                                WebkitBackgroundClip: "text",
                                backgroundClip: "text",
                                color: "transparent",
                                textShadow: `
-                                 2px 2px 0 rgba(0, 0, 0, 0.3),
-                                 0 0 20px rgba(225, 13, 13, 0.5),
-                                 0 0 40px rgba(186, 6, 6, 0.3),
-                                 0 0 60px rgba(179, 8, 8, 0.2)
-                               `,
+            2px 2px 0 rgba(0, 0, 0, 0.3),
+            0 0 20px rgba(255, 223, 0, 0.5),
+            0 0 40px rgba(255, 193, 7, 0.3),
+            0 0 60px rgba(178, 34, 34, 0.2)
+          `,
                                filter: "drop-shadow(0 0 10px rgba(0, 0, 0, 0.3))",
                              }}
                              whileHover={{
@@ -193,18 +194,8 @@ rgb(220, 11, 11) 100%
                      </motion.div>
              
                      {/* Animated Tagline */}
-                     <motion.p
-                       variants={taglineVariants}
-                       initial="hidden"
-                       animate="visible"
-                       className="text-xl md:text-2xl text-center max-w-2xl mx-auto px-4 text-[#FFFFFF]"
-                       style={{
-                         fontFamily: "Cinzel, serif",
-                         textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 20px rgba(223, 23, 16, 0.4)",
-                       }}
-                     >
-                       Where hard work and loyalty forge unbreakable bonds.
-                     </motion.p>
+                     <Tagline text="Where hard work and loyalty forge unbreakable bonds." />
+                     
                    </motion.div>
              
                    {/* Custom Cursor */}
