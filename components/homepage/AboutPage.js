@@ -1,6 +1,6 @@
 import { Handshake, MoveRight, PhoneCall } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "../ui/badge";
+import Button from "../ui/button";
 import ImageVertical, { InfiniteSliderVertical } from "./InfiniteSliderVertical";
 
 function AboutPage() {
@@ -29,7 +29,7 @@ function AboutPage() {
               </Button>
             </div>
           </div>
-          <div className="bg-muted rounded-md aspect-square mt-8 lg:mt-0">
+          <div className="bg-muted rounded-md aspect-square mt-8 lg:mr-8 lg:mt-0">
             <InfiniteSliderVertical />
           </div>
         </div>

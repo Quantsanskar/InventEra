@@ -2,7 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { IconBrandGithub, IconBrandTwitter, IconBrandLinkedin, IconMail, IconBrandDiscord, IconMapPin, IconBrandInstagram, IconBrandPatreon, IconBrandLinktree, IconBrandWhatsapp } from '@tabler/icons-react';
+import {  IconBrandLinkedin, IconMail, IconMapPin, IconBrandInstagram, IconBrandLinktree, IconBrandWhatsapp } from '@tabler/icons-react';
 
 const FooterLink = ({ href, children }) => (
   <Link
@@ -77,7 +77,7 @@ export const Footer = () => {
             <ul className="space-y-3">
               <li><FooterLink href="/">Home</FooterLink></li>
               <li><FooterLink href="/thenights">The Nights</FooterLink></li>
-              <li><FooterLink href="/contact">Contact</FooterLink></li>
+              <li><FooterLink href="/contactPage/contact">Contact</FooterLink></li>
 
             </ul>
           </nav>
