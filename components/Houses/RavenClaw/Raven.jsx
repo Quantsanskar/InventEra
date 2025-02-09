@@ -1,183 +1,236 @@
-import { useEffect, useState } from 'react';
+"use client"
+
+import React, { useRef, useState, useEffect } from "react"
+import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion"
+import { Star, Dot } from "lucide-react"
+import Tagline from "../Tagline"
+
 const Home = () => {
-    const [bgType, setBgType] = useState('image');
-    const [loaded, setLoaded] = useState(false);
+  const containerRef = useRef(null)
+  const { scrollY } = useScroll()
+  const opacity = useTransform(scrollY, [0, 900], [1, 0])
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const cursorX = useMotionValue(0)
+  const cursorY = useMotionValue(0)
 
-    useEffect(() => {
-        const heading = document.querySelector('.hero-heading');
-        const tagline = document.querySelector('.hero-tagline');
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY })
+      cursorX.set(e.clientX)
+      cursorY.set(e.clientY)
+    }
 
-        setLoaded(true);
+    window.addEventListener("mousemove", handleMouseMove)
+    return () => window.removeEventListener("mousemove", handleMouseMove)
+  }, [cursorX, cursorY]) // Added cursorX and cursorY as dependencies
 
-        setTimeout(() => {
-            tagline.classList.add('animate-fade-in');
-        }, 2000);
-    }, []);
+  // const springConfig = { stiffness: 1000, damping: 100 }
+  // const cursorXSpring = useSpring(cursorX, springConfig)
+  // const cursorYSpring = useSpring(cursorY, springConfig)
 
-    const BackgroundMedia = () => {
-        switch (bgType) {
-            case 'video':
-                return (
-                    <video
-                        autoPlay
-                        muted
-                        playsInline
-                        className="object-cover w-full h-full"
-                    >
-                        <source src="/videos/Raven1.mp4" type="video/mp4" />
-                    </video>
-                );
+  const titleVariants = {
+    hidden: { opacity: 0, y: 200, scale: 1.2 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 2,
+        ease: [0.33, 1, 0.68, 1],
+        opacity: { duration: 2.5 },
+        scale: { duration: 2.2 },
+      },
+    },
+  }
 
-            case 'image':
-                return (
-                    <img
-                        src="/images/Huff8.jpeg"
-                        alt="Background"
-                        className="object-cover w-full h-full"
-                    />
-                );
+  // const taglineVariants = {
+  //   hidden: { opacity: 0, y: 20 },
+  //   visible: {
+  //     opacity: 1,
+  //     y: 0,
+  //     transition: {
+  //       delay: 1.5,
+  //       duration: 1.5,
+  //       ease: [0.33, 1, 0.68, 1],
+  //     },
+  //   },
+  // }
 
-            default:
-                return null;
-        }
-    };
+  const backgroundVariants = {
+    hidden: { opacity: 0.3, scale: 1.1 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 3, ease: "easeOut" },
+    },
+  }
 
-    return (
-        <div className="relative h-screen w-full overflow-hidden mb-16">
-            <div className="absolute inset-0">
-                <BackgroundMedia />
-                <div className="absolute inset-0" />
-            </div>
+  const floatingFirefliesVariants = {
+    animate: (i) => ({
+      y: [0, -10, 0],
+      x: [0, i * 5, 0],
+      opacity: [0.2, 1, 0.2],
+      scale: [1, 1.2, 1],
+      transition: {
+        duration: 8 + i * 2,
+        repeat: Number.POSITIVE_INFINITY,
+        ease: "easeInOut",
+      },
+    }),
+  }
 
-            <div className="relative z-10 h-full flex flex-col items-center justify-center text-white px-4">
-                <div className={`hero-heading-wrapper ${loaded ? 'loaded' : ''}`}>
-                    <h1 className="hero-heading text-6xl md:text-8xl font-bold mb-6 tracking-wider" style={{ fontFamily: 'Irish Grover, cursive' }}>
-                        {"Welcome To Ravenclaw".split('').map((char, index) => (
-                            <span
-                                key={index}
-                                className="inline-block hover-char"
-                                style={{
-                                    animationDelay: `${index * 0.1}s`,
-                                }}
-                            >
-                                {char}
-                            </span>
-                        ))}
-                    </h1>
-                </div>
+  return (
+    <section ref={containerRef} className="relative w-full min-h-screen overflow-hidden bg-[#372e29] mb-16">
+      {/* Animated Background */}
+      <motion.div variants={backgroundVariants} initial="hidden" animate="visible" className="absolute inset-0">
+        <motion.div
+          animate={{
+            backgroundPosition: `${mousePosition.x * 0.005}px ${mousePosition.y * 0.005}px`,
+          }}
+          className="absolute inset-0 bg-gradient-to-b from-[#372e29]/80 via-[#5c4f3c]/70 to-[#372e29]"
+          style={{
+            backgroundImage: `url(${encodeURI("/houses/RavenClaw/Raven-Hero-Bg.png")})`,
+            backgroundSize: "cover",
+            backgroundPosition: "bottom",
+            opacity: 100,
+          }}
+        />
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.7 }}
+          transition={{ duration: 2, delay: 1 }}
+          className="absolute inset-0 bg-gradient-to-t from-[#372e29] via-transparent to-transparent"
+        />
+        <div className="absolute inset-0 bg-black opacity-70" />
+      </motion.div>
 
-                <p className="hero-tagline opacity-0 text-xl md:text-2xl text-center max-w-2xl" style={{ fontFamily: 'Cinzel, serif' }}>
-                    Where wit and wisdom shape the brightest minds of tomorrow.
-                </p>
-            </div>
+      {/* Floating Fireflies */}
+      <motion.div className="absolute inset-0 pointer-events-none">
+        {[...Array(30)].map((_, i) => (
+          <motion.div
+            key={i}
+            custom={i}
+            variants={floatingFirefliesVariants}
+            animate="animate"
+            style={{
+              position: "absolute",
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+            }}
+          >
+            <Dot size={Math.random() * 45 + 3} color="#0066E6" fill="#0066E6" />
+          </motion.div>
+        ))}
+      </motion.div>
 
-            <style jsx>{`
-        @import url('https://fonts.googleapis.com/css2?family=Irish+Grover&family=Cinzel:wght@400;700&display=swap');
-        .hero-heading-wrapper {
-          position: relative;
-          transform-style: preserve-3d;
-          perspective: 1000px;
-        }
+      {/* Content Container */}
+      <motion.div
+        style={{ opacity }}
+        className="relative z-10 w-full h-screen flex flex-col items-center justify-center"
+      >
+        {/* Main Title with Animation */}
+        <motion.div variants={titleVariants} initial="hidden" animate="visible" className="relative mb-8">
+          <h1
+            className="font-bold text-3xl md:text-7xl lg:text-8xl text-center"
+            style={{ fontFamily: "Irish Grover, cursive" }}
+          >
+            {[
+              "W",
+              "e",
+              "l",
+              "c",
+              "o",
+              "m",
+              "e",
+              " ",
+              "T",
+              "o",
+              " ",
+              "R",
+              "a",
+              "v",
+              "e",
+              "n",
+              "c",
+              "l",
+              "a",
+              "w",
+              ].map((letter, index) => (
+                           <motion.span
+                             key={index}
+                             className="inline-block hover-char"
+                             style={{
+                               animationDelay: `${index * 0.1}s`,
+                               background: `linear-gradient(
+                                135deg, 
+                              #0066E6 0%,    /* Ravenclaw Blue */
+                              #FFFFFF 50%,   /* White */
+                              #946B2D 100%
+                               )`,
+                               WebkitBackgroundClip: "text",
+                               backgroundClip: "text",
+                               color: "transparent",
+                               textShadow: `
+                                2px 2px 0 rgba(0, 0, 0, 0.5),
+                                4px 4px 0 rgba(0, 102, 230, 0.4),
+                                0 0 20px rgba(0, 102, 230, 0.6),
+                                0 0 40px rgba(0, 102, 230, 0.4),
+                                0 0 60px rgba(0, 102, 230, 0.2);
+                               `,
+                               filter: "drop-shadow(0 0 10px rgba(0, 0, 0, 0.3))",
+                             }}
+                             whileHover={{
+                               scale: 1.2,
+                               rotate: Math.random() * 20 - 10,
+                               transition: { duration: 0.3 },
+                             }}
+                           >
+                             {letter === " " ? "\u00A0" : letter}
+                           </motion.span>
+                         ))}
+                       </h1>
+                     </motion.div>
+             
+                     {/* Animated Tagline */}
+                     <Tagline text="Where hard work and loyalty forge unbreakable bonds." />
 
-        .hero-heading {
-          opacity: 0;
-          transform: translateZ(-100px);
-          transition: all 0.5s ease-out;
-        }
-
-        .hero-heading-wrapper.loaded .hero-heading {
-          opacity: 1;
-          transform: translateZ(0);
-        }
-
-        .hover-char {
-          display: inline-block;
-          transition: all 0.3s ease;
-          transform-style: preserve-3d;
-          animation: float-in 0.5s ease-out forwards;
-          opacity: 0;
-          background: linear-gradient(
-            135deg, 
-            #0066E6 0%,    /* Ravenclaw Blue */
-            #FFFFFF 25%,   /* White */
-            #946B2D 50%,   /* Ravenclaw Bronze */
-            #FFFFFF 75%,   /* White */
-            #0066E6 100%   /* Ravenclaw Blue */
-          );
-          -webkit-background-clip: text;
-          background-clip: text;
-          color: transparent;
-          text-shadow: 
-            2px 2px 0 rgba(0, 0, 0, 0.3),
-            0 0 20px rgba(0, 102, 230, 0.5),
-            0 0 40px rgba(0, 102, 230, 0.3),
-            0 0 60px rgba(0, 102, 230, 0.2);
-          filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.3));
-        }
-
-        .hover-char:hover {
-          transform: 
-            translateZ(20px) 
-            rotateX(10deg) 
-            rotateY(10deg);
-          background: linear-gradient(
-            135deg, 
-            #0066E6 0%,    /* Ravenclaw Blue */
-            #FFFFFF 50%,   /* White */
-            #946B2D 100%   /* Ravenclaw Bronze */
-          );
-          -webkit-background-clip: text;
-          background-clip: text;
-          text-shadow: 
-            2px 2px 0 rgba(0, 0, 0, 0.5),
-            4px 4px 0 rgba(0, 102, 230, 0.4),
-            0 0 20px rgba(0, 102, 230, 0.6),
-            0 0 40px rgba(0, 102, 230, 0.4),
-            0 0 60px rgba(0, 102, 230, 0.2);
-        }
-
-        .hero-tagline {
-          text-shadow: 
-            2px 2px 4px rgba(0, 0, 0, 0.5),
-            0 0 20px rgba(0, 102, 230, 0.4);
-        }
-
-        @keyframes float-in {
-          0% {
-            opacity: 0;
-            transform: 
-              translateY(100px) 
-              translateZ(-50px) 
-              rotateX(-45deg);
-          }
-          100% {
-            opacity: 1;
-            transform: 
-              translateY(0) 
-              translateZ(0) 
-              rotateX(0);
-          }
-        }
-
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-fade-in {
-          animation: fadeIn 1s ease-out forwards;
-        }
-      `}</style>
-
-
-        </div>
-    );
-}
-
-export default Home;
+                   </motion.div>
+             
+                   {/* Custom Cursor */}
+                   {/* <motion.div
+                     className="fixed w-6 h-6 rounded-full border-2 border-[#FFD700] pointer-events-none z-50 mix-blend-difference"
+                     style={{
+                       left: cursorXSpring,
+                       top: cursorYSpring,
+                     }}
+                   /> */}
+             
+                   <style jsx global>{`
+                     @import url('https://fonts.googleapis.com/css2?family=Irish+Grover&family=Cinzel:wght@400;700&display=swap');
+             
+                     .hover-char:hover {
+                       transform: 
+                         translateZ(20px) 
+                         rotateX(10deg) 
+                         rotateY(10deg);
+                       background: linear-gradient(
+                         135deg, 
+                         #0066E6 0%,
+                         #FFFFFF 50%,
+                         #000000 100%
+                       );
+                       -webkit-background-clip: text;
+                       background-clip: text;
+                       text-shadow: 
+                         2px 2px 0 rgba(0, 0, 0, 0.5),
+                         4px 4px 0 rgba(0, 102, 230, 0.4),
+                         0 0 20px rgba(0, 102, 230, 0.6),
+                         0 0 40px rgba(0, 102, 230, 0.4),
+                         0 0 60px rgba(0, 102, 230, 0.2);
+                     }
+                   `}</style>
+                 </section>
+               )
+             }
+             
+             export default Home

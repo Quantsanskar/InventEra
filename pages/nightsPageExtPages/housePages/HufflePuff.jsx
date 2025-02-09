@@ -1,35 +1,36 @@
 import { useState } from "react";
-import Home from "@/components/Houses/Huff";
-import Carousel from "@/components/Houses/HuffCarousel";
+import Home from "@/components/Houses/HufflePuff/Huff";
+import Carousel from "@/components/Houses/HufflePuff/HuffCarousel";
 import Navigation from "@/components/homepage/Navigation";
 import HeroParallax from "@/components/Houses/HeroParallax";
 import { Footer } from "@/components/footer";
-import CategoriesSection from "@/components/Houses/Hufflethemes";
+import BackgroundImage from "@/components/ui/Gradient";
+import CategoriesSection from "@/components/Houses/HufflePuff/Hufflethemes";
 export default function HufflePuff() {
     const eventThemes = [
         {
             title: "Gryffindor",
-            link: "/notFoundPage/404.js",
+            link: "/404",
             thumbnail: "/reference/ComingSoonThumb.png", // Add your image path here
         },
         {
             title: "HufflePuff",
-            link: "/notFoundPage/404.js",
+            link: "/404",
             thumbnail: "/reference/ComingSoonThumb.png", // Add your image path here
         },
         {
             title: "RavenClaw",
-            link: "/notFoundPage/404.js",
+            link: "/404",
             thumbnail: "/reference/ComingSoonThumb.png", // Add your image path here
         },
         {
             title: "Phoenix",
-            link: "/notFoundPage/404.js",
+            link: "/404",
             thumbnail: "/reference/ComingSoonThumb.png", // Add your image path here
         },
         {
             title: "Slytherin",
-            link: "/notFoundPage/404.js",
+            link: "/404",
             thumbnail: "/reference/ComingSoonThumb.png", // Add your image path here
         },
     ];
@@ -45,6 +46,7 @@ export default function HufflePuff() {
 
 
             <div className="text-white dark:text-white">
+
                 <HeroParallax products={eventThemes} />
             </div>
 

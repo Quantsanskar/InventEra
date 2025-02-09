@@ -4,31 +4,31 @@ import Navigation from "@/components/homepage/Navigation";
 import HeroParallax from "@/components/Houses/HeroParallax";
 import { Footer } from "@/components/footer";
 import CategoriesSection from "@/components/Houses/RavenClaw/Raventhemes";
-export default function HufflePuff() {
+export default function RavenClaw() {
     const eventThemes = [
         {
             title: "Gryffindor",
-            link: "/notFoundPage/404.js",
+            link: "/404",
             thumbnail: "/reference/ComingSoonThumb.png", // Add your image path here
         },
         {
             title: "HufflePuff",
-            link: "/notFoundPage/404.js",
+            link: "/404",
             thumbnail: "/reference/ComingSoonThumb.png", // Add your image path here
         },
         {
             title: "RavenClaw",
-            link: "/notFoundPage/404.js",
+            link: "/404",
             thumbnail: "/reference/ComingSoonThumb.png", // Add your image path here
         },
         {
             title: "Phoenix",
-            link: "/notFoundPage/404.js",
+            link: "/404",
             thumbnail: "/reference/ComingSoonThumb.png", // Add your image path here
         },
         {
             title: "Slytherin",
-            link: "/notFoundPage/404.js",
+            link: "/404",
             thumbnail: "/reference/ComingSoonThumb.png", // Add your image path here
         },
     ];

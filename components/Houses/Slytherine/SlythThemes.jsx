@@ -37,7 +37,7 @@ const CategoriesSection = () => {
                     {/* SVG Decoration */}
                     <div className="flex justify-center">
                         <img
-                            src="/houses/Slytherine/Frame 39.svg"
+                            src="/houses/Slytherine/SlythCat.svg/"
                             alt="Category Heading Decoration"
                             className="w-[100%] lg:w-[100%] ml-[15%]"
                         />
