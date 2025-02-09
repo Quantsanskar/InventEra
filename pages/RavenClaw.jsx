@@ -4,7 +4,7 @@ import Navigation from "@/components/homepage/Navigation";
 import HeroParallax from "@/components/Houses/HeroParallax";
 import { Footer } from "@/components/footer";
 import CategoriesSection from "@/components/Houses/RavenClaw/Raventhemes";
-export default function HufflePuff() {
+export default function RavenClaw() {
     const eventThemes = [
         {
             title: "Gryffindor",

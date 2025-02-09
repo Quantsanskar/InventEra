@@ -1,10 +1,10 @@
-import Home from "@/components/Houses/Slytherine/Slyth";
-import Carousel from "@/components/Houses/Slytherine/SlythCarousel";
+import Home from "@/components/Houses/Gryffindor/Gryff";
+import Carousel from "@/components/Houses/Gryffindor/GryffCaousel";
 import Navigation from "@/components/homepage/Navigation";
 import HeroParallax from "@/components/Houses/HeroParallax";
 import { Footer } from "@/components/footer";
-import CategoriesSection from "@/components/Houses/Slytherine/SlythThemes";
-export default function Slytherin() {
+import CategoriesSection from "@/components/Houses/Gryffindor/Gryffthemes";
+export default function Gryffindor() {
     const eventThemes = [
         {
             title: "Gryffindor",

@@ -88,7 +88,7 @@ const Home = () => {
           }}
           className="absolute inset-0 bg-gradient-to-b from-[#372e29]/80 via-[#5c4f3c]/70 to-[#372e29]"
           style={{
-            backgroundImage: `url(${encodeURI("/houses/Slytherine/Mainslyth.png")})`,
+            backgroundImage: `url(${encodeURI("/images/Phoenixmain.png/")})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             opacity: 100,
@@ -117,7 +117,7 @@ const Home = () => {
               left: `${Math.random() * 100}%`,
             }}
           >
-            <Dot size={Math.random() * 45 + 3} color="rgb(3, 101, 67)" fill="rgb(3, 85, 56)" />
+            <Dot size={Math.random() * 45 + 3} color="#9D4EDD" fill="#9D4EDD" />
           </motion.div>
         ))}
       </motion.div>
@@ -145,104 +145,101 @@ const Home = () => {
               "T",
               "o",
               " ",
-              "S",
-              "l",
-              "y",
-              "t",
+              "P",
               "h",
+              "o",
               "e",
-              "r",
-              "i",
               "n",
-              "e",
-            ].map((letter, index) => (
-              <motion.span
-                key={index}
-                className="inline-block hover-char"
-                style={{
-                  animationDelay: `${index * 0.1}s`,
-                  background: `linear-gradient(
-                    135deg, 
-                  #0F8A5F 0%,    /* Vibrant Slytherin Green */
-                  #FFFFFF 50%,   /* Pure White */
-                  #1A472A 100%   /* Dark Green */
-
-                  )`,
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  color: "transparent",
-                  textShadow: `
-                    2px 2px 0 rgba(0, 0, 0, 0.5),
-            4px 4px 0 rgba(15, 138, 95, 0.6),
-            0 0 20px rgba(15, 138, 95, 0.8),
-            0 0 40px rgba(221, 221, 221, 0.6),
-            0 0 60px rgba(15, 138, 95, 0.4);
-                  `,
-                  filter: "drop-shadow(0 0 10px rgba(0, 0, 0, 0.3))",
-                }}
-                whileHover={{
-                  scale: 1.2,
-                  rotate: Math.random() * 20 - 10,
-                  transition: { duration: 0.3 },
-                }}
-              >
-                {letter === " " ? "\u00A0" : letter}
-              </motion.span>
-            ))}
-          </h1>
-        </motion.div>
-
-        {/* Animated Tagline */}
-        <motion.p
-          variants={taglineVariants}
-          initial="hidden"
-          animate="visible"
-          className="text-xl md:text-2xl text-center max-w-2xl mx-auto px-4 text-[#ffffff]"
-          style={{
-            fontFamily: "Cinzel, serif",
-            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 20px rgba(15, 138, 95, 0.6)",
-          }}
-        >
-          Where hard work and loyalty forge unbreakable bonds.
-        </motion.p>
-      </motion.div>
-
-      {/* Custom Cursor */}
-      {/* <motion.div
-        className="fixed w-6 h-6 rounded-full border-2 border-[#FFD700] pointer-events-none z-50 mix-blend-difference"
-        style={{
-          left: cursorXSpring,
-          top: cursorYSpring,
-        }}
-      /> */}
-
-      <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Irish+Grover&family=Cinzel:wght@400;700&display=swap');
-
-        .hover-char:hover {
-          transform: 
-            translateZ(20px) 
-            rotateX(10deg) 
-            rotateY(10deg);
-          background: linear-gradient(
-            135deg, 
-            #0F8A5F 0%,    /* Vibrant Slytherin Green */
-            #FFFFFF 50%,   /* Pure White */
-            #1A472A 100%
-          );
-          -webkit-background-clip: text;
-          background-clip: text;
-          text-shadow: 
-            2px 2px 0 rgba(0, 0, 0, 0.5),
-            4px 4px 0 rgba(15, 138, 95, 0.6),
-            0 0 20px rgba(15, 138, 95, 0.8),
-            0 0 40px rgba(221, 221, 221, 0.6),
-            0 0 60px rgba(15, 138, 95, 0.4);
-        }
-      `}</style>
-    </section>
-  )
-}
-
-export default Home
-
+              "i",
+              "x",
+              ].map((letter, index) => (
+                           <motion.span
+                             key={index}
+                             className="inline-block hover-char"
+                             style={{
+                               animationDelay: `${index * 0.1}s`,
+                               background: `linear-gradient(
+                                 135deg, 
+#9D4EDD 0%,
+#c3a9d9 25%,
+                                 #000000 50%,
+#c3a9d9 75%,
+#9D4EDD 100%
+                               )`,
+                               WebkitBackgroundClip: "text",
+                               backgroundClip: "text",
+                               color: "transparent",
+                               textShadow: `
+                                 2px 2px 0 rgba(0, 0, 0, 0.5),
+                                4px 4px 0 rgba(222, 141, 227, 0.4),
+                                0 0 20px rgba(216, 80, 224, 0.6),
+                                0 0 40px rgba(129, 32, 153, 0.4),
+                                0 0 60px rgba(61, 8, 86, 0.2);
+                               `,
+                               filter: "drop-shadow(0 0 10px rgba(0, 0, 0, 0.3))",
+                             }}
+                             whileHover={{
+                               scale: 1.2,
+                               rotate: Math.random() * 20 - 10,
+                               transition: { duration: 0.3 },
+                             }}
+                           >
+                             {letter === " " ? "\u00A0" : letter}
+                           </motion.span>
+                         ))}
+                       </h1>
+                     </motion.div>
+             
+                     {/* Animated Tagline */}
+                     <motion.p
+                       variants={taglineVariants}
+                       initial="hidden"
+                       animate="visible"
+                       className="text-xl md:text-2xl text-center max-w-2xl mx-auto px-4 text-[#FFFFFF]"
+                       style={{
+                         fontFamily: "Cinzel, serif",
+                         textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 20px rgba(223, 23, 16, 0.4)",
+                       }}
+                     >
+                       Where hard work and loyalty forge unbreakable bonds.
+                     </motion.p>
+                   </motion.div>
+             
+                   {/* Custom Cursor */}
+                   {/* <motion.div
+                     className="fixed w-6 h-6 rounded-full border-2 border-[#FFD700] pointer-events-none z-50 mix-blend-difference"
+                     style={{
+                       left: cursorXSpring,
+                       top: cursorYSpring,
+                     }}
+                   /> */}
+             
+                   <style jsx global>{`
+                     @import url('https://fonts.googleapis.com/css2?family=Irish+Grover&family=Cinzel:wght@400;700&display=swap');
+             
+                     .hover-char:hover {
+                       transform: 
+                         translateZ(20px) 
+                         rotateX(10deg) 
+                         rotateY(10deg);
+                       background: linear-gradient(
+                         135deg, 
+                         #FFD700 0%,
+                         #FFFFFF 50%,
+                         #000000 100%
+                       );
+                       -webkit-background-clip: text;
+                       background-clip: text;
+                       text-shadow: 
+                         2px 2px 0 rgba(0, 0, 0, 0.5),
+                         4px 4px 0 rgba(255, 215, 0, 0.4),
+                         0 0 20px rgba(255, 215, 0, 0.6),
+                         0 0 40px rgba(255, 215, 0, 0.4),
+                         0 0 60px rgba(255, 215, 0, 0.2);
+                     }
+                   `}</style>
+                 </section>
+               )
+             }
+             
+             export default Home

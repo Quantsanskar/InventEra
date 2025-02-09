@@ -3,7 +3,7 @@
 import { ChevronRight } from "lucide-react"
 import Link from "next/link"
 
-const categories = ["Robotics", "Hardware", "IOT", "Automation"]
+const categories = ["Product Management", "Business Development", "Marketing", "Startup Pitching", "Community Building", "Event Management"]
 
 const CategoriesSection = () => {
     return (
@@ -15,7 +15,7 @@ const CategoriesSection = () => {
                     {/* SVG Section */}
                     <div className="relative z-10 flex justify-end lg:mr-[-12%]">
                         <img
-                            src="/houses/RavenClaw/sidesvg.svg"
+                            src="/houses/Phoenix/phoenixgirls.svg"
                             alt="SVG"
                             className="w-[270px] md:w-[340px] mb-[-10%] h-auto"
                         />
@@ -32,12 +32,12 @@ const CategoriesSection = () => {
 
 
                 {/* Right Column (Categories) */}
-                <div className="relative bg-[#4C9C70] rounded-2xl p-4 sm:p-6 md:p-8 flex flex-col h-full justify-between">
+                <div className="relative bg-[#9D4EDD] rounded-2xl p-4 sm:p-6 md:p-8 flex flex-col h-full justify-between">
 
                     {/* SVG Decoration */}
                     <div className="flex justify-center">
                         <img
-                            src="/houses/Slytherine/SlythCat.svg/"
+                            src="/houses/Phoenix/PhoenixCat.svg"
                             alt="Category Heading Decoration"
                             className="w-[100%] lg:w-[100%] ml-[15%]"
                         />
