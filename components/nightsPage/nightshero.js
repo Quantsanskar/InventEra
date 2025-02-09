@@ -4,7 +4,7 @@ import React, { useRef, useState, useEffect } from "react"
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion"
 import { Handshake, MoveRight, ChevronDown, Star } from "lucide-react"
 import { Button } from "../ui/button"
-
+import { Helmet } from "react-helmet";
 const HeroSection = () => {
   const containerRef = useRef(null)
   const { scrollY } = useScroll()
@@ -82,6 +82,9 @@ const HeroSection = () => {
     <section ref={containerRef} className="relative w-full min-h-screen overflow-hidden bg-[#0a1128]">
       {/* Animated Background */}
       <motion.div variants={backgroundVariants} initial="hidden" animate="visible" className="absolute inset-0">
+        <Helmet>
+          <link rel="preload" as="image" href="/reference/NightsTree.png" />
+        </Helmet>
         <motion.div
           animate={{
             backgroundPosition: `${mousePosition.x * 0.005}px ${mousePosition.y * 0.005}px`,

@@ -36,8 +36,8 @@ export const ContainerScroll = ({ children }) => {
     return { width: '70%', height: '600px' };
   };
 
-  const rotate = useTransform(scrollYProgress, [0, 1], [20, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [10, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.9, 1]);
 
   const dimensions = getDeviceDimensions();
 
