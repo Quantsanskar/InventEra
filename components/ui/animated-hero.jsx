@@ -5,7 +5,7 @@ import Button from "./button";
 
 function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
-  const titles = useMemo(() => ["dream", "connect", "create", "share", , "build"], []);
+  const titles = useMemo(() => ["dream", "connect", "create", "share", "build"], []);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -25,7 +25,7 @@ function Hero() {
     >
       <div className="absolute inset-0 bg-black opacity-60"></div>
       <div className="container mx-auto h-full relative z-10">
-        <div className="flex gap-8 py-20 lg:py-40 items-center justify-center flex-col h-full">
+        <div className="flex gap-8 py-20 px-4 lg:px-0 lg:py-40 items-center justify-center flex-col h-full">
           <div>
             <Button size="sm" className="gap-4 bg-black text-white hover:text-black" onClick={() => window.location.href = "/thenights"}>
 
@@ -34,9 +34,9 @@ function Hero() {
             </Button>
           </div>
           <div className="flex gap-4 flex-col">
-            <h1 className="text-5xl md:text-[5rem] max-w-2xl  text-center font-regular text-white">
+            <h1 className="text-4xl md:text-[5rem] max-w-2xl  text-center font-regular text-white">
               <span className="text-spektr-cyan-50 font-bold">Builder's Space</span>
-              <span className="relative flex w-full font-light justify-center overflow-hidden text-center md:pb-4 md:pt-1">
+              <span className="relative flex w-full font-light justify-center overflow-hidden text-center lg:mt-8 md:pb-4 md:pt-1">
                 &nbsp;
                 {titles.map((title, index) => (
                   <motion.span
@@ -68,10 +68,10 @@ function Hero() {
             </p>
           </div>
           <div className="flex flex-row gap-3">
-            <Button size="lg" className="gap-4" variant="outline" onClick={() => window.location.href = "/thenights"}>
+            <Button size="lg" className="" variant="outline" onClick={() => window.location.href = "/thenights"}>
               Join Us Now <Handshake className="w-4 h-4" />
             </Button>
-            <Button size="lg" className="gap-4 text-black" onClick={() => window.location.href = "/thenights"}>
+            <Button size="lg" className="text-black" onClick={() => window.location.href = "/thenights"}>
               Explore More <MoveRight className="w-4 h-4" />
             </Button>
           </div>
