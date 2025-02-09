@@ -19,11 +19,11 @@ export function InfiniteSliderVertical() {
           alt="Yung Lean - Stardust"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
         />
-        <img
+        {/* <img
           src="/carousel/4.png"
           alt="Lana Del Rey - Ultraviolence"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
-        />
+        /> */}
         <img
           src="/carousel/5.png"
           alt="A$AP Rocky - Tailor Swif"
@@ -127,11 +127,11 @@ export function InfiniteSliderVertical() {
           alt="Yung Lean - Stardust"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-cover"
         />
-        <img
+        {/* <img
           src="/carousel/4.png"
           alt="Lana Del Rey - Ultraviolence"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-cover"
-        />
+        /> */}
         <img
           src="/carousel/5.png"
           alt="A$AP Rocky - Tailor Swif"
