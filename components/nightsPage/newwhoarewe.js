@@ -6,7 +6,7 @@ export default function WhoAreWe() {
     return (
         <div className="relative min-h-screen w-full overflow-hidden">
             {/* Background Image */}
-            <Image src="/reference/whoarewebg.png" alt="Cosmic background" fill className="object-cover" priority />
+            <Image src="/reference/Gradient1.png" alt="Cosmic background" fill className="object-cover" priority />
 
             {/* Content Container */}
             <div className="relative z-10 flex flex-col lg:flex-row min-h-screen w-full items-center justify-between p-4 sm:p-8 lg:p-12">
@@ -32,10 +32,10 @@ export default function WhoAreWe() {
                     </div>
                 </div>
 
-                {/* Right Column - Text Content */}
+  
                 {/* Right Column - Text Content */}
                 <div className="w-full lg:w-2/3 max-w-3xl h-[calc(100vh-2rem)] lg:h-[calc(100vh-6rem)]">
-                    <div className="rounded-3xl bg-black/70 p-4 sm:p-6 lg:p-8 backdrop-blur-sm h-full overflow-hidden">
+                    <div className="rounded-3xl bg-black/30 p-4 sm:p-6 lg:p-8 backdrop-blur-sm h-full overflow-hidden">
                         <div className="prose prose-invert max-w-none h-full overflow-y-auto scrollbar-thin text-white scrollbar-thumb-gray-400 scrollbar-track-gray-900">
                             <h1 className="text-3xl font-bold mb-4 text-center">What is The Nights Season 1?</h1>
 

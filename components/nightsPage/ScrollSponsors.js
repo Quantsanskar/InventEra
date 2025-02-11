@@ -76,7 +76,9 @@ const DynamicMarqueeSponsComm = () => {
                     <div id="move" style={styles.move}>
                         {Array.from({ length: 10 }).map((_, index) => (
                             <div key={index} className="marquee" style={styles.marquee}>
-                                <h1 className="text-3xl font-bold" style={styles.heading}>OUR SPONSORS & COMMUNITIES</h1>
+                                <h1 className="text-3xl font-bold" style={styles.heading}>
+                                    OUR SPONSORS & COMMUNITIES
+                                </h1>
                                 <img
                                     src="/reference/arrow.png"
                                     alt="Arrow"
@@ -93,8 +95,12 @@ const DynamicMarqueeSponsComm = () => {
 };
 
 const styles = {
+  
     move: {
-        backgroundColor: "#000000",
+        backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/reference/Gradient1.png')", // Replace with your image URL
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
         display: "flex",
         color: "#FFFFFF",
         padding: "3vw 0",
@@ -112,8 +118,8 @@ const styles = {
     },
     heading: {
         fontFamily: "'Product Sans', sans-serif",
-        fontWeight: "bold"
-    }
+        fontWeight: "bold",
+    },
 };
 
 export default dynamic(() => Promise.resolve(DynamicMarqueeSponsComm), { ssr: false });

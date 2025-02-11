@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react"
 
-
 const RotatingCarousel = ({ items }) => {
   const [activeIndex, setActiveIndex] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
@@ -19,7 +18,6 @@ const RotatingCarousel = ({ items }) => {
   const handleButtonClick = (index) => {
     setActiveIndex(index)
   }
-  
 
   // Background images for each house
   const bgImages = [
@@ -81,7 +79,6 @@ const RotatingCarousel = ({ items }) => {
           ))}
         </div>
       </div>
-
       {/* Rotating Carousel */}
       <div
         className={`${isMobile ? "w-full h-full mr-[3rem]" : "fixed right-8 bottom-4 lg:bottom-0 h-full md:w-[30vw] md:h-[8vw] lg:w-[43vw] xl:w-[48vw] 2xl:w-[52vw]  3xl:w-[56vw]"}`}
@@ -109,20 +106,16 @@ const RotatingCarousel = ({ items }) => {
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     boxShadow: isActive
-                      ? "0 25px 50px -12px rgba(0,0,0,0.7), inset 0 0 100px rgba(0,0,0,0.5)"
+                      ? "0 25px 50px -12px rgba(0,0,0,0.7), inset 0 0 100px rgba(0,0,0,0.5), 0 0 30px 5px rgba(255,255,255,0.3)"
                       : "0 10px 30px -12px rgba(0,0,0,0.6)",
                     transform: `scale(${isActive ? 1 : 0.6})`,
+                    // border: isActive ? "4px solid rgba(255,255,255,0.8)" : "none",
                   }}
                 >
-                  {/* Dark overlay with radial gradient */}
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background: "radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%)",
-                    }}
-                  />
+                 
 
-                
+              
+
                   {/* Central content */}
                   <div className="relative z-10 flex flex-col items-center">
                     <h2
@@ -224,6 +217,16 @@ export default function WelcomePage() {
           <RotatingCarousel items={carouselItems} />
         </div>
       </div>
+      <style jsx>{`
+        @keyframes glowing {
+          0% {
+            background-position: -200% 0;
+          }
+          100% {
+            background-position: 200% 0;
+          }
+        }
+      `}</style>
     </main>
   )
 }

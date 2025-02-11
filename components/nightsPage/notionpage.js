@@ -104,7 +104,7 @@ const ContentCards = ({ className, pages, hovering }) => {
             rel="noopener noreferrer"
             className="block w-full h-full"
           >
-            <div className="w-full h-full overflow-hidden relative rounded-2xl p-8 text-white bg-gradient-to-br from-gray-900 to-gray-800 group transition-all duration-300">
+            <div className="w-full h-full overflow-hidden relative rounded-2xl p-8 text-white bg-[#0C0C0C] shadow-[-4px_-4px_30px_0px_rgba(162,210,255,0.15),4px_4px_30px_0px_rgba(162,210,255,0.15)] group transition-all duration-300">
               <div className="relative z-10">
                 <h3 className="text-2xl font-bold mb-4">{page.title}</h3>
                 <p className="text-gray-300 text-lg">{page.description}</p>
@@ -116,7 +116,7 @@ const ContentCards = ({ className, pages, hovering }) => {
                     className="mt-6 inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors"
                   >
                     <span>Know More</span>
-                    <ExternalLink size={20} />
+                    <ExternalLink size={32} />
                   </motion.div>
                 )}
               </div>
@@ -127,3 +127,5 @@ const ContentCards = ({ className, pages, hovering }) => {
     </div>
   );
 };
+
+export default PageShowcase;
