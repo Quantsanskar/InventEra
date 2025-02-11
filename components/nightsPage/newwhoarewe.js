@@ -26,7 +26,7 @@ export default function WhoAreWe() {
                             alt="Question mark"
                             height={180}
                             width={180}
-                            className="h-[200px] md:h-[260px] lg:h-[260px] w-[200px] md:w-[260px] lg:w-[260px] object-contain absolute -right-24 top-[44%] md:-right-40 md:top-[35%] lg:-right-40 lg:top-[35%] transform rotate-[3deg]"
+                            className="h-[175px] md:h-[235px] lg:h-[235px] w-[175px] md:w-[235px] lg:w-[235px] object-contain absolute -right-20 top-[54%] md:-right-36 md:top-[45%] lg:-right-36 lg:top-[45%] transform rotate-[3deg]"
                             priority
                         />
                     </div>
