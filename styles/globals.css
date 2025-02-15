@@ -172,3 +172,28 @@ body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
+
+
+@keyframes animate {
+  0%, 100% {
+      background-position: left top;
+  }
+  25% {
+      background-position: right bottom;
+  }
+  50% {
+      background-position: left bottom;
+  }
+  75% {
+      background-position: right top;
+  }
+}
+
+.animated-text {
+  color: rgba(225,225,225, 0.01);
+  background-image: url("/signup/1.jpg");
+  background-repeat: repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: animate 15s ease-in-out infinite;
+}
