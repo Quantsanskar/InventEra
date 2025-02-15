@@ -5,7 +5,7 @@ const SignUpPage = () => {
             {/* Background Image */}
             <div className="absolute inset-0 bg-[url('/images/signupgradient.png')] bg-center opacity-60"></div>
             <div className="relative z-10">
-                <h1 className="text-[128px] font-black text-center mb-8 animated-text uppercase">
+                <h1 className="text-[104px] font-black text-center mb-4 animated-text uppercase">
                     SIGN UP
                 </h1>
 
@@ -55,7 +55,12 @@ const SignUpPage = () => {
                         <div className="flex justify-center mt-6">
                             <button
                                 type="submit"
-                                className="w-full max-w-[40%] bg-black/25 border-2 border-[#03045E] rounded-[53px] px-6 py-2 text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#3A0CA3]/50"
+                                className="w-full max-w-[40%] bg-black/25 border-2 border-[#03045E] rounded-[53px] px-6 py-2 text-gray-300 
+                focus:outline-none focus:ring-2 focus:ring-[#3A0CA3]/50
+                hover:border-[#3A0CA3] hover:shadow-[0_0_15px_rgba(58,12,163,0.5)] 
+                hover:scale-105 hover:text-white
+                transition-all duration-300 ease-in-out
+                hover:bg-gradient-to-r hover:from-[#03045E]/30 hover:to-[#3A0CA3]/30"
                             >
                                 SIGN UP
                             </button>
