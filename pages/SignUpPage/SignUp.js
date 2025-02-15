@@ -5,8 +5,8 @@ const SignUpPage = () => {
             {/* Background Image */}
             <div className="absolute inset-0 bg-[url('/images/signupgradient.png')] bg-center opacity-60"></div>
             <div className="relative z-10">
-                <h1 className="text-[104px] font-black text-center mb-4 animated-text uppercase">
-                    SIGN UP
+                <h1 className="text-[104px] font-black text-center mb-4 animated-text uppercase stroke-text tracking-wide">
+                    Sign Up
                 </h1>
 
                 <div className="bg-black border border-[#495057] rounded-[24px] p-8 py-20 px-16 w-full max-w-xl backdrop-blur-sm shadow-[0_0_20px_rgba(162,210,255,0.10)]">
