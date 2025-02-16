@@ -42,6 +42,7 @@ module.exports = {
         manrope: ["var(--font-manrope)", "sans-serif"],
         caveat: ["Caveat", "cursive"],
         sans: ["Plus Jakarta Sans", "sans-serif"],
+        inconsolata: ["Inconsolata", "monospace"],
       },
 
       animation: {

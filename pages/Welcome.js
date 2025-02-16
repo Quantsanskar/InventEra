@@ -1,181 +1,169 @@
-import React from 'react';
-import Head from 'next/head';
-import { motion } from 'framer-motion';
-import { Sparkles } from 'lucide-react';
-// import {styles} from '../styles/welcome.module.css';
-const Welcome = () => {
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
-    }
+import { React, useState, useRef, useEffect } from 'react';
+import { Play, Pause } from 'lucide-react';
+import Navigation from '@/components/homepage/Navigation';
+import { Footer } from '@/components/footer';
+import Image from 'next/image';
+const WelcomePage = () => {
+  const userData = {
+    name: "John Builder",
+    houseName: "Builder's Space",
+    projectDescription: "Creating interactive digital experiences",
+    videoUrl: "https://youtube.com/embed/example",
+    socialHandles: [
+      { platform: "Twitter", handle: "@johnbuilder" },
+      { platform: "GitHub", handle: "johnbuilder" },
+      { platform: "Instagram", handle: "@johnbuilds" },
+      { platform: "LinkedIn", handle: "john-builder" }
+    ]
+  };
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState('0:00');
+  const [duration, setDuration] = useState('1:24');
+  const [progress, setProgress] = useState(0);
+
+  const audioRef = useRef(null);
+  const progressRef = useRef(null);
+
+  // Format time in MM:SS
+  const formatTime = (time) => {
+    if (isNaN(time)) return '0:00';
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
 
-  const headerVariants = {
-    hidden: { opacity: 0, y: -20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: "easeOut" }
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.loop = true;
     }
-  };
 
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
+    // Set initial duration once audio is loaded
+    const handleLoadedMetadata = () => {
+      setDuration(formatTime(audioRef.current.duration));
+    };
+
+    // Update time and progress during playback
+    const handleTimeUpdate = () => {
+      setCurrentTime(formatTime(audioRef.current.currentTime));
+      const progressPercent = (audioRef.current.currentTime / audioRef.current.duration) * 100;
+      setProgress(progressPercent);
+    };
+
+    // Add event listeners
+    audioRef.current.addEventListener('loadedmetadata', handleLoadedMetadata);
+    audioRef.current.addEventListener('timeupdate', handleTimeUpdate);
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.removeEventListener('loadedmetadata', handleLoadedMetadata);
+        audioRef.current.removeEventListener('timeupdate', handleTimeUpdate);
       }
+    };
+  }, []);
+
+  const handlePlayPause = () => {
+    if (isPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play();
     }
+    setIsPlaying(!isPlaying);
   };
 
+  const handleProgressClick = (e) => {
+    const progressBar = progressRef.current;
+    const rect = progressBar.getBoundingClientRect();
+    const clickPosition = (e.clientX - rect.left) / rect.width;
+    const newTime = clickPosition * audioRef.current.duration;
+
+    audioRef.current.currentTime = newTime;
+    setProgress(clickPosition * 100);
+  };
   return (
-    <div className="min-h-screen bg-black text-white font-sans">
-      <Head>
-        <title>Welcome to S1</title>
-        <style>{`
-          @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-          
-          body {
-            background: black;
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-          }
 
-          .hero-text {
-            color: #ffffff;
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            line-height: 1.2;
-            font-weight: 600;
-            text-align: center;
-            letter-spacing: -0.04em;
-          }
-
-          .subtext {
-            color: #8E8E8E;
-            font-size: 1.25rem;
-            line-height:1.5rem;
-            text-align: center;
-            font-weight: 400;
-          }
-
-          .info-text {
-            color: #8E8E8E;
-            font-size: 1.5rem;
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1;
-          }
-
-          .welcome-container {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-          }
-
-          .logo-text {
-            background: linear-gradient(to right, #fff, #999);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 700;
-          }
-
-          .header {
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-          }
-        `}</style>
-      </Head>
-
-      {/* Header */}
-      <motion.header
-        className="header fixed top-0 w-full z-50 bg-black/50"
-        variants={headerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <motion.div
-            className="flex items-center gap-2"
-            
-          >
-            <Sparkles className="w-6 h-6 text-white/80" />
-            <span className="logo-text text-xl">builders' space</span>
-          </motion.div>
-
+    <div className="min-h-screen bg-black text-gray-300 p-8 font-mono relative">
+      <div className="absolute inset-0 bg-[url('/reference/Gradient1.png')] bg-center opacity-60"></div>
+      <div className="relative z-10">
+        <div className='lg:mb-24'>
+          <Navigation />
         </div>
-      </motion.header>
 
-      {/* Main Content */}
-      <div className="pt-24">
-        <motion.div
-          className="welcome-container"
-          variants={staggerContainer}
-          initial="hidden"
-          animate="visible"
-        >
-          <motion.div className="space-y-0.2" variants={fadeInUp}>
-            <motion.h1
-              className="hero-text"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              you made it.
-            </motion.h1>
-            <motion.h1
-              className="hero-text"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              welcome to s1.
-            </motion.h1>
-          </motion.div>
 
-          <motion.div
-            className="space-y-1 mt-0"
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-          >
-            <motion.p className="subtext" variants={fadeInUp}>hi :)</motion.p>
-            <motion.p className="subtext" variants={fadeInUp}>
-              welcome to The Nights season 1.
-            </motion.p>
-            <motion.p className="subtext" variants={fadeInUp}>
-              we're excited as hell to have you.
-            </motion.p>
-          </motion.div>
+        {/* Main content container */}
+        <div className="max-w-2xl mx-auto space-y-6">
+          {/* Header text */}
+          <div className="space-y-1 text-center text-[25px] font-inconsolata mb-4">
+            <p className='text-[34px] font-bold'>Oh, you made it? Damn right, you did </p>
+            <p className='text-[34px] font-bold text-center'>^_^ </p>
+            <p className='text-[28px] font-bold'>Welcome to <span className='text-[32px] underline'><strong>"The Nights"</strong></span> (Season 1).</p>
+            <p className='text-center text-[40px]'>:)</p>
+            <p>This page? It's got everything you need to know.</p>
+            <p>Yeah, it's a lot, but we trust you can handle it.</p>
+            <p>To make it less of a drag, here's a song. Hit</p>
+            <p>play, tune in, and let's get to it.</p>
+          </div>
+          <div className="w-full max-w-3xl bg-black rounded-lg overflow-hidden">
+            <audio
+              ref={audioRef}
+              src="/Welcome/lazy-day-stylish-futuristic-chill-239287.mp3"  // Replace with your audio file path
+              preload="metadata"
+            />
 
-          <motion.div
-            className="space-y-2 mt-4"
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-          >
-            <motion.p className="info-text" variants={fadeInUp}>
-              this page is full of everything you need to know.
-            </motion.p>
-            <motion.p className="info-text" variants={fadeInUp}>
-              it's a lot of information and it might be kinda boring...
-            </motion.p>
-            <motion.p className="info-text" variants={fadeInUp}>
-              so, here's a song to listen to as you read through the pack:
-            </motion.p>
-          </motion.div>
-        </motion.div>
+            <div className="p-2 flex items-center gap-4">
+              <button
+                onClick={handlePlayPause}
+                className="text-white hover:text-gray-300 transition-colors"
+              >
+                {isPlaying ? (
+                  <Pause size={20} />
+                ) : (
+                  <Play size={20} />
+                )}
+              </button>
+
+              <span className="text-gray-400 text-sm min-w-[80px]">
+                {currentTime}/{duration}
+              </span>
+
+              <div
+                ref={progressRef}
+                className="flex-1 h-1 bg-gray-800 rounded-full overflow-hidden cursor-pointer"
+                onClick={handleProgressClick}
+              >
+                <div
+                  className="h-full bg-white hover:bg-gray-300 transition-colors"
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
+            </div>
+          </div>
+          {/* Black box with message */}
+
+          <div className="relative w-full max-w-xl h-[400px] lg:h-[800px] mx-auto"> {/* Adjust height as needed */}
+            <Image
+              src="/signup/Group 118.png" // Add your image path here
+              alt="Welcome Letter"
+              fill
+              className="object-contain rounded-md"
+              priority
+            />
+
+          </div>
+
+
+          {/* Upload box */}
+          {/* <div className="border border-gray-700 rounded-lg p-4 mt-8 text-center text-gray-500">
+          Upload your video here
+        </div> */}
+        </div>
+
+        <div>
+          <Footer />
+        </div>
+
       </div>
     </div>
   );
 };
 
-export default Welcome;
+export default WelcomePage;

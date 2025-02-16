@@ -45,13 +45,6 @@ const SignUpPage = () => {
 
                         />
 
-                        <input
-                            type="password"
-                            placeholder="CONFIRM PASSWORD"
-                            className="w-full bg-black/25 border-2 border-[#3A0CA3] rounded-[53px] px-6 py-2 text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#3A0CA3]/50"
-
-                        />
-
                         <div className="flex justify-center mt-6">
                             <button
                                 type="submit"
