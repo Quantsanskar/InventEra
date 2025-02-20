@@ -15,7 +15,8 @@ import DynamicMarqueeSponsComm from "@/components/nightsPage/ScrollSponsors";
 import CTA from "../components/homepage/ctanights";
 import WhoAreWe from "@/components/nightsPage/newwhoarewe";
 import WelcomePage from "@/components/nightsPage/Welc-Hogw";
-
+import { TimeLine } from "@/components/homepage/TimeLine";
+import AnimatedCoolText from "@/components/ui/NightsAnimatedText";
 const EventPage = () => {
   const pages = [
     {
@@ -73,7 +74,7 @@ const EventPage = () => {
       </div>
     );
   };
-  
+
   const cards = [
     {
       id: 1,
@@ -179,6 +180,13 @@ const EventPage = () => {
       </BackgroundImage>
       <div><CTA /></div>
       <div><WelcomePage /></div>
+      <BackgroundImage imagePath="/reference/Gradient1.png" className="min-h-screen py-40">
+      
+          <AnimatedCoolText />
+
+      </BackgroundImage>
+
+      <div><TimeLine /></div>
       <div className="bg-background w-full">
         <LayoutGrid
           cards={cards}

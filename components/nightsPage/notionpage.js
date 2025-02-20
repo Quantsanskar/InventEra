@@ -108,15 +108,17 @@ const ContentCards = ({ className, pages, hovering }) => {
               <div className="relative z-10">
                 <h3 className="text-2xl font-bold mb-4">{page.title}</h3>
                 <p className="text-gray-300 text-lg">{page.description}</p>
-                
+
                 {hoveringCard === page.value && (
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="mt-6 inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors"
+                    className="mt-6 flex items-center justify-center w-full text-blue-400 hover:text-blue-300 transition-colors"
                   >
-                    <span>Know More</span>
-                    <ExternalLink size={32} />
+                    <div className="inline-flex items-center gap-2">
+                      <span>Know More</span>
+                      <ExternalLink size={40} />
+                    </div>
                   </motion.div>
                 )}
               </div>
