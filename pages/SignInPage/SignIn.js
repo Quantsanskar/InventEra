@@ -27,7 +27,7 @@ const SignInPage = () => {
         setError('');
 
         try {
-            const usersResponse = await fetch('/api/users');
+            const usersResponse = await fetch('http://127.0.0.1:8000/login/');
             const users = await usersResponse.json();
 
             const user = users.find(u => u.email === email && u.password === password);
