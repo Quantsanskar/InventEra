@@ -28,24 +28,24 @@ const SocialLinksEditor = () => {
 
     return (
         <div className="relative group">
-            <div className="flex items-center justify-center gap-6 bg-zinc-900/50 mb-16 backdrop-blur-sm px-8 py-4 rounded-full">
+            <div className="flex items-center justify-center gap-28 bg-zinc-900/50 mb-16 backdrop-blur-sm px-8 py-4 rounded-full">
                 <a href={socialLinks.instagram} target="_blank" className="hover:text-pink-500 transition-colors">
-                    <Instagram className="w-8 h-8" />
+                    <Instagram className="w-12 h-12" />
                 </a>
                 <a href={socialLinks.github} target="_blank" className="hover:text-purple-500 transition-colors">
-                    <Github className="w-8 h-8" />
+                    <Github className="w-12 h-12" />
                 </a>
                 <a href={socialLinks.twitter} target="_blank" className="hover:text-blue-400 transition-colors">
-                    <Twitter className="w-8 h-8" />
+                    <Twitter className="w-12 h-12" />
                 </a>
                 <a href={socialLinks.linkedin} target="_blank" className="hover:text-blue-600 transition-colors">
-                    <Linkedin className="w-8 h-8" />
+                    <Linkedin className="w-12 h-12" />
                 </a>
             </div>
 
             {/* Edit Button */}
             <button
-                className="absolute -top-2 -left-2 w-8 h-8 bg-zinc-800 border border-zinc-700 rounded-full flex items-center justify-center shadow-lg transform transition-transform duration-200 hover:scale-110"
+                className="absolute -top-2 -left-2 w-12 h-12 bg-zinc-800 border border-zinc-700 rounded-full flex items-center justify-center shadow-lg transform transition-transform duration-200 hover:scale-110"
                 aria-label="Edit social links"
                 onClick={() => setIsModalOpen(true)}
             >

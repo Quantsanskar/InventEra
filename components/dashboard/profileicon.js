@@ -1,57 +1,119 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import Image from "next/image"
-import { motion, AnimatePresence } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { X } from "lucide-react"
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { X, User, Home, Users, LogOut, Settings, Bell } from "lucide-react";
+import UserProfileModal from "./userprofilemodal";
 
-const ProfileIcon = () => {
-    const [showProfile, setShowProfile] = useState(false)
+const ProfileIcon = ({ customPosition, customSize, customData }) => {
+    const [showProfile, setShowProfile] = useState(false);
+    const [showProfileModal, setShowProfileModal] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
     const [profileData, setProfileData] = useState({
         email: "user@example.com",
         displayName: "John Doe",
         house: "Phoenix House",
         group: "Creators Guild",
         profileImage: "/placeholder.svg?height=96&width=96",
-    })
+        notifications: 3,
+        ...customData
+    });
+
+    // Default positioning class that can be overridden with customPosition prop
+    const positionClass = customPosition || "absolute right-2 lg:right-6 bottom-[-20%] lg:bottom-[-25%] z-30";
+    
+    // Default size classes that can be overridden with customSize prop
+    const sizeClasses = customSize || {
+        button: "w-20 h-20 md:w-16 md:h-16 lg:w-24 lg:h-24",
+        image: { width: 96, height: 96 }
+    };
 
     useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const response = await fetch("/api/user-profile")
-                if (!response.ok) {
-                    throw new Error("Failed to fetch user data")
+        // Only fetch if custom data isn't provided
+        if (!customData) {
+            const fetchUserData = async () => {
+                try {
+                    const response = await fetch("/api/user-profile");
+                    if (!response.ok) {
+                        throw new Error("Failed to fetch user data");
+                    }
+                    const data = await response.json();
+                    setProfileData(data);
+                } catch (error) {
+                    console.error("Error fetching user data:", error);
                 }
-                const data = await response.json()
-                setProfileData(data)
-            } catch (error) {
-                console.error("Error fetching user data:", error)
-            }
+            };
+            
+            fetchUserData();
         }
+    }, [customData]);
 
-        fetchUserData()
-    }, [])
+    const handleViewProfile = () => {
+        setShowProfileModal(true);
+        setShowProfile(false);
+    };
+
+    const handleCloseDropdown = (e) => {
+        if (showProfile) {
+            setShowProfile(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener("click", handleCloseDropdown);
+        return () => {
+            document.removeEventListener("click", handleCloseDropdown);
+        };
+    }, [showProfile]);
+
+    const stopPropagation = (e) => {
+        e.stopPropagation();
+    };
 
     return (
-        <div className="absolute right-2 lg:right-6 bottom-[-20%] lg:bottom-[-25%]">
-            <div className="relative">
-                <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    // onHoverStart={() => setShowProfile(true)}
-                    // onHoverEnd={() => setShowProfile(false)}
-                    onClick={() => setShowProfile(!showProfile)}
-                    className="w-20 h-20 md:w-16 md:h-16 lg:w-24 lg:h-24 rounded-full overflow-hidden border-2 border-white hover:border-primary transition-all duration-300"
-                >
-                    <Image
-                        src={profileData.profileImage || "/placeholder.svg"}
-                        alt="Profile"
-                        width={96}
-                        height={96}
-                        className="object-cover flex items-center justify-center w-full h-full"
+        <div className={positionClass}>
+            <div className="relative" onClick={stopPropagation}>
+                {/* Avatar with animated ring */}
+                <div className="relative">
+                    <motion.div
+                        className="absolute -inset-1 rounded-full bg-gradient-to-r from-purple-600 via-blue-500 to-indigo-400 opacity-75 blur-sm"
+                        animate={{ 
+                            rotate: isHovered ? 90 : 0,
+                            scale: isHovered ? 1.05 : 1
+                        }}
+                        transition={{ duration: 1, ease: "easeInOut" }}
                     />
-                </motion.button>
+                    <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => setShowProfile(!showProfile)}
+                        onMouseEnter={() => setIsHovered(true)}
+                        onMouseLeave={() => setIsHovered(false)}
+                        className={`relative ${sizeClasses.button} rounded-full overflow-hidden border-4 border-zinc-900 transition-all duration-300 shadow-xl`}
+                    >
+                        <Image
+                            src={profileData.profileImage || "/placeholder.svg"}
+                            alt="Profile"
+                            width={sizeClasses.image.width}
+                            height={sizeClasses.image.height}
+                            className="object-cover flex items-center justify-center w-full h-full"
+                        />
+                        
+                        {/* Notification badge */}
+                        {profileData.notifications > 0 && (
+                            <motion.div 
+                                className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shadow-lg border-2 border-zinc-900"
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                transition={{ type: "spring", stiffness: 500, damping: 20 }}
+                            >
+                                {profileData.notifications}
+                            </motion.div>
+                        )}
+                    </motion.button>
+                </div>
 
                 <AnimatePresence>
                     {showProfile && (
@@ -60,127 +122,143 @@ const ProfileIcon = () => {
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: 10, scale: 0.95 }}
                             transition={{ duration: 0.2 }}
-                            className="absolute right-0 mt-2 w-72 bg-zinc-900/95 backdrop-blur-sm rounded-xl border border-zinc-800 shadow-2xl"
+                            className="absolute right-0 mt-4 w-80 bg-gradient-to-b from-zinc-900 to-zinc-950 backdrop-blur-md rounded-xl border border-zinc-800/50 shadow-2xl overflow-hidden"
                             role="dialog"
                             aria-modal="true"
                         >
-                            <div className="p-5 space-y-4">
+                            <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:20px_20px] pointer-events-none" />
+                            <div className="absolute inset-0 bg-gradient-to-b from-blue-500/20 via-transparent to-purple-500/20 opacity-20 pointer-events-none" />
+                            
+                            {/* Header with glowing border */}
+                            <div className="relative p-5">
+                                <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-500/30 to-transparent" />
+                                
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center gap-3">
-                                        <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-zinc-700 ring-2 ring-zinc-500/20">
+                                        <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-zinc-700 ring-2 ring-zinc-500/20 shadow-xl">
                                             <Image
                                                 src={profileData.profileImage || "/placeholder.svg"}
                                                 alt={`${profileData.displayName}'s profile`}
-                                                layout="fill"
-                                                objectFit="cover"
-                                                priority
-                                                className="object-center"
+                                                fill
+                                                className="object-cover object-center"
                                             />
+                                            <div className="absolute inset-0 ring-1 ring-inset ring-white/10" />
                                         </div>
                                         <div className="flex-1 min-w-0">
                                             <h3 className="font-semibold text-lg text-white truncate">{profileData.displayName}</h3>
                                             <p className="text-sm text-zinc-400 truncate">{profileData.email}</p>
+                                            <div className="mt-1 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-900/30 text-blue-200 border border-blue-800/50">
+                                                Premium Member
+                                            </div>
                                         </div>
                                     </div>
                                     <Button
                                         variant="ghost"
                                         size="icon"
-                                        className="text-zinc-400 hover:text-white"
+                                        className="text-zinc-400 hover:text-white bg-zinc-800/50 hover:bg-zinc-700/50 rounded-full h-8 w-8"
                                         onClick={() => setShowProfile(false)}
                                     >
                                         <X className="h-4 w-4" />
                                     </Button>
                                 </div>
+                            </div>
 
-                                <div className="h-px bg-gradient-to-r from-zinc-800/50 via-zinc-600/50 to-zinc-800/50"></div>
-
-                                <div className="grid grid-cols-2 gap-2 text-sm px-1">
-                                    <div className="flex items-center gap-2">
-                                        <div className="w-8 h-8 rounded-md bg-zinc-800/80 flex items-center justify-center">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 24 24"
-                                                fill="currentColor"
-                                                className="w-4 h-4 text-zinc-400"
-                                            >
-                                                <path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z" />
-                                                <path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75v4.5a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198c.031-.028.061-.056.091-.086L12 5.432z" />
-                                            </svg>
+                            <div className="p-3 space-y-1">
+                                {/* User Info Cards */}
+                                <div className="grid grid-cols-2 gap-2 p-2">
+                                    <motion.div 
+                                        whileHover={{ scale: 1.03 }}
+                                        className="flex items-center gap-2 p-2 rounded-lg bg-gradient-to-br from-zinc-800/80 to-zinc-900/80 hover:from-blue-900/20 hover:to-blue-800/10 border border-zinc-700/50 transition-all duration-200 cursor-pointer"
+                                    >
+                                        <div className="w-8 h-8 rounded-md bg-blue-900/30 flex items-center justify-center">
+                                            <Home className="h-4 w-4 text-blue-400" />
                                         </div>
-                                        <span className="text-zinc-300">{profileData.house}</span>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <div className="w-8 h-8 rounded-md bg-zinc-800/80 flex items-center justify-center">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 24 24"
-                                                fill="currentColor"
-                                                className="w-4 h-4 text-zinc-400"
-                                            >
-                                                <path
-                                                    fillRule="evenodd"
-                                                    d="M8.25 6.75a3.75 3.75 0 117.5 0 3.75 3.75 0 01-7.5 0zM15.75 9.75a3 3 0 116 0 3 3 0 01-6 0zM2.25 9.75a3 3 0 116 0 3 3 0 01-6 0zM6.31 15.117A6.745 6.745 0 0112 12a6.745 6.745 0 016.709 7.498.75.75 0 01-.372.568A12.696 12.696 0 0112 21.75c-2.305 0-4.47-.612-6.337-1.684a.75.75 0 01-.372-.568 6.787 6.787 0 011.019-4.38z"
-                                                    clipRule="evenodd"
-                                                />
-                                                <path d="M5.082 14.254a8.287 8.287 0 00-1.308 5.135 9.687 9.687 0 01-1.764-.44l-.115-.04a.563.563 0 01-.373-.487l-.01-.121a3.75 3.75 0 013.57-4.047zM20.226 19.389a8.287 8.287 0 00-1.308-5.135 3.75 3.75 0 013.57 4.047l-.01.121a.563.563 0 01-.373.486l-.115.04c-.567.2-1.156.349-1.764.441z" />
-                                            </svg>
+                                        <span className="text-zinc-300 text-sm">{profileData.house}</span>
+                                    </motion.div>
+                                    
+                                    <motion.div 
+                                        whileHover={{ scale: 1.03 }}
+                                        className="flex items-center gap-2 p-2 rounded-lg bg-gradient-to-br from-zinc-800/80 to-zinc-900/80 hover:from-purple-900/20 hover:to-purple-800/10 border border-zinc-700/50 transition-all duration-200 cursor-pointer"
+                                    >
+                                        <div className="w-8 h-8 rounded-md bg-purple-900/30 flex items-center justify-center">
+                                            <Users className="h-4 w-4 text-purple-400" />
                                         </div>
-                                        <span className="text-zinc-300">{profileData.group}</span>
-                                    </div>
+                                        <span className="text-zinc-300 text-sm">{profileData.group}</span>
+                                    </motion.div>
                                 </div>
 
-                                <div className="pt-2 space-y-2">
-                                    <Button
-                                        variant="outline"
-                                        className="w-full bg-zinc-800/50 hover:bg-zinc-700/50 text-zinc-300 hover:text-white border-zinc-700 transition-colors"
-                                        onClick={() => console.log("View profile clicked")}
-                                    >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="h-4 w-4 mr-2"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
+                                {/* Action Buttons - More prominent with animations */}
+                                <div className="px-2 pt-2 space-y-2">
+                                    <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                                        <Button
+                                            variant="outline"
+                                            className="w-full bg-gradient-to-r from-zinc-800/80 to-zinc-900/80 hover:from-blue-900/30 hover:to-purple-900/30 text-zinc-300 hover:text-white border-zinc-700/50 hover:border-zinc-600 transition-all duration-300 h-10"
+                                            onClick={handleViewProfile}
                                         >
-                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                            <circle cx="12" cy="7" r="4"></circle>
-                                        </svg>
-                                        View Profile
-                                    </Button>
+                                            <User className="h-4 w-4 mr-2" />
+                                            View Profile
+                                        </Button>
+                                    </motion.div>
+                                    
+                                    <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                                        <Button
+                                            variant="outline"
+                                            className="w-full bg-gradient-to-r from-zinc-800/80 to-zinc-900/80 hover:from-indigo-900/30 hover:to-blue-900/30 text-zinc-300 hover:text-white border-zinc-700/50 hover:border-zinc-600 transition-all duration-300 h-10"
+                                        >
+                                            <Settings className="h-4 w-4 mr-2" />
+                                            Settings
+                                        </Button>
+                                    </motion.div>
+                                    
+                                    <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                                        <Button
+                                            variant="outline"
+                                            className="w-full bg-gradient-to-r from-zinc-800/80 to-zinc-900/80 hover:from-amber-900/30 hover:to-orange-900/30 text-zinc-300 hover:text-white border-zinc-700/50 hover:border-zinc-600 transition-all duration-300 h-10"
+                                        >
+                                            <Bell className="h-4 w-4 mr-2" />
+                                            Notifications
+                                            {profileData.notifications > 0 && (
+                                                <span className="ml-2 bg-red-500/80 text-white text-xs rounded-full px-1.5 py-0.5 min-w-[20px]">
+                                                    {profileData.notifications}
+                                                </span>
+                                            )}
+                                        </Button>
+                                    </motion.div>
 
-                                    <Button
-                                        variant="destructive"
-                                        className="w-full bg-red-900/60 hover:bg-red-800/80 text-red-100 transition-colors"
-                                        onClick={() => console.log("Sign out clicked")}
-                                    >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="h-4 w-4 mr-2"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
+                                    <div className="h-px bg-gradient-to-r from-transparent via-zinc-700/50 to-transparent my-1" />
+                                    
+                                    <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                                        <Button
+                                            variant="destructive"
+                                            className="w-full bg-gradient-to-r from-red-900/60 to-red-950/60 hover:from-red-800/80 hover:to-red-900/80 text-red-100 border border-red-800/50 transition-all duration-300 h-10"
+                                            onClick={() => console.log("Sign out clicked")}
                                         >
-                                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                                            <polyline points="16 17 21 12 16 7"></polyline>
-                                            <line x1="21" y1="12" x2="9" y2="12"></line>
-                                        </svg>
-                                        Sign Out
-                                    </Button>
+                                            <LogOut className="h-4 w-4 mr-2" />
+                                            Sign Out
+                                        </Button>
+                                    </motion.div>
+                                </div>
+                            </div>
+                            
+                            {/* Footer with subtle gradient */}
+                            <div className="p-3 mt-1">
+                                <div className="text-center text-xs text-zinc-500 bg-zinc-900/50 rounded-lg p-2 border border-zinc-800/50">
+                                    <span className="text-blue-400 font-medium">Pro Account</span> · Joined Sept 2024
                                 </div>
                             </div>
                         </motion.div>
                     )}
                 </AnimatePresence>
             </div>
+
+            {/* Profile Modal */}
+            <UserProfileModal
+                isOpen={showProfileModal}
+                onClose={() => setShowProfileModal(false)}
+                initialProfileData={profileData}
+            />
         </div>
-    )
-}
+    );
+};
 
-export default ProfileIcon
-
+export default ProfileIcon;
