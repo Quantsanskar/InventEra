@@ -8,7 +8,7 @@ const EditableYoutubeCard = ({ apiEndpoint, cardId }) => {
     const [inputValue, setInputValue] = useState("");
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [isHovered, setIsHovered] = useState(false);
+   
 
     // Function to extract YouTube video ID from various YouTube URL formats
     const extractVideoId = (url) => {
@@ -137,25 +137,11 @@ const EditableYoutubeCard = ({ apiEndpoint, cardId }) => {
 
                 {/* Edit Button */}
                 <button
-                    className="absolute bottom-[-24%] lg:bottom-[-5%] right-[-2%] w-10 h-10 bg-zinc-800/90 border border-zinc-700 rounded-full flex items-center justify-center shadow-lg transform transition-transform duration-200 hover:scale-110 z-50"
+                    className="absolute bottom-[-18%] lg:bottom-[-10%] right-[-2%] w-10 h-10 bg-red-600 rounded-full flex items-center justify-center shadow-lg transform transition-all duration-300  z-20"
                     aria-label="Edit video"
                     onClick={() => setIsEditing(true)}
                 >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="14"
-                        height="14"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="text-zinc-300"
-                    >
-                        <path d="M12 20h9"></path>
-                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                    </svg>
+                    <Edit2 size={16} className="text-white" />
                 </button>
           
 

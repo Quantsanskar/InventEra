@@ -31,7 +31,7 @@ const Dashboard = () => {
 
 
                     {/* // Custom positioning */}
-                    <ProfileIcon customPosition="absolute right-4 bottom-4 z-50" />
+                    <ProfileIcon customPosition="absolute right-[-2%] bottom-[-15%] z-50" />
 
 
 
@@ -79,7 +79,7 @@ const Dashboard = () => {
                 </div>
 
                 {/* Social links with subtle hover animation */}
-                <div className="relative group mb-16 w-full max-w-3xl">
+                <div className="relative group mb-16 w-full max-w-2xl">
                    
                     <SocialLinksEditor />
                 </div>

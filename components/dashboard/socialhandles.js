@@ -28,24 +28,24 @@ const SocialLinksEditor = () => {
 
     return (
         <div className="relative group">
-            <div className="flex items-center justify-center gap-28 bg-zinc-900/50 mb-16 backdrop-blur-sm px-8 py-4 rounded-full">
+            <div className="flex bg-zinc-600 items-center justify-center gap-8 lg:gap-16 bg-zinc-900/50 mb-16 backdrop-blur-sm px-8 py-4 border border-zinc-700 rounded-full">
                 <a href={socialLinks.instagram} target="_blank" className="hover:text-pink-500 transition-colors">
-                    <Instagram className="w-12 h-12" />
+                    <Instagram className="w-9 h-9 lg:w-12 lg:h-12" />
                 </a>
                 <a href={socialLinks.github} target="_blank" className="hover:text-purple-500 transition-colors">
-                    <Github className="w-12 h-12" />
+                    <Github className="w-9 h-9 lg:w-12 lg:h-12" />
                 </a>
                 <a href={socialLinks.twitter} target="_blank" className="hover:text-blue-400 transition-colors">
-                    <Twitter className="w-12 h-12" />
+                    <Twitter className="w-9 h-9 lg:w-12 lg:h-12" />
                 </a>
                 <a href={socialLinks.linkedin} target="_blank" className="hover:text-blue-600 transition-colors">
-                    <Linkedin className="w-12 h-12" />
+                    <Linkedin className="w-9 h-9 lg:w-12 lg:h-12" />
                 </a>
             </div>
 
             {/* Edit Button */}
             <button
-                className="absolute -top-2 -left-2 w-12 h-12 bg-zinc-800 border border-zinc-700 rounded-full flex items-center justify-center shadow-lg transform transition-transform duration-200 hover:scale-110"
+                className="absolute -top-6 -left-2 w-9 h-9 lg:w-12 lg:h-12 bg-zinc-200 border border-zinc-700 rounded-full flex items-center justify-center shadow-lg transform transition-transform duration-200 hover:scale-110"
                 aria-label="Edit social links"
                 onClick={() => setIsModalOpen(true)}
             >
@@ -59,7 +59,7 @@ const SocialLinksEditor = () => {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="text-zinc-300"
+                    className="text-black"
                 >
                     <path d="M12 20h9"></path>
                     <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>

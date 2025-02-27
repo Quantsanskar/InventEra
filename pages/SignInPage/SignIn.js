@@ -130,6 +130,7 @@ const SignInPage = () => {
                     {/* Decorative elements */}
                     <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-blue-500/10 to-purple-600/10 rounded-bl-3xl"></div>
                     <div className="absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-tr from-blue-500/10 to-purple-600/10 rounded-tr-3xl"></div>
+                    <div className="absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-tr from-blue-500/10 to-purple-600/10 rounded-tr-3xl"></div>
                     
                     {/* Progress indicator */}
                     <div className="flex justify-center mb-8">

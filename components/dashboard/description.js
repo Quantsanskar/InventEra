@@ -15,14 +15,17 @@ const EditableDescriptionCard = ({ apiEndpoint, cardId }) => {
         const fetchDescriptionData = async () => {
             setIsLoading(true);
             try {
-                // const response = await axios.get(`${apiEndpoint}/${cardId}/`);
-                const fetchedDescription = 'response.data.descriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptiescriptivvon';
+                const response = await axios.get(`${apiEndpoint}/${cardId}/`);
+                const fetchedDescription = 'response.data.description';
 
                 setDescription(fetchedDescription);
                 setInputValue(fetchedDescription);
             } catch (err) {
-                setError("Failed to load description data");
-                console.error("API fetch error:", err);
+                // setError("Failed to load description data");
+                // console.error("API fetch error:", err);
+                const fetchedDescription="ahwgd,hawgdjweghkdfhwekfhkwdnjehje,jhjewjehukI m sanskar my name is whor are theay wre good not doing dinner theya re doing wromhg quaeery all must same not imparencies some are lurckyhkj.ewhd so some should be available on the sppt and npot in another dimension but can't understand true men feelings";
+                setDescription(fetchedDescription);
+                setInputValue(fetchedDescription);
             } finally {
                 setIsLoading(false);
             }
@@ -49,7 +52,7 @@ const EditableDescriptionCard = ({ apiEndpoint, cardId }) => {
 
     if (isLoading) {
         return (
-            <div className="lg:col-span-5 bg-gradient-to-br from-zinc-900/70 to-black/80 border border-zinc-800 rounded-xl flex items-center justify-center relative h-[315px] shadow-lg transition-all duration-500 backdrop-blur-sm overflow-hidden">
+            <div className="lg:col-span-5 bg-gradient-to-br from-zinc-900/70 to-black/80 border border-zinc-800 rounded-xl flex items-center justify-center relative h-[315px] shadow-lg transition-all duration-500 backdrop-blur-sm">
                 <div className="p-8 text-center space-y-4">
                     <Loader2 size={36} className="text-purple-500 animate-spin mx-auto" />
                     <div className="text-zinc-400 font-medium">Loading description...</div>
@@ -77,17 +80,17 @@ const EditableDescriptionCard = ({ apiEndpoint, cardId }) => {
 
     return (
         <div 
-            className="lg:col-span-5 relative overflow-hidden group h-[315px]"
+            className="lg:col-span-5 relative group h-[315px]"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
             <div className="absolute -inset-2 bg-gradient-to-r from-blue-600/20 via-transparent to-purple-600/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-xl"></div>
             
-            <div className="relative bg-gradient-to-br from-zinc-900/90 to-black border border-zinc-800 rounded-xl overflow-hidden shadow-lg transition-all duration-500 transform group-hover:scale-[1.01] group-hover:border-zinc-700 h-full">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="relative bg-gradient-to-br from-zinc-900/90 to-black border border-zinc-800 rounded-xl shadow-lg transition-all duration-500 transform group-hover:scale-[1.01] group-hover:border-zinc-700 h-full">
+               
                 
                 {/* Label */}
-                <div className="absolute top-3 left-3 z-20 bg-purple-600/90 text-white text-xs px-2 py-1 rounded-md flex items-center space-x-1 shadow-lg transform -translate-y-12 group-hover:translate-y-0 transition-transform duration-500">
+                <div className="absolute top-3 left-3 z-20 bg-purple-600/90 text-white text-xs px-2 py-1 rounded-md flex items-center space-x-1 shadow-lg ">
                     <FileText size={14} />
                     <span>Project Description</span>
                 </div>
@@ -103,12 +106,11 @@ const EditableDescriptionCard = ({ apiEndpoint, cardId }) => {
                     </div>
                 </div>
                 
-                {/* Overlay for hover effect */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+     
                 
                 {/* Edit Button with improved styling */}
                 <button
-                    className={`absolute bottom-4 right-4 w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center shadow-lg transform transition-all duration-300 ${isHovered ? 'scale-100 opacity-100' : 'scale-90 opacity-0'} hover:bg-purple-700 hover:scale-110 z-20`}
+                    className={`absolute bottom-[-5%] right-1 w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center shadow-lg transform transition-all duration-300 z-20`}
                     aria-label="Edit description"
                     onClick={() => setIsEditing(true)}
                 >

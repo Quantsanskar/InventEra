@@ -147,9 +147,7 @@ const ProfileIcon = ({ customPosition, customSize, customData }) => {
                                         <div className="flex-1 min-w-0">
                                             <h3 className="font-semibold text-lg text-white truncate">{profileData.displayName}</h3>
                                             <p className="text-sm text-zinc-400 truncate">{profileData.email}</p>
-                                            <div className="mt-1 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-900/30 text-blue-200 border border-blue-800/50">
-                                                Premium Member
-                                            </div>
+                                           
                                         </div>
                                     </div>
                                     <Button
@@ -200,7 +198,7 @@ const ProfileIcon = ({ customPosition, customSize, customData }) => {
                                         </Button>
                                     </motion.div>
                                     
-                                    <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                                    {/* <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                                         <Button
                                             variant="outline"
                                             className="w-full bg-gradient-to-r from-zinc-800/80 to-zinc-900/80 hover:from-indigo-900/30 hover:to-blue-900/30 text-zinc-300 hover:text-white border-zinc-700/50 hover:border-zinc-600 transition-all duration-300 h-10"
@@ -208,7 +206,7 @@ const ProfileIcon = ({ customPosition, customSize, customData }) => {
                                             <Settings className="h-4 w-4 mr-2" />
                                             Settings
                                         </Button>
-                                    </motion.div>
+                                    </motion.div> */}
                                     
                                     <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                                         <Button
@@ -243,7 +241,7 @@ const ProfileIcon = ({ customPosition, customSize, customData }) => {
                             {/* Footer with subtle gradient */}
                             <div className="p-3 mt-1">
                                 <div className="text-center text-xs text-zinc-500 bg-zinc-900/50 rounded-lg p-2 border border-zinc-800/50">
-                                    <span className="text-blue-400 font-medium">Pro Account</span> · Joined Sept 2024
+                                   · Joined Sept 2024
                                 </div>
                             </div>
                         </motion.div>
