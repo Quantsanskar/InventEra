@@ -13,7 +13,7 @@ const ProfileIcon = ({ customPosition, customSize, customData }) => {
     const [isHovered, setIsHovered] = useState(false);
     const [profileData, setProfileData] = useState({
         email: "user@example.com",
-        displayName: "John Doe",
+        fisrt_name: "John Doe",
         house: "Phoenix House",
         group: "Creators Guild",
         profileImage: "/placeholder.svg?height=96&width=96",
@@ -138,14 +138,14 @@ const ProfileIcon = ({ customPosition, customSize, customData }) => {
                                         <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-zinc-700 ring-2 ring-zinc-500/20 shadow-xl">
                                             <Image
                                                 src={profileData.profileImage || "/placeholder.svg"}
-                                                alt={`${profileData.displayName}'s profile`}
+                                                alt={`${profileData.first_name}'s profile`}
                                                 fill
                                                 className="object-cover object-center"
                                             />
                                             <div className="absolute inset-0 ring-1 ring-inset ring-white/10" />
                                         </div>
                                         <div className="flex-1 min-w-0">
-                                            <h3 className="font-semibold text-lg text-white truncate">{profileData.displayName}</h3>
+                                            <h3 className="font-semibold text-lg text-white truncate">{profileData.first_name}</h3>
                                             <p className="text-sm text-zinc-400 truncate">{profileData.email}</p>
 
                                         </div>

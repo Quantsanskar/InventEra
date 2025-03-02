@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Instagram, Github, Twitter, Linkedin, X, Edit3 } from 'lucide-react';
+import { Instagram, Github, Linkedin, X, Edit3 } from 'lucide-react';
 
 const SocialLinksEditor = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -42,45 +42,53 @@ const SocialLinksEditor = () => {
             href={url} 
             target="_blank" 
             rel="noopener noreferrer"
-            className={`transform transition-all duration-300 hover:scale-110 hover:${color} group`}
+            className={`transform transition-all duration-300 hover:scale-110`}
         >
             <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-full blur-lg opacity-0 group-hover:opacity-70 transition-opacity"></div>
-                {React.cloneElement(icon, { 
-                    className: `w-8 h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 relative z-10 transition-colors duration-300 group-hover:${color}` 
-                })}
+                {icon}
             </div>
         </a>
+    );
+
+    // Custom Twitter SVG component with white color
+    const CustomTwitterIcon = () => (
+        <div className="w-8 h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 relative z-10 transition-colors duration-300 group-hover:text-blue-400 flex items-center justify-center">
+            <img 
+                src="/Welcome/icons8-twitter-60.svg" 
+                alt="Twitter" 
+                className="w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-white filter invert" 
+            />
+        </div>
     );
 
     return (
         <div className="relative mx-auto px-4">
             {/* Social Links Display */}
             <div className="relative group">
-                {/* <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full blur opacity-30 group-hover:opacity-50 transition-opacity"></div> */}
-                <div className="relative flex items-center justify-center gap-6 md:gap-8 lg:gap-12 bg-zinc-900/90 backdrop-blur-lg lg:px-6 py-2 lg:py-4 border border-zinc-700/50 rounded-full shadow-xl">
+                <div className="relative flex items-center justify-center gap-4 md:gap-6 lg:gap-10 bg-zinc-900/90 backdrop-blur-lg lg:px-6 py-2 lg:py-4 border border-zinc-700/50 rounded-full shadow-xl">
                     <SocialIcon 
                         platform="instagram" 
-                        icon={<Instagram />} 
-                        color="text-pink-500" 
+                        icon={<Instagram className="w-7 h-7 md:w-8 md:h-8 lg:w-9 lg:h-9 relative z-10 transition-colors duration-300 text-white" />} 
+                        color="text-white" 
                         url={socialLinks.instagram} 
                     />
                     <SocialIcon 
                         platform="github" 
-                        icon={<Github />} 
-                        color="text-purple-500" 
+                        icon={<Github className="w-7 h-7 md:w-8 md:h-8 lg:w-9 lg:h-9 relative z-10 transition-colors duration-300 text-white" />} 
+                        color="text-white" 
                         url={socialLinks.github} 
                     />
                     <SocialIcon 
                         platform="twitter" 
-                        icon={<Twitter />} 
-                        color="text-blue-400" 
+                        icon={<CustomTwitterIcon />} 
+                        color="text-white" 
                         url={socialLinks.twitter} 
                     />
                     <SocialIcon 
                         platform="linkedin" 
-                        icon={<Linkedin />} 
-                        color="text-blue-600" 
+                        icon={<Linkedin className="w-7 h-7 md:w-8 md:h-8 lg:w-9 lg:h-9 relative z-10 transition-colors duration-300 text-white" />} 
+                        color="text-white" 
                         url={socialLinks.linkedin} 
                     />
                 </div>
@@ -119,10 +127,10 @@ const SocialLinksEditor = () => {
 
                         <form onSubmit={handleSubmit} className="space-y-5">
                             {Object.entries({
-                                instagram: { icon: <Instagram />, color: "ring-pink-500 focus:ring-pink-500", text: "text-pink-500" },
-                                github: { icon: <Github />, color: "ring-purple-500 focus:ring-purple-500", text: "text-purple-500" },
-                                twitter: { icon: <Twitter />, color: "ring-blue-400 focus:ring-blue-400", text: "text-blue-400" },
-                                linkedin: { icon: <Linkedin />, color: "ring-blue-600 focus:ring-blue-600", text: "text-blue-600" }
+                                instagram: { icon: <Instagram />, text: "text-white" },
+                                github: { icon: <Github />, text: "text-white" },
+                                twitter: { icon: <img src="/Welcome/icons8-twitter-60.svg" alt="Twitter" width="20" height="20" className="filter invert" />, text: "text-white" },
+                                linkedin: { icon: <Linkedin />, text: "text-white" }
                             }).map(([platform, { icon, color, text }]) => (
                                 <div key={platform} className="group">
                                     <label className="block text-sm font-medium text-zinc-300 mb-2 capitalize">
@@ -130,7 +138,7 @@ const SocialLinksEditor = () => {
                                     </label>
                                     <div className="flex items-center bg-zinc-800/70 backdrop-blur-sm border border-zinc-700 rounded-lg group-focus-within:border-indigo-500 overflow-hidden transition-all duration-200">
                                         <div className={`flex items-center justify-center w-12 h-12 ${text} bg-zinc-800`}>
-                                            {React.cloneElement(icon, { size: 20 })}
+                                            {icon}
                                         </div>
                                         <input
                                             type="url"

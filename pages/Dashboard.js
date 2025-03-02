@@ -178,7 +178,7 @@ const Dashboard = () => {
         </div>
 
         {/* Social links with subtle hover animation */}
-        <div className="relative group mb-16 w-full max-w-sm lg:max-w-md">
+        <div className="relative group mb-16 w-full max-w-[260px] lg:max-w-sm">
           <SocialLinksEditor />
         </div>
       </div>
