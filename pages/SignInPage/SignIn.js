@@ -25,6 +25,21 @@ const SignInPage = () => {
   const [mobileNo, setMobileNo] = useState("")
   const [regPassword, setRegPassword] = useState("")
 
+  // Add a new state for participant registration
+  const [showParticipantRegistration, setShowParticipantRegistration] = useState(false)
+
+  // Add states for participant registration form
+  const [participantFirstName, setParticipantFirstName] = useState("")
+  const [participantLastName, setParticipantLastName] = useState("")
+  const [participantLoginEmail, setParticipantLoginEmail] = useState("")
+  const [participantMobileNo, setParticipantMobileNo] = useState("")
+  const [participantLoginPassword, setParticipantLoginPassword] = useState("")
+  const [selectedHouse, setSelectedHouse] = useState("")
+  const [projectTitle, setProjectTitle] = useState("")
+  const [projectDescription, setProjectDescription] = useState("")
+  const [projectExperience, setProjectExperience] = useState("")
+  const [projectVideoLink, setProjectVideoLink] = useState("")
+
   // Shared states
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
@@ -150,8 +165,8 @@ const SignInPage = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: participantEmail,
-          password: participantPassword,
+          email: participantLoginEmail,
+          password: participantLoginPassword,
         }),
       })
 
@@ -270,7 +285,7 @@ const SignInPage = () => {
           last_name: lastName,
           email: regEmail,
           mobile_number: mobileNo,
-          password: regPassword,
+          password: regPassword, // Note: The backend might generate a new password
           is_attendee: true,
           is_participant: false,
         }),
@@ -291,6 +306,77 @@ const SignInPage = () => {
           setRegEmail("")
           setMobileNo("")
           setRegPassword("")
+          // Display a message about the password
+          alert("Registration successful! Please check your email for your login credentials.")
+        }, 1000)
+      } else {
+        setError(data.error || "Registration failed. Please try again.")
+      }
+    } catch (err) {
+      setError("An error occurred. Please try again.")
+      console.error(err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  // Add this function after handleAttendeeRegistration
+  // Handle participant registration
+  const handleParticipantRegistration = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+    setError("")
+
+    if (!selectedHouse) {
+      setError("Please select a house")
+      setLoading(false)
+      return
+    }
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/create-user-account/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          first_name: participantFirstName,
+          last_name: participantLastName,
+          email: participantEmail,
+          mobile_number: participantMobileNo,
+          password: participantPassword, // Note: The backend might generate a new password
+          is_attendee: false,
+          is_participant: true,
+          house: selectedHouse,
+          project_idea_title: projectTitle,
+          project_idea_description: projectDescription,
+          project_experience: projectExperience,
+          project_video_link: projectVideoLink,
+        }),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setSuccess(true)
+        setTimeout(() => {
+          setSuccess(false)
+          setShowParticipantRegistration(false)
+          setUserType("participant")
+          setParticipantEmail(participantEmail)
+          // Reset registration form
+          setParticipantFirstName("")
+          setParticipantLastName("")
+          setParticipantEmail("")
+          setParticipantMobileNo("")
+          setParticipantPassword("")
+          setSelectedHouse("")
+          setProjectTitle("")
+          setProjectDescription("")
+          setProjectExperience("")
+          setProjectVideoLink("")
+          // Display a message about the password
+          alert("Registration successful! Please check your email for your login credentials.")
         }, 1000)
       } else {
         setError(data.error || "Registration failed. Please try again.")
@@ -433,8 +519,8 @@ const SignInPage = () => {
                     <input
                       type="email"
                       placeholder="EMAIL"
-                      value={participantEmail}
-                      onChange={(e) => setParticipantEmail(e.target.value)}
+                      value={participantLoginEmail}
+                      onChange={(e) => setParticipantLoginEmail(e.target.value)}
                       className="w-full bg-black/25 border-2 border-[#3A0CA3] rounded-[53px] px-6 py-3 text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#3A0CA3]/50 focus:border-indigo-500 transition-all duration-300"
                       required
                     />
@@ -447,8 +533,8 @@ const SignInPage = () => {
                     <input
                       type="password"
                       placeholder="PASSWORD"
-                      value={participantPassword}
-                      onChange={(e) => setParticipantPassword(e.target.value)}
+                      value={participantLoginPassword}
+                      onChange={(e) => setParticipantLoginPassword(e.target.value)}
                       className="w-full bg-black/25 border-2 border-[#3A0CA3] rounded-[53px] px-6 py-3 text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#3A0CA3]/50 focus:border-indigo-500 transition-all duration-300"
                       required
                     />
@@ -480,7 +566,7 @@ const SignInPage = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.4 }}
-                  className="text-center mt-4"
+                  className="flex flex-col items-center gap-3 mt-4"
                 >
                   <button
                     type="button"
@@ -488,6 +574,13 @@ const SignInPage = () => {
                     className="text-sm text-gray-500 hover:text-gray-300 transition-colors duration-300"
                   >
                     Back to selection
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setShowParticipantRegistration(true)}
+                    className="text-indigo-400 hover:text-indigo-300 transition-colors duration-300"
+                  >
+                    Create a Participant Account
                   </button>
                 </motion.div>
               </motion.form>
@@ -704,6 +797,208 @@ const SignInPage = () => {
                     onClick={() => {
                       setShowRegistration(false)
                       setUserType("attendee")
+                    }}
+                    className="text-sm text-gray-500 hover:text-gray-300 transition-colors duration-300"
+                  >
+                    Already have an account? Sign In
+                  </button>
+                </motion.div>
+              </motion.form>
+            )}
+
+            {/* Participant Registration Form */}
+            {showParticipantRegistration && (
+              <motion.form
+                key="participant-registration"
+                onSubmit={handleParticipantRegistration}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                className="space-y-6 w-full"
+              >
+                <div className="text-center text-gray-300 mb-4">
+                  <h2 className="text-xl font-bold">Create Participant Account</h2>
+                </div>
+
+                <div className="space-y-4 w-full">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <motion.div
+                      initial={{ x: -20, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      transition={{ delay: 0.1 }}
+                    >
+                      <input
+                        type="text"
+                        placeholder="FIRST NAME"
+                        value={participantFirstName}
+                        onChange={(e) => setParticipantFirstName(e.target.value)}
+                        className="w-full bg-black/25 border-2 border-[#3A0CA3] rounded-[53px] px-6 py-3 text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#3A0CA3]/50 focus:border-indigo-500 transition-all duration-300"
+                        required
+                      />
+                    </motion.div>
+                    <motion.div
+                      initial={{ x: 20, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      <input
+                        type="text"
+                        placeholder="LAST NAME"
+                        value={participantLastName}
+                        onChange={(e) => setParticipantLastName(e.target.value)}
+                        className="w-full bg-black/25 border-2 border-[#3A0CA3] rounded-[53px] px-6 py-3 text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#3A0CA3]/50 focus:border-indigo-500 transition-all duration-300"
+                        required
+                      />
+                    </motion.div>
+                  </div>
+                  <motion.div
+                    initial={{ y: 10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                  >
+                    <input
+                      type="email"
+                      placeholder="EMAIL"
+                      value={participantEmail}
+                      onChange={(e) => setParticipantEmail(e.target.value)}
+                      className="w-full bg-black/25 border-2 border-[#3A0CA3] rounded-[53px] px-6 py-3 text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#3A0CA3]/50 focus:border-indigo-500 transition-all duration-300"
+                      required
+                    />
+                  </motion.div>
+                  <motion.div
+                    initial={{ y: 10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                  >
+                    <input
+                      type="tel"
+                      placeholder="MOBILE NUMBER"
+                      value={participantMobileNo}
+                      onChange={(e) => setParticipantMobileNo(e.target.value)}
+                      className="w-full bg-black/25 border-2 border-[#3A0CA3] rounded-[53px] px-6 py-3 text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#3A0CA3]/50 focus:border-indigo-500 transition-all duration-300"
+                      required
+                    />
+                  </motion.div>
+                  <motion.div
+                    initial={{ y: 10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                  >
+                    <input
+                      type="password"
+                      placeholder="PASSWORD"
+                      value={participantPassword}
+                      onChange={(e) => setParticipantPassword(e.target.value)}
+                      className="w-full bg-black/25 border-2 border-[#3A0CA3] rounded-[53px] px-6 py-3 text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#3A0CA3]/50 focus:border-indigo-500 transition-all duration-300"
+                      required
+                    />
+                  </motion.div>
+                  <motion.div
+                    initial={{ y: 10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.6 }}
+                  >
+                    <select
+                      value={selectedHouse}
+                      onChange={(e) => setSelectedHouse(e.target.value)}
+                      className="w-full bg-black/25 border-2 border-[#3A0CA3] rounded-[53px] px-6 py-3 text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#3A0CA3]/50 focus:border-indigo-500 transition-all duration-300"
+                      required
+                    >
+                      <option value="">SELECT HOUSE</option>
+                      <option value="Gryffindor">Gryffindor</option>
+                      <option value="Hufflepuff">Hufflepuff</option>
+                      <option value="Ravenclaw">Ravenclaw</option>
+                      <option value="Slytherin">Slytherin</option>
+                      <option value="Phoenix">Phoenix</option>
+                    </select>
+                  </motion.div>
+                  <motion.div
+                    initial={{ y: 10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.7 }}
+                  >
+                    <input
+                      type="text"
+                      placeholder="PROJECT TITLE"
+                      value={projectTitle}
+                      onChange={(e) => setProjectTitle(e.target.value)}
+                      className="w-full bg-black/25 border-2 border-[#3A0CA3] rounded-[53px] px-6 py-3 text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#3A0CA3]/50 focus:border-indigo-500 transition-all duration-300"
+                      required
+                    />
+                  </motion.div>
+                  <motion.div
+                    initial={{ y: 10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.8 }}
+                  >
+                    <textarea
+                      placeholder="PROJECT DESCRIPTION"
+                      value={projectDescription}
+                      onChange={(e) => setProjectDescription(e.target.value)}
+                      className="w-full bg-black/25 border-2 border-[#3A0CA3] rounded-[20px] px-6 py-3 text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#3A0CA3]/50 focus:border-indigo-500 transition-all duration-300 min-h-[100px]"
+                      required
+                    />
+                  </motion.div>
+                  <motion.div
+                    initial={{ y: 10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.9 }}
+                  >
+                    <textarea
+                      placeholder="PROJECT EXPERIENCE"
+                      value={projectExperience}
+                      onChange={(e) => setProjectExperience(e.target.value)}
+                      className="w-full bg-black/25 border-2 border-[#3A0CA3] rounded-[20px] px-6 py-3 text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#3A0CA3]/50 focus:border-indigo-500 transition-all duration-300 min-h-[100px]"
+                      required
+                    />
+                  </motion.div>
+                  <motion.div
+                    initial={{ y: 10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 1.0 }}
+                  >
+                    <input
+                      type="url"
+                      placeholder="PROJECT VIDEO LINK (OPTIONAL)"
+                      value={projectVideoLink}
+                      onChange={(e) => setProjectVideoLink(e.target.value)}
+                      className="w-full bg-black/25 border-2 border-[#3A0CA3] rounded-[53px] px-6 py-3 text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#3A0CA3]/50 focus:border-indigo-500 transition-all duration-300"
+                    />
+                  </motion.div>
+                </div>
+                <motion.div
+                  className="flex justify-center mt-8"
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 1.1 }}
+                >
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="relative w-full max-w-[60%] lg:max-w-[40%] bg-black/25 border-2 border-[#03045E] rounded-[53px] py-3 text-gray-300 
+                    focus:outline-none focus:ring-2 focus:ring-[#3A0CA3]/50
+                    hover:border-[#3A0CA3] hover:shadow-[0_0_15px_rgba(58,12,163,0.5)] 
+                    hover:scale-105 hover:text-white
+                    transition-all duration-300 ease-in-out
+                    hover:bg-gradient-to-r hover:from-[#03045E]/30 hover:to-[#3A0CA3]/30
+                    disabled:opacity-50 disabled:cursor-not-allowed
+                    overflow-hidden group"
+                  >
+                    <span className="relative z-10">{loading ? "REGISTERING..." : "REGISTER"}</span>
+                    <span className="absolute inset-0 bg-gradient-to-r from-indigo-600/40 to-purple-600/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                  </button>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1.2 }}
+                  className="text-center mt-4"
+                >
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowParticipantRegistration(false)
+                      setUserType("participant")
                     }}
                     className="text-sm text-gray-500 hover:text-gray-300 transition-colors duration-300"
                   >
