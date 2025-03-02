@@ -1,9 +1,10 @@
 import Image from "next/image"
 import Link from "next/link"
-import { Instagram, Github, Twitter, Linkedin } from "lucide-react"
+import { Instagram, Github, Twitter, Linkedin } from 'lucide-react'
 import { Card } from "@/components/ui/card"
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
+import { useRouter } from "next/navigation"
 import Navigation from "@/components/homepage/Navigation"
 import { Footer } from "@/components/footer"
 import SocialLinksEditor from "@/components/dashboard/socialhandles"
@@ -12,15 +13,62 @@ import EditableDescriptionCard from "@/components/dashboard/description"
 import ProfileIcon from "@/components/dashboard/profileicon"
 
 const Dashboard = () => {
+    const router = useRouter()
+    const [userData, setUserData] = useState(null)
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        // Check if user is logged in
+        const checkAuth = () => {
+            const token = localStorage.getItem("access_token")
+            const userInfo = localStorage.getItem("user_info")
+            
+            if (!token || !userInfo) {
+                // User is not logged in, redirect to sign in page
+                router.push("/SignInPage/SignIn")
+                return
+            }
+            
+            try {
+                // Parse user info
+                const user = JSON.parse(userInfo)
+                
+                // Check if user is a participant
+                if (!user.is_participant) {
+                    // If not a participant, redirect to appropriate page
+                    router.push("/SignInPage/SignIn")
+                    return
+                }
+                
+                // Set user data for use in the component
+                setUserData(user)
+            } catch (error) {
+                console.error("Error parsing user data:", error)
+                // If there's an error, redirect to sign in
+                router.push("/SignInPage/SignIn")
+            } finally {
+                setLoading(false)
+            }
+        }
+        
+        checkAuth()
+    }, [router])
+
+    // Show loading state while checking authentication
+    if (loading) {
+        return (
+            <div className="min-h-screen font-inconsolata bg-gradient-to-b from-black to-zinc-900 text-white flex items-center justify-center">
+                <div className="animate-pulse text-2xl">Loading...</div>
+            </div>
+        )
+    }
+
     return (
         <div>
             <Navigation />
             <div className="min-h-screen font-inconsolata bg-gradient-to-b from-black to-zinc-900 text-white flex flex-col items-center px-4">
-                
-
                 {/* Header Image with Profile Icon - Enhanced with gradient overlay */}
                 <div className="w-full max-w-6xl relative h-[260px] mb-16 mt-6 mx-auto rounded-xl shadow-2xl">
-
                     <Image
                         src="/images/main-bg.jpg"
                         alt="Decorative header with books and coffee"
@@ -29,15 +77,11 @@ const Dashboard = () => {
                         className="object-cover opacity-70 rounded-lg transform hover:scale-105 transition-transform duration-700"
                     />
 
-
-                    {/* // Custom positioning */}
-                    <ProfileIcon customPosition="absolute right-[-2%] bottom-[-15%] z-50" />
-
-
-
-
-
-
+                    {/* Custom positioning */}
+                    <ProfileIcon 
+                        customPosition="absolute right-[-2%] bottom-[-15%] z-50" 
+                        customData={userData}
+                    />
                 </div>
 
                 {/* Welcome section with animated border */}
@@ -80,15 +124,12 @@ const Dashboard = () => {
 
                 {/* Social links with subtle hover animation */}
                 <div className="relative group mb-16 w-full max-w-2xl">
-                   
                     <SocialLinksEditor />
                 </div>
-
-                {/* Enhanced footer */}
             </div>
             <Footer />
         </div>
     )
 }
 
-export default Dashboard;
+export default Dashboard

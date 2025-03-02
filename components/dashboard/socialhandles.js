@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Instagram, Github, Twitter, Linkedin, X } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Instagram, Github, Twitter, Linkedin, X, Edit3 } from 'lucide-react';
 
 const SocialLinksEditor = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -9,8 +9,19 @@ const SocialLinksEditor = () => {
         twitter: 'https://twitter.com/username',
         linkedin: 'https://linkedin.com/in/username'
     });
-
     const [formData, setFormData] = useState({ ...socialLinks });
+    const [isEditing, setIsEditing] = useState(false);
+
+    useEffect(() => {
+        if (isModalOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isModalOpen]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -26,140 +37,124 @@ const SocialLinksEditor = () => {
         setIsModalOpen(false);
     };
 
-    return (
-        <div className="relative group">
-            <div className="flex bg-zinc-600 items-center justify-center gap-8 lg:gap-16 bg-zinc-900/50 mb-16 backdrop-blur-sm px-8 py-4 border border-zinc-700 rounded-full">
-                <a href={socialLinks.instagram} target="_blank" className="hover:text-pink-500 transition-colors">
-                    <Instagram className="w-9 h-9 lg:w-12 lg:h-12" />
-                </a>
-                <a href={socialLinks.github} target="_blank" className="hover:text-purple-500 transition-colors">
-                    <Github className="w-9 h-9 lg:w-12 lg:h-12" />
-                </a>
-                <a href={socialLinks.twitter} target="_blank" className="hover:text-blue-400 transition-colors">
-                    <Twitter className="w-9 h-9 lg:w-12 lg:h-12" />
-                </a>
-                <a href={socialLinks.linkedin} target="_blank" className="hover:text-blue-600 transition-colors">
-                    <Linkedin className="w-9 h-9 lg:w-12 lg:h-12" />
-                </a>
+    const SocialIcon = ({ platform, icon, color, url }) => (
+        <a 
+            href={url} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className={`transform transition-all duration-300 hover:scale-110 hover:${color} group`}
+        >
+            <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-full blur-lg opacity-0 group-hover:opacity-70 transition-opacity"></div>
+                {React.cloneElement(icon, { 
+                    className: `w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 relative z-10 transition-colors duration-300 group-hover:${color}` 
+                })}
             </div>
+        </a>
+    );
 
-            {/* Edit Button */}
-            <button
-                className="absolute -top-6 -left-2 w-9 h-9 lg:w-12 lg:h-12 bg-zinc-200 border border-zinc-700 rounded-full flex items-center justify-center shadow-lg transform transition-transform duration-200 hover:scale-110"
-                aria-label="Edit social links"
-                onClick={() => setIsModalOpen(true)}
-            >
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="text-black"
+    return (
+        <div className="relative max-w-3xl mx-auto px-4">
+            {/* Social Links Display */}
+            <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full blur opacity-30 group-hover:opacity-50 transition-opacity"></div>
+                <div className="relative flex items-center justify-center gap-6 sm:gap-8 md:gap-12 lg:gap-16 bg-zinc-900/90 backdrop-blur-lg px-6 py-6 sm:py-8 border border-zinc-700/50 rounded-full shadow-xl">
+                    <SocialIcon 
+                        platform="instagram" 
+                        icon={<Instagram />} 
+                        color="text-pink-500" 
+                        url={socialLinks.instagram} 
+                    />
+                    <SocialIcon 
+                        platform="github" 
+                        icon={<Github />} 
+                        color="text-purple-500" 
+                        url={socialLinks.github} 
+                    />
+                    <SocialIcon 
+                        platform="twitter" 
+                        icon={<Twitter />} 
+                        color="text-blue-400" 
+                        url={socialLinks.twitter} 
+                    />
+                    <SocialIcon 
+                        platform="linkedin" 
+                        icon={<Linkedin />} 
+                        color="text-blue-600" 
+                        url={socialLinks.linkedin} 
+                    />
+                </div>
+
+                {/* Edit Button */}
+                <button
+                    className="absolute -top-4 -right-4 sm:-top-5 sm:-right-5 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 rounded-full flex items-center justify-center shadow-lg transform transition-all duration-300 hover:scale-110 hover:rotate-12 z-10"
+                    aria-label="Edit social links"
+                    onClick={() => setIsModalOpen(true)}
+                    onMouseEnter={() => setIsEditing(true)}
+                    onMouseLeave={() => setIsEditing(false)}
                 >
-                    <path d="M12 20h9"></path>
-                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                </svg>
-            </button>
+                    <Edit3 
+                        size={isEditing ? 18 : 16} 
+                        className="text-white transition-all duration-300" 
+                    />
+                </button>
+            </div>
 
             {/* Modal */}
             {isModalOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                    <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-6 w-full max-w-md">
-                        <div className="flex justify-between items-center mb-4">
-                            <h2 className="text-lg font-medium text-zinc-100">Edit Social Links</h2>
+                <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                    <div 
+                        className="bg-zinc-900 border border-zinc-700 rounded-xl p-6 w-full max-w-md shadow-2xl transform transition-all duration-300 animate-fadeIn"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <div className="flex justify-between items-center mb-6">
+                            <h2 className="text-xl font-bold text-white bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent">Edit Social Links</h2>
                             <button
                                 onClick={() => setIsModalOpen(false)}
-                                className="text-zinc-400 hover:text-zinc-100"
+                                className="text-zinc-400 hover:text-white transition-colors p-1 hover:bg-zinc-800 rounded-full"
                             >
                                 <X size={20} />
                             </button>
                         </div>
 
-                        <form onSubmit={handleSubmit} className="space-y-4">
-                            <div>
-                                <label className="block text-sm font-medium text-zinc-400 mb-1">
-                                    Instagram URL
-                                </label>
-                                <div className="flex items-center">
-                                    <Instagram className="w-5 h-5 text-pink-500 mr-2" />
-                                    <input
-                                        type="url"
-                                        name="instagram"
-                                        value={formData.instagram}
-                                        onChange={handleInputChange}
-                                        className="w-full bg-zinc-800 border border-zinc-700 rounded px-3 py-2 text-sm text-zinc-200 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                                        placeholder="https://instagram.com/username"
-                                    />
+                        <form onSubmit={handleSubmit} className="space-y-5">
+                            {Object.entries({
+                                instagram: { icon: <Instagram />, color: "ring-pink-500 focus:ring-pink-500", text: "text-pink-500" },
+                                github: { icon: <Github />, color: "ring-purple-500 focus:ring-purple-500", text: "text-purple-500" },
+                                twitter: { icon: <Twitter />, color: "ring-blue-400 focus:ring-blue-400", text: "text-blue-400" },
+                                linkedin: { icon: <Linkedin />, color: "ring-blue-600 focus:ring-blue-600", text: "text-blue-600" }
+                            }).map(([platform, { icon, color, text }]) => (
+                                <div key={platform} className="group">
+                                    <label className="block text-sm font-medium text-zinc-300 mb-2 capitalize">
+                                        {platform} URL
+                                    </label>
+                                    <div className="flex items-center bg-zinc-800/70 backdrop-blur-sm border border-zinc-700 rounded-lg group-focus-within:border-indigo-500 overflow-hidden transition-all duration-200">
+                                        <div className={`flex items-center justify-center w-12 h-12 ${text} bg-zinc-800`}>
+                                            {React.cloneElement(icon, { size: 20 })}
+                                        </div>
+                                        <input
+                                            type="url"
+                                            name={platform}
+                                            value={formData[platform]}
+                                            onChange={handleInputChange}
+                                            className={`w-full bg-transparent px-3 py-3 text-zinc-200 focus:outline-none focus:ring-1 ${color}`}
+                                            placeholder={`https://${platform}.com/username`}
+                                        />
+                                    </div>
                                 </div>
-                            </div>
+                            ))}
 
-                            <div>
-                                <label className="block text-sm font-medium text-zinc-400 mb-1">
-                                    GitHub URL
-                                </label>
-                                <div className="flex items-center">
-                                    <Github className="w-5 h-5 text-purple-500 mr-2" />
-                                    <input
-                                        type="url"
-                                        name="github"
-                                        value={formData.github}
-                                        onChange={handleInputChange}
-                                        className="w-full bg-zinc-800 border border-zinc-700 rounded px-3 py-2 text-sm text-zinc-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                                        placeholder="https://github.com/username"
-                                    />
-                                </div>
-                            </div>
-
-                            <div>
-                                <label className="block text-sm font-medium text-zinc-400 mb-1">
-                                    Twitter URL
-                                </label>
-                                <div className="flex items-center">
-                                    <Twitter className="w-5 h-5 text-blue-400 mr-2" />
-                                    <input
-                                        type="url"
-                                        name="twitter"
-                                        value={formData.twitter}
-                                        onChange={handleInputChange}
-                                        className="w-full bg-zinc-800 border border-zinc-700 rounded px-3 py-2 text-sm text-zinc-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
-                                        placeholder="https://twitter.com/username"
-                                    />
-                                </div>
-                            </div>
-
-                            <div>
-                                <label className="block text-sm font-medium text-zinc-400 mb-1">
-                                    LinkedIn URL
-                                </label>
-                                <div className="flex items-center">
-                                    <Linkedin className="w-5 h-5 text-blue-600 mr-2" />
-                                    <input
-                                        type="url"
-                                        name="linkedin"
-                                        value={formData.linkedin}
-                                        onChange={handleInputChange}
-                                        className="w-full bg-zinc-800 border border-zinc-700 rounded px-3 py-2 text-sm text-zinc-200 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                                        placeholder="https://linkedin.com/in/username"
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="flex justify-end space-x-3 pt-2">
+                            <div className="flex justify-end space-x-3 pt-4">
                                 <button
                                     type="button"
                                     onClick={() => setIsModalOpen(false)}
-                                    className="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-sm font-medium rounded-md transition-colors"
+                                    className="px-5 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-sm font-medium rounded-lg transition-colors"
                                 >
                                     Cancel
                                 </button>
                                 <button
                                     type="submit"
-                                    className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-md transition-colors"
+                                    className="px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-sm font-medium rounded-lg transition-colors shadow-lg"
                                 >
                                     Save Changes
                                 </button>

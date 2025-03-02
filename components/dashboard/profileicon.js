@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { X, User, Home, Users, LogOut, Settings, Bell } from "lucide-react";
 import UserProfileModal from "./userprofilemodal";
-
+import SignOutButton from "./signoutbtn";
 const ProfileIcon = ({ customPosition, customSize, customData }) => {
     const [showProfile, setShowProfile] = useState(false);
     const [showProfileModal, setShowProfileModal] = useState(false);
@@ -23,7 +23,7 @@ const ProfileIcon = ({ customPosition, customSize, customData }) => {
 
     // Default positioning class that can be overridden with customPosition prop
     const positionClass = customPosition || "absolute right-2 lg:right-6 bottom-[-20%] lg:bottom-[-25%] z-30";
-    
+
     // Default size classes that can be overridden with customSize prop
     const sizeClasses = customSize || {
         button: "w-20 h-20 md:w-16 md:h-16 lg:w-24 lg:h-24",
@@ -45,7 +45,7 @@ const ProfileIcon = ({ customPosition, customSize, customData }) => {
                     console.error("Error fetching user data:", error);
                 }
             };
-            
+
             fetchUserData();
         }
     }, [customData]);
@@ -79,7 +79,7 @@ const ProfileIcon = ({ customPosition, customSize, customData }) => {
                 <div className="relative">
                     <motion.div
                         className="absolute -inset-1 rounded-full bg-gradient-to-r from-purple-600 via-blue-500 to-indigo-400 opacity-75 blur-sm"
-                        animate={{ 
+                        animate={{
                             rotate: isHovered ? 90 : 0,
                             scale: isHovered ? 1.05 : 1
                         }}
@@ -100,10 +100,10 @@ const ProfileIcon = ({ customPosition, customSize, customData }) => {
                             height={sizeClasses.image.height}
                             className="object-cover flex items-center justify-center w-full h-full"
                         />
-                        
+
                         {/* Notification badge */}
                         {profileData.notifications > 0 && (
-                            <motion.div 
+                            <motion.div
                                 className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shadow-lg border-2 border-zinc-900"
                                 initial={{ scale: 0 }}
                                 animate={{ scale: 1 }}
@@ -128,11 +128,11 @@ const ProfileIcon = ({ customPosition, customSize, customData }) => {
                         >
                             <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:20px_20px] pointer-events-none" />
                             <div className="absolute inset-0 bg-gradient-to-b from-blue-500/20 via-transparent to-purple-500/20 opacity-20 pointer-events-none" />
-                            
+
                             {/* Header with glowing border */}
                             <div className="relative p-5">
                                 <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-500/30 to-transparent" />
-                                
+
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center gap-3">
                                         <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-zinc-700 ring-2 ring-zinc-500/20 shadow-xl">
@@ -147,7 +147,7 @@ const ProfileIcon = ({ customPosition, customSize, customData }) => {
                                         <div className="flex-1 min-w-0">
                                             <h3 className="font-semibold text-lg text-white truncate">{profileData.displayName}</h3>
                                             <p className="text-sm text-zinc-400 truncate">{profileData.email}</p>
-                                           
+
                                         </div>
                                     </div>
                                     <Button
@@ -164,7 +164,7 @@ const ProfileIcon = ({ customPosition, customSize, customData }) => {
                             <div className="p-3 space-y-1">
                                 {/* User Info Cards */}
                                 <div className="grid grid-cols-2 gap-2 p-2">
-                                    <motion.div 
+                                    <motion.div
                                         whileHover={{ scale: 1.03 }}
                                         className="flex items-center gap-2 p-2 rounded-lg bg-gradient-to-br from-zinc-800/80 to-zinc-900/80 hover:from-blue-900/20 hover:to-blue-800/10 border border-zinc-700/50 transition-all duration-200 cursor-pointer"
                                     >
@@ -173,8 +173,8 @@ const ProfileIcon = ({ customPosition, customSize, customData }) => {
                                         </div>
                                         <span className="text-zinc-300 text-sm">{profileData.house}</span>
                                     </motion.div>
-                                    
-                                    <motion.div 
+
+                                    <motion.div
                                         whileHover={{ scale: 1.03 }}
                                         className="flex items-center gap-2 p-2 rounded-lg bg-gradient-to-br from-zinc-800/80 to-zinc-900/80 hover:from-purple-900/20 hover:to-purple-800/10 border border-zinc-700/50 transition-all duration-200 cursor-pointer"
                                     >
@@ -197,7 +197,7 @@ const ProfileIcon = ({ customPosition, customSize, customData }) => {
                                             View Profile
                                         </Button>
                                     </motion.div>
-                                    
+
                                     {/* <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                                         <Button
                                             variant="outline"
@@ -207,7 +207,7 @@ const ProfileIcon = ({ customPosition, customSize, customData }) => {
                                             Settings
                                         </Button>
                                     </motion.div> */}
-                                    
+
                                     <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                                         <Button
                                             variant="outline"
@@ -224,26 +224,17 @@ const ProfileIcon = ({ customPosition, customSize, customData }) => {
                                     </motion.div>
 
                                     <div className="h-px bg-gradient-to-r from-transparent via-zinc-700/50 to-transparent my-1" />
-                                    
+
                                     <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                                        <Button
-                                            variant="destructive"
-                                            className="w-full bg-gradient-to-r from-red-900/60 to-red-950/60 hover:from-red-800/80 hover:to-red-900/80 text-red-100 border border-red-800/50 transition-all duration-300 h-10"
-                                            onClick={() => console.log("Sign out clicked")}
-                                        >
-                                            <LogOut className="h-4 w-4 mr-2" />
-                                            Sign Out
-                                        </Button>
+                                        <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                                            <SignOutButton />
+                                        </motion.div>
                                     </motion.div>
                                 </div>
                             </div>
-                            
+
                             {/* Footer with subtle gradient */}
-                            <div className="p-3 mt-1">
-                                <div className="text-center text-xs text-zinc-500 bg-zinc-900/50 rounded-lg p-2 border border-zinc-800/50">
-                                   · Joined Sept 2024
-                                </div>
-                            </div>
+
                         </motion.div>
                     )}
                 </AnimatePresence>

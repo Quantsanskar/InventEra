@@ -33,7 +33,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "components/dashboard/signoutbtn.jsx"  ],
   "exclude": [
     "node_modules"
   ]
