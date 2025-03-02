@@ -137,7 +137,7 @@ const EditableYoutubeCard = ({ apiEndpoint, cardId }) => {
 
                 {/* Edit Button */}
                 <button
-                    className="absolute bottom-[-18%] lg:bottom-[-10%] right-[-2%] w-10 h-10 bg-red-600 rounded-full flex items-center justify-center shadow-lg transform transition-all duration-300  z-20"
+                    className="absolute bottom-[-9%] lg:bottom-[-6%] right-[-5%] lg:right-[-3%] w-10 h-10 bg-red-600 rounded-full flex items-center justify-center shadow-lg transform transition-all duration-300  z-20"
                     aria-label="Edit video"
                     onClick={() => setIsEditing(true)}
                 >

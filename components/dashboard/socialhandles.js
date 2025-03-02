@@ -47,18 +47,18 @@ const SocialLinksEditor = () => {
             <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-full blur-lg opacity-0 group-hover:opacity-70 transition-opacity"></div>
                 {React.cloneElement(icon, { 
-                    className: `w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 relative z-10 transition-colors duration-300 group-hover:${color}` 
+                    className: `w-8 h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 relative z-10 transition-colors duration-300 group-hover:${color}` 
                 })}
             </div>
         </a>
     );
 
     return (
-        <div className="relative max-w-3xl mx-auto px-4">
+        <div className="relative mx-auto px-4">
             {/* Social Links Display */}
             <div className="relative group">
-                <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full blur opacity-30 group-hover:opacity-50 transition-opacity"></div>
-                <div className="relative flex items-center justify-center gap-6 sm:gap-8 md:gap-12 lg:gap-16 bg-zinc-900/90 backdrop-blur-lg px-6 py-6 sm:py-8 border border-zinc-700/50 rounded-full shadow-xl">
+                {/* <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full blur opacity-30 group-hover:opacity-50 transition-opacity"></div> */}
+                <div className="relative flex items-center justify-center gap-6 md:gap-8 lg:gap-12 bg-zinc-900/90 backdrop-blur-lg lg:px-6 py-2 lg:py-4 border border-zinc-700/50 rounded-full shadow-xl">
                     <SocialIcon 
                         platform="instagram" 
                         icon={<Instagram />} 
@@ -87,7 +87,7 @@ const SocialLinksEditor = () => {
 
                 {/* Edit Button */}
                 <button
-                    className="absolute -top-4 -right-4 sm:-top-5 sm:-right-5 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 rounded-full flex items-center justify-center shadow-lg transform transition-all duration-300 hover:scale-110 hover:rotate-12 z-10"
+                    className="absolute -top-4 -right-2 lg:-top-5 lg:-right-3 w-8 h-8 lg:w-11 lg:h-11 bg-gray-600 rounded-full flex items-center justify-center shadow-lg transform transition-all duration-300 hover:scale-110 hover:rotate-12 z-10"
                     aria-label="Edit social links"
                     onClick={() => setIsModalOpen(true)}
                     onMouseEnter={() => setIsEditing(true)}

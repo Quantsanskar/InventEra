@@ -110,7 +110,7 @@ const EditableDescriptionCard = ({ apiEndpoint, cardId }) => {
                 
                 {/* Edit Button with improved styling */}
                 <button
-                    className={`absolute bottom-[-5%] right-1 w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center shadow-lg transform transition-all duration-300 z-20`}
+                    className={`absolute bottom-[-5%] right-[-4%] w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center shadow-lg transform transition-all duration-300 z-20`}
                     aria-label="Edit description"
                     onClick={() => setIsEditing(true)}
                 >
