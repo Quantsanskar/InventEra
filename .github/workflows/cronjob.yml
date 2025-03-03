@@ -1,0 +1,14 @@
+name: Call API every 15 minutes
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+
+jobs:
+  call-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send request to API
+        run: |
+          RESPONSE=$(curl -X GET -s -w "\nHTTP_STATUS:%{http_code}" "https://buildersspace.tech/api/void_request_for_active_state")
+          echo "Response: $RESPONSE"
