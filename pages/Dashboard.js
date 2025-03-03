@@ -150,7 +150,7 @@ const Dashboard = () => {
             <br />
             Yeah, it's a lot, but we trust you can handle it.
             <br />
-            To make it less of a drag, here's a song. Hit play, tune in, and let's get to it.
+            {/* To make it less of a drag, here's a song. Hit play, tune in, and let's get to it. */}
           </p>
         </div>
 
