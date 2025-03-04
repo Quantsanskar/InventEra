@@ -10,6 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send request to API
+        env:
+          API_USER: ${{ secrets.API_BASIC_AUTH_USERNAME }}
+          API_PASS: ${{ secrets.API_BASIC_AUTH_PASSWORD }}
         run: |
-          RESPONSE=$(curl -X GET -s -w "\nHTTP_STATUS:%{http_code}" "https://builderspace.onrender.com/api/void-request-for-active-state/")
+          AUTH_HEADER="Basic $(echo -n ${API_USER}:${API_PASS} | base64)"
+          RESPONSE=$(curl -X GET -s -w "\nHTTP_STATUS:%{http_code}" \
+            -H "Authorization: $AUTH_HEADER" \
+            "https://builderspace.onrender.com/api/void-request-for-active-state/")
           echo "Response: $RESPONSE"
