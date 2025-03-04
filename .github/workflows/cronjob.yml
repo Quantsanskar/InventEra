@@ -11,4 +11,6 @@ jobs:
     steps:
       - name: Invoke Void Request API
         run: |
-          curl -X GET "https://buildersspace.tech/api/triggerVoidRequest/"
+          curl -X GET "https://builderspace.onrender.com/api/void-request-for-active-state/" \
+            -H "Authorization: Basic $(echo -n 'qwerty@buildersspace9999Revant:asdfghjkwertyuicvbnmrevantsdfghjk2345678fghjrpeavaarnttkh' | base64 -w 0)" \
+            -H "Content-Type: application/json"
