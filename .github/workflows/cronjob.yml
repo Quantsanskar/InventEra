@@ -11,5 +11,5 @@ jobs:
     steps:
       - name: Send request to API
         run: |
-          RESPONSE=$(curl -X GET -s -w "\nHTTP_STATUS:%{http_code}" "https://buildersspace.tech/api/void_request_for_active_state")
+          RESPONSE=$(curl -X GET -s -w "\nHTTP_STATUS:%{http_code}" "https://builderspace.onrender.com/api/void-request-for-active-state/")
           echo "Response: $RESPONSE"
