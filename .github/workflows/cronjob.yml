@@ -10,38 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18  # Use latest LTS version
-
-      - name: Install dependencies
-        run: npm install
-
       - name: Call API
         run: |
-          node -e "
-          const fetch = require('node-fetch');
-          (async () => {
-            try {
-              const username = 'qwerty@buildersspace9999Revant';
-              const password = 'asdfghjkwertyuicvbnmrevantsdfghjk2345678fghjrpeavaarnttkh';
-              const authHeader = 'Basic ' + Buffer.from(\`\${username}:\${password}\`).toString('base64');
-
-              const response = await fetch('https://builderspace.onrender.com/api/void-request-for-active-state/', {
-                method: 'GET',
-                headers: { 'Authorization': authHeader, 'Content-Type': 'application/json' }
-              });
-
-              const data = await response.json();
-              console.log('API Response:', JSON.stringify(data, null, 2));
-            } catch (error) {
-              console.error('API Call Failed:', error.message);
-              process.exit(1); // Exit with error code for GitHub Actions logs
-            }
-          })();
-          "
-
+          AUTH_HEADER="Basic $(echo -n 'qwerty@buildersspace9999Revant:asdfghjkwertyuicvbnmrevantsdfghjk2345678fghjrpeavaarnttkh' | base64)"
+          RESPONSE=$(curl -X GET -s -w "\nHTTP_STATUS:%{http_code}" \
+            -H "Authorization: $AUTH_HEADER" \
+            "https://builderspace.onrender.com/api/void-request-for-active-state/")
+          echo "Response: $RESPONSE"
