@@ -1,4 +1,4 @@
-name: Trigger Void Request Every 10 Minutes
+name: Trigger Void Request Every 8 Minutes
 
 on:
   schedule:
