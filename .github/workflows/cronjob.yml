@@ -11,4 +11,4 @@ jobs:
     steps:
       - name: Invoke Void Request API
         run: |
-          curl -X GET "https://buildersspace.tech/api/triggerVoidRequest"
+          curl -X GET "https://buildersspace.tech/api/triggerVoidRequest/"
