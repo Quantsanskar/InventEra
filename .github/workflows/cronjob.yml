@@ -2,7 +2,7 @@ name: Trigger Void Request Every 10 Minutes
 
 on:
   schedule:
-    - cron: '*/8 * * * *' # Runs every 10 minutes
+    - cron: '*/8 * * * *' # Runs every 8 minutes
 
 jobs:
   call-void-request-api:
