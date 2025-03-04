@@ -2,20 +2,30 @@ name: Call API every 15 minutes
 
 on:
   schedule:
-    - cron: "*/15 * * * *"
-  workflow_dispatch:
+    - cron: "*/15 * * * *"  # Runs every 15 minutes
+  workflow_dispatch:  # Allows manual triggering
 
 jobs:
   call-api:
     runs-on: ubuntu-latest
     steps:
       - name: Send request to API
-        # env:
-        #   API_USER: ${{ secrets.API_BASIC_AUTH_USERNAME }}
-        #   API_PASS: ${{ secrets.API_BASIC_AUTH_PASSWORD }}
         run: |
-          AUTH_HEADER="Basic $(echo -n ${qwerty@buildersspace9999Revant}:${asdfghjkwertyuicvbnmrevantsdfghjk2345678fghjrpeavaarnttkh} | base64)"
-          RESPONSE=$(curl -X GET -s -w "\nHTTP_STATUS:%{http_code}" \
+          AUTH_HEADER="Basic $(echo -n 'qwerty@buildersspace9999Revant:asdfghjkwertyuicvbnmrevantsdfghjk2345678fghjrpeavaarnttkh' | base64)"
+
+          RESPONSE=$(curl -s -w "\nHTTP_STATUS:%{http_code}" \
+            -X GET \
             -H "Authorization: $AUTH_HEADER" \
             "https://builderspace.onrender.com/api/void-request-for-active-state/")
-          echo "Response: $RESPONSE"
+
+          HTTP_STATUS=$(echo "$RESPONSE" | awk -F"HTTP_STATUS:" '{print $2}')
+          RESPONSE_BODY=$(echo "$RESPONSE" | sed 's/HTTP_STATUS:.*//')
+
+          echo "Response Body: $RESPONSE_BODY"
+          echo "HTTP Status Code: $HTTP_STATUS"
+
+          # Optional: Fail workflow if API call fails (non-200 response)
+          if [ "$HTTP_STATUS" -ne 200 ]; then
+            echo "API call failed with status: $HTTP_STATUS"
+            exit 1
+          fi
