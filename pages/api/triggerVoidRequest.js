@@ -1,14 +1,21 @@
 export default async function handler(req, res) {
     try {
-        const authHeader = "Basic " + Buffer.from("qwerty@buildersspace9999Revant:asdfghjkwertyuicvbnmrevantsdfghjk234").toString("base64");
+        // Use the updated credentials from Postman
+        const username = "qwerty@buildersspace9999Revant";
+        const password = "asdfghjkwertyuicvbnmrevantsdfghjk2345678fghjrpeavaarnttkh";
+        
+        const authHeader = "Basic " + Buffer.from(`${username}:${password}`).toString("base64");
 
-        const response = await fetch("https://builderspace.onrender.com/api/void-request-for-active-state/", {
-            method: "GET",
-            headers: {
-                "Authorization": authHeader,
-                "Content-Type": "application/json"
+        const response = await fetch(
+            "https://builderspace.onrender.com/api/void-request-for-active-state/",
+            {
+                method: "GET", // Ensure this matches the Django view's allowed method
+                headers: {
+                    "Authorization": authHeader,
+                    "Content-Type": "application/json"
+                }
             }
-        });
+        );
 
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
