@@ -46,17 +46,15 @@ const SignInPage = () => {
   const router = useRouter()
   const API_BASE_URL = "https://builderspace.onrender.com/api"
 
-  // Basic auth credentials
-  const getBasicAuthHeaders = () => {
-    const clientId = "qwerty@builderspace9999Revant"
-    const clientSecret = "asdfghjkwertyuicvbnmrevantsdfghjk2345678fghjrpeavaarnttkh"
-    const base64Credentials = btoa(`${clientId}:${clientSecret}`)
-    return {
-      Authorization: `Basic ${base64Credentials}`,
-      "Content-Type": "application/json",
-    }
-  }
-
+  
+  // const getCSRFToken = () => {
+  //   if (typeof document === 'undefined') return ''; // Handle server-side rendering
+  //   const cookieValue = document.cookie
+  //     .split('; ')
+  //     .find(row => row.startsWith('csrftoken='))
+  //     ?.split('=')[1];
+  //   return cookieValue || '';
+  // };
   // Check if a user is already logged in using token verification
   useEffect(() => {
     const verifyToken = async () => {
@@ -67,7 +65,6 @@ const SignInPage = () => {
         const response = await fetch(`${API_BASE_URL}/verify-token/`, {
           method: "POST",
           headers: {
-            ...getBasicAuthHeaders(),
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ token: accessToken }),
@@ -98,7 +95,6 @@ const SignInPage = () => {
       const response = await fetch(`${API_BASE_URL}/token/refresh/`, {
         method: "POST",
         headers: {
-          ...getBasicAuthHeaders(),
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ refresh: refreshToken }),
@@ -133,7 +129,6 @@ const SignInPage = () => {
       await fetch(`${API_BASE_URL}/token/blacklist/`, {
         method: "POST",
         headers: {
-          ...getBasicAuthHeaders(),
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ refresh: refreshToken }),
@@ -158,7 +153,6 @@ const SignInPage = () => {
       const response = await fetch(`${API_BASE_URL}/user-login/`, {
         method: "POST",
         headers: {
-          ...getBasicAuthHeaders(),
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -217,7 +211,6 @@ const SignInPage = () => {
       const response = await fetch(`${API_BASE_URL}/user-login/`, {
         method: "POST",
         headers: {
-          ...getBasicAuthHeaders(),
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -276,7 +269,6 @@ const SignInPage = () => {
       const response = await fetch(`${API_BASE_URL}/create-user-account/`, {
         method: "POST",
         headers: {
-          ...getBasicAuthHeaders(),
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -334,7 +326,6 @@ const SignInPage = () => {
       const response = await fetch(`${API_BASE_URL}/create-user-account/`, {
         method: "POST",
         headers: {
-          ...getBasicAuthHeaders(),
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
