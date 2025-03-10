@@ -45,17 +45,9 @@ const SignInPage = () => {
 
   const router = useRouter()
   const API_BASE_URL = "https://builderspace.onrender.com/api"
+  const CLIENT_ID = "qwerty@buildersspace9999Revant"
+  const CLIENT_SECRET = "asdfghjkwertyuicvbnmrevantsdfghjk2345678fghjrpeavaarnttkh"
 
-  
-  // const getCSRFToken = () => {
-  //   if (typeof document === 'undefined') return ''; // Handle server-side rendering
-  //   const cookieValue = document.cookie
-  //     .split('; ')
-  //     .find(row => row.startsWith('csrftoken='))
-  //     ?.split('=')[1];
-  //   return cookieValue || '';
-  // };
-  // Check if a user is already logged in using token verification
   useEffect(() => {
     const verifyToken = async () => {
       const accessToken = localStorage.getItem("access_token")
@@ -145,35 +137,38 @@ const SignInPage = () => {
 
   // Handle participant sign in
   const handleParticipantSignIn = async (e) => {
-    e.preventDefault()
-    setLoading(true)
-    setError("")
+    e.preventDefault();
+    setLoading(true);
+    setError("");
 
     try {
       const response = await fetch(`${API_BASE_URL}/user-login/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          CLIENT_ID: CLIENT_ID,
+          CLIENT_SECRET: CLIENT_SECRET,
         },
         body: JSON.stringify({
           email: participantLoginEmail,
           password: participantLoginPassword,
         }),
-      })
+        credentials: "include",
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
       if (response.ok) {
         // Check if user is a participant
         if (!data.is_participant) {
-          setError("This account is not registered as a participant.")
-          setLoading(false)
-          return
+          setError("This account is not registered as a participant.");
+          setLoading(false);
+          return;
         }
 
         // Store tokens and user info
-        localStorage.setItem("access_token", data.access)
-        localStorage.setItem("refresh_token", data.refresh)
+        localStorage.setItem("access_token", data.access);
+        localStorage.setItem("refresh_token", data.refresh);
         localStorage.setItem(
           "user_info",
           JSON.stringify({
@@ -183,23 +178,24 @@ const SignInPage = () => {
             is_participant: data.is_participant,
             is_attendee: data.is_attendee,
             is_staff: data.is_staff,
-          }),
-        )
+          })
+        );
 
-        setSuccess(true)
+        setSuccess(true);
         setTimeout(() => {
-          router.push("/Dashboard")
-        }, 1000)
+          router.push("/Dashboard");
+        }, 1000);
       } else {
-        setError(data.error || "Invalid email or password.")
+        setError(data.error || "Invalid email or password.");
       }
     } catch (err) {
-      setError("An error occurred. Please try again.")
-      console.error(err)
+      setError("An error occurred. Please try again.");
+      console.error(err);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
+
 
   // Handle attendee sign in
   const handleAttendeeSignIn = async (e) => {
@@ -212,11 +208,14 @@ const SignInPage = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "CLIENT_ID": "qwerty@buildersspace9999Revant",
+          "CLIENT_SECRET": "asdfghjkwertyuicvbnmrevantsdfghjk2345678fghjrpeavaarnttkh"
         },
         body: JSON.stringify({
           email: attendeeEmail,
           password: attendeePassword,
         }),
+        credentials: "include",
       })
 
       const data = await response.json()
@@ -266,10 +265,12 @@ const SignInPage = () => {
     setError("")
 
     try {
-      const response = await fetch(`${API_BASE_URL}/create-user-account/`, {
+      const response = await fetch(`${API_BASE_URL}/create-user-account/?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "CLIENT_ID": "qwerty@buildersspace9999Revant",
+          "CLIENT_SECRET": "asdfghjkwertyuicvbnmrevantsdfghjk2345678fghjrpeavaarnttkh"
         },
         body: JSON.stringify({
           first_name: firstName,
@@ -280,6 +281,7 @@ const SignInPage = () => {
           is_attendee: true,
           is_participant: false,
         }),
+        credentials: "include",
       })
 
       const data = await response.json()
@@ -327,6 +329,8 @@ const SignInPage = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "CLIENT_ID": "qwerty@buildersspace9999Revant",
+          "CLIENT_SECRET": "asdfghjkwertyuicvbnmrevantsdfghjk2345678fghjrpeavaarnttkh"
         },
         body: JSON.stringify({
           first_name: participantFirstName,
@@ -342,6 +346,7 @@ const SignInPage = () => {
           project_experience: projectExperience,
           project_video_link: projectVideoLink,
         }),
+        credentials: "include",
       })
 
       const data = await response.json()

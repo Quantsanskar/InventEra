@@ -130,7 +130,7 @@ const ProfileIcon = ({ customPosition, customSize }) => { // Removed customData 
       // }
 
       // Encode Basic Auth Credentials
-      
+
 
       // Fetch user data
       const response = await fetch(`${API_BASE_URL}/get-user-details/`, {
@@ -299,10 +299,40 @@ const ProfileIcon = ({ customPosition, customSize }) => { // Removed customData 
   }
 
   // Sign out handler
-  const handleSignOut = () => {
-    localStorage.removeItem("access_token")
-    window.location.href = "/login" // Redirect to login page
+  const handleSignOut = async () => {
+    try {
+      // Get the access token from localStorage
+      const token = localStorage.getItem("access_token")
+
+      if (token) {
+        // Call the blacklist API to invalidate the token
+        const response = await fetch("https://builderspace.onrender.com/api/token/blacklist/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            refresh: localStorage.getItem("refresh_token")
+          })
+        })
+
+        // Even if the API call fails, we still want to clear local storage
+        if (!response.ok) {
+          console.error("Error blacklisting token:", await response.text())
+        }
+      }
+    } catch (error) {
+      console.error("Error during sign out:", error)
+    } finally {
+      // Clear localStorage
+      localStorage.removeItem("access_token")
+      localStorage.removeItem("refresh_token")
+      localStorage.removeItem("user_info")
+      router.push("/SignInPage/SignIn")
+    }
   }
+
 
   // Loading state
   if (loading) {
