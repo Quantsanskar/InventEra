@@ -4,12 +4,12 @@ import { useState, useEffect } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { X, User, Home, Users, Bell, Github, Twitter, Instagram, Linkedin, Upload, Video } from "lucide-react"
+import { X, User, Home, Users, Bell, Github, Twitter, Instagram, Linkedin, Video } from "lucide-react"
 
 const API_BASE_URL = "https://builderspace.onrender.com/api"
 // const API_BASE_URL = "http://127.0.0.1:8000/api"
 
-const ProfileIcon = ({ customPosition, customSize }) => { // Removed customData prop
+const ProfileIcon = ({ customPosition, customSize }) => {
   const [showProfile, setShowProfile] = useState(false)
   const [showProfileModal, setShowProfileModal] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
@@ -22,7 +22,7 @@ const ProfileIcon = ({ customPosition, customSize }) => { // Removed customData 
     house: "",
     about: "",
     designation: "",
-    profileImage: "/placeholder.svg",
+    profileImage: "/placeholder.svg", // Default image that will be used regardless
     notifications: 0,
     project: {
       project_idea_title: "",
@@ -38,9 +38,8 @@ const ProfileIcon = ({ customPosition, customSize }) => { // Removed customData 
     }
   })
 
-  // For handling image upload in profile modal
-  const [imagePreview, setImagePreview] = useState(null)
-  const [profileImage, setProfileImage] = useState(null)
+  // Default profile image path - this will always be used
+  const DEFAULT_PROFILE_IMAGE = "/images/profile.png"
 
   const positionClass = customPosition || "absolute right-2 lg:right-6 bottom-[-20%] lg:bottom-[-25%] z-30"
   const sizeClasses = customSize || {
@@ -109,29 +108,6 @@ const ProfileIcon = ({ customPosition, customSize }) => { // Removed customData 
       setLoading(true);
       let token = localStorage.getItem("access_token");
 
-      // if (!token) {
-      //   setError("No authentication token found");
-      //   setLoading(false);
-      //   return;
-      // }
-
-      // // Verify and refresh token if needed
-      // const isTokenValid = await verifyToken();
-      // if (!isTokenValid) {
-      //   const isRefreshed = await refreshToken();
-      //   if (!isRefreshed) {
-      //     localStorage.removeItem("access_token");
-      //     // window.location.href = "/SignInPage/SignIn";
-      //     console.log.error("Token refresh failed");
-      //     // setError("Failed to refresh token");
-      //     return;
-      //   }
-      //   token = localStorage.getItem("access_token"); // Fetch new token
-      // }
-
-      // Encode Basic Auth Credentials
-
-
       // Fetch user data
       const response = await fetch(`${API_BASE_URL}/get-user-details/`, {
         method: "GET",
@@ -155,7 +131,7 @@ const ProfileIcon = ({ customPosition, customSize }) => { // Removed customData 
         house: data.house || "",
         about: data.about || "",
         designation: data.designation || "",
-        profileImage: data.profile_picture ? data.profile_picture : "/placeholder.svg",
+        profileImage: DEFAULT_PROFILE_IMAGE, // Always use default image regardless of backend data
         notifications: data.unread_notifications || 0,
         project: {
           project_idea_title: data.project_idea_title || "",
@@ -180,13 +156,9 @@ const ProfileIcon = ({ customPosition, customSize }) => { // Removed customData 
     }
   };
 
-
-
-
   useEffect(() => {
     fetchUserData() // Always fetch from API
   }, [showProfileModal]) // Refresh when modal closes
-
 
   const handleUpdateProfile = async (formData) => {
     try {
@@ -194,6 +166,12 @@ const ProfileIcon = ({ customPosition, customSize }) => { // Removed customData 
 
       if (!token) {
         throw new Error("No authentication token found")
+      }
+
+      // Remove profile_picture from formData if it exists
+      // This ensures profile image is never sent to backend
+      if (formData.has("profile_picture")) {
+        formData.delete("profile_picture")
       }
 
       const response = await fetch(`${API_BASE_URL}/update-all-details/`, {
@@ -221,7 +199,6 @@ const ProfileIcon = ({ customPosition, customSize }) => { // Removed customData 
   }
 
   const handleViewProfile = () => {
-    setImagePreview(profileData.profileImage)
     setShowProfileModal(true)
     setShowProfile(false)
   }
@@ -238,18 +215,6 @@ const ProfileIcon = ({ customPosition, customSize }) => { // Removed customData 
   }, [showProfile])
 
   const stopPropagation = (e) => e.stopPropagation()
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0]
-    if (file) {
-      setProfileImage(file)
-      const reader = new FileReader()
-      reader.onload = () => {
-        setImagePreview(reader.result)
-      }
-      reader.readAsDataURL(file)
-    }
-  }
 
   const handleSubmitProfile = async (e) => {
     e.preventDefault()
@@ -284,17 +249,12 @@ const ProfileIcon = ({ customPosition, customSize }) => { // Removed customData 
     formData.append("twitter", twitter)
     formData.append("linkedin", linkedin)
 
-    // Add profile image if changed
-    if (profileImage) {
-      formData.append("profile_picture", profileImage)
-    }
+    // No profile image is added to formData
 
     const success = await handleUpdateProfile(formData)
 
     if (success) {
       setShowProfileModal(false)
-      // Reset the file input
-      setProfileImage(null)
     }
   }
 
@@ -329,10 +289,9 @@ const ProfileIcon = ({ customPosition, customSize }) => { // Removed customData 
       localStorage.removeItem("access_token")
       localStorage.removeItem("refresh_token")
       localStorage.removeItem("user_info")
-      router.push("/SignInPage/SignIn")
+      window.location.href = "/SignInPage/SignIn"
     }
   }
-
 
   // Loading state
   if (loading) {
@@ -362,7 +321,7 @@ const ProfileIcon = ({ customPosition, customSize }) => { // Removed customData 
       <div className="relative" onClick={stopPropagation} data-dropdown="profile">
         <div className="relative">
           <motion.div
-            className="absolute -inset-1 rounded-full bg-gradient-to-r from-purple-600 via-blue-500 to-indigo-400 opacity-75 blur-sm"
+            className="absolute rounded-full"
             animate={{
               rotate: isHovered ? 90 : 0,
               scale: isHovered ? 1.05 : 1,
@@ -375,11 +334,28 @@ const ProfileIcon = ({ customPosition, customSize }) => { // Removed customData 
             onClick={() => setShowProfile(!showProfile)}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className={`relative ${sizeClasses.button} rounded-full overflow-hidden border-4 border-zinc-900 transition-all duration-300 shadow-xl`}
+            className={`
+                  relative 
+                  ${sizeClasses.button} 
+                  rounded-full 
+                  overflow-hidden 
+                  bg-zinc-800
+                  shadow-lg
+                  transition-all 
+                  duration-300 
+                  transform
+                  hover:scale-110
+                  hover:border-indigo-300
+                  hover:ring-4
+                  hover:ring-indigo-200
+                  hover:ring-opacity-50
+                  active:scale-95
+                  ${isHovered ? 'ring-4 ring-indigo-300 ring-opacity-70' : 'ring-4 ring-indigo-300 ring-opacity-40'}
+                `}
           >
             <Image
-              src={profileData.profileImage || "/placeholder.svg"}
-              alt={`${profileData.first_name}'s profile`}
+              src={DEFAULT_PROFILE_IMAGE}
+              alt="Profile"
               width={sizeClasses.image.width}
               height={sizeClasses.image.height}
               className="object-cover flex items-center justify-center w-full h-full"
@@ -420,8 +396,8 @@ const ProfileIcon = ({ customPosition, customSize }) => { // Removed customData 
                   <div className="flex items-center gap-3">
                     <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-zinc-700 ring-2 ring-zinc-500/20 shadow-xl">
                       <Image
-                        src={profileData.profileImage || "/placeholder.svg"}
-                        alt={`${profileData.first_name}'s profile`}
+                        src={DEFAULT_PROFILE_IMAGE}
+                        alt="Profile"
                         fill
                         className="object-cover object-center"
                       />
@@ -479,7 +455,7 @@ const ProfileIcon = ({ customPosition, customSize }) => { // Removed customData 
                     </Button>
                   </motion.div>
 
-                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                  {/* <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                     <Button
                       variant="outline"
                       className="w-full bg-gradient-to-r from-zinc-800/80 to-zinc-900/80 hover:from-amber-900/30 hover:to-orange-900/30 text-zinc-300 hover:text-white border-zinc-700/50 hover:border-zinc-600 transition-all duration-300 h-10"
@@ -492,7 +468,7 @@ const ProfileIcon = ({ customPosition, customSize }) => { // Removed customData 
                         </span>
                       )}
                     </Button>
-                  </motion.div>
+                  </motion.div> */}
 
                   <div className="h-px bg-gradient-to-r from-transparent via-zinc-700/50 to-transparent my-1" />
 
@@ -538,30 +514,17 @@ const ProfileIcon = ({ customPosition, customSize }) => { // Removed customData 
 
               <form onSubmit={handleSubmitProfile}>
                 <div className="p-6 space-y-6">
-                  {/* Profile Picture */}
+                  {/* Profile Picture - Display only, no upload option */}
                   <div className="flex flex-col items-center gap-4">
                     <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-zinc-800">
                       <Image
-                        src={imagePreview || profileData.profileImage || "/placeholder.svg"}
+                        src={DEFAULT_PROFILE_IMAGE}
                         alt="Profile"
                         fill
                         className="object-cover"
                       />
-                      <label
-                        htmlFor="profile-image"
-                        className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity cursor-pointer"
-                      >
-                        <Upload className="h-8 w-8 text-white" />
-                      </label>
-                      <input
-                        type="file"
-                        id="profile-image"
-                        accept="image/*"
-                        onChange={handleImageChange}
-                        className="hidden"
-                      />
                     </div>
-                    <p className="text-zinc-400 text-sm">Click to upload new profile picture</p>
+                    <p className="text-zinc-400 text-sm">{profileData.first_name + " " + profileData.last_name}</p>
                   </div>
 
                   {/* Basic Info */}

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Youtube, Edit2, AlertCircle, Loader2 } from 'lucide-react';
-import axios from 'axios';
+import { X, Youtube, Edit2, AlertCircle, Loader2, Upload } from 'lucide-react';
 
 const EditableYoutubeCard = ({ apiEndpoint, cardId }) => {
     const [videoUrl, setVideoUrl] = useState("");
@@ -8,7 +7,6 @@ const EditableYoutubeCard = ({ apiEndpoint, cardId }) => {
     const [inputValue, setInputValue] = useState("");
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
-   
 
     // Function to extract YouTube video ID from various YouTube URL formats
     const extractVideoId = (url) => {
@@ -28,17 +26,34 @@ const EditableYoutubeCard = ({ apiEndpoint, cardId }) => {
         const fetchVideoData = async () => {
             setIsLoading(true);
             try {
-                // const response = await axios.get(`${apiEndpoint}/${cardId}/`);
-                const fetchedVideoUrl = 'https://youtu.be/0LF1VllQKLo?si=yJkEz3vR2baJdgOB';
-
-                // Check if URL is valid and convert to embed format if needed
-                const videoId = extractVideoId(fetchedVideoUrl);
-                if (videoId) {
-                    const embedUrl = `https://www.youtube.com/embed/${videoId}`;
-                    setVideoUrl(embedUrl);
-                    setInputValue(fetchedVideoUrl); // Keep original URL for editing
+                const token = localStorage.getItem("access_token");
+                
+                if (!token) {
+                    throw new Error("No authentication token found");
+                }
+                
+                const response = await fetch(`https://builderspace.onrender.com/api/get-user-details/`, {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                    },
+                });
+                
+                const data = await response.json();
+                const fetchedVideoUrl = data.project_video_link; // Fetch project video link
+                
+                console.log(fetchedVideoUrl);
+                if (fetchedVideoUrl) {
+                    const videoId = extractVideoId(fetchedVideoUrl);
+                    if (videoId) {
+                        setVideoUrl(`https://www.youtube.com/embed/${videoId}`);
+                        setInputValue(fetchedVideoUrl);
+                    } else {
+                        setError("Invalid YouTube URL received from API");
+                    }
                 } else {
-                    setError("Invalid YouTube URL received from API");
+                    setVideoUrl(null); // No video link case
                 }
             } catch (err) {
                 setError("Failed to load video data");
@@ -52,20 +67,33 @@ const EditableYoutubeCard = ({ apiEndpoint, cardId }) => {
     }, [apiEndpoint, cardId]);
 
     const handleSave = async () => {
-        // Check if the input is a valid YouTube URL
         const videoId = extractVideoId(inputValue);
 
         if (videoId) {
-            // Create proper embed URL for display
             const embedUrl = `https://www.youtube.com/embed/${videoId}`;
 
             try {
-                // Send update to the backend
-                await axios.patch(`${apiEndpoint}/${cardId}/`, {
-                    video_url: inputValue // Send the original URL, not the embed URL
+                const token = localStorage.getItem("access_token");
+
+                if (!token) {
+                    throw new Error("No authentication token found");
+                }
+
+                const formData = new FormData();
+                formData.append("project_video_link", inputValue);
+
+                const response = await fetch(`https://builderspace.onrender.com/api/update-all-details/`, {
+                    method: "PATCH",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: formData,
                 });
 
-                // Update local state only after successful API update
+                if (!response.ok) {
+                    throw new Error("Failed to update video");
+                }
+
                 setVideoUrl(embedUrl);
                 setIsEditing(false);
             } catch (err) {
@@ -106,20 +134,16 @@ const EditableYoutubeCard = ({ apiEndpoint, cardId }) => {
     }
 
     return (
-        <div
-            className="lg:col-span-6 relative group"
-           
-        >
-           
+        <div className="lg:col-span-6 relative group">
+            {/* Label */}
+            <div className="absolute top-3 left-[0] z-20 bg-red-600/90 text-white text-xs px-1 py-1 rounded-sm flex items-center space-x-1 shadow-lg transform -translate-y-9 transition-transform duration-500">
+                <Youtube size={12} />
+                <span>S1 Feature</span>
+            </div>
 
-                {/* Label */}
-                <div className="absolute top-3 left-[0] z-20 bg-red-600/90 text-white text-xs px-1 py-1 rounded-sm flex items-center space-x-1 shadow-lg transform -translate-y-9 transition-transform duration-500">
-                    <Youtube size={12} />
-                    <span>S1 Feature</span>
-                </div>
-
-                {/* YouTube iframe with placeholder */}
-                <div className="aspect-video relative">
+            {/* YouTube iframe or upload icon */}
+            <div className="aspect-video relative bg-zinc-900 flex items-center justify-center border border-zinc-800 rounded-lg shadow-md">
+                {videoUrl ? (
                     <iframe
                         width="100%"
                         height="100%"
@@ -131,19 +155,22 @@ const EditableYoutubeCard = ({ apiEndpoint, cardId }) => {
                         allowFullScreen
                         className="z-10 relative"
                     ></iframe>
-                </div>
+                ) : (
+                    <div className="flex flex-col items-center justify-center text-zinc-500">
+                        <Upload size={40} className="mb-2 text-zinc-600" />
+                        <span className="text-sm">No video uploaded</span>
+                    </div>
+                )}
+            </div>
 
-
-
-                {/* Edit Button */}
-                <button
-                    className="absolute bottom-[-9%] lg:bottom-[-6%] right-[-5%] lg:right-[-3%] w-10 h-10 bg-red-600 rounded-full flex items-center justify-center shadow-lg transform transition-all duration-300  z-20"
-                    aria-label="Edit video"
-                    onClick={() => setIsEditing(true)}
-                >
-                    <Edit2 size={16} className="text-white" />
-                </button>
-          
+            {/* Edit Button */}
+            <button
+                className="absolute bottom-[-9%] lg:bottom-[-6%] right-[-5%] lg:right-[-3%] w-10 h-10 bg-red-600 rounded-full flex items-center justify-center shadow-lg transform transition-all duration-300  z-20"
+                aria-label="Edit video"
+                onClick={() => setIsEditing(true)}
+            >
+                <Edit2 size={16} className="text-white" />
+            </button>
 
             {/* Edit Modal with improved UI */}
             {isEditing && (

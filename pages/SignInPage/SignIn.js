@@ -560,13 +560,13 @@ const SignInPage = () => {
                   >
                     Back to selection
                   </button>
-                  <button
+                  {/* <button
                     type="button"
                     onClick={() => setShowParticipantRegistration(true)}
                     className="text-indigo-400 hover:text-indigo-300 transition-colors duration-300"
                   >
                     Create a Participant Account
-                  </button>
+                  </button> */}
                 </motion.div>
               </motion.form>
             )}

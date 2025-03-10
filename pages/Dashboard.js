@@ -11,8 +11,8 @@ import SocialLinksEditor from "@/components/dashboard/socialhandles"
 import EditableYoutubeCard from "@/components/dashboard/videos"
 import EditableDescriptionCard from "@/components/dashboard/description"
 import ProfileIcon from "@/components/dashboard/profileicon"
-import { Play, Pause, Download, Users, Calendar, ExternalLink } from "lucide-react"
-
+import { Play, Pause, Download, Users, Calendar, ExternalLink, House } from "lucide-react"
+import { Twitter, Instagram, Linkedin, Globe } from 'lucide-react';
 const API_BASE_URL = "https://builderspace.onrender.com/api"
 
 // Inline components for the enhanced dashboard
@@ -81,7 +81,7 @@ const AcceptancePackCard = () => {
     link.click(); // Trigger download
     document.body.removeChild(link); // Remove after download
   };
-
+  const shiningLinkStyle = "text-blue-400 hover:text-blue-300 relative overflow-hidden transition-colors duration-300 after:absolute after:content-[''] after:h-full after:w-4 after:top-0 after:-left-8 after:skew-x-12 after:bg-white/20 after:opacity-0 hover:after:animate-shine";
   return (
     <div className="bg-zinc-800/30 border border-purple-500/20 rounded-xl px-4 sm:px-8 py-4 mb-8 backdrop-blur-sm hover:border-purple-500/40 transition-all duration-300 shadow-lg">
       <h2 className="text-2xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
@@ -96,9 +96,8 @@ const AcceptancePackCard = () => {
         {acceptanceImages.map((image) => (
           <div
             key={image.id}
-            className={`relative group ${
-              image.id === 5 ? "lg:col-span-1 lg:mx-auto" : ""
-            }`}
+            className={`relative group ${image.id === 5 ? "lg:col-span-1 lg:mx-auto" : ""
+              }`}
           >
             <div className="overflow-hidden rounded-lg">
               <Image
@@ -121,50 +120,116 @@ const AcceptancePackCard = () => {
         ))}
       </div>
 
-      <div className="text-zinc-300">
-        <p className="font-semibold mb-2">What to do:</p>
-        <ul className="list-disc list-inside space-y-1 text-sm">
-          <li>Pick the one you vibe with, download it, and share it anywhere.</li>
-          <li>Tag us so we can hype you up:</li>
-          <li className="ml-6">twitter: @_builderspace</li>
-          <li className="ml-6">insta: @_builderspace</li>
-          <li className="ml-6">linkedin: @builderspace</li>
-        </ul>
+      <div className="bg-gradient-to-br from-zinc-900/70 to-black/80 border border-zinc-800 rounded-xl p-5 shadow-lg">
+        <div className="text-zinc-300">
+          <p className="font-semibold mb-2">What to do:</p>
+          <ul className="list-disc list-inside space-y-1 text-sm">
+            <li>Pick the one you vibe with, download it, and share it anywhere.</li>
+            <li>Tag us so we can hype you up:</li>
+            <li className="ml-6 flex items-center gap-2">
+              <Twitter size={16} className="text-blue-400" />
+              <span>twitter: </span>
+              <a
+                href="https://x.com/Builders_space9?t=FMH0JZVCbW0_ovV2R8IS_g&s=08"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={shiningLinkStyle}
+              >
+                @Builders_space9
+              </a>
+            </li>
+            <li className="ml-6 flex items-center gap-2">
+              <Instagram size={16} className="text-pink-500" />
+              <span>insta: </span>
+              <a
+                href="https://www.instagram.com/builders.space"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={shiningLinkStyle}
+              >
+                @builders.space
+              </a>
+            </li>
+            <li className="ml-6 flex items-center gap-2">
+              <Linkedin size={16} className="text-blue-600" />
+              <span>linkedin: </span>
+              <a
+                href="https://www.linkedin.com/company/builder-s-space/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={shiningLinkStyle}
+              >
+                @builder-s-space
+              </a>
+            </li>
+            <li className="ml-6 flex items-center gap-2 mt-2">
+              <Globe size={16} className="text-green-500" />
+              <span>commudle: </span>
+              <a
+                href="https://www.commudle.com/communities/builders-space"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={shiningLinkStyle}
+              >
+                @builders-space
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );
 };
-
+const styleTag = typeof document !== 'undefined' ? document.createElement('style') : null;
+if (styleTag) {
+  styleTag.textContent = `
+    @keyframes shine {
+      0% {
+        left: -100%;
+        opacity: 0.6;
+      }
+      100% {
+        left: 200%;
+        opacity: 0;
+      }
+    }
+    
+    .animate-shine {
+      animation: shine 1.5s ease-in-out;
+    }
+  `;
+  document.head.appendChild(styleTag);
+}
 const BuddyPassCard = () => (
   <div className="bg-zinc-800/30 border border-purple-500/20 rounded-xl p-6 mb-8 backdrop-blur-sm hover:border-purple-500/40 transition-all duration-300 shadow-lg">
     <div className="flex items-center justify-between mb-4">
       <h2 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
         02 — Buddy Passes
       </h2>
-      <Badge className="bg-gradient-to-r from-purple-500 to-blue-500 text-white">5 Remaining</Badge>
+
     </div>
 
     <p className="text-zinc-300 mb-4">
-      Doing this solo? Totally fine. But having a buddy can make it even better. You get 5 buddy passes to invite people
+      Doing this solo? Totally fine. But having a buddy can make it even better. You get buddy passes to invite people
       to Builder's Space Nights. Got friends who've always wanted to build something? Send them a pass.
     </p>
 
     <div className="bg-zinc-900/50 rounded-lg p-4 mb-4 border border-zinc-700/50">
       <div className="flex items-center justify-between mb-2">
-        <p className="text-sm text-zinc-400">Your unique invite link:</p>
-        <Button variant="ghost" size="sm" className="h-7 text-xs text-blue-400 hover:text-blue-300">
+        <p className="text-sm text-zinc-400">invite link:</p>
+        <Button variant="ghost" size="sm" className="h-7 text-xs text-blue-400 hover:text-blue-300" onClick={() => {
+          navigator.clipboard.writeText("https://www.commudle.com/fill-form/3154");
+          alert("Copied to clipboard");
+        }}>
           Copy
         </Button>
       </div>
       <p className="text-xs bg-zinc-800 p-2 rounded border border-zinc-700 text-zinc-300 truncate">
-        https://builderspace.com/invite/your-unique-code
+        https://www.commudle.com/fill-form/3154
       </p>
     </div>
 
-    <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white">
-      <Users className="h-4 w-4 mr-2" />
-      Access Buddy Passes
-    </Button>
+
   </div>
 )
 
@@ -178,7 +243,7 @@ const KickoffDetailsCard = () => (
       <div className="flex-1 bg-zinc-900/50 rounded-lg p-4 border border-zinc-700/50">
         <div className="flex items-center mb-2">
           <Calendar className="h-5 w-5 mr-2 text-purple-400" />
-          <h3 className="font-medium">Date</h3>
+          <h3 className="font-medium">Date: 15th March</h3>
         </div>
         <p className="text-zinc-300">This Saturday</p>
       </div>
@@ -206,7 +271,7 @@ const KickoffDetailsCard = () => (
       </ul>
     </div>
 
-    <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white">
+    <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white" onClick={() => window.location.href = "https://lu.ma/mp4dualo"}>
       RSVP to Kickoff
     </Button>
   </div>
@@ -215,10 +280,18 @@ const KickoffDetailsCard = () => (
 // Main Dashboard Component
 const Dashboard = () => {
   const router = useRouter()
-  const [userData, setUserData] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [house, setHouse] = useState(null);
+  const [imageSrc, setImageSrc] = useState("");
+  const houseImages = {
+    Gryffindor: "/reference/Gryffindor.png",
+    Slytherin: "/reference/Slytherine.png",
+    Hufflepuff: "/reference/Hufflepuff.png",
+    Ravenclaw: "/reference/Ravenclaw.png",
+    Phoenix: "/reference/Phoenix.png",
+  };
   useEffect(() => {
     const verifyToken = async () => {
       const accessToken = localStorage.getItem("access_token")
@@ -264,6 +337,39 @@ const Dashboard = () => {
 
     verifyToken()
   }, [])
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      const token = localStorage.getItem("access_token");
+      if (!token) return;
+
+      try {
+        const response = await fetch("https://builderspace.onrender.com/api/get-user-details/", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setHouse(data.house);
+          console.log(data.house);
+
+          if (houseImages[data.house]) {
+            setImageSrc(houseImages[data.house]);
+          }
+        } else {
+          console.error("Failed to fetch user details");
+        }
+      } catch (error) {
+        console.error("Error fetching user details:", error);
+      }
+    };
+
+    fetchUserDetails();
+  }, []);
 
   const refreshToken = async () => {
     const refreshToken = localStorage.getItem("refresh_token")
@@ -318,7 +424,6 @@ const Dashboard = () => {
     router.push("/SignInPage/SignIn")
     return null
   }
-
   return (
     <div>
       <Navigation />
@@ -360,15 +465,36 @@ const Dashboard = () => {
         </div>
 
         {/* Builder's Space card grp wise with glowing effect */}
-        <div className="flex items-center justify-center rounded-xl mb-12 max-w-2xl w-full relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 blur-2xl rounded-full"></div>
-          <Image
-            src="/Welcome/Group 131.png"
-            alt="Builder's Space Card Group Wise"
-            width={480}
-            height={480}
-            className="object-contain relative z-10 hover:scale-105 transition-all duration-500 drop-shadow-2xl"
-          />
+        <div className="flex flex-col items-center gap-4 w-full max-w-2xl mx-auto">
+          <div className="flex items-center justify-center rounded-xl mb-1 w-full relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 blur-2xl rounded-full"></div>
+            <Image
+              src={imageSrc}
+              alt="House Image"
+              width={480}
+              height={480}
+              className="object-contain relative z-10 hover:scale-105 transition-all duration-500 drop-shadow-2xl"
+            />
+          </div>
+
+          <button
+            onClick={() => {
+              const link = document.createElement("a");
+              link.href = imageSrc;
+              link.download = `${house}.png`;
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+            }}
+            className="px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-medium rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center gap-2 mb-6"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-download">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Download Image
+          </button>
         </div>
 
         {/* Acceptance Letter */}

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { X, FileText, Edit2, AlertCircle, Loader2 } from 'lucide-react';
-import axios from 'axios';
 
 const EditableDescriptionCard = ({ apiEndpoint, cardId }) => {
     const [description, setDescription] = useState("");
@@ -10,22 +9,38 @@ const EditableDescriptionCard = ({ apiEndpoint, cardId }) => {
     const [error, setError] = useState(null);
     const [isHovered, setIsHovered] = useState(false);
 
-    // Fetch description from the API on component mount
+    // Fetch project idea description from the API on component mount
     useEffect(() => {
         const fetchDescriptionData = async () => {
             setIsLoading(true);
             try {
-                const response = await axios.get(`${apiEndpoint}/${cardId}/`);
-                const fetchedDescription = 'response.data.description';
-
-                setDescription(fetchedDescription);
-                setInputValue(fetchedDescription);
+                const token = localStorage.getItem("access_token");
+                
+                if (!token) {
+                    throw new Error("No authentication token found");
+                }
+                
+                const response = await fetch(`https://builderspace.onrender.com/api/get-user-details/`, {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                    },
+                });
+                
+                const data = await response.json();
+                const fetchedDescription = data.project_idea_description;
+                
+                if (fetchedDescription) {
+                    setDescription(fetchedDescription);
+                    setInputValue(fetchedDescription);
+                } else {
+                    setDescription("No project idea description available. Add one by clicking the edit button.");
+                    setInputValue("");
+                }
             } catch (err) {
-                // setError("Failed to load description data");
-                // console.error("API fetch error:", err);
-                const fetchedDescription="ahwgd,hawgdjweghkdfhwekfhkwdnjehje,jhjewjehukI m sanskar my name is whor are theay wre good not doing dinner theya re doing wromhg quaeery all must same not imparencies some are lurckyhkj.ewhd so some should be available on the sppt and npot in another dimension but can't understand true men feelings";
-                setDescription(fetchedDescription);
-                setInputValue(fetchedDescription);
+                setError("Failed to load project idea description");
+                console.error("API fetch error:", err);
             } finally {
                 setIsLoading(false);
             }
@@ -36,16 +51,32 @@ const EditableDescriptionCard = ({ apiEndpoint, cardId }) => {
 
     const handleSave = async () => {
         try {
-            // Send update to the backend
-            await axios.patch(`${apiEndpoint}/${cardId}/`, {
-                description: inputValue
+            const token = localStorage.getItem("access_token");
+            
+            if (!token) {
+                throw new Error("No authentication token found");
+            }
+            
+            const formData = new FormData();
+            formData.append("project_idea_description", inputValue);
+            
+            const response = await fetch(`https://builderspace.onrender.com/api/update-all-details/`, {
+                method: "PATCH",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                body: formData,
             });
+            
+            if (!response.ok) {
+                throw new Error("Failed to update project idea description");
+            }
 
             // Update local state only after successful API update
             setDescription(inputValue);
             setIsEditing(false);
         } catch (err) {
-            alert("Failed to update description. Please try again.");
+            alert("Failed to update project idea description. Please try again.");
             console.error("API update error:", err);
         }
     };
@@ -55,7 +86,7 @@ const EditableDescriptionCard = ({ apiEndpoint, cardId }) => {
             <div className="lg:col-span-5 bg-gradient-to-br from-zinc-900/70 to-black/80 border border-zinc-800 rounded-xl flex items-center justify-center relative h-[315px] shadow-lg transition-all duration-500 backdrop-blur-sm">
                 <div className="p-8 text-center space-y-4">
                     <Loader2 size={36} className="text-purple-500 animate-spin mx-auto" />
-                    <div className="text-zinc-400 font-medium">Loading description...</div>
+                    <div className="text-zinc-400 font-medium">Loading project idea description...</div>
                 </div>
             </div>
         );
@@ -88,11 +119,10 @@ const EditableDescriptionCard = ({ apiEndpoint, cardId }) => {
             
             <div className="relative bg-gradient-to-br from-zinc-900/90 to-black border border-zinc-800 rounded-xl shadow-lg transition-all duration-500 transform group-hover:scale-[1.01] group-hover:border-zinc-700 h-full">
                
-                
                 {/* Label */}
-                <div className="absolute top-3 left-3 z-20 bg-purple-600/90 text-white text-xs px-2 py-1 rounded-md flex items-center space-x-1 shadow-lg ">
+                <div className="absolute top-3 left-3 z-20 bg-purple-600/90 text-white text-xs px-2 py-1 rounded-md flex items-center space-x-1 shadow-lg">
                     <FileText size={14} />
-                    <span>Project Description</span>
+                    <span>Project Idea Description</span>
                 </div>
                 
                 {/* Description Content */}
@@ -106,12 +136,10 @@ const EditableDescriptionCard = ({ apiEndpoint, cardId }) => {
                     </div>
                 </div>
                 
-     
-                
                 {/* Edit Button with improved styling */}
                 <button
-                    className={`absolute bottom-[-5%] right-[-4%] w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center shadow-lg transform transition-all duration-300 z-20`}
-                    aria-label="Edit description"
+                    className="absolute bottom-[-5%] right-[-4%] w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center shadow-lg transform transition-all duration-300 z-20"
+                    aria-label="Edit project idea description"
                     onClick={() => setIsEditing(true)}
                 >
                     <Edit2 size={16} className="text-white" />
@@ -128,7 +156,7 @@ const EditableDescriptionCard = ({ apiEndpoint, cardId }) => {
                         <div className="flex justify-between items-center mb-4">
                             <h2 className="text-lg font-medium text-zinc-100 flex items-center gap-2">
                                 <FileText size={18} className="text-purple-500" />
-                                Edit Description
+                                Edit Project Idea Description
                             </h2>
                             <button
                                 onClick={() => setIsEditing(false)}
@@ -141,16 +169,16 @@ const EditableDescriptionCard = ({ apiEndpoint, cardId }) => {
                         <div className="space-y-5">
                             <div>
                                 <label className="block text-sm font-medium text-zinc-300 mb-2">
-                                    Description Text
+                                    Project Idea Description
                                 </label>
                                 <textarea
                                     value={inputValue}
                                     onChange={(e) => setInputValue(e.target.value)}
                                     className="w-full bg-zinc-800/80 border border-zinc-700 rounded-lg px-3 py-3 text-zinc-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 h-64 resize-none"
-                                    placeholder="Enter description text..."
+                                    placeholder="Enter your project idea description..."
                                 />
                                 <p className="mt-2 text-xs text-zinc-500">
-                                    Describe your project or add important information here
+                                    Describe your project idea in detail
                                 </p>
                             </div>
 
