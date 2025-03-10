@@ -69,9 +69,8 @@ const SignInPage = () => {
           await refreshToken()
         }
       } catch (err) {
-        localStorage.removeItem("access_token")
-        localStorage.removeItem("refresh_token")
-        localStorage.removeItem("user_info")
+        console.error("Error verifying token:", err)
+        await refreshToken()
       }
     }
 
@@ -103,12 +102,15 @@ const SignInPage = () => {
         localStorage.removeItem("refresh_token")
         localStorage.removeItem("user_info")
         return false
+        window.location.reload()
+        
       }
     } catch (err) {
       localStorage.removeItem("access_token")
       localStorage.removeItem("refresh_token")
       localStorage.removeItem("user_info")
       return false
+      window.location.reload()
     }
   }
 
