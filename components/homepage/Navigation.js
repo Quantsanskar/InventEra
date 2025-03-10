@@ -9,6 +9,7 @@ export default function Navigation() {
     { name: "Home", url: "/", icon: Home, active: pathname === "/" },
     { name: "Nights", url: "/thenights", icon: Eclipse, active: pathname === "/thenights" },
     { name: "Contact", url: "/contactPage/contact", icon: Phone, active: pathname === "/contact" },
+    { name: "Dashboard", url: "/Dashboard", icon: User, active: pathname === "/Dashboard" },
   ];
 
   return <NavBar items={navItems} />;
