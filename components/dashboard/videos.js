@@ -43,7 +43,7 @@ const EditableYoutubeCard = ({ apiEndpoint, cardId }) => {
                 const data = await response.json();
                 const fetchedVideoUrl = data.project_video_link; // Fetch project video link
                 
-                console.log(fetchedVideoUrl);
+                // console.log(fetchedVideoUrl);
                 if (fetchedVideoUrl) {
                     const videoId = extractVideoId(fetchedVideoUrl);
                     if (videoId) {

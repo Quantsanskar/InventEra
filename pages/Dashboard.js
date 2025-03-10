@@ -363,7 +363,7 @@ const Dashboard = () => {
         if (response.ok) {
           const data = await response.json();
           setHouse(data.house);
-          console.log(data.house);
+          // console.log(data.house);
 
           if (houseImages[data.house]) {
             setImageSrc(houseImages[data.house]);

@@ -122,7 +122,7 @@ const ProfileIcon = ({ customPosition, customSize }) => {
       }
 
       const data = await response.json();
-      console.log("API Response Data:", data);
+      // console.log("API Response Data:", data);
 
       setProfileData({
         email: data.email || "",
