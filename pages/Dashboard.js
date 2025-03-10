@@ -112,7 +112,7 @@ const AcceptancePackCard = () => {
             </div>
             <Button
               onClick={() => downloadImage(image)}
-              className="absolute bottom-2 right-2 bg-blue-600/80 hover:bg-blue-700 rounded-full h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 sm:h-10 sm:w-10"
+              className="absolute bottom-2 right-2 bg-blue-700 rounded-full h-8 w-8 p-0 opacity-100 sm:h-10 sm:w-10"
             >
               <Download className="h-4 w-4" />
             </Button>
