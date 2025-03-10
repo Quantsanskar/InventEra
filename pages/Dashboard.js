@@ -325,11 +325,19 @@ const Dashboard = () => {
           const refreshed = await refreshToken()
           if (!refreshed) {
             setError("Your session has expired. Please sign in again.")
+            localStorage.removeItem("access_token")
+            localStorage.removeItem("refresh_token")  
+            localStorage.removeItem("user_info")
+            window.location.href = "/SignInPage/SignIn"
           }
         }
       } catch (err) {
         console.error("Token verification failed:", err)
         setError("An error occurred while verifying your session. Please try again.")
+        localStorage.removeItem("access_token")
+        localStorage.removeItem("refresh_token")  
+        localStorage.removeItem("user_info")
+        window.location.href = "/SignInPage/SignIn"
       } finally {
         setLoading(false)
       }
