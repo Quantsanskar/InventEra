@@ -140,32 +140,31 @@ const SignInPage = () => {
     e.preventDefault();
     setLoading(true);
     setError("");
-
+  
     try {
-      const response = await fetch(`${API_BASE_URL}/user-login/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          CLIENT_ID: CLIENT_ID,
-          CLIENT_SECRET: CLIENT_SECRET,
-        },
-        body: JSON.stringify({
-          email: participantLoginEmail,
-          password: participantLoginPassword,
-        }),
-        credentials: "include",
-      });
-
+      const response = await fetch(
+        `${API_BASE_URL}/user-login/?CLIENT_ID=${encodeURIComponent(CLIENT_ID)}&CLIENT_SECRET=${encodeURIComponent(CLIENT_SECRET)}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: participantLoginEmail,
+            password: participantLoginPassword,
+          }),
+        }
+      );
+  
       const data = await response.json();
-
+  
       if (response.ok) {
-        // Check if user is a participant
         if (!data.is_participant) {
           setError("This account is not registered as a participant.");
           setLoading(false);
           return;
         }
-
+  
         // Store tokens and user info
         localStorage.setItem("access_token", data.access);
         localStorage.setItem("refresh_token", data.refresh);
@@ -180,7 +179,7 @@ const SignInPage = () => {
             is_staff: data.is_staff,
           })
         );
-
+  
         setSuccess(true);
         setTimeout(() => {
           router.push("/Dashboard");
@@ -195,6 +194,7 @@ const SignInPage = () => {
       setLoading(false);
     }
   };
+  
 
 
   // Handle attendee sign in
@@ -204,18 +204,16 @@ const SignInPage = () => {
     setError("")
 
     try {
-      const response = await fetch(`${API_BASE_URL}/user-login/`, {
+      const response = await fetch(`${API_BASE_URL}/user-login/?CLIENT_ID=${encodeURIComponent(CLIENT_ID)}&CLIENT_SECRET=${encodeURIComponent(CLIENT_SECRET)}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "CLIENT_ID": "qwerty@buildersspace9999Revant",
-          "CLIENT_SECRET": "asdfghjkwertyuicvbnmrevantsdfghjk2345678fghjrpeavaarnttkh"
         },
         body: JSON.stringify({
           email: attendeeEmail,
           password: attendeePassword,
         }),
-        credentials: "include",
+       
       })
 
       const data = await response.json()
@@ -265,12 +263,10 @@ const SignInPage = () => {
     setError("")
 
     try {
-      const response = await fetch(`${API_BASE_URL}/create-user-account/?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}`, {
+      const response = await fetch(`${API_BASE_URL}/create-user-account/?CLIENT_ID=${encodeURIComponent(CLIENT_ID)}&CLIENT_SECRET=${encodeURIComponent(CLIENT_SECRET)}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "CLIENT_ID": "qwerty@buildersspace9999Revant",
-          "CLIENT_SECRET": "asdfghjkwertyuicvbnmrevantsdfghjk2345678fghjrpeavaarnttkh"
         },
         body: JSON.stringify({
           first_name: firstName,
@@ -281,7 +277,7 @@ const SignInPage = () => {
           is_attendee: true,
           is_participant: false,
         }),
-        credentials: "include",
+       
       })
 
       const data = await response.json()
@@ -325,12 +321,10 @@ const SignInPage = () => {
     }
 
     try {
-      const response = await fetch(`${API_BASE_URL}/create-user-account/`, {
+      const response = await fetch(`${API_BASE_URL}/create-user-account/?CLIENT_ID=${encodeURIComponent(CLIENT_ID)}&CLIENT_SECRET=${encodeURIComponent(CLIENT_SECRET)}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "CLIENT_ID": "qwerty@buildersspace9999Revant",
-          "CLIENT_SECRET": "asdfghjkwertyuicvbnmrevantsdfghjk2345678fghjrpeavaarnttkh"
         },
         body: JSON.stringify({
           first_name: participantFirstName,
@@ -346,7 +340,6 @@ const SignInPage = () => {
           project_experience: projectExperience,
           project_video_link: projectVideoLink,
         }),
-        credentials: "include",
       })
 
       const data = await response.json()
