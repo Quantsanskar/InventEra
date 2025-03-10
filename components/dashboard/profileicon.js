@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { X, User, Home, Users, Bell, Github, Twitter, Instagram, Linkedin, Upload, Video } from "lucide-react"
 
 const API_BASE_URL = "https://builderspace.onrender.com/api"
+// const API_BASE_URL = "http://127.0.0.1:8000/api"
 
 const ProfileIcon = ({ customPosition, customSize }) => { // Removed customData prop
   const [showProfile, setShowProfile] = useState(false)
@@ -48,32 +49,105 @@ const ProfileIcon = ({ customPosition, customSize }) => { // Removed customData 
   }
 
   // Fetch user data function
-  const fetchUserData = async () => {
+  const verifyToken = async () => {
+    const accessToken = localStorage.getItem("access_token")
     try {
-      setLoading(true)
-      const token = localStorage.getItem("access_token")
+      const response = await fetch(`${API_BASE_URL}/verify-token/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ token: accessToken }),
+      });
 
-      if (!token) {
-        setError("No authentication token found")
-        setLoading(false)
-        return
+      if (!response.ok) {
+        throw new Error("Invalid token");
       }
 
+      if (response.ok) {
+        const userInfo = JSON.parse(localStorage.getItem("user_info") || "{}")
+      } else {
+        await refreshToken()
+      }
+    } catch (err) {
+      // localStorage.removeItem("access_token")
+      // localStorage.removeItem("refresh_token")
+      // localStorage.removeItem("user_info")
+    }
+  };
+
+  const refreshToken = async () => {
+    const refreshToken = localStorage.getItem("refresh_token")
+    if (!refreshToken) return false
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/token/refresh/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ refresh: refreshToken }),
+      })
+      if (response.ok) {
+        const data = await response.json()
+        localStorage.setItem("access_token", data.access)
+        const userInfo = JSON.parse(localStorage.getItem("user_info") || "{}")
+        return true
+      } else {
+        return false
+      }
+    } catch (err) {
+      // localStorage.removeItem("access_token")
+      // localStorage.removeItem("refresh_token")
+      // localStorage.removeItem("user_info")
+      return false
+    }
+  }
+
+  const fetchUserData = async () => {
+    try {
+      setLoading(true);
+      let token = localStorage.getItem("access_token");
+
+      // if (!token) {
+      //   setError("No authentication token found");
+      //   setLoading(false);
+      //   return;
+      // }
+
+      // // Verify and refresh token if needed
+      // const isTokenValid = await verifyToken();
+      // if (!isTokenValid) {
+      //   const isRefreshed = await refreshToken();
+      //   if (!isRefreshed) {
+      //     localStorage.removeItem("access_token");
+      //     // window.location.href = "/SignInPage/SignIn";
+      //     console.log.error("Token refresh failed");
+      //     // setError("Failed to refresh token");
+      //     return;
+      //   }
+      //   token = localStorage.getItem("access_token"); // Fetch new token
+      // }
+
+      // Encode Basic Auth Credentials
+      
+
+      // Fetch user data
       const response = await fetch(`${API_BASE_URL}/get-user-details/`, {
+        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-      })
+      });
 
       if (!response.ok) {
-        throw new Error(`Failed to fetch user data: ${response.status}`)
+        throw new Error(`Failed to fetch user data: ${response.status}`);
       }
 
-      const data = await response.json()
-      console.log("API Response Data:", data) // Log API response
+      const data = await response.json();
+      console.log("API Response Data:", data);
 
-      // Map backend data to component state
       setProfileData({
         email: data.email || "",
         first_name: data.first_name || "",
@@ -95,16 +169,19 @@ const ProfileIcon = ({ customPosition, customSize }) => { // Removed customData 
           twitter: data.twitter || "",
           linkedin: data.linkedin || "",
         },
-      })
+      });
 
-      setError(null)
+      setError(null);
     } catch (error) {
-      console.error("Error fetching user data:", error)
-      setError("Failed to load profile data")
+      console.error("Fetch user data error:", error);
+      setError("Failed to fetch user data");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
+
+
+
 
   useEffect(() => {
     fetchUserData() // Always fetch from API

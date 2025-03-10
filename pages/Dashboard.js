@@ -1,18 +1,218 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
 import Navigation from "@/components/homepage/Navigation"
 import { Footer } from "@/components/footer"
 import SocialLinksEditor from "@/components/dashboard/socialhandles"
 import EditableYoutubeCard from "@/components/dashboard/videos"
 import EditableDescriptionCard from "@/components/dashboard/description"
 import ProfileIcon from "@/components/dashboard/profileicon"
+import { Play, Pause, Download, Users, Calendar, ExternalLink } from "lucide-react"
 
 const API_BASE_URL = "https://builderspace.onrender.com/api"
 
+// Inline components for the enhanced dashboard
+const MusicPlayer = () => {
+  const [isPlaying, setIsPlaying] = useState(false)
+  const audioRef = useRef(null)
+
+  const togglePlay = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause()
+      } else {
+        audioRef.current.play()
+      }
+      setIsPlaying(!isPlaying)
+    }
+  }
+
+  return (
+    <div className="w-full max-w-xs lg:max-w-sm bg-zinc-800/50 lg:ml-8 rounded-xl px-1 py-2 lg:px-2 lg:py-4 border border-purple-500/20 shadow-lg backdrop-blur-sm">
+      <div className="flex items-center justify-center">
+        <div className="flex items-center space-x-16">
+          <Button
+            onClick={togglePlay}
+            variant="ghost"
+            size="icon"
+            className="h-10 w-10 rounded-full lg:-ml-16 bg-gradient-to-r from-purple-500 to-blue-500 text-white hover:opacity-90"
+          >
+            {isPlaying ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
+          </Button>
+          <div className="lg:-ml-8">
+            <h3 className="text-sm font-medium">Builder's Space Playlist</h3>
+            <p className="text-xs text-zinc-400">Season 1 Vibes</p>
+          </div>
+        </div>
+      </div>
+      <audio ref={audioRef} className="hidden">
+        <source src="/music/musicplist.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  )
+}
+
+const AcceptanceCard = ({ title, content }) => (
+  <div className="bg-zinc-800/30 border border-purple-500/20 rounded-xl p-6 mb-8 backdrop-blur-sm hover:border-purple-500/40 transition-all duration-300 shadow-lg">
+    <h2 className="text-2xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
+      {title}
+    </h2>
+    <div className="text-zinc-300 space-y-4">{content}</div>
+  </div>
+)
+
+const AcceptancePackCard = () => {
+  const acceptanceImages = [1, 2, 3, 4, 5].map((num) => ({
+    id: num,
+    src: `/images/acceptance-${num}.png`, // Replace with actual image paths
+    alt: `Acceptance Pack Design ${num}`,
+  }));
+
+  const downloadImage = (image) => {
+    const link = document.createElement("a"); // Create a temporary anchor element
+    link.href = image.src; // Set image source as href
+    link.download = `Acceptance-${image.id}.png`; // Set default file name
+    document.body.appendChild(link); // Append to body
+    link.click(); // Trigger download
+    document.body.removeChild(link); // Remove after download
+  };
+
+  return (
+    <div className="bg-zinc-800/30 border border-purple-500/20 rounded-xl px-4 sm:px-8 py-4 mb-8 backdrop-blur-sm hover:border-purple-500/40 transition-all duration-300 shadow-lg">
+      <h2 className="text-2xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
+        04 — Your Acceptance Pack
+      </h2>
+      <p className="text-zinc-300 mb-6">
+        This is huge—you made it into season 1! Celebrate it. We've designed 5 different acceptance images.
+      </p>
+
+      {/* Responsive grid: 1 column on small screens, 2 on medium, 3 on large */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-6">
+        {acceptanceImages.map((image) => (
+          <div
+            key={image.id}
+            className={`relative group ${
+              image.id === 5 ? "lg:col-span-1 lg:mx-auto" : ""
+            }`}
+          >
+            <div className="overflow-hidden rounded-lg">
+              <Image
+                src={image.src || "/placeholder.svg"}
+                alt={image.alt}
+                width={600}
+                height={700}
+                className="object-cover w-full h-auto"
+                placeholder="blur"
+                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
+              />
+            </div>
+            <Button
+              onClick={() => downloadImage(image)}
+              className="absolute bottom-2 right-2 bg-blue-600/80 hover:bg-blue-700 rounded-full h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 sm:h-10 sm:w-10"
+            >
+              <Download className="h-4 w-4" />
+            </Button>
+          </div>
+        ))}
+      </div>
+
+      <div className="text-zinc-300">
+        <p className="font-semibold mb-2">What to do:</p>
+        <ul className="list-disc list-inside space-y-1 text-sm">
+          <li>Pick the one you vibe with, download it, and share it anywhere.</li>
+          <li>Tag us so we can hype you up:</li>
+          <li className="ml-6">twitter: @_builderspace</li>
+          <li className="ml-6">insta: @_builderspace</li>
+          <li className="ml-6">linkedin: @builderspace</li>
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+const BuddyPassCard = () => (
+  <div className="bg-zinc-800/30 border border-purple-500/20 rounded-xl p-6 mb-8 backdrop-blur-sm hover:border-purple-500/40 transition-all duration-300 shadow-lg">
+    <div className="flex items-center justify-between mb-4">
+      <h2 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
+        02 — Buddy Passes
+      </h2>
+      <Badge className="bg-gradient-to-r from-purple-500 to-blue-500 text-white">5 Remaining</Badge>
+    </div>
+
+    <p className="text-zinc-300 mb-4">
+      Doing this solo? Totally fine. But having a buddy can make it even better. You get 5 buddy passes to invite people
+      to Builder's Space Nights. Got friends who've always wanted to build something? Send them a pass.
+    </p>
+
+    <div className="bg-zinc-900/50 rounded-lg p-4 mb-4 border border-zinc-700/50">
+      <div className="flex items-center justify-between mb-2">
+        <p className="text-sm text-zinc-400">Your unique invite link:</p>
+        <Button variant="ghost" size="sm" className="h-7 text-xs text-blue-400 hover:text-blue-300">
+          Copy
+        </Button>
+      </div>
+      <p className="text-xs bg-zinc-800 p-2 rounded border border-zinc-700 text-zinc-300 truncate">
+        https://builderspace.com/invite/your-unique-code
+      </p>
+    </div>
+
+    <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white">
+      <Users className="h-4 w-4 mr-2" />
+      Access Buddy Passes
+    </Button>
+  </div>
+)
+
+const KickoffDetailsCard = () => (
+  <div className="bg-zinc-800/30 border border-purple-500/20 rounded-xl p-6 mb-8 backdrop-blur-sm hover:border-purple-500/40 transition-all duration-300 shadow-lg">
+    <h2 className="text-2xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
+      01 — Kickoff Details
+    </h2>
+
+    <div className="flex flex-col md:flex-row gap-6 mb-6">
+      <div className="flex-1 bg-zinc-900/50 rounded-lg p-4 border border-zinc-700/50">
+        <div className="flex items-center mb-2">
+          <Calendar className="h-5 w-5 mr-2 text-purple-400" />
+          <h3 className="font-medium">Date</h3>
+        </div>
+        <p className="text-zinc-300">This Saturday</p>
+      </div>
+
+      <div className="flex-1 bg-zinc-900/50 rounded-lg p-4 border border-zinc-700/50">
+        <div className="flex items-center mb-2">
+          <Clock className="h-5 w-5 mr-2 text-blue-400" />
+          <h3 className="font-medium">Time</h3>
+        </div>
+        <p className="text-zinc-300">10:00 AM PST</p>
+      </div>
+    </div>
+
+    <p className="text-zinc-300 mb-4">
+      Kickoff is a live online stream and lasts about an hour. We'll break down how Builder's Space Nights works, the
+      schedule, and more. Nearly all your questions will be answered here.
+    </p>
+
+    <div className="bg-zinc-900/50 rounded-lg p-4 mb-4 border border-zinc-700/50">
+      <h3 className="font-medium mb-2">What to do now:</h3>
+      <ul className="list-disc list-inside space-y-1 text-sm text-zinc-300">
+        <li>RSVP using the button below</li>
+        <li>Set up reminders: a phone alarm, a sticky note on your fridge, whatever works</li>
+        <li>Be somewhere quiet with headphones. We recommend watching on a laptop or desktop</li>
+      </ul>
+    </div>
+
+    <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white">
+      RSVP to Kickoff
+    </Button>
+  </div>
+)
+
+// Main Dashboard Component
 const Dashboard = () => {
   const router = useRouter()
   const [userData, setUserData] = useState(null)
@@ -150,19 +350,111 @@ const Dashboard = () => {
             <br />
             Yeah, it's a lot, but we trust you can handle it.
             <br />
-            {/* To make it less of a drag, here's a song. Hit play, tune in, and let's get to it. */}
+            To make it less of a drag, here's a song. Hit play, tune in, and let's get to it.
           </p>
         </div>
 
-        {/* Logo with glowing effect */}
+        {/* Music Player */}
+        <div className="mb-12 w-full max-w-md">
+          <MusicPlayer />
+        </div>
+
+        {/* Builder's Space card grp wise with glowing effect */}
         <div className="flex items-center justify-center rounded-xl mb-12 max-w-2xl w-full relative">
           <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 blur-2xl rounded-full"></div>
           <Image
             src="/Welcome/Group 131.png"
-            alt="Builder's Space Logo"
+            alt="Builder's Space Card Group Wise"
             width={480}
             height={480}
             className="object-contain relative z-10 hover:scale-105 transition-all duration-500 drop-shadow-2xl"
+          />
+        </div>
+
+        {/* Acceptance Letter */}
+        <div className="w-full max-w-3xl mb-12">
+          <AcceptanceCard
+            title="First things first, your acceptance letter"
+            content={
+              <>
+                <p>We've pulled together an incredible group for season 1.</p>
+                <p>
+                  Creators, engineers, designers, writers, musicians, and more. If you're here, you're already part of
+                  something awesome.
+                </p>
+                <p>
+                  Some of you know exactly what you're building. Some of you just have a vague idea, and that's totally
+                  cool. And some of you? You're just here to figure it all out. That's what we're here for—to help you
+                  start building, and stay building.
+                </p>
+                <p className="font-bold">No matter where you're starting, you belong here.</p>
+              </>
+            }
+          />
+
+          <AcceptanceCard
+            title='"Wait... do I really wanna do this?"'
+            content={
+              <>
+                <p>If you're feeling unsure, let's talk:</p>
+                <ul className="list-disc list-inside space-y-1">
+                  <li>Most of us have jobs, classes, or full schedules. You're not alone.</li>
+                  <li>We'll guide you step by step. No pressure—just progress.</li>
+                  <li>At least join the kickoff and see what it's about. Take it from there.</li>
+                </ul>
+                <p className="font-bold mt-4">This isn't about being perfect. It's about showing up.</p>
+              </>
+            }
+          />
+        </div>
+
+        {/* Kickoff Details */}
+        <div className="w-full max-w-3xl mb-12">
+          <KickoffDetailsCard />
+        </div>
+
+        {/* Buddy Passes */}
+        <div className="w-full max-w-3xl mb-12">
+          <BuddyPassCard />
+        </div>
+
+        {/* Partners & Teams */}
+        <div className="w-full max-w-3xl mb-12">
+          <AcceptanceCard
+            title="03 — Partners & Teams"
+            content={
+              <>
+                <p>90% of participants go solo, but if you've got a partner or team, here's the deal:</p>
+                <ul className="list-disc list-inside space-y-1">
+                  <li>Each teammate needs their own account.</li>
+                  <li>Not registered yet? Send them a buddy pass to join.</li>
+                </ul>
+                <p className="mt-4">There's no way to "link" accounts, so just focus on building together.</p>
+              </>
+            }
+          />
+        </div>
+
+        {/* Acceptance Pack */}
+        <div className="w-full max-w-3xl mb-12">
+          <AcceptancePackCard />
+        </div>
+
+        {/* What's Next */}
+        <div className="w-full max-w-3xl mb-12">
+          <AcceptanceCard
+            title="What's Next?"
+            content={
+              <>
+                <p className="font-bold">Just one thing: show up to kickoff.</p>
+                <p>Don't worry about what's coming after that.</p>
+                <p className="mt-4">
+                  We'll go over everything—grants, demo days, and the big stuff at kickoff. All we need from you right
+                  now is to show up.
+                </p>
+                <p className="mt-4 font-bold">See you there, builder. Let's create something epic. 🚀</p>
+              </>
+            }
           />
         </div>
 
@@ -184,6 +476,25 @@ const Dashboard = () => {
       </div>
       <Footer />
     </div>
+  )
+}
+
+// Missing component definition for Clock
+const Clock = ({ className }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
   )
 }
 
