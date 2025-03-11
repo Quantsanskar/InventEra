@@ -1,10 +1,24 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { X, User, Home, Users, Bell, Github, Twitter, Instagram, Linkedin, Video } from "lucide-react"
+import {
+  X,
+  User,
+  Home,
+  Github,
+  Twitter,
+  Instagram,
+  Linkedin,
+  Video,
+  Calendar,
+  MapPin,
+  Award,
+  Heart,
+  Camera,
+} from "lucide-react"
 
 const API_BASE_URL = "https://builderspace.onrender.com/api"
 // const API_BASE_URL = "http://127.0.0.1:8000/api"
@@ -15,6 +29,9 @@ const ProfileIcon = ({ customPosition, customSize }) => {
   const [isHovered, setIsHovered] = useState(false)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [imagePreview, setImagePreview] = useState(null)
+  const [uploadingImage, setUploadingImage] = useState(false)
+  const fileInputRef = useRef(null)
   const [profileData, setProfileData] = useState({
     email: "",
     first_name: "",
@@ -22,7 +39,12 @@ const ProfileIcon = ({ customPosition, customSize }) => {
     house: "",
     about: "",
     designation: "",
-    profileImage: "/placeholder.svg", // Default image that will be used regardless
+    domain: "",
+    location: "",
+    date: "",
+    votes: "",
+    likes: "",
+    profileImage: "/images/profile.png", // Default fallback image
     notifications: 0,
     project: {
       project_idea_title: "",
@@ -35,15 +57,15 @@ const ProfileIcon = ({ customPosition, customSize }) => {
       github: "",
       twitter: "",
       linkedin: "",
-    }
+    },
   })
 
-  // Default profile image path - this will always be used
+  // Default profile image path - this will be used as fallback
   const DEFAULT_PROFILE_IMAGE = "/images/profile.png"
 
   const positionClass = customPosition || "absolute right-2 lg:right-6 bottom-[-20%] lg:bottom-[-25%] z-30"
   const sizeClasses = customSize || {
-    button: "w-20 h-20 md:w-16 md:h-16 lg:w-24 lg:h-24",
+    button: "w-16 h-16 sm:w-20 sm:h-20 md:w-16 md:h-16 lg:w-24 lg:h-24",
     image: { width: 96, height: 96 },
   }
 
@@ -57,10 +79,10 @@ const ProfileIcon = ({ customPosition, customSize }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ token: accessToken }),
-      });
+      })
 
       if (!response.ok) {
-        throw new Error("Invalid token");
+        throw new Error("Invalid token")
       }
 
       if (response.ok) {
@@ -73,7 +95,7 @@ const ProfileIcon = ({ customPosition, customSize }) => {
       // localStorage.removeItem("refresh_token")
       // localStorage.removeItem("user_info")
     }
-  };
+  }
 
   const refreshToken = async () => {
     const refreshToken = localStorage.getItem("refresh_token")
@@ -105,8 +127,8 @@ const ProfileIcon = ({ customPosition, customSize }) => {
 
   const fetchUserData = async () => {
     try {
-      setLoading(true);
-      let token = localStorage.getItem("access_token");
+      setLoading(true)
+      const token = localStorage.getItem("access_token")
 
       // Fetch user data
       const response = await fetch(`${API_BASE_URL}/get-user-details/`, {
@@ -115,14 +137,25 @@ const ProfileIcon = ({ customPosition, customSize }) => {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-      });
+      })
 
       if (!response.ok) {
-        throw new Error(`Failed to fetch user data: ${response.status}`);
+        throw new Error(`Failed to fetch user data: ${response.status}`)
       }
 
-      const data = await response.json();
-      // console.log("API Response Data:", data);
+      const data = await response.json()
+
+      // Format date if exists
+      const formattedDate = data.date_joined ? new Date(data.date_joined).toISOString().split("T")[0] : ""
+
+      // Check if profile image exists and create proper URL
+      const profileImageUrl = data.profile_picture?.startsWith("/media/")
+        ? `https://builderspace.onrender.com${data.profile_picture.replace("/media//media/", "/media/")}`
+        : DEFAULT_PROFILE_IMAGE;
+
+
+
+      // Create an image object to test if the URL is valid
 
       setProfileData({
         email: data.email || "",
@@ -131,7 +164,12 @@ const ProfileIcon = ({ customPosition, customSize }) => {
         house: data.house || "",
         about: data.about || "",
         designation: data.designation || "",
-        profileImage: DEFAULT_PROFILE_IMAGE, // Always use default image regardless of backend data
+        domain: data.domain || "",
+        location: data.location || "",
+        date: formattedDate,
+        votes: data.votes || "0",
+        likes: data.likes || "0",
+        profileImage: profileImageUrl,
         notifications: data.unread_notifications || 0,
         project: {
           project_idea_title: data.project_idea_title || "",
@@ -145,33 +183,73 @@ const ProfileIcon = ({ customPosition, customSize }) => {
           twitter: data.twitter || "",
           linkedin: data.linkedin || "",
         },
-      });
+      })
 
-      setError(null);
+      setError(null)
     } catch (error) {
-      console.error("Fetch user data error:", error);
-      setError("Failed to fetch user data");
+      console.error("Fetch user data error:", error)
+      setError("Failed to fetch user data")
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   useEffect(() => {
     fetchUserData() // Always fetch from API
   }, [showProfileModal]) // Refresh when modal closes
 
+  useEffect(() => {
+    if (profileData.profileImage && profileData.profileImage !== DEFAULT_PROFILE_IMAGE) {
+      const img = document.createElement("img"); // Correct way
+
+      img.onerror = () => {
+        setProfileData((prevData) => ({
+          ...prevData,
+          profileImage: DEFAULT_PROFILE_IMAGE, // Set default on error
+        }));
+      };
+
+      img.src = profileData.profileImage; // Trigger loading
+    }
+  }, [profileData.profileImage]);
+
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0]
+    if (!file) return
+
+    // Check file type
+    const validTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"]
+    if (!validTypes.includes(file.type)) {
+      alert("Please select a valid image file (JPEG, PNG, GIF, WEBP)")
+      return
+    }
+
+    // Check file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      alert("Image size should be less than 5MB")
+      return
+    }
+
+    // Create preview URL
+    const reader = new FileReader()
+    reader.onloadend = () => {
+      setImagePreview(reader.result)
+    }
+    reader.readAsDataURL(file)
+  }
+
+  const triggerFileInput = () => {
+    fileInputRef.current.click()
+  }
+
   const handleUpdateProfile = async (formData) => {
     try {
+      setUploadingImage(true)
       const token = localStorage.getItem("access_token")
 
       if (!token) {
         throw new Error("No authentication token found")
-      }
-
-      // Remove profile_picture from formData if it exists
-      // This ensures profile image is never sent to backend
-      if (formData.has("profile_picture")) {
-        formData.delete("profile_picture")
       }
 
       const response = await fetch(`${API_BASE_URL}/update-all-details/`, {
@@ -195,6 +273,8 @@ const ProfileIcon = ({ customPosition, customSize }) => {
     } catch (error) {
       console.error("Profile update error:", error)
       return false
+    } finally {
+      setUploadingImage(false)
     }
   }
 
@@ -226,6 +306,12 @@ const ProfileIcon = ({ customPosition, customSize }) => {
     const lastName = e.target.last_name.value
     const about = e.target.about.value
     const designation = e.target.designation.value
+    const domain = e.target.domain.value
+    const location = e.target.location.value
+    const date = e.target.date.value
+    const votes = e.target.votes.value
+    const likes = e.target.likes.value
+
     const projectTitle = e.target.project_title.value
     const projectDescription = e.target.project_description.value
     const projectExperience = e.target.project_experience.value
@@ -240,6 +326,12 @@ const ProfileIcon = ({ customPosition, customSize }) => {
     formData.append("last_name", lastName)
     formData.append("about", about)
     formData.append("designation", designation)
+    formData.append("domain", domain)
+    formData.append("location", location)
+    formData.append("date", date)
+    formData.append("votes", votes)
+    formData.append("likes", likes)
+
     formData.append("project_idea_title", projectTitle)
     formData.append("project_idea_description", projectDescription)
     formData.append("project_experience", projectExperience)
@@ -249,12 +341,16 @@ const ProfileIcon = ({ customPosition, customSize }) => {
     formData.append("twitter", twitter)
     formData.append("linkedin", linkedin)
 
-    // No profile image is added to formData
+    // Add profile image if there is a new one selected
+    if (fileInputRef.current && fileInputRef.current.files[0]) {
+      formData.append("profile_picture", fileInputRef.current.files[0])
+    }
 
     const success = await handleUpdateProfile(formData)
 
     if (success) {
       setShowProfileModal(false)
+      setImagePreview(null)
     }
   }
 
@@ -270,11 +366,11 @@ const ProfileIcon = ({ customPosition, customSize }) => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
-            refresh: localStorage.getItem("refresh_token")
-          })
+            refresh: localStorage.getItem("refresh_token"),
+          }),
         })
 
         // Even if the API call fails, we still want to clear local storage
@@ -293,11 +389,35 @@ const ProfileIcon = ({ customPosition, customSize }) => {
     }
   }
 
+  // Format date to be more readable
+  const formatDate = (dateString) => {
+    if (!dateString) return "Not available"
+
+    try {
+      const date = new Date(dateString)
+      return new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }).format(date)
+    } catch (error) {
+      return dateString
+    }
+  }
+
+  // Add a function to handle image loading errors globally
+  const handleImageError = (e) => {
+    e.target.onerror = null
+    e.target.src = DEFAULT_PROFILE_IMAGE
+  }
+
   // Loading state
   if (loading) {
     return (
       <div className={positionClass}>
-        <div className={`${sizeClasses.button} rounded-full bg-zinc-800/50 animate-pulse flex items-center justify-center`}>
+        <div
+          className={`${sizeClasses.button} rounded-full bg-zinc-800/50 animate-pulse flex items-center justify-center`}
+        >
           <div className="w-8 h-8 rounded-full border-2 border-zinc-700 border-t-zinc-300 animate-spin"></div>
         </div>
       </div>
@@ -308,7 +428,9 @@ const ProfileIcon = ({ customPosition, customSize }) => {
   if (error) {
     return (
       <div className={positionClass}>
-        <div className={`${sizeClasses.button} rounded-full bg-red-900/20 border border-red-700/50 flex items-center justify-center`}>
+        <div
+          className={`${sizeClasses.button} rounded-full bg-red-900/20 border border-red-700/50 flex items-center justify-center`}
+        >
           <span className="text-xs text-red-400">Error</span>
         </div>
       </div>
@@ -350,20 +472,21 @@ const ProfileIcon = ({ customPosition, customSize }) => {
                   hover:ring-indigo-200
                   hover:ring-opacity-50
                   active:scale-95
-                  ${isHovered ? 'ring-4 ring-indigo-300 ring-opacity-70' : 'ring-4 ring-indigo-300 ring-opacity-40'}
+                  ${isHovered ? "ring-4 ring-indigo-300 ring-opacity-70" : "ring-4 ring-indigo-300 ring-opacity-40"}
                 `}
           >
             <Image
-              src={DEFAULT_PROFILE_IMAGE}
+              src={profileData.profileImage || "/placeholder.svg"}
               alt="Profile"
               width={sizeClasses.image.width}
               height={sizeClasses.image.height}
               className="object-cover flex items-center justify-center w-full h-full"
+              onError={handleImageError}
             />
 
             {profileData.notifications > 0 && (
               <motion.div
-                className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shadow-lg border-2 border-zinc-900"
+                className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center shadow-lg border-2 border-zinc-900"
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ type: "spring", stiffness: 500, damping: 20 }}
@@ -382,7 +505,7 @@ const ProfileIcon = ({ customPosition, customSize }) => {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.95 }}
               transition={{ duration: 0.2 }}
-              className="absolute right-0 mt-4 w-80 bg-gradient-to-b from-zinc-900 to-zinc-950 backdrop-blur-md rounded-xl border border-zinc-800/50 shadow-2xl overflow-hidden"
+              className="absolute right-0 mt-4 w-64 sm:w-80 max-w-[90vw] bg-gradient-to-b from-zinc-900 to-zinc-950 backdrop-blur-md rounded-xl border border-zinc-800/50 shadow-2xl overflow-hidden"
               role="dialog"
               aria-modal="true"
               data-dropdown="profile"
@@ -390,56 +513,83 @@ const ProfileIcon = ({ customPosition, customSize }) => {
               <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:20px_20px] pointer-events-none" />
               <div className="absolute inset-0 bg-gradient-to-b from-blue-500/20 via-transparent to-purple-500/20 opacity-20 pointer-events-none" />
 
-              <div className="relative p-5">
+              <div className="relative p-4 sm:p-5">
                 <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-500/30 to-transparent" />
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-zinc-700 ring-2 ring-zinc-500/20 shadow-xl">
+                  <div className="flex items-center gap-2 sm:gap-3">
+                    <div className="relative w-12 h-12 sm:w-16 sm:h-16 rounded-full overflow-hidden border-2 border-zinc-700 ring-2 ring-zinc-500/20 shadow-xl">
                       <Image
-                        src={DEFAULT_PROFILE_IMAGE}
+                        src={profileData.profileImage || "/placeholder.svg"}
                         alt="Profile"
                         fill
                         className="object-cover object-center"
+                        onError={handleImageError}
                       />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-lg text-white truncate">
+                      <h3 className="font-semibold text-base sm:text-lg text-white truncate">
                         {profileData.first_name} {profileData.last_name}
                       </h3>
-                      <p className="text-sm text-zinc-400 truncate">{profileData.email}</p>
+                      <p className="text-xs sm:text-sm text-zinc-400 truncate">{profileData.email}</p>
+                      {profileData.domain && (
+                        <p className="text-xs text-indigo-400 truncate mt-1">{profileData.domain}</p>
+                      )}
                     </div>
                   </div>
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="text-zinc-400 hover:text-white bg-zinc-800/50 hover:bg-zinc-700/50 rounded-full h-8 w-8"
+                    className="text-zinc-400 hover:text-white bg-zinc-800/50 hover:bg-zinc-700/50 rounded-full h-7 w-7 sm:h-8 sm:w-8"
                     onClick={() => setShowProfile(false)}
                   >
-                    <X className="h-4 w-4" />
+                    <X className="h-3 w-3 sm:h-4 sm:w-4" />
                   </Button>
                 </div>
               </div>
 
-              <div className="p-3 space-y-1">
+              <div className="p-2 sm:p-3 space-y-1">
                 <div className="grid grid-cols-2 gap-2 p-2">
                   <motion.div
                     whileHover={{ scale: 1.03 }}
                     className="flex items-center gap-2 p-2 rounded-lg bg-gradient-to-br from-zinc-800/80 to-zinc-900/80 hover:from-blue-900/20 hover:to-blue-800/10 border border-zinc-700/50 transition-all duration-200 cursor-pointer"
                   >
-                    <div className="w-8 h-8 rounded-md bg-blue-900/30 flex items-center justify-center">
-                      <Home className="h-4 w-4 text-blue-400" />
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-md bg-blue-900/30 flex items-center justify-center">
+                      <Home className="h-3 w-3 sm:h-4 sm:w-4 text-blue-400" />
                     </div>
-                    <span className="text-zinc-300 text-sm">{profileData.house || "No House"}</span>
+                    <span className="text-zinc-300 text-xs sm:text-sm truncate">{profileData.house || "No House"}</span>
                   </motion.div>
 
                   <motion.div
                     whileHover={{ scale: 1.03 }}
                     className="flex items-center gap-2 p-2 rounded-lg bg-gradient-to-br from-zinc-800/80 to-zinc-900/80 hover:from-purple-900/20 hover:to-purple-800/10 border border-zinc-700/50 transition-all duration-200 cursor-pointer"
                   >
-                    <div className="w-8 h-8 rounded-md bg-purple-900/30 flex items-center justify-center">
-                      <Users className="h-4 w-4 text-purple-400" />
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-md bg-purple-900/30 flex items-center justify-center">
+                      <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-purple-400" />
                     </div>
-                    <span className="text-zinc-300 text-sm">Participant</span>
+                    <span className="text-zinc-300 text-xs sm:text-sm truncate">
+                      {profileData.location || "No Location"}
+                    </span>
+                  </motion.div>
+                </div>
+
+                {/* Stats Row */}
+                <div className="grid grid-cols-3 gap-2 p-2">
+                  <motion.div
+                    whileHover={{ scale: 1.03 }}
+                    className="flex flex-col items-center p-2 rounded-lg bg-gradient-to-br from-zinc-800/80 to-zinc-900/80 hover:from-green-900/20 hover:to-green-800/10 border border-zinc-700/50 transition-all duration-200"
+                  >
+                    <Award className="h-3 w-3 sm:h-4 sm:w-4 text-green-400 mb-1" />
+                    <span className="text-green-400 text-xs sm:text-sm font-bold">{profileData.votes}</span>
+                    <span className="text-zinc-400 text-xs">Votes</span>
+                  </motion.div>
+
+                  <motion.div
+                    whileHover={{ scale: 1.03 }}
+                    className="flex flex-col items-center p-2 rounded-lg bg-gradient-to-br from-zinc-800/80 to-zinc-900/80 hover:from-red-900/20 hover:to-red-800/10 border border-zinc-700/50 transition-all duration-200"
+                  >
+                    <Heart className="h-3 w-3 sm:h-4 sm:w-4 text-red-400 mb-1" />
+                    <span className="text-red-400 text-xs sm:text-sm font-bold">{profileData.likes}</span>
+                    <span className="text-zinc-400 text-xs">Likes</span>
                   </motion.div>
                 </div>
 
@@ -447,38 +597,23 @@ const ProfileIcon = ({ customPosition, customSize }) => {
                   <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                     <Button
                       variant="outline"
-                      className="w-full bg-gradient-to-r from-zinc-800/80 to-zinc-900/80 hover:from-blue-900/30 hover:to-purple-900/30 text-zinc-300 hover:text-white border-zinc-700/50 hover:border-zinc-600 transition-all duration-300 h-10"
+                      className="w-full bg-gradient-to-r from-zinc-800/80 to-zinc-900/80 hover:from-blue-900/30 hover:to-purple-900/30 text-zinc-300 hover:text-white border-zinc-700/50 hover:border-zinc-600 transition-all duration-300 h-8 sm:h-10 text-xs sm:text-sm"
                       onClick={handleViewProfile}
                     >
-                      <User className="h-4 w-4 mr-2" />
+                      <User className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
                       View Profile
                     </Button>
                   </motion.div>
-
-                  {/* <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                    <Button
-                      variant="outline"
-                      className="w-full bg-gradient-to-r from-zinc-800/80 to-zinc-900/80 hover:from-amber-900/30 hover:to-orange-900/30 text-zinc-300 hover:text-white border-zinc-700/50 hover:border-zinc-600 transition-all duration-300 h-10"
-                    >
-                      <Bell className="h-4 w-4 mr-2" />
-                      Notifications
-                      {profileData.notifications > 0 && (
-                        <span className="ml-2 bg-red-500/80 text-white text-xs rounded-full px-1.5 py-0.5 min-w-[20px]">
-                          {profileData.notifications}
-                        </span>
-                      )}
-                    </Button>
-                  </motion.div> */}
 
                   <div className="h-px bg-gradient-to-r from-transparent via-zinc-700/50 to-transparent my-1" />
 
                   <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                     <Button
                       variant="outline"
-                      className="w-full bg-gradient-to-r from-zinc-800/80 to-zinc-900/80 hover:from-red-900/30 hover:to-rose-900/30 text-zinc-300 hover:text-white border-zinc-700/50 hover:border-zinc-600 transition-all duration-300 h-10"
+                      className="w-full bg-gradient-to-r from-zinc-800/80 to-zinc-900/80 hover:from-red-900/30 hover:to-rose-900/30 text-zinc-300 hover:text-white border-zinc-700/50 hover:border-zinc-600 transition-all duration-300 h-8 sm:h-10 text-xs sm:text-sm"
                       onClick={handleSignOut}
                     >
-                      <User className="h-4 w-4 mr-2" />
+                      <User className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
                       Sign Out
                     </Button>
                   </motion.div>
@@ -501,34 +636,77 @@ const ProfileIcon = ({ customPosition, customSize }) => {
               className="bg-zinc-900 rounded-xl border border-zinc-800 shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto"
             >
               <div className="sticky top-0 z-10 bg-zinc-900 border-b border-zinc-800 p-4 flex justify-between items-center">
-                <h2 className="text-xl font-bold text-white">Edit Profile</h2>
+                <h2 className="text-lg sm:text-xl font-bold text-white">Edit Profile</h2>
                 <Button
                   variant="ghost"
                   size="icon"
                   className="text-zinc-400 hover:text-white rounded-full"
                   onClick={() => setShowProfileModal(false)}
                 >
-                  <X className="h-5 w-5" />
+                  <X className="h-4 w-4 sm:h-5 sm:w-5" />
                 </Button>
               </div>
 
               <form onSubmit={handleSubmitProfile}>
-                <div className="p-6 space-y-6">
-                  {/* Profile Picture - Display only, no upload option */}
+                <div className="p-4 sm:p-6 space-y-6">
+                  {/* Profile Picture with upload option */}
                   <div className="flex flex-col items-center gap-4">
-                    <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-zinc-800">
-                      <Image
-                        src={DEFAULT_PROFILE_IMAGE}
-                        alt="Profile"
-                        fill
-                        className="object-cover"
+                    <div className="relative">
+                      <div className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden border-4 border-zinc-800">
+                        <Image
+                          src={imagePreview || profileData.profileImage}
+                          alt="Profile"
+                          fill
+                          className="object-cover"
+                          onError={handleImageError}
+                        />
+                      </div>
+                      <Button
+                        type="button"
+                        size="icon"
+                        className="absolute bottom-0 right-0 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white w-8 h-8 sm:w-10 sm:h-10 shadow-lg border-2 border-zinc-800"
+                        onClick={triggerFileInput}
+                        disabled={uploadingImage}
+                      >
+                        {uploadingImage ? (
+                          <div className="animate-spin w-4 h-4 border-2 border-zinc-300 border-t-white rounded-full" />
+                        ) : (
+                          <Camera className="h-4 w-4" />
+                        )}
+                      </Button>
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={handleFileChange}
                       />
                     </div>
                     <p className="text-zinc-400 text-sm">{profileData.first_name + " " + profileData.last_name}</p>
+
+                    {/* Joined date display */}
+                    <div className="flex items-center text-xs text-zinc-500">
+                      <Calendar className="h-3 w-3 mr-1" />
+                      <span>Joined: {formatDate(profileData.date)}</span>
+                    </div>
+                  </div>
+
+                  {/* Account Stats */}
+                  <div className="grid grid-cols-3 gap-4 bg-zinc-800/30 p-4 rounded-lg border border-zinc-700/30">
+                    <div className="flex flex-col items-center">
+                      <p className="text-base sm:text-lg font-bold text-green-400">{profileData.votes}</p>
+                      <p className="text-xs text-zinc-400">Votes</p>
+                      <input type="hidden" name="votes" id="votes" defaultValue={profileData.votes} />
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <p className="text-base sm:text-lg font-bold text-red-400">{profileData.likes}</p>
+                      <p className="text-xs text-zinc-400">Likes</p>
+                      <input type="hidden" name="likes" id="likes" defaultValue={profileData.likes} />
+                    </div>
                   </div>
 
                   {/* Basic Info */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="first_name" className="block text-sm font-medium text-zinc-400 mb-1">
                         First Name
@@ -538,7 +716,7 @@ const ProfileIcon = ({ customPosition, customSize }) => {
                         id="first_name"
                         name="first_name"
                         defaultValue={profileData.first_name}
-                        className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white"
+                        className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white text-sm"
                       />
                     </div>
                     <div>
@@ -550,12 +728,51 @@ const ProfileIcon = ({ customPosition, customSize }) => {
                         id="last_name"
                         name="last_name"
                         defaultValue={profileData.last_name}
-                        className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white"
+                        className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white text-sm"
                       />
                     </div>
                   </div>
 
-                  {/* About & Designation */}
+                  {/* Hidden date field */}
+                  <input type="hidden" id="date" name="date" defaultValue={profileData.date} />
+
+                  {/* Domain & Location */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label htmlFor="domain" className="block text-sm font-medium text-zinc-400 mb-1">
+                        <div className="flex items-center gap-1">
+                          <Award className="h-4 w-4 text-indigo-400" />
+                          <span>Domain/Expertise</span>
+                        </div>
+                      </label>
+                      <input
+                        type="text"
+                        id="domain"
+                        name="domain"
+                        defaultValue={profileData.domain}
+                        className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white"
+                        placeholder="e.g. Frontend Developer, UI/UX Designer"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="location" className="block text-sm font-medium text-zinc-400 mb-1">
+                        <div className="flex items-center gap-1">
+                          <MapPin className="h-4 w-4 text-purple-400" />
+                          <span>Location</span>
+                        </div>
+                      </label>
+                      <input
+                        type="text"
+                        id="location"
+                        name="location"
+                        defaultValue={profileData.location}
+                        className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white"
+                        placeholder="e.g. San Francisco, CA"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Designation & About */}
                   <div className="grid grid-cols-1 gap-4">
                     <div>
                       <label htmlFor="designation" className="block text-sm font-medium text-zinc-400 mb-1">
@@ -732,3 +949,4 @@ const ProfileIcon = ({ customPosition, customSize }) => {
 }
 
 export default ProfileIcon
+

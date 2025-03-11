@@ -7,7 +7,13 @@ const nextConfig = {
         hostname: "assets.aceternity.com",
         pathname: "**",
       },
+      {
+        protocol: "https",
+        hostname: "builderspace.onrender.com",
+        pathname: "**",
+      },
     ],
+    
   },
   async headers() {
     return [
