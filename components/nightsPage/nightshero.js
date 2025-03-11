@@ -209,13 +209,13 @@ const HeroSection = () => {
       </motion.div>
 
       {/* Custom Cursor */}
-      <motion.div
+      {/* <motion.div
         className="fixed w-6 h-6 rounded-full border-2 border-white pointer-events-none z-50 mix-blend-difference"
         style={{
           left: cursorXSpring,
           top: cursorYSpring,
         }}
-      />
+      /> */}
     </section>
   )
 }
