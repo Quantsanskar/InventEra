@@ -28,14 +28,14 @@ const SponsorCard = ({ name, logo, description }) => (
 
 const sponsors = [
   {
-    name: "Sponsor 1(searching)",
-    logo: "/reference/SponsorsCall.jpg", // Add your sponsor logos
-    description: "..."
+    name: "COMMUDLE",
+    logo: "/sponsors/COMMUDLE.png", // Add your sponsor logos
+    description: ""
   },
   {
-    name: "Sponsor 2(searching)",
-    logo: "/reference/SponsorsCall.jpg",
-    description: "..."
+    name: "ONNOFF",
+    logo: "/sponsors/ONNOFF.png",
+    description: ""
   },
   {
     name: "Sponsor 3(searching)",
