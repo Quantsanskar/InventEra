@@ -253,7 +253,7 @@ const KickoffDetailsCard = () => (
           <Clock className="h-5 w-5 mr-2 text-blue-400" />
           <h3 className="font-medium">Time</h3>
         </div>
-        <p className="text-zinc-300">10:00 AM PST</p>
+        <p className="text-zinc-300">9:30 PM</p>
       </div>
     </div>
 
