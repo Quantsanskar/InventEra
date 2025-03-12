@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
+import { useRouter } from "next/router"
 import { Button } from "@/components/ui/button"
 import {
   X,
@@ -19,6 +20,7 @@ import {
   Heart,
   Camera,
 } from "lucide-react"
+import { set } from "zod"
 
 const API_BASE_URL = "https://builderspace.onrender.com/api"
 // const API_BASE_URL = "http://127.0.0.1:8000/api"
@@ -32,6 +34,7 @@ const ProfileIcon = ({ customPosition, customSize, onProfileUpdate }) => {
   const [imagePreview, setImagePreview] = useState(null)
   const [uploadingImage, setUploadingImage] = useState(false)
   const fileInputRef = useRef(null)
+  const router = useRouter()
   const [profileData, setProfileData] = useState({
     email: "",
     first_name: "",
@@ -374,7 +377,7 @@ const ProfileIcon = ({ customPosition, customSize, onProfileUpdate }) => {
     try {
       // Get the access token from localStorage
       const token = localStorage.getItem("access_token")
-
+      setLoading(true)
       if (token) {
         // Call the blacklist API to invalidate the token
         const response = await fetch("https://builderspace.onrender.com/api/token/blacklist/", {
@@ -390,17 +393,20 @@ const ProfileIcon = ({ customPosition, customSize, onProfileUpdate }) => {
 
         // Even if the API call fails, we still want to clear local storage
         if (!response.ok) {
+          setLoading(false)
           console.error("Error blacklisting token:", await response.text())
+
         }
       }
     } catch (error) {
+      setLoading(false)
       console.error("Error during sign out:", error)
     } finally {
       // Clear localStorage
       localStorage.removeItem("access_token")
       localStorage.removeItem("refresh_token")
       localStorage.removeItem("user_info")
-      window.location.href = "/SignInPage/SignIn"
+      router.push("/SignInPage/SignIn")
     }
   }
 
@@ -629,7 +635,7 @@ const ProfileIcon = ({ customPosition, customSize, onProfileUpdate }) => {
                       onClick={handleSignOut}
                     >
                       <User className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
-                      Sign Out
+                      <span>{loading ? "Signing Out..." : "Sign Out"}</span>
                     </Button>
                   </motion.div>
                 </div>

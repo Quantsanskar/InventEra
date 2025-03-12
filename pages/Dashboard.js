@@ -13,7 +13,9 @@ import ProfileIcon from "@/components/dashboard/profileicon"
 import { Play, Pause, Download, Calendar } from "lucide-react"
 import { Twitter, Instagram, Linkedin, Globe } from "lucide-react"
 import { set } from "zod"
-const API_BASE_URL = "https://builderspace.onrender.com/api"
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+const CLIENT_ID = "qwerty@buildersspace9999Revant";
+const CLIENT_SECRET = "asdfghjkwertyuicvbnmrevantsdfghjk2345678fghjrpeavaarnttkh";
 
 // Inline components for the enhanced dashboard
 const MusicPlayer = () => {
@@ -305,19 +307,38 @@ const Dashboard = () => {
   }
   useEffect(() => {
     const verifyToken = async () => {
-      const accessToken = localStorage.getItem("access_token")
-      const userInfo = localStorage.getItem("user_info")
-      if (!accessToken || !userInfo) {
-        await refreshToken()
-        if (!refreshToken || !userInfo) {
-          setError("You need to sign in to access this page.")
-          localStorage.removeItem("access_token")
-          localStorage.removeItem("refresh_token")
-          localStorage.removeItem("user_info")
-          window.location.href = "/SignInPage/SignIn"
-          setLoading(false)
-          return
+      let accessToken = localStorage.getItem("access_token");
+      let userInfo = localStorage.getItem("user_info");
+      let refreshtoken = localStorage.getItem("refresh_token");
+      if (!accessToken || !userInfo || !refreshtoken) {
+        if (!userInfo) {
+          setLoading(false);
+          setError("You need to sign in to access this page.");
+          localStorage.removeItem("access_token");
+          localStorage.removeItem("refresh_token");
+          // localStorage.removeItem("user_info");
+          // window.location.href = "/SignInPage/SignIn";
+          return;
         }
+        const refreshed = await refreshToken();
+        if (!refreshed) {
+          setLoading(false);
+          setError("You need to sign in to access this page.");
+          // localStorage.removeItem("access_token");
+          // localStorage.removeItem("refresh_token");
+          // localStorage.removeItem("user_info");
+          // window.location.href = "/SignInPage/SignIn";
+          return;
+        }
+        if (!accessToken) {
+          accessToken = localStorage.getItem("access_token"); // Get the new token
+        }
+        if (!userInfo) {
+
+          userInfo = localStorage.setItem("user_info", userInfo)
+        }
+
+
       }
 
       try {
@@ -327,53 +348,63 @@ const Dashboard = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ token: accessToken }),
-        })
+        });
 
         if (response.ok) {
-          // Token is valid
-          const user = JSON.parse(userInfo)
-          if (!user.is_participant) {
-            setError("Access denied. This dashboard is for participants only.")
-          } else {
-            setUserData(user)
+          const response = await fetch(`${API_BASE_URL}/verify-token/`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ token: refreshtoken }),
+          });
+          if (response.ok) {
+            const user = JSON.parse(userInfo);
+            if (!user.is_participant) {
+              setError("Access denied. This dashboard is for participants only.");
+            } else {
+              setUserData(user);
+            }
           }
+
         } else {
-          // Token is invalid, try to refresh it
-          const refreshed = await refreshToken()
+          const refreshed = await refreshToken();
           if (!refreshed) {
-            setError("Your session has expired. Please sign in again.")
-            localStorage.removeItem("access_token")
-            localStorage.removeItem("refresh_token")
-            localStorage.removeItem("user_info")
-            window.location.href = "/SignInPage/SignIn"
+            setError("Your session has expired. Please sign in again.");
+            // localStorage.removeItem("access_token");
+            // localStorage.removeItem("refresh_token");
+            // localStorage.removeItem("user_info");
+            // window.location.href = "/SignInPage/SignIn";
           }
         }
       } catch (err) {
-        console.error("Token verification failed:", err)
-        setError("An error occurred while verifying your session. Please try again.")
-        localStorage.removeItem("access_token")
-        localStorage.removeItem("refresh_token")
-        localStorage.removeItem("user_info")
-        window.location.href = "/SignInPage/SignIn"
+        console.error("Token verification failed:", err);
+        setError("An error occurred while verifying your session. Please try again.");
+        // localStorage.removeItem("access_token");
+        // localStorage.removeItem("refresh_token");
+        // localStorage.removeItem("user_info");
+        // window.location.href = "/SignInPage/SignIn";
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    verifyToken()
-  }, [])
+    verifyToken();
+  }, []);
+
   const fetchUserDetails = async () => {
     const token = localStorage.getItem("access_token")
     if (!token) {
-      await refreshToken()
-      if (!refreshToken) {
+      const refreshed = await refreshToken();
+      if (!refreshed) {
         setError("Your session has expired. Please sign in again.")
-        window.localStorage.removeItem("access_token")
-        window.localStorage.removeItem("refresh_token")
-        window.localStorage.removeItem("user_info")
-        window.location.href = "/SignInPage/SignIn"
+        // window.localStorage.removeItem("access_token")
+        // window.localStorage.removeItem("refresh_token")
+        // window.localStorage.removeItem("user_info")
+        // window.location.href = "/SignInPage/SignIn"
+        return
       }
-      return
+
     }
 
     try {
@@ -395,32 +426,33 @@ const Dashboard = () => {
         }
       } else {
         console.error("Failed to fetch user details")
-        window.localStorage.removeItem("access_token")
-        window.localStorage.removeItem("refresh_token")
-        window.localStorage.removeItem("user_info")
-        window.location.href = "/SignInPage/SignIn"
+        // window.localStorage.removeItem("access_token")
+        // window.localStorage.removeItem("refresh_token")
+        // window.localStorage.removeItem("user_info")
+        // window.location.href = "/SignInPage/SignIn"
       }
     } catch (error) {
       console.error("Error fetching user details:", error)
-      window.localStorage.removeItem("access_token")
-      window.localStorage.removeItem("refresh_token")
-      window.localStorage.removeItem("user_info")
-      window.location.href = "/SignInPage/SignIn"
+      // window.localStorage.removeItem("access_token")
+      // window.localStorage.removeItem("refresh_token")
+      // window.localStorage.removeItem("user_info")
+      // window.location.href = "/SignInPage/SignIn"
     }
   }
   useEffect(() => {
     const fetchUserDetails = async () => {
       const token = localStorage.getItem("access_token")
       if (!token) {
-        await refreshToken()
-        if (!refreshToken) {
+        const refreshed = await refreshToken();
+        if (!refreshed) {
           setError("Your session has expired. Please sign in again.")
-          window.localStorage.removeItem("access_token")
-          window.localStorage.removeItem("refresh_token")
-          window.localStorage.removeItem("user_info")
-          window.location.href = "/SignInPage/SignIn"
+          // window.localStorage.removeItem("access_token")
+          // window.localStorage.removeItem("refresh_token")
+          // window.localStorage.removeItem("user_info")
+          // window.location.href = "/SignInPage/SignIn"
+          return
         }
-        return
+
       }
 
       try {
@@ -442,17 +474,17 @@ const Dashboard = () => {
           }
         } else {
           console.error("Failed to fetch user details")
-          window.localStorage.removeItem("access_token")
-          window.localStorage.removeItem("refresh_token")
-          window.localStorage.removeItem("user_info")
-          window.location.href = "/SignInPage/SignIn"
+          // window.localStorage.removeItem("access_token")
+          // window.localStorage.removeItem("refresh_token")
+          // window.localStorage.removeItem("user_info")
+          // window.location.href = "/SignInPage/SignIn"
         }
       } catch (error) {
         console.error("Error fetching user details:", error)
-        window.localStorage.removeItem("access_token")
-        window.localStorage.removeItem("refresh_token")
-        window.localStorage.removeItem("user_info")
-        window.location.href = "/SignInPage/SignIn"
+        // window.localStorage.removeItem("access_token")
+        // window.localStorage.removeItem("refresh_token")
+        // window.localStorage.removeItem("user_info")
+        // window.location.href = "/SignInPage/SignIn"
       }
     }
 
@@ -462,11 +494,13 @@ const Dashboard = () => {
   const refreshToken = async () => {
     const refreshToken = localStorage.getItem("refresh_token")
     if (!refreshToken) {
+      localStorage.removeItem("access_token")
+      localStorage.removeItem("user_info")
       return false
     }
 
     try {
-      const response = await fetch(`${API_BASE_URL}/token/refresh/`, {
+      const response = await fetch(`${API_BASE_URL}/token/refresh/?CLIENT_ID=${encodeURIComponent(CLIENT_ID)}&CLIENT_SECRET=${encodeURIComponent(CLIENT_SECRET)}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
