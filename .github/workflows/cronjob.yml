@@ -1,8 +1,8 @@
-name: Trigger Void Request Every 8 Minutes
+name: Trigger Void Request Every Minute
 
 on:
   schedule:
-    - cron: '*/8 * * * *' # Runs every 8 minutes
+    - cron: '*/1 * * * *' # Runs every 1 minutes
   workflow_dispatch:
 
 jobs:
@@ -12,5 +12,4 @@ jobs:
       - name: Invoke Void Request API
         run: |
           curl -X GET "https://builderspace.onrender.com/api/void-request-for-active-state/" \
-            -H "Authorization: Basic $(echo -n 'qwerty@buildersspace9999Revant:asdfghjkwertyuicvbnmrevantsdfghjk2345678fghjrpeavaarnttkh' | base64 -w 0)" \
             -H "Content-Type: application/json"
