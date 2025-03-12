@@ -23,7 +23,7 @@ import {
 const API_BASE_URL = "https://builderspace.onrender.com/api"
 // const API_BASE_URL = "http://127.0.0.1:8000/api"
 
-const ProfileIcon = ({ customPosition, customSize }) => {
+const ProfileIcon = ({ customPosition, customSize, onProfileUpdate }) => {
   const [showProfile, setShowProfile] = useState(false)
   const [showProfileModal, setShowProfileModal] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
@@ -140,7 +140,20 @@ const ProfileIcon = ({ customPosition, customSize }) => {
       })
 
       if (!response.ok) {
-        throw new Error(`Failed to fetch user data: ${response.status}`)
+        if (!token) {
+          await verifyToken()
+          if (!(await verifyToken())){
+            window.localStorage.removeItem("access_token")
+            window.localStorage.removeItem("refresh_token")
+            window.localStorage.removeItem("user_info")
+            window.location.href = "/SignInPage/SignIn"
+          }
+          await fetchUserData()
+        }
+        else {
+          throw new Error(`Failed to fetch user data: ${response.status}`)
+        }
+
       }
 
       const data = await response.json()
@@ -151,9 +164,7 @@ const ProfileIcon = ({ customPosition, customSize }) => {
       // Check if profile image exists and create proper URL
       const profileImageUrl = data.profile_picture?.startsWith("/media/")
         ? `https://builderspace.onrender.com${data.profile_picture.replace("/media//media/", "/media/")}`
-        : DEFAULT_PROFILE_IMAGE;
-
-
+        : DEFAULT_PROFILE_IMAGE
 
       // Create an image object to test if the URL is valid
 
@@ -200,19 +211,18 @@ const ProfileIcon = ({ customPosition, customSize }) => {
 
   useEffect(() => {
     if (profileData.profileImage && profileData.profileImage !== DEFAULT_PROFILE_IMAGE) {
-      const img = document.createElement("img"); // Correct way
+      const img = document.createElement("img") // Correct way
 
       img.onerror = () => {
         setProfileData((prevData) => ({
           ...prevData,
           profileImage: DEFAULT_PROFILE_IMAGE, // Set default on error
-        }));
-      };
+        }))
+      }
 
-      img.src = profileData.profileImage; // Trigger loading
+      img.src = profileData.profileImage // Trigger loading
     }
-  }, [profileData.profileImage]);
-
+  }, [profileData.profileImage])
 
   const handleFileChange = (e) => {
     const file = e.target.files[0]
@@ -249,7 +259,10 @@ const ProfileIcon = ({ customPosition, customSize }) => {
       const token = localStorage.getItem("access_token")
 
       if (!token) {
-        throw new Error("No authentication token found")
+        window.localStorage.removeItem("access_token")
+        window.localStorage.removeItem("refresh_token")
+        window.localStorage.removeItem("user_info")
+        window.location.href = "/SignInPage/SignIn"
       }
 
       const response = await fetch(`${API_BASE_URL}/update-all-details/`, {
@@ -264,11 +277,13 @@ const ProfileIcon = ({ customPosition, customSize }) => {
         throw new Error(`Update failed: ${response.status}`)
       }
 
-      const responseData = await response.json()
+      // const responseData = await response.json()
 
       // Refresh user data after successful update
       await fetchUserData()
 
+      // Notify parent component that profile was updated
+      onProfileUpdate(true)
       return true
     } catch (error) {
       console.error("Profile update error:", error)

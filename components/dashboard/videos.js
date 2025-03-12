@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, use } from 'react';
 import { X, Youtube, Edit2, AlertCircle, Loader2, Upload } from 'lucide-react';
 
 const EditableYoutubeCard = ({ apiEndpoint, cardId }) => {
@@ -7,7 +7,7 @@ const EditableYoutubeCard = ({ apiEndpoint, cardId }) => {
     const [inputValue, setInputValue] = useState("");
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    const [userData, setUserData] = useState(null)
     // Function to extract YouTube video ID from various YouTube URL formats
     const extractVideoId = (url) => {
         // Handle different YouTube URL formats
@@ -20,18 +20,53 @@ const EditableYoutubeCard = ({ apiEndpoint, cardId }) => {
 
         return null;
     };
+    const refreshToken = async () => {
+        const refreshToken = localStorage.getItem("refresh_token")
+        if (!refreshToken) {
+            return false
+        }
 
+        try {
+            const response = await fetch(`https://builderspace.onrender.com/api/token/refresh/`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ refresh: refreshToken }),
+            })
+
+            if (response.ok) {
+                const data = await response.json()
+                localStorage.setItem("access_token", data.access)
+                return true
+            } else {
+                return false
+            }
+        } catch (err) {
+            console.error("Token refresh failed:", err)
+            setError("An error occurred while refreshing your session. Please try again.")
+            return false
+        }
+    }
     // Fetch video URL from the API on component mount
     useEffect(() => {
         const fetchVideoData = async () => {
             setIsLoading(true);
             try {
                 const token = localStorage.getItem("access_token");
-                
+
                 if (!token) {
-                    throw new Error("No authentication token found");
+                    await refreshToken()
+                    {
+                        if (!refreshToken()) {
+                            window.localStorage.removeItem("access_token")
+                            window.localStorage.removeItem("refresh_token")
+                            window.localStorage.removeItem("user_info")
+                            window.location.href = "/SignInPage/SignIn"
+                        }
+                    }
                 }
-                
+
                 const response = await fetch(`https://builderspace.onrender.com/api/get-user-details/`, {
                     method: "GET",
                     headers: {
@@ -39,10 +74,10 @@ const EditableYoutubeCard = ({ apiEndpoint, cardId }) => {
                         "Content-Type": "application/json",
                     },
                 });
-                
+
                 const data = await response.json();
                 const fetchedVideoUrl = data.project_video_link; // Fetch project video link
-                
+
                 // console.log(fetchedVideoUrl);
                 if (fetchedVideoUrl) {
                     const videoId = extractVideoId(fetchedVideoUrl);
@@ -66,6 +101,67 @@ const EditableYoutubeCard = ({ apiEndpoint, cardId }) => {
         fetchVideoData();
     }, [apiEndpoint, cardId]);
 
+
+    useEffect(() => {
+        const verifyToken = async () => {
+            const accessToken = localStorage.getItem("access_token")
+            const userInfo = localStorage.getItem("user_info")
+            if (!accessToken || !userInfo) {
+                await refreshToken()
+                if (!refreshToken || !userInfo) {
+                    setError("You need to sign in to access this page.")
+                    localStorage.removeItem("access_token")
+                    localStorage.removeItem("refresh_token")
+                    localStorage.removeItem("user_info")
+                    window.location.href = "/SignInPage/SignIn"
+                    setIsLoading(false)
+                    return
+                }
+            }
+
+            try {
+                const response = await fetch(`https://builderspace.onrender.com/api/verify-token/`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ token: accessToken }),
+                })
+
+                if (response.ok) {
+                    // Token is valid
+                    const user = JSON.parse(userInfo)
+                    if (!user.is_participant) {
+                        setError("Access denied. This dashboard is for participants only.")
+                    } else {
+                        setUserData(user)
+                    }
+                } else {
+                    // Token is invalid, try to refresh it
+                    const refreshed = await refreshToken()
+                    if (!refreshed) {
+                        setError("Your session has expired. Please sign in again.")
+                        localStorage.removeItem("access_token")
+                        localStorage.removeItem("refresh_token")
+                        localStorage.removeItem("user_info")
+                        window.location.href = "/SignInPage/SignIn"
+                    }
+                }
+            } catch (err) {
+                console.error("Token verification failed:", err)
+                setError("An error occurred while verifying your session. Please try again.")
+                localStorage.removeItem("access_token")
+                localStorage.removeItem("refresh_token")
+                localStorage.removeItem("user_info")
+                window.location.href = "/SignInPage/SignIn"
+            } finally {
+                setIsLoading(false)
+            }
+        }
+
+        verifyToken()
+    }, [])
+
     const handleSave = async () => {
         const videoId = extractVideoId(inputValue);
 
@@ -76,6 +172,7 @@ const EditableYoutubeCard = ({ apiEndpoint, cardId }) => {
                 const token = localStorage.getItem("access_token");
 
                 if (!token) {
+                    await verifyto
                     throw new Error("No authentication token found");
                 }
 

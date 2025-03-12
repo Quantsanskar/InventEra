@@ -17,32 +17,126 @@ const EditableSocialLinks = ({ apiEndpoint }) => {
     });
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    const [userData, setUserData] = useState(null)
     // Function to validate social media URLs
     const validateUrl = (url, platform) => {
         if (!url) return true; // Empty is valid
-        
+
         const patterns = {
             instagram: /^(https?:\/\/)?(www\.)?instagram\.com\/[a-zA-Z0-9_.]+\/?$/,
             github: /^(https?:\/\/)?(www\.)?github\.com\/[a-zA-Z0-9_-]+\/?$/,
             twitter: /^(https?:\/\/)?(www\.)?twitter\.com\/[a-zA-Z0-9_]+\/?$/,
             linkedin: /^(https?:\/\/)?(www\.)?linkedin\.com\/(in|company)\/[a-zA-Z0-9_-]+\/?$/
         };
-        
+
         return patterns[platform].test(url);
     };
+    const refreshToken = async () => {
+        const refreshToken = localStorage.getItem("refresh_token")
+        if (!refreshToken) {
+            return false
+        }
 
+        try {
+            const response = await fetch(`https://builderspace.onrender.com/api/token/refresh/`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ refresh: refreshToken }),
+            })
+
+            if (response.ok) {
+                const data = await response.json()
+                localStorage.setItem("access_token", data.access)
+                return true
+            } else {
+                return false
+            }
+        } catch (err) {
+            console.error("Token refresh failed:", err)
+            setError("An error occurred while refreshing your session. Please try again.")
+            return false
+        }
+    }
+    useEffect(() => {
+        const verifyToken = async () => {
+            const accessToken = localStorage.getItem("access_token")
+            const userInfo = localStorage.getItem("user_info")
+            if (!accessToken || !userInfo) {
+                await refreshToken()
+                if (!refreshToken || !userInfo) {
+                    setError("You need to sign in to access this page.")
+                    localStorage.removeItem("access_token")
+                    localStorage.removeItem("refresh_token")
+                    localStorage.removeItem("user_info")
+                    window.location.href = "/SignInPage/SignIn"
+                    setIsLoading(false)
+                    return
+                }
+            }
+
+            try {
+                const response = await fetch(`https://builderspace.onrender.com/api/verify-token/`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ token: accessToken }),
+                })
+
+                if (response.ok) {
+                    // Token is valid
+                    const user = JSON.parse(userInfo)
+                    if (!user.is_participant) {
+                        setError("Access denied. This dashboard is for participants only.")
+                    } else {
+                        setUserData(user)
+                    }
+                } else {
+                    // Token is invalid, try to refresh it
+                    const refreshed = await refreshToken()
+                    if (!refreshed) {
+                        setError("Your session has expired. Please sign in again.")
+                        localStorage.removeItem("access_token")
+                        localStorage.removeItem("refresh_token")
+                        localStorage.removeItem("user_info")
+                        window.location.href = "/SignInPage/SignIn"
+                    }
+                }
+            } catch (err) {
+                console.error("Token verification failed:", err)
+                setError("An error occurred while verifying your session. Please try again.")
+                localStorage.removeItem("access_token")
+                localStorage.removeItem("refresh_token")
+                localStorage.removeItem("user_info")
+                window.location.href = "/SignInPage/SignIn"
+            } finally {
+                setIsLoading(false)
+            }
+        }
+
+        verifyToken()
+    }, [])
     // Fetch social links from the API on component mount
     useEffect(() => {
         const fetchSocialData = async () => {
             setIsLoading(true);
             try {
                 const token = localStorage.getItem("access_token");
-                
+
                 if (!token) {
-                    throw new Error("No authentication token found");
+                    await refreshToken()
+                    {
+                        if (!refreshToken()) {
+                            window.localStorage.removeItem("access_token")
+                            window.localStorage.removeItem("refresh_token")
+                            window.localStorage.removeItem("user_info")
+                            window.location.href = "/SignInPage/SignIn"
+                        }
+                    }
                 }
-                
+
                 const response = await fetch(`https://builderspace.onrender.com/api/get-user-details/`, {
                     method: "GET",
                     headers: {
@@ -50,9 +144,9 @@ const EditableSocialLinks = ({ apiEndpoint }) => {
                         "Content-Type": "application/json",
                     },
                 });
-                
+
                 const data = await response.json();
-                
+
                 // Extract social links
                 const fetchedSocialLinks = {
                     instagram: data.instagram || "",
@@ -60,7 +154,7 @@ const EditableSocialLinks = ({ apiEndpoint }) => {
                     twitter: data.twitter || "",
                     linkedin: data.linkedin || ""
                 };
-                
+
                 setSocialLinks(fetchedSocialLinks);
                 setInputValues(fetchedSocialLinks);
             } catch (err) {
@@ -83,7 +177,7 @@ const EditableSocialLinks = ({ apiEndpoint }) => {
 
     const handleSave = async () => {
         // Validate all URLs
-        const isValid = Object.keys(inputValues).every(platform => 
+        const isValid = Object.keys(inputValues).every(platform =>
             validateUrl(inputValues[platform], platform)
         );
 
@@ -117,7 +211,7 @@ const EditableSocialLinks = ({ apiEndpoint }) => {
                 throw new Error("Failed to update social links");
             }
 
-            setSocialLinks({...inputValues});
+            setSocialLinks({ ...inputValues });
             setIsEditing(false);
         } catch (err) {
             alert("Failed to update social links. Please try again.");
@@ -160,7 +254,7 @@ const EditableSocialLinks = ({ apiEndpoint }) => {
             twitter: <Twitter size={22} className="text-blue-400" />,
             linkedin: <Linkedin size={22} className="text-blue-600" />
         };
-        
+
         const labels = {
             instagram: "Instagram",
             github: "GitHub",
@@ -189,7 +283,7 @@ const EditableSocialLinks = ({ apiEndpoint }) => {
                 <div className="flex justify-between items-center mb-4">
                     <h2 className="text-lg font-medium text-zinc-100">Social Profiles</h2>
                 </div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <SocialIcon platform="instagram" url={socialLinks.instagram} />
                     <SocialIcon platform="github" url={socialLinks.github} />
@@ -241,7 +335,7 @@ const EditableSocialLinks = ({ apiEndpoint }) => {
                                     placeholder="https://instagram.com/username"
                                 />
                             </div>
-                            
+
                             {/* GitHub */}
                             <div>
                                 <label className="flex items-center text-sm font-medium text-zinc-300 mb-2">
@@ -256,7 +350,7 @@ const EditableSocialLinks = ({ apiEndpoint }) => {
                                     placeholder="https://github.com/username"
                                 />
                             </div>
-                            
+
                             {/* Twitter */}
                             <div>
                                 <label className="flex items-center text-sm font-medium text-zinc-300 mb-2">
@@ -271,7 +365,7 @@ const EditableSocialLinks = ({ apiEndpoint }) => {
                                     placeholder="https://twitter.com/username"
                                 />
                             </div>
-                            
+
                             {/* LinkedIn */}
                             <div>
                                 <label className="flex items-center text-sm font-medium text-zinc-300 mb-2">

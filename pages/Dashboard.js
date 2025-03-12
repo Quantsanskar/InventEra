@@ -4,15 +4,15 @@ import { useState, useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 import Navigation from "@/components/homepage/Navigation"
 import { Footer } from "@/components/footer"
 import SocialLinksEditor from "@/components/dashboard/socialhandles"
 import EditableYoutubeCard from "@/components/dashboard/videos"
 import EditableDescriptionCard from "@/components/dashboard/description"
 import ProfileIcon from "@/components/dashboard/profileicon"
-import { Play, Pause, Download, Users, Calendar, ExternalLink, House } from "lucide-react"
-import { Twitter, Instagram, Linkedin, Globe } from 'lucide-react';
+import { Play, Pause, Download, Calendar } from "lucide-react"
+import { Twitter, Instagram, Linkedin, Globe } from "lucide-react"
+import { set } from "zod"
 const API_BASE_URL = "https://builderspace.onrender.com/api"
 
 // Inline components for the enhanced dashboard
@@ -71,17 +71,18 @@ const AcceptancePackCard = () => {
     id: num,
     src: `/images/acceptance-${num}.png`, // Replace with actual image paths
     alt: `Acceptance Pack Design ${num}`,
-  }));
+  }))
 
   const downloadImage = (image) => {
-    const link = document.createElement("a"); // Create a temporary anchor element
-    link.href = image.src; // Set image source as href
-    link.download = `Acceptance-${image.id}.png`; // Set default file name
-    document.body.appendChild(link); // Append to body
-    link.click(); // Trigger download
-    document.body.removeChild(link); // Remove after download
-  };
-  const shiningLinkStyle = "text-blue-400 hover:text-blue-300 relative overflow-hidden transition-colors duration-300 after:absolute after:content-[''] after:h-full after:w-4 after:top-0 after:-left-8 after:skew-x-12 after:bg-white/20 after:opacity-0 hover:after:animate-shine";
+    const link = document.createElement("a") // Create a temporary anchor element
+    link.href = image.src // Set image source as href
+    link.download = `Acceptance-${image.id}.png` // Set default file name
+    document.body.appendChild(link) // Append to body
+    link.click() // Trigger download
+    document.body.removeChild(link) // Remove after download
+  }
+  const shiningLinkStyle =
+    "text-blue-400 hover:text-blue-300 relative overflow-hidden transition-colors duration-300 after:absolute after:content-[''] after:h-full after:w-4 after:top-0 after:-left-8 after:skew-x-12 after:bg-white/20 after:opacity-0 hover:after:animate-shine"
   return (
     <div className="bg-zinc-800/30 border border-purple-500/20 rounded-xl px-4 sm:px-8 py-4 mb-8 backdrop-blur-sm hover:border-purple-500/40 transition-all duration-300 shadow-lg">
       <h2 className="text-2xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
@@ -94,11 +95,7 @@ const AcceptancePackCard = () => {
       {/* Responsive grid: 1 column on small screens, 2 on medium, 3 on large */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-6">
         {acceptanceImages.map((image) => (
-          <div
-            key={image.id}
-            className={`relative group ${image.id === 5 ? "lg:col-span-1 lg:mx-auto" : ""
-              }`}
-          >
+          <div key={image.id} className={`relative group ${image.id === 5 ? "lg:col-span-1 lg:mx-auto" : ""}`}>
             <div className="overflow-hidden rounded-lg">
               <Image
                 src={image.src || "/placeholder.svg"}
@@ -178,9 +175,9 @@ const AcceptancePackCard = () => {
         </div>
       </div>
     </div>
-  );
-};
-const styleTag = typeof document !== 'undefined' ? document.createElement('style') : null;
+  )
+}
+const styleTag = typeof document !== "undefined" ? document.createElement("style") : null
 if (styleTag) {
   styleTag.textContent = `
     @keyframes shine {
@@ -197,8 +194,8 @@ if (styleTag) {
     .animate-shine {
       animation: shine 1.5s ease-in-out;
     }
-  `;
-  document.head.appendChild(styleTag);
+  `
+  document.head.appendChild(styleTag)
 }
 const BuddyPassCard = () => (
   <div className="bg-zinc-800/30 border border-purple-500/20 rounded-xl p-6 mb-8 backdrop-blur-sm hover:border-purple-500/40 transition-all duration-300 shadow-lg">
@@ -206,7 +203,6 @@ const BuddyPassCard = () => (
       <h2 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
         02 — Buddy Passes
       </h2>
-
     </div>
 
     <p className="text-zinc-300 mb-4">
@@ -217,10 +213,15 @@ const BuddyPassCard = () => (
     <div className="bg-zinc-900/50 rounded-lg p-4 mb-4 border border-zinc-700/50">
       <div className="flex items-center justify-between mb-2">
         <p className="text-sm text-zinc-400">invite link:</p>
-        <Button variant="ghost" size="sm" className="h-7 text-xs text-blue-400 hover:text-blue-300" onClick={() => {
-          navigator.clipboard.writeText("https://www.commudle.com/fill-form/3154");
-          alert("Copied to clipboard");
-        }}>
+        <Button
+          variant="ghost"
+          size="sm"
+          className="h-7 text-xs text-blue-400 hover:text-blue-300"
+          onClick={() => {
+            navigator.clipboard.writeText("https://www.commudle.com/fill-form/3154")
+            alert("Copied to clipboard")
+          }}
+        >
           Copy
         </Button>
       </div>
@@ -228,8 +229,6 @@ const BuddyPassCard = () => (
         https://www.commudle.com/fill-form/3154
       </p>
     </div>
-
-
   </div>
 )
 
@@ -271,7 +270,10 @@ const KickoffDetailsCard = () => (
       </ul>
     </div>
 
-    <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white" onClick={() => window.location.href = "https://lu.ma/mp4dualo"}>
+    <Button
+      className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white"
+      onClick={() => (window.location.href = "https://lu.ma/mp4dualo")}
+    >
       RSVP to Kickoff
     </Button>
   </div>
@@ -280,27 +282,42 @@ const KickoffDetailsCard = () => (
 // Main Dashboard Component
 const Dashboard = () => {
   const router = useRouter()
-  const [userData, setUserData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [house, setHouse] = useState(null);
-  const [imageSrc, setImageSrc] = useState("");
+  const [userData, setUserData] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [house, setHouse] = useState(null)
+  const [imageSrc, setImageSrc] = useState("")
   const houseImages = {
     Gryffindor: "/reference/Gryffindor.png",
     Slytherin: "/reference/Slytherine.png",
     Hufflepuff: "/reference/Hufflepuff.png",
     Ravenclaw: "/reference/Ravenclaw.png",
     Phoenix: "/reference/Phoenix.png",
-  };
+  }
+  const [refreshCounter, setRefreshCounter] = useState(0)
+
+  const handleProfileUpdate = () => {
+    // First fetch the details
+    fetchUserDetails().then(() => {
+      // Then increment the counter to trigger re-renders
+      setRefreshCounter(prev => prev + 1)
+    })
+  }
   useEffect(() => {
     const verifyToken = async () => {
       const accessToken = localStorage.getItem("access_token")
       const userInfo = localStorage.getItem("user_info")
-
       if (!accessToken || !userInfo) {
-        setError("No token found. Please sign in.")
-        setLoading(false)
-        return
+        await refreshToken()
+        if (!refreshToken || !userInfo) {
+          setError("You need to sign in to access this page.")
+          localStorage.removeItem("access_token")
+          localStorage.removeItem("refresh_token")
+          localStorage.removeItem("user_info")
+          window.location.href = "/SignInPage/SignIn"
+          setLoading(false)
+          return
+        }
       }
 
       try {
@@ -326,7 +343,7 @@ const Dashboard = () => {
           if (!refreshed) {
             setError("Your session has expired. Please sign in again.")
             localStorage.removeItem("access_token")
-            localStorage.removeItem("refresh_token")  
+            localStorage.removeItem("refresh_token")
             localStorage.removeItem("user_info")
             window.location.href = "/SignInPage/SignIn"
           }
@@ -335,7 +352,7 @@ const Dashboard = () => {
         console.error("Token verification failed:", err)
         setError("An error occurred while verifying your session. Please try again.")
         localStorage.removeItem("access_token")
-        localStorage.removeItem("refresh_token")  
+        localStorage.removeItem("refresh_token")
         localStorage.removeItem("user_info")
         window.location.href = "/SignInPage/SignIn"
       } finally {
@@ -345,11 +362,66 @@ const Dashboard = () => {
 
     verifyToken()
   }, [])
+  const fetchUserDetails = async () => {
+    const token = localStorage.getItem("access_token")
+    if (!token) {
+      await refreshToken()
+      if (!refreshToken) {
+        setError("Your session has expired. Please sign in again.")
+        window.localStorage.removeItem("access_token")
+        window.localStorage.removeItem("refresh_token")
+        window.localStorage.removeItem("user_info")
+        window.location.href = "/SignInPage/SignIn"
+      }
+      return
+    }
 
+    try {
+      const response = await fetch("https://builderspace.onrender.com/api/get-user-details/", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
+
+      if (response.ok) {
+        const data = await response.json()
+        setHouse(data.house)
+        // console.log(data.house);
+
+        if (houseImages[data.house]) {
+          setImageSrc(houseImages[data.house])
+        }
+      } else {
+        console.error("Failed to fetch user details")
+        window.localStorage.removeItem("access_token")
+        window.localStorage.removeItem("refresh_token")
+        window.localStorage.removeItem("user_info")
+        window.location.href = "/SignInPage/SignIn"
+      }
+    } catch (error) {
+      console.error("Error fetching user details:", error)
+      window.localStorage.removeItem("access_token")
+      window.localStorage.removeItem("refresh_token")
+      window.localStorage.removeItem("user_info")
+      window.location.href = "/SignInPage/SignIn"
+    }
+  }
   useEffect(() => {
     const fetchUserDetails = async () => {
-      const token = localStorage.getItem("access_token");
-      if (!token) return;
+      const token = localStorage.getItem("access_token")
+      if (!token) {
+        await refreshToken()
+        if (!refreshToken) {
+          setError("Your session has expired. Please sign in again.")
+          window.localStorage.removeItem("access_token")
+          window.localStorage.removeItem("refresh_token")
+          window.localStorage.removeItem("user_info")
+          window.location.href = "/SignInPage/SignIn"
+        }
+        return
+      }
 
       try {
         const response = await fetch("https://builderspace.onrender.com/api/get-user-details/", {
@@ -358,30 +430,40 @@ const Dashboard = () => {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
-        });
+        })
 
         if (response.ok) {
-          const data = await response.json();
-          setHouse(data.house);
+          const data = await response.json()
+          setHouse(data.house)
           // console.log(data.house);
 
           if (houseImages[data.house]) {
-            setImageSrc(houseImages[data.house]);
+            setImageSrc(houseImages[data.house])
           }
         } else {
-          console.error("Failed to fetch user details");
+          console.error("Failed to fetch user details")
+          window.localStorage.removeItem("access_token")
+          window.localStorage.removeItem("refresh_token")
+          window.localStorage.removeItem("user_info")
+          window.location.href = "/SignInPage/SignIn"
         }
       } catch (error) {
-        console.error("Error fetching user details:", error);
+        console.error("Error fetching user details:", error)
+        window.localStorage.removeItem("access_token")
+        window.localStorage.removeItem("refresh_token")
+        window.localStorage.removeItem("user_info")
+        window.location.href = "/SignInPage/SignIn"
       }
-    };
+    }
 
-    fetchUserDetails();
-  }, []);
+    fetchUserDetails()
+  }, [])
 
   const refreshToken = async () => {
     const refreshToken = localStorage.getItem("refresh_token")
-    if (!refreshToken) return false
+    if (!refreshToken) {
+      return false
+    }
 
     try {
       const response = await fetch(`${API_BASE_URL}/token/refresh/`, {
@@ -401,6 +483,7 @@ const Dashboard = () => {
       }
     } catch (err) {
       console.error("Token refresh failed:", err)
+      setError("An error occurred while refreshing your session. Please try again.")
       return false
     }
   }
@@ -447,7 +530,11 @@ const Dashboard = () => {
           />
 
           {/* Custom positioning */}
-          <ProfileIcon customPosition="absolute right-[-2%] bottom-[-15%] z-50" customData={userData} />
+          <ProfileIcon
+            customPosition="absolute right-[-2%] bottom-[-15%] z-50"
+            customData={userData}
+            onProfileUpdate={handleProfileUpdate}
+          />
         </div>
 
         {/* Welcome section with animated border */}
@@ -477,7 +564,7 @@ const Dashboard = () => {
           <div className="flex items-center justify-center rounded-xl mb-1 w-full relative">
             <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 blur-2xl rounded-full"></div>
             <Image
-              src={imageSrc}
+              src={imageSrc || "/placeholder.svg"}
               alt="House Image"
               width={480}
               height={480}
@@ -487,16 +574,27 @@ const Dashboard = () => {
 
           <button
             onClick={() => {
-              const link = document.createElement("a");
-              link.href = imageSrc;
-              link.download = `${house}.png`;
-              document.body.appendChild(link);
-              link.click();
-              document.body.removeChild(link);
+              const link = document.createElement("a")
+              link.href = imageSrc
+              link.download = `${house}.png`
+              document.body.appendChild(link)
+              link.click()
+              document.body.removeChild(link)
             }}
             className="px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-medium rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center gap-2 mb-6"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-download">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="feather feather-download"
+            >
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
               <polyline points="7 10 12 15 17 10"></polyline>
               <line x1="12" y1="15" x2="12" y2="3"></line>
@@ -595,19 +693,22 @@ const Dashboard = () => {
         {/* Cards with animated hover effects */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-12 w-full max-w-5xl">
           <div className="lg:col-span-7 mt-24 mb-16 lg:mt-24 lg:mb-28 transform transition-all duration-300">
-            <EditableYoutubeCard />
+            <EditableYoutubeCard key={`youtube-${refreshCounter}`} />
           </div>
 
           <div className="lg:col-span-5 mb-20 lg:mt-24 lg:mb-28 transform transition-all duration-300">
-            <EditableDescriptionCard />
+            <EditableDescriptionCard key={`desc-${refreshCounter}`} />
           </div>
         </div>
 
         {/* Social links with subtle hover animation */}
         <div className="relative group mb-16 w-full max-w-[260px] lg:max-w-sm">
-          <SocialLinksEditor />
+          <SocialLinksEditor key={`social-${refreshCounter}`} />
         </div>
       </div>
+
+
+
       <Footer />
     </div>
   )

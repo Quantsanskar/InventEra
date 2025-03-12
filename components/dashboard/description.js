@@ -8,18 +8,113 @@ const EditableDescriptionCard = ({ apiEndpoint, cardId }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const [isHovered, setIsHovered] = useState(false);
+    const [userData, setUserData] = useState(null)
+    const refreshToken = async () => {
+        const refreshToken = localStorage.getItem("refresh_token")
+        if (!refreshToken) {
+            return false
+        }
 
+        try {
+            const response = await fetch(`https://builderspace.onrender.com/api/token/refresh/`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ refresh: refreshToken }),
+            })
+
+            if (response.ok) {
+                const data = await response.json()
+                localStorage.setItem("access_token", data.access)
+                return true
+            } else {
+                return false
+            }
+        } catch (err) {
+            console.error("Token refresh failed:", err)
+            setError("An error occurred while refreshing your session. Please try again.")
+            return false
+        }
+    }
+    useEffect(() => {
+        const verifyToken = async () => {
+            const accessToken = localStorage.getItem("access_token")
+            const userInfo = localStorage.getItem("user_info")
+            if (!accessToken || !userInfo) {
+                await refreshToken()
+                if (!refreshToken || !userInfo) {
+                    setError("You need to sign in to access this page.")
+                    localStorage.removeItem("access_token")
+                    localStorage.removeItem("refresh_token")
+                    localStorage.removeItem("user_info")
+                    window.location.href = "/SignInPage/SignIn"
+                    setIsLoading(false)
+                    return
+                }
+            }
+
+            try {
+                const response = await fetch(`https://builderspace.onrender.com/api/verify-token/`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ token: accessToken }),
+                })
+
+                if (response.ok) {
+                    // Token is valid
+                    const user = JSON.parse(userInfo)
+                    if (!user.is_participant) {
+                        setError("Access denied. This dashboard is for participants only.")
+                    } else {
+                        setUserData(user)
+                    }
+                } else {
+                    // Token is invalid, try to refresh it
+                    const refreshed = await refreshToken()
+                    if (!refreshed) {
+                        setError("Your session has expired. Please sign in again.")
+                        localStorage.removeItem("access_token")
+                        localStorage.removeItem("refresh_token")
+                        localStorage.removeItem("user_info")
+                        window.location.href = "/SignInPage/SignIn"
+                    }
+                }
+            } catch (err) {
+                console.error("Token verification failed:", err)
+                setError("An error occurred while verifying your session. Please try again.")
+                localStorage.removeItem("access_token")
+                localStorage.removeItem("refresh_token")
+                localStorage.removeItem("user_info")
+                window.location.href = "/SignInPage/SignIn"
+            } finally {
+                setIsLoading(false)
+            }
+        }
+
+        verifyToken()
+    }, [])
     // Fetch project idea description from the API on component mount
     useEffect(() => {
         const fetchDescriptionData = async () => {
             setIsLoading(true);
             try {
                 const token = localStorage.getItem("access_token");
-                
+
                 if (!token) {
-                    throw new Error("No authentication token found");
+                    await refreshToken()
+                    if (!refreshToken()) {
+
+                        window.localStorage.removeItem("access_token")
+                        window.localStorage.removeItem("refresh_token")
+                        window.localStorage.removeItem("user-info")
+                        window.location.href = "/SignInPage/SignIn"
+                    }
+
                 }
-                
+
                 const response = await fetch(`https://builderspace.onrender.com/api/get-user-details/`, {
                     method: "GET",
                     headers: {
@@ -27,10 +122,10 @@ const EditableDescriptionCard = ({ apiEndpoint, cardId }) => {
                         "Content-Type": "application/json",
                     },
                 });
-                
+
                 const data = await response.json();
                 const fetchedDescription = data.project_idea_description;
-                
+
                 if (fetchedDescription) {
                     setDescription(fetchedDescription);
                     setInputValue(fetchedDescription);
@@ -52,14 +147,22 @@ const EditableDescriptionCard = ({ apiEndpoint, cardId }) => {
     const handleSave = async () => {
         try {
             const token = localStorage.getItem("access_token");
-            
+
             if (!token) {
-                throw new Error("No authentication token found");
+                await refreshToken()
+                if (!refreshToken()) {
+
+                    window.localStorage.removeItem("access_token")
+                    window.localStorage.removeItem("refresh_token")
+                    window.localStorage.removeItem("user_info")
+                    window.location.href = "/SignInPage/SignIn"
+                }
+
             }
-            
+
             const formData = new FormData();
             formData.append("project_idea_description", inputValue);
-            
+
             const response = await fetch(`https://builderspace.onrender.com/api/update-all-details/`, {
                 method: "PATCH",
                 headers: {
@@ -67,7 +170,7 @@ const EditableDescriptionCard = ({ apiEndpoint, cardId }) => {
                 },
                 body: formData,
             });
-            
+
             if (!response.ok) {
                 throw new Error("Failed to update project idea description");
             }
@@ -98,7 +201,7 @@ const EditableDescriptionCard = ({ apiEndpoint, cardId }) => {
                 <div className="p-8 text-center space-y-4">
                     <AlertCircle size={36} className="text-red-500 mx-auto" />
                     <div className="text-red-400 font-medium">{error}</div>
-                    <button 
+                    <button
                         onClick={() => window.location.reload()}
                         className="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 rounded-lg text-sm text-zinc-200 transition-colors"
                     >
@@ -110,21 +213,21 @@ const EditableDescriptionCard = ({ apiEndpoint, cardId }) => {
     }
 
     return (
-        <div 
+        <div
             className="lg:col-span-5 relative group h-[315px]"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
             <div className="absolute -inset-2 bg-gradient-to-r from-blue-600/20 via-transparent to-purple-600/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-xl"></div>
-            
+
             <div className="relative bg-gradient-to-br from-zinc-900/90 to-black border border-zinc-800 rounded-xl shadow-lg transition-all duration-500 transform group-hover:scale-[1.01] group-hover:border-zinc-700 h-full">
-               
+
                 {/* Label */}
                 <div className="absolute top-3 left-3 z-20 bg-purple-600/90 text-white text-xs px-2 py-1 rounded-md flex items-center space-x-1 shadow-lg">
                     <FileText size={14} />
                     <span>Project Idea Description</span>
                 </div>
-                
+
                 {/* Description Content */}
                 <div className="h-full w-full p-6 overflow-y-auto scrollbar-thin">
                     <div className="p-4 h-full">
@@ -135,7 +238,7 @@ const EditableDescriptionCard = ({ apiEndpoint, cardId }) => {
                         </div>
                     </div>
                 </div>
-                
+
                 {/* Edit Button with improved styling */}
                 <button
                     className="absolute bottom-[-5%] right-[-4%] w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center shadow-lg transform transition-all duration-300 z-20"
@@ -149,7 +252,7 @@ const EditableDescriptionCard = ({ apiEndpoint, cardId }) => {
             {/* Edit Modal with improved UI */}
             {isEditing && (
                 <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-                    <div 
+                    <div
                         className="bg-gradient-to-b from-zinc-900 to-black border border-zinc-800 rounded-xl p-6 w-full max-w-md shadow-2xl transform transition-all duration-300"
                         onClick={(e) => e.stopPropagation()}
                     >
