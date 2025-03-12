@@ -262,7 +262,7 @@ const EditableYoutubeCard = ({ apiEndpoint, cardId }) => {
 
             {/* Edit Button */}
             <button
-                className="absolute bottom-[-9%] lg:bottom-[-6%] right-[-5%] lg:right-[-3%] w-10 h-10 bg-red-600 rounded-full flex items-center justify-center shadow-lg transform transition-all duration-300  z-20"
+                className="absolute bottom-[-16%] md:bottom-[-12%] lg:bottom-[-6%] right-[-5%] lg:right-[-3%] w-10 h-10 bg-red-600 rounded-full flex items-center justify-center shadow-lg transform transition-all duration-300  z-20"
                 aria-label="Edit video"
                 onClick={() => setIsEditing(true)}
             >
@@ -271,7 +271,7 @@ const EditableYoutubeCard = ({ apiEndpoint, cardId }) => {
 
             {/* Edit Modal with improved UI */}
             {isEditing && (
-                <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                <div className="fixed inset-0 bg-black/80 mb-32 backdrop-blur-sm flex items-center justify-center z-50 p-4">
                     <div
                         className="bg-gradient-to-b from-zinc-900 to-black border border-zinc-800 rounded-xl p-6 w-full max-w-md shadow-2xl transform transition-all duration-300"
                         onClick={(e) => e.stopPropagation()}
