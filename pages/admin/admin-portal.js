@@ -38,7 +38,7 @@ const AdminPortal = () => {
         if (!accessToken) {
             setIsAuthenticated(false);
             setLoading(false);
-            window.location.href = '/admin-signin';
+            window.location.href = '/admin/adminsignin';
             return;
         }
 
