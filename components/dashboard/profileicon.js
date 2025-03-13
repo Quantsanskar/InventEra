@@ -19,6 +19,7 @@ import {
   Award,
   Heart,
   Camera,
+  Bell
 } from "lucide-react"
 import { set } from "zod"
 
@@ -145,7 +146,7 @@ const ProfileIcon = ({ customPosition, customSize, onProfileUpdate }) => {
       if (!response.ok) {
         if (!token) {
           await verifyToken()
-          if (!(await verifyToken())){
+          if (!(await verifyToken())) {
             window.localStorage.removeItem("access_token")
             window.localStorage.removeItem("refresh_token")
             window.localStorage.removeItem("user_info")
@@ -298,6 +299,11 @@ const ProfileIcon = ({ customPosition, customSize, onProfileUpdate }) => {
 
   const handleViewProfile = () => {
     setShowProfileModal(true)
+    setShowProfile(false)
+  }
+
+  const handleNavigateToNotifications = () => {
+    router.push("/Notifications")
     setShowProfile(false)
   }
 
@@ -623,6 +629,23 @@ const ProfileIcon = ({ customPosition, customSize, onProfileUpdate }) => {
                     >
                       <User className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
                       View Profile
+                    </Button>
+                  </motion.div>
+
+                  {/* New Notifications Button */}
+                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                    <Button
+                      variant="outline"
+                      className="w-full bg-gradient-to-r from-zinc-800/80 to-zinc-900/80 hover:from-orange-900/30 hover:to-amber-900/30 text-zinc-300 hover:text-white border-zinc-700/50 hover:border-zinc-600 transition-all duration-300 h-8 sm:h-10 text-xs sm:text-sm"
+                      onClick={handleNavigateToNotifications}
+                    >
+                      <Bell className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
+                      Notifications
+                      {profileData.notifications > 0 && (
+                        <span className="ml-2 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                          {profileData.notifications}
+                        </span>
+                      )}
                     </Button>
                   </motion.div>
 
