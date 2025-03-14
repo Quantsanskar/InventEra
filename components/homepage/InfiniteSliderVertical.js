@@ -35,6 +35,11 @@ export function InfiniteSliderVertical() {
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
         />
         <img
+          src="/carousel/7.png"
+          alt="Midnight Miami (feat Konvy) - Nino Paid, Konvy"
+          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
+        />
+        <img
           src="/carousel/9.png"
           alt="You're in My System - TORYONTHEBEAT"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-contain"
@@ -139,6 +144,11 @@ export function InfiniteSliderVertical() {
         />
         <img
           src="/carousel/6.png"
+          alt="Midnight Miami (feat Konvy) - Nino Paid, Konvy"
+          className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-cover"
+        />
+        <img
+          src="/carousel/7.png"
           alt="Midnight Miami (feat Konvy) - Nino Paid, Konvy"
           className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[380px] rounded-[4px] object-cover"
         />
