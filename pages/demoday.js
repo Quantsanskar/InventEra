@@ -37,7 +37,7 @@ export default function DemoDay() {
     const houses = ["All", "Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin", "Phoenix"]
 
     // Fallback YouTube link if no link is provided
-    const FALLBACK_YOUTUBE_LINK = "https://youtu.be/EFmxPMdBqmU"
+    const FALLBACK_YOUTUBE_LINK = "https://youtu.be/WTSP_l0joZY"
 
     // Sample carousel data with local videos
     const carouselData = [
