@@ -251,9 +251,9 @@ const SocialLinksEditor = ({ apiEndpoint }) => {
   const SocialIcon = ({ platform, url }) => {
     const icons = {
       instagram: <img src="/icons/dashboard/socialhandles/Instagram.png" alt="Instagram" className="w-10 h-10" />,
-      github: <img src="/icons/dashboard/socialhandles/Github.png" alt="GitHub" className="w-10 h-10" />,
+      github: <img src="/icons/dashboard/socialhandles/GitHub.png" alt="GitHub" className="w-10 h-10" />,
       twitter: <img src="/icons/dashboard/socialhandles/X.png" alt="X" className="w-10 h-10" />,
-      linkedin: <img src="/icons/dashboard/socialhandles/Linkedin.png" alt="LinkedIn" className="w-12 h-10" />,
+      linkedin: <img src="/icons/dashboard/socialhandles/LinkedIn.png" alt="LinkedIn" className="w-12 h-10" />,
     };
 
     return (
