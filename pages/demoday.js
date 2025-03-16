@@ -698,6 +698,7 @@ export default function DemoDay() {
         // First filter by search query
         const matchesSearch = !searchQuery || (
             (project.participant_name && project.participant_name.toLowerCase().includes(searchQuery.toLowerCase())) ||
+            (project.participant_email && project.participant_email.toLowerCase().includes(searchQuery.toLowerCase())) ||
             (project.project_idea_title && project.project_idea_title.toLowerCase().includes(searchQuery.toLowerCase())) ||
             (project.project_idea_description && project.project_idea_description.toLowerCase().includes(searchQuery.toLowerCase()))
         )
@@ -1345,9 +1346,12 @@ export default function DemoDay() {
                                     </div>
                                 )}
                             </div>
-                            <div className="p-3">
+                            <div className="p-3 cursor-pointer" onClick={() => openProjectDetails(project)}>
                                 <h3 className="font-medium text-sm text-white mb-1 truncate-1">
-                                    {project.participant_name || "Shivangi Singh"}
+                                    {project.participant_name || "Anonymous"}
+                                </h3>
+                                <h3 className="font-medium text-sm text-white mb-1 truncate-1">
+                                    {project.participant_email || "Anonymous"}
                                 </h3>
                                 <h4 className="text-xs text-gray-300 mb-2 truncate-1">
                                     {project.project_idea_title || "Untitled Project"}

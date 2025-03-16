@@ -1,25 +1,29 @@
-import React, { useState, useEffect, use } from 'react';
-import { X, Youtube, Edit2, AlertCircle, Loader2, Upload } from 'lucide-react';
+"use client"
+
+import { useState, useEffect } from "react"
+import { X, Youtube, Edit2, AlertCircle, Loader2, Upload } from "lucide-react"
 
 const EditableYoutubeCard = ({ apiEndpoint, cardId }) => {
-    const [videoUrl, setVideoUrl] = useState("");
-    const [isEditing, setIsEditing] = useState(false);
-    const [inputValue, setInputValue] = useState("");
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [videoUrl, setVideoUrl] = useState("")
+    const [isEditing, setIsEditing] = useState(false)
+    const [inputValue, setInputValue] = useState("")
+    const [isLoading, setIsLoading] = useState(true)
+    const [error, setError] = useState(null)
     const [userData, setUserData] = useState(null)
+
     // Function to extract YouTube video ID from various YouTube URL formats
     const extractVideoId = (url) => {
         // Handle different YouTube URL formats
-        const regExp = /^.*(youtu.be\/|v\/|e\/|u\/\w+\/|embed\/|v=)([^#\&\?]*).*/;
-        const match = url?.match(regExp);
+        const regExp = /^.*(youtu.be\/|v\/|e\/|u\/\w+\/|embed\/|v=)([^#&?]*).*/
+        const match = url?.match(regExp)
 
         if (match && match[2].length === 11) {
-            return match[2];
+            return match[2]
         }
 
-        return null;
-    };
+        return null
+    }
+
     const refreshToken = async () => {
         const refreshToken = localStorage.getItem("refresh_token")
         if (!refreshToken) {
@@ -48,22 +52,64 @@ const EditableYoutubeCard = ({ apiEndpoint, cardId }) => {
             return false
         }
     }
+    const fetchVideoData = async () => {
+        setIsLoading(true)
+        try {
+            const token = localStorage.getItem("access_token")
+
+            if (!token) {
+                await refreshToken()
+                if (!refreshToken()) {
+                    window.localStorage.removeItem("access_token")
+                    window.localStorage.removeItem("refresh_token")
+                    window.localStorage.removeItem("user_info")
+                    window.location.href = "/SignInPage/SignIn"
+                }
+            }
+
+            const response = await fetch(`https://builderspace.onrender.com/api/get-user-details/`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+            })
+
+            const data = await response.json()
+            const fetchedVideoUrl = data.project_video_link // Fetch project video link
+
+            if (fetchedVideoUrl) {
+                const videoId = extractVideoId(fetchedVideoUrl)
+                if (videoId) {
+                    setVideoUrl(`https://www.youtube.com/embed/${videoId}`)
+                    setInputValue(fetchedVideoUrl)
+                } else {
+                    setError("Invalid YouTube URL received from API")
+                }
+            } else {
+                setVideoUrl(null) // No video link case
+            }
+        } catch (err) {
+            setError("Failed to load video data")
+            console.error("API fetch error:", err)
+        } finally {
+            setIsLoading(false)
+        }
+    }
     // Fetch video URL from the API on component mount
     useEffect(() => {
         const fetchVideoData = async () => {
-            setIsLoading(true);
+            setIsLoading(true)
             try {
-                const token = localStorage.getItem("access_token");
+                const token = localStorage.getItem("access_token")
 
                 if (!token) {
                     await refreshToken()
-                    {
-                        if (!refreshToken()) {
-                            window.localStorage.removeItem("access_token")
-                            window.localStorage.removeItem("refresh_token")
-                            window.localStorage.removeItem("user_info")
-                            window.location.href = "/SignInPage/SignIn"
-                        }
+                    if (!refreshToken()) {
+                        window.localStorage.removeItem("access_token")
+                        window.localStorage.removeItem("refresh_token")
+                        window.localStorage.removeItem("user_info")
+                        window.location.href = "/SignInPage/SignIn"
                     }
                 }
 
@@ -73,34 +119,32 @@ const EditableYoutubeCard = ({ apiEndpoint, cardId }) => {
                         Authorization: `Bearer ${token}`,
                         "Content-Type": "application/json",
                     },
-                });
+                })
 
-                const data = await response.json();
-                const fetchedVideoUrl = data.project_video_link; // Fetch project video link
+                const data = await response.json()
+                const fetchedVideoUrl = data.project_video_link // Fetch project video link
 
-                // console.log(fetchedVideoUrl);
                 if (fetchedVideoUrl) {
-                    const videoId = extractVideoId(fetchedVideoUrl);
+                    const videoId = extractVideoId(fetchedVideoUrl)
                     if (videoId) {
-                        setVideoUrl(`https://www.youtube.com/embed/${videoId}`);
-                        setInputValue(fetchedVideoUrl);
+                        setVideoUrl(`https://www.youtube.com/embed/${videoId}`)
+                        setInputValue(fetchedVideoUrl)
                     } else {
-                        setError("Invalid YouTube URL received from API");
+                        setError("Invalid YouTube URL received from API")
                     }
                 } else {
-                    setVideoUrl(null); // No video link case
+                    setVideoUrl(null) // No video link case
                 }
             } catch (err) {
-                setError("Failed to load video data");
-                console.error("API fetch error:", err);
+                setError("Failed to load video data")
+                console.error("API fetch error:", err)
             } finally {
-                setIsLoading(false);
+                setIsLoading(false)
             }
-        };
+        }
 
-        fetchVideoData();
-    }, [apiEndpoint, cardId]);
-
+        fetchVideoData()
+    }, [apiEndpoint, cardId])
 
     useEffect(() => {
         const verifyToken = async () => {
@@ -163,21 +207,21 @@ const EditableYoutubeCard = ({ apiEndpoint, cardId }) => {
     }, [])
 
     const handleSave = async () => {
-        const videoId = extractVideoId(inputValue);
+        const videoId = extractVideoId(inputValue)
 
         if (videoId) {
-            const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+            const embedUrl = `https://www.youtube.com/embed/${videoId}`
 
             try {
-                const token = localStorage.getItem("access_token");
+                const token = localStorage.getItem("access_token")
 
                 if (!token) {
-                    await verifyto
-                    throw new Error("No authentication token found");
+                    await refreshToken()
+                    throw new Error("No authentication token found")
                 }
 
-                const formData = new FormData();
-                formData.append("project_video_link", inputValue);
+                const formData = new FormData()
+                formData.append("project_video_link", inputValue)
 
                 const response = await fetch(`https://builderspace.onrender.com/api/update-all-details/`, {
                     method: "PATCH",
@@ -185,61 +229,60 @@ const EditableYoutubeCard = ({ apiEndpoint, cardId }) => {
                         Authorization: `Bearer ${token}`,
                     },
                     body: formData,
-                });
+                })
 
                 if (!response.ok) {
-                    throw new Error("Failed to update video");
+                    throw new Error("Failed to update video")
                 }
 
-                setVideoUrl(embedUrl);
-                setIsEditing(false);
+                setVideoUrl(embedUrl)
+                setIsEditing(false)
             } catch (err) {
-                alert("Failed to update video. Please try again.");
-                console.error("API update error:", err);
+                alert("Failed to update video. Please try again.")
+                console.error("API update error:", err)
             }
         } else {
-            alert("Please enter a valid YouTube URL");
+            alert("Please enter a valid YouTube URL")
         }
-    };
+    }
 
     if (isLoading) {
         return (
-            <div className="lg:col-span-6 bg-gradient-to-br from-zinc-900/70 to-black/80 border border-zinc-800 rounded-xl flex items-center justify-center relative h-[315px] shadow-lg transition-all duration-500 backdrop-blur-sm overflow-hidden">
+            <div className="lg:col-span-6 bg-[#0B090A] border border-white/50 rounded-[22px] shadow-md flex items-center justify-center relative  w-[323px] h-[367px] lg:w-[553px] lg:h-[587px] flex-shrink-0 backdrop-blur-lg overflow-hidden">
                 <div className="p-8 text-center space-y-4">
-                    <Loader2 size={36} className="text-red-500 animate-spin mx-auto" />
-                    <div className="text-zinc-400 font-medium">Loading your video...</div>
+                    <Loader2 size={28} className="text-white animate-spin mx-auto" />
+                    <div className="text-white text-sm">Loading your video...</div>
                 </div>
             </div>
-        );
+        )
     }
 
     if (error) {
         return (
-            <div className="lg:col-span-6 bg-gradient-to-br from-zinc-900/70 to-black/80 border border-zinc-800 rounded-xl flex items-center justify-center relative h-[315px] shadow-lg transition-all duration-500">
+            <div className="lg:col-span-6 bg-[#0B090A] border border-white/50 rounded-[22px] shadow-md flex items-center justify-center relative w-[323px] h-[367px] lg:w-[553px] lg:h-[587px] flex-shrink-0">
                 <div className="p-8 text-center space-y-4">
                     <AlertCircle size={36} className="text-red-500 mx-auto" />
-                    <div className="text-red-400 font-medium">{error}</div>
+                    <div className="text-red-400 font-medium">Please check your youtube video link again.</div>
                     <button
-                        onClick={() => window.location.reload()}
-                        className="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 rounded-lg text-sm text-zinc-200 transition-colors"
+                        onClick={fetchVideoData}
+                        className="px-4 py-2 bg-[#0B090A] border border-white/50 rounded-[22px] shadow-md text-sm text-zinc-200 transition-colors"
                     >
                         Try Again
                     </button>
                 </div>
             </div>
-        );
+        )
     }
 
     return (
         <div className="lg:col-span-6 relative group">
             {/* Label */}
-            <div className="absolute top-3 left-[0] z-20 bg-red-600/90 text-white text-xs px-1 py-1 rounded-sm flex items-center space-x-1 shadow-lg transform -translate-y-9 transition-transform duration-500">
-                <Youtube size={12} />
-                <span>S1 Feature</span>
-            </div>
+
 
             {/* YouTube iframe or upload icon */}
-            <div className="aspect-video relative bg-zinc-900 flex items-center justify-center border border-zinc-800 rounded-lg shadow-md">
+            <div className="aspect-video relative bg-[#0B090A] flex items-center justify-center border border-white/50 rounded-[22px] shadow-md w-[323px] h-[367px] lg:w-[553px] lg:h-[587px] flex-shrink-0
+
+">
                 {videoUrl ? (
                     <iframe
                         width="100%"
@@ -262,18 +305,18 @@ const EditableYoutubeCard = ({ apiEndpoint, cardId }) => {
 
             {/* Edit Button */}
             <button
-                className="absolute bottom-[-16%] md:bottom-[-12%] lg:bottom-[-6%] right-[-5%] lg:right-[-3%] w-10 h-10 bg-red-600 rounded-full flex items-center justify-center shadow-lg transform transition-all duration-300  z-20"
+                className={`absolute bottom-[-5%] md:bottom-[-12%] lg:bottom-[-4%] right-[-1%] lg:right-[4%] w-10 h-10 bg-black rounded-full flex items-center justify-center border border-white/50 shadow-lg z-20 ${isEditing ? 'opacity-0 cursor-default' : 'opacity-100'}`}
                 aria-label="Edit video"
                 onClick={() => setIsEditing(true)}
             >
-                <Edit2 size={16} className="text-white" />
+                <Edit2 size={16} className={`text-white z-20`} />
             </button>
 
             {/* Edit Modal with improved UI */}
             {isEditing && (
-                <div className="fixed inset-0 bg-black/80 mb-32 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                <div className="fixed inset-0 mb-32 flex items-center justify-center z-50 p-4 w-[323px] h-[367px] lg:w-[553px] lg:h-[587px] flex-shrink-0 backdrop-blur-lg">
                     <div
-                        className="bg-gradient-to-b from-zinc-900 to-black border border-zinc-800 rounded-xl p-6 w-full max-w-md shadow-2xl transform transition-all duration-300"
+                        className="bg-gradient-to-b from-zinc-900 to-black border border-white/50 rounded-[22px] shadow-md p-6 w-full"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <div className="flex justify-between items-center mb-4">
@@ -291,9 +334,7 @@ const EditableYoutubeCard = ({ apiEndpoint, cardId }) => {
 
                         <div className="space-y-5">
                             <div>
-                                <label className="block text-sm font-medium text-zinc-300 mb-2">
-                                    YouTube Video URL
-                                </label>
+                                <label className="block text-sm font-medium text-zinc-300 mb-2">YouTube Video URL</label>
                                 <input
                                     type="text"
                                     value={inputValue}
@@ -301,9 +342,7 @@ const EditableYoutubeCard = ({ apiEndpoint, cardId }) => {
                                     className="w-full bg-zinc-800/80 border border-zinc-700 rounded-lg px-3 py-3 text-zinc-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300"
                                     placeholder="https://www.youtube.com/watch?v=..."
                                 />
-                                <p className="mt-2 text-xs text-zinc-500">
-                                    Paste any YouTube URL format (watch, share, or embed)
-                                </p>
+                                <p className="mt-2 text-xs text-zinc-500">Paste any YouTube URL format (watch, share, or embed)</p>
                             </div>
 
                             <div className="pt-1">
@@ -347,7 +386,7 @@ const EditableYoutubeCard = ({ apiEndpoint, cardId }) => {
                                 <button
                                     type="button"
                                     onClick={handleSave}
-                                    className={`px-4 py-2.5 ${extractVideoId(inputValue) ? 'bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600' : 'bg-zinc-700 cursor-not-allowed'} text-white text-sm font-medium rounded-lg transition-all duration-300 shadow-lg`}
+                                    className={`px-4 py-2.5 ${extractVideoId(inputValue) ? "bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600" : "bg-zinc-700 cursor-not-allowed"} text-white text-sm font-medium rounded-lg transition-all duration-300 shadow-lg`}
                                     disabled={!extractVideoId(inputValue)}
                                 >
                                     Update Video
@@ -358,7 +397,8 @@ const EditableYoutubeCard = ({ apiEndpoint, cardId }) => {
                 </div>
             )}
         </div>
-    );
-};
+    )
+}
 
-export default EditableYoutubeCard;
+export default EditableYoutubeCard
+

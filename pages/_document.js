@@ -13,8 +13,12 @@ class MyDocument extends Document {
           </head>
           <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet" />
           <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Nanum+Gothic+Coding&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet"></link>
-          <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet"/>
-
+          <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet" />
+          <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+          <link rel="icon" href="/favicon-16x16.png" type="image/png" />
+          <link rel="icon" href="/favicon-32x32.png" type="image/png" />
+          <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+          <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         </Head>
         <body>
           <Main />
