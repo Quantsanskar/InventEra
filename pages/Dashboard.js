@@ -391,7 +391,7 @@ const Dashboard = () => {
         {/* Header Image with Profile Icon - Enhanced with gradient overlay */}
         <div className="w-full max-w-6xl relative h-[260px] mb-16 mx-auto mt-6 lg:mt-12 rounded-xl shadow-2xl">
           <Image
-            src="/images/main-bg.png"
+            src="/images/main-bg2.png"
             alt="Decorative header with books and coffee"
             fill
             priority
