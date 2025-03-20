@@ -28,7 +28,7 @@ const SocialLinksEditor = ({ apiEndpoint }) => {
     const patterns = {
       instagram: /^(https?:\/\/)?(www\.)?instagram\.com\/[a-zA-Z0-9_.]+\/?$/,
       github: /^(https?:\/\/)?(www\.)?github\.com\/[a-zA-Z0-9_-]+\/?$/,
-      twitter: /^(https?:\/\/)?(www\.)?twitter\.com\/[a-zA-Z0-9_]+\/?$/,
+      twitter: /^(https?:\/\/)?(www\.)?x\.com\/[a-zA-Z0-9_]+\/?$/,
       linkedin: /^(https?:\/\/)?(www\.)?linkedin\.com\/(in|company)\/[a-zA-Z0-9_-]+\/?$/,
     }
 
@@ -255,7 +255,7 @@ const SocialLinksEditor = ({ apiEndpoint }) => {
       twitter: <img src="/icons/dashboard/socialhandles/X.png" alt="X" className="w-10 h-10" />,
       linkedin: <img src="/icons/dashboard/socialhandles/LinkedIn.png" alt="LinkedIn" className="w-12 h-10" />,
     };
-
+ 
     return (
       <div className="cursor-pointer p-3 bg-[#0B090A] rounded-lg hover:opacity-80 transition duration-300"
         onClick={() => window.location.href = url}>
@@ -349,7 +349,7 @@ const SocialLinksEditor = ({ apiEndpoint }) => {
                   value={inputValues.twitter}
                   onChange={(e) => handleInputChange(e, "twitter")}
                   className="w-full bg-zinc-800/80 border border-zinc-700 rounded-lg px-3 py-2 text-zinc-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300"
-                  placeholder="https://twitter.com/username"
+                  placeholder="https://x.com/username"
                 />
               </div>
 
