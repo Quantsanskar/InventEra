@@ -460,30 +460,38 @@ export default function DemoDay() {
             const data = await response.json()
 
             // Transform the data to match our component needs
-            const transformedData = data.map((item, index) => ({
-                id: index + 1,
-                participant_name: Array.isArray(item.participant_name) ? item.participant_name[0] : item.participant_name,
-                participant_email: Array.isArray(item.participant_email) ? item.participant_email[0] : item.participant_email,
-                project_idea_title: Array.isArray(item.project_idea_title)
-                    ? item.project_idea_title[0]
-                    : item.project_idea_title,
-                project_idea_description: Array.isArray(item.project_idea_description)
-                    ? item.project_idea_description[0]
-                    : item.project_idea_description,
-                project_experience: Array.isArray(item.project_experience)
-                    ? item.project_experience[0]
-                    : item.project_experience,
-                project_video_link: Array.isArray(item.project_video_link)
-                    ? item.project_video_link[0]
-                    : item.project_video_link,
-                like_counts: Array.isArray(item.like_counts) ? parseInt(item.like_counts[0]) : parseInt(item.like_counts || 0),
-                // Extract social media links
-                instagram: Array.isArray(item.instagram) ? item.instagram[0] : item.instagram,
-                github: Array.isArray(item.github) ? item.github[0] : item.github,
-                twitter: Array.isArray(item.twitter) ? item.twitter[0] : item.twitter,
-                linkedin: Array.isArray(item.linkedin) ? item.linkedin[0] : item.linkedin,
-                house: Array.isArray(item.house) ? item.house[0] : item.house,
-            }))
+            const transformedData = data
+                .filter(item => {
+                    // Only include projects with a video link
+                    const videoLink = Array.isArray(item.project_video_link)
+                        ? item.project_video_link[0]
+                        : item.project_video_link
+                    return videoLink && videoLink.trim() !== ''
+                })
+                .map((item, index) => ({
+                    id: index + 1,
+                    participant_name: Array.isArray(item.participant_name) ? item.participant_name[0] : item.participant_name,
+                    participant_email: Array.isArray(item.participant_email) ? item.participant_email[0] : item.participant_email,
+                    project_idea_title: Array.isArray(item.project_idea_title)
+                        ? item.project_idea_title[0]
+                        : item.project_idea_title,
+                    project_idea_description: Array.isArray(item.project_idea_description)
+                        ? item.project_idea_description[0]
+                        : item.project_idea_description,
+                    project_experience: Array.isArray(item.project_experience)
+                        ? item.project_experience[0]
+                        : item.project_experience,
+                    project_video_link: Array.isArray(item.project_video_link)
+                        ? item.project_video_link[0]
+                        : item.project_video_link,
+                    like_counts: Array.isArray(item.like_counts) ? parseInt(item.like_counts[0]) : parseInt(item.like_counts || 0),
+                    // Extract social media links
+                    instagram: Array.isArray(item.instagram) ? item.instagram[0] : item.instagram,
+                    github: Array.isArray(item.github) ? item.github[0] : item.github,
+                    twitter: Array.isArray(item.twitter) ? item.twitter[0] : item.twitter,
+                    linkedin: Array.isArray(item.linkedin) ? item.linkedin[0] : item.linkedin,
+                    house: Array.isArray(item.house) ? item.house[0] : item.house,
+                }))
 
             // Sort projects by like count (most likes to least likes)
             const sortedProjects = transformedData.sort((a, b) => (b.like_counts || 0) - (a.like_counts || 0))
@@ -706,6 +714,7 @@ export default function DemoDay() {
         // Then filter by house
         const matchesHouse = selectedHouse === "All" ||
             (project.house && project.house.toLowerCase() === selectedHouse.toLowerCase())
+        
 
         return matchesSearch && matchesHouse
     })
@@ -939,11 +948,12 @@ export default function DemoDay() {
                   overflow: hidden;
                   border-radius: 8px;
                   background-color: #111;
+                  
                   transition: transform 0.3s ease;
                 }
                 
                 .video-card:hover {
-                  transform: translateY(-5px);
+                  transform: translateY(0px);
                 }
                 
                 .video-card .play-button {
@@ -1350,16 +1360,12 @@ export default function DemoDay() {
                                 <h3 className="font-medium text-sm text-white mb-1 truncate-1">
                                     {project.participant_name || "Anonymous"}
                                 </h3>
-                                <h3 className="font-medium text-sm text-white mb-1 truncate-1">
-                                    {project.participant_email || "Anonymous"}
-                                </h3>
+
                                 <h4 className="text-xs text-gray-300 mb-2 truncate-1">
                                     {project.project_idea_title || "Untitled Project"}
                                 </h4>
-                                <p className="text-xs text-gray-400 mb-2 truncate-2">
-                                    {project.project_idea_description || "No description available"}
-                                </p>
-                               
+
+
                             </div>
                             <div className="absolute bottom-3 right-3 z-10 flex space-x-2">
                                 {/* Like Button */}
@@ -1392,125 +1398,148 @@ export default function DemoDay() {
 
                 {/* Project Details Modal */}
                 {showProjectModal && selectedProject && (
-                    <div className="modal-overlay" onClick={closeProjectModal}>
-                        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                {/* Video Section */}
-                                <div className="p-6">
-                                    <div className="aspect-w-16 mb-4">
+                    <div
+                        className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+                        onClick={closeProjectModal}
+                    >
+                        <div
+                            className="w-[95%] h-[90vh] max-w-7xl bg-black border border-gray-800 rounded-xl shadow-2xl overflow-hidden"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <div className="relative h-full flex flex-col md:flex-row">
+                                {/* Video Section - Larger */}
+                                <div className="w-full md:w-3/5 h-full flex flex-col p-6 overflow-y-auto">
+                                    <div className="relative aspect-video w-full mb-6 rounded-lg  shadow-lg">
                                         <iframe
                                             src={getYoutubeEmbedUrl(selectedProject.project_video_link)}
                                             title={selectedProject.project_idea_title || "Project Video"}
-                                            className="w-full h-full rounded-lg"
+                                            className="absolute inset-0 w-full h-full"
                                             frameBorder="0"
                                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                             allowFullScreen
                                         ></iframe>
                                     </div>
-                                    <h2 className="text-xl font-bold mb-2">{selectedProject.project_idea_title || "Untitled Project"}</h2>
-                                    <p className="text-gray-300 text-sm mb-4">
-                                        {selectedProject.project_idea_description || "No description available"}
-                                    </p>
 
-                                    {/* Project Tags */}
-                                    <div className="flex flex-wrap gap-2 mb-4">
-                                        <span className="video-tag">PARTICIPANT</span>
-                                        {selectedProject.project_experience && (
-                                            <span className="video-tag">{selectedProject.project_experience.toUpperCase()}</span>
-                                        )}
-                                        {selectedProject.house && (
-                                            <span className="video-tag">{selectedProject.house.toUpperCase()}</span>
-                                        )}
-                                    </div>
+                                    <div className="space-y-4">
+                                        <h2 className="text-2xl font-bold">{selectedProject.project_idea_title || "Untitled Project"}</h2>
 
-                                    {/* Like Button in Modal */}
-                                    <button
-                                        className={`like-button ${likedProjects[selectedProject.participant_email] ? "liked" : ""} ${likingInProgress[selectedProject.participant_email] ? "liking" : ""}`}
-                                        onClick={() => likeProject(selectedProject.participant_email)}
-                                        disabled={likingInProgress[selectedProject.participant_email] || !isAuthenticated}
-                                    >
-                                        {likingInProgress[selectedProject.participant_email] ? (
-                                            <Loader2 className="w-4 h-4 mr-1 animate-spin" />
-                                        ) : (
-                                            <Heart className={`w-4 h-4 mr-1 ${likedProjects[selectedProject.participant_email] ? "fill-current" : ""}`} />
-                                        )}
-                                        <span>{formatLikeCount(selectedProject.like_counts)}</span>
-                                    </button>
-                                </div>
+                                        {/* Project Tags */}
+                                        <div className="flex flex-wrap gap-2">
+                                            <span className="px-2 py-1 bg-gray-800 rounded-md text-xs font-medium uppercase tracking-wider">
+                                                PARTICIPANT
+                                            </span>
 
-                                {/* Creator Info Section */}
-                                <div className="bg-gray-900 p-6 rounded-r-lg">
-                                    <h3 className="text-2xl font-bold mb-1">
-                                        Hello, I'm {selectedProject.participant_name || "Anonymous"}
-                                    </h3>
-                                    <p className="text-gray-400 mb-6">{selectedProject.project_experience || "Builder"} at buildspace</p>
+                                            {selectedProject.house && (
+                                                <span className="px-2 py-1 bg-gray-800 rounded-md text-xs font-medium uppercase tracking-wider">
+                                                    {selectedProject.house}
+                                                </span>
+                                            )}
+                                        </div>
 
-                                    <h4 className="font-semibold mb-2">About this project</h4>
-                                    <p className="text-gray-300 text-sm mb-4">
-                                        {selectedProject.project_idea_description || "No description available"}
-                                    </p>
-                                    <p className="text-gray-400 mb-3">Say hi to {selectedProject.participant_name || "Builder"} at </p>
 
-                                    {/* Social Links */}
-                                    <div className="flex mb-6">
-                                        {isValidUrl(selectedProject.twitter) && (
-                                            <a
-                                                href={selectedProject.twitter}
-                                                className="social-link"
-                                                title="Twitter"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                            >
-                                                <Twitter size={18} />
-                                            </a>
-                                        )}
+                                        {/* Like Button in Modal */}
+                                        <button
+                                            className={`like-button ${likedProjects[selectedProject.participant_email] ? "liked" : ""} ${likingInProgress[selectedProject.participant_email] ? "liking" : ""}`}
+                                            onClick={() => likeProject(selectedProject.participant_email)}
+                                            disabled={likingInProgress[selectedProject.participant_email] || !isAuthenticated}
+                                        >
+                                            {likingInProgress[selectedProject.participant_email] ? (
+                                                <Loader2 className="w-4 h-4 mr-1 animate-spin" />
+                                            ) : (
+                                                <Heart className={`w-4 h-4 mr-1 ${likedProjects[selectedProject.participant_email] ? "fill-current" : ""}`} />
+                                            )}
+                                            <span>{formatLikeCount(selectedProject.like_counts)}</span>
+                                        </button>
 
-                                        {isValidUrl(selectedProject.github) && (
-                                            <a
-                                                href={selectedProject.github}
-                                                className="social-link"
-                                                title="GitHub"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                            >
-                                                <Github size={18} />
-                                            </a>
-                                        )}
 
-                                        {isValidUrl(selectedProject.linkedin) && (
-                                            <a
-                                                href={selectedProject.linkedin}
-                                                className="social-link"
-                                                title="LinkedIn"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                            >
-                                                <Linkedin size={18} />
-                                            </a>
-                                        )}
+                                        <div>
+                                            <p className="text-gray-400 mb-3">
+                                                Say hi to {selectedProject.participant_name || "Builder"} at{" "}
+                                            </p>
 
-                                        {isValidUrl(selectedProject.instagram) && (
-                                            <a
-                                                href={selectedProject.instagram}
-                                                className="social-link"
-                                                title="Instagram"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                            >
-                                                <Instagram size={18} />
-                                            </a>
-                                        )}
+                                            {/* Social Links */}
+                                            <div className="flex gap-3">
+                                                {isValidUrl(selectedProject.twitter) && (
+                                                    <a
+                                                        href={selectedProject.twitter}
+                                                        className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition-colors duration-200"
+                                                        title="Twitter"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                    >
+                                                        <Twitter size={18} />
+                                                    </a>
+                                                )}
+
+                                                {isValidUrl(selectedProject.github) && (
+                                                    <a
+                                                        href={selectedProject.github}
+                                                        className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition-colors duration-200"
+                                                        title="GitHub"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                    >
+                                                        <Github size={18} />
+                                                    </a>
+                                                )}
+
+                                                {isValidUrl(selectedProject.linkedin) && (
+                                                    <a
+                                                        href={selectedProject.linkedin}
+                                                        className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition-colors duration-200"
+                                                        title="LinkedIn"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                    >
+                                                        <Linkedin size={18} />
+                                                    </a>
+                                                )}
+
+                                                {isValidUrl(selectedProject.instagram) && (
+                                                    <a
+                                                        href={selectedProject.instagram}
+                                                        className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition-colors duration-200"
+                                                        title="Instagram"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                    >
+                                                        <Instagram size={18} />
+                                                    </a>
+                                                )}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+
+                                {/* Creator Info Section - Cleaner */}
+                                <div className="w-full md:w-2/5 h-full bg-gray-900/50 p-8 overflow-y-auto border-t md:border-t-0 md:border-l border-gray-800">
+                                    <div className="space-y-6">
+                                        <div>
+                                            <h3 className="text-2xl font-bold mb-4 md:mb-6">
+                                                Hello, I'm {selectedProject.participant_name || "Anonymous"}
+                                            </h3>
+                                            <div className="mb-4 md:mb-6">
+                                                <h4 className="text-lg font-semibold mb-2">About this project</h4>
+                                                <p className="text-gray-300">
+                                                    {selectedProject.project_idea_description || "No description available"}
+                                                </p>
+                                            </div>
+                                            <div>
+                                                <h4 className="text-lg font-semibold mb-2">My Journey</h4>
+                                                <p className="text-gray-400 mt-1">{selectedProject.project_experience || ""}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Close Button */}
+                                <button
+                                    className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-800 text-gray-300 hover:bg-gray-700 transition-colors duration-200"
+                                    onClick={closeProjectModal}
+                                >
+                                    ✕
+                                </button>
                             </div>
-
-                            {/* Close Button */}
-                            <button
-                                className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-800 text-gray-300 hover:bg-gray-700"
-                                onClick={closeProjectModal}
-                            >
-                                ✕
-                            </button>
                         </div>
                     </div>
                 )}
