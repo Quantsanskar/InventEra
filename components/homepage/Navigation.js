@@ -11,7 +11,7 @@ export default function Navigation() {
     { name: "S1 Demos", url: "/s1-demos", icon: Video, active: pathname === "/s1-demos" },
     { name: "Dashboard", url: "/Dashboard", icon: User, active: pathname === "/Dashboard" },
     { name: "Contact", url: "/contactPage/contact", icon: Phone, active: pathname === "/contact" },
-    // { name: "S1 Demos", url: "/demoday", icon: Video, active: pathname === "/demoday" },
+    
   ];
 
   return <NavBar items={navItems} />;
