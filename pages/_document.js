@@ -19,6 +19,12 @@ class MyDocument extends Document {
           <link rel="icon" href="/favicon-32x32.png" type="image/png" />
           <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
           <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+          <link
+          rel="preload"
+          href="/reference/NightsTree.webp"
+          as="image"
+          type="image/webp"
+        />
         </Head>
         <body>
           <Main />

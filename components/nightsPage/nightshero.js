@@ -91,7 +91,7 @@ const HeroSection = () => {
           }}
           className="absolute inset-0 bg-gradient-to-b from-[#1a365d]/80 via-[#1e3a8a]/70 to-[#0a1128]"
           style={{
-            backgroundImage: `url(${encodeURI("/reference/NightsTree.png")})`,
+            backgroundImage: `url(${encodeURI("/reference/NightsTree.webp")})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             opacity: 100,
