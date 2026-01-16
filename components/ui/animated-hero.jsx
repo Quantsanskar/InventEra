@@ -68,7 +68,7 @@ function Hero() {
             </p>
           </div>
           <div className="flex flex-row gap-3">
-            <Button size="lg" className="" variant="outline" onClick={() => window.location.href = "/thenights"}>
+            <Button size="lg" className="" variant="outline" onClick={() => window.location.href = "/join-now"}>
               Join Us Now <Handshake className="w-4 h-4" />
             </Button>
             <Button size="lg" className="text-black" onClick={() => window.location.href = "/thenights"}>

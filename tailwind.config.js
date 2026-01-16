@@ -144,6 +144,10 @@ module.exports = {
           sm: "calc(var(--radius) - 4px)",
         },
       },
+      backgroundImage: {
+        'buildersspace-logo': "url('/logo.jpg')",
+        'video-bs': "url('/reelsvideo.io_1768470202706.gif')"
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
