@@ -411,11 +411,11 @@ export default function FoundConnect() {
                     </div>
 
                     {/* Hero Content - Centered */}
-                    <div className="flex-1 flex flex-col justify-center px-6 lg:px-8 pb-6 lg:pb-8">
-                        <div className='h-fit text-white pb-12 px-6 lg:pl-11 flex flex-col items-start justify-center gap-5'>
-                            <h1 className='font-manrope font-bold text-4xl md:text-7xl'>hi. we are <br></br> Builder's Space.</h1>
-                            <h2 className='font-manrope opacity-50 text-lg md:text-2xl'>Welcome to Builder's Space-where <br></br> creativity meets chaos! <br></br> Build Cool Stuff. With Cooler People.</h2>
-                            <button className='bg-white w-full md:w-2/5 h-14 text-2xl text-black font-caveat font-bold hover:opacity-70 transition-all ease-linear hover:text-3xl' onClick={() => window.location.href = "/join-now"}>FOUND'D</button>
+                    <div className="flex-1 flex flex-col justify-center px-4 lg:px-8 pb-4 lg:pb-8">
+                        <div className='h-fit text-white pb-6 md:pb-12 px-4 lg:pl-11 flex flex-col items-start justify-center gap-3 md:gap-5'>
+                            <h1 className='font-manrope font-bold text-3xl md:text-7xl'>hi. we are <br></br> Builder's Space.</h1>
+                            <h2 className='hidden md:block font-manrope opacity-50 text-lg md:text-2xl'>Welcome to Builder's Space-where <br></br> creativity meets chaos! <br></br> Build Cool Stuff. With Cooler People.</h2>
+                            <button className='bg-white w-full md:w-2/5 h-12 md:h-14 text-xl md:text-2xl text-black font-caveat font-bold hover:opacity-70 transition-all ease-linear hover:text-3xl' onClick={() => window.location.href = "/join-now"}>FOUND'D</button>
                         </div>
 
                         {/* Search Bar for Mobile/Tablet */}
