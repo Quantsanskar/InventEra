@@ -50,7 +50,7 @@ export default function PitchAdmin() {
     const [actionLoading, setActionLoading] = useState(null)
     const [notification, setNotification] = useState(null)
     
-    const API_BASE_URL = "http://127.0.0.1:8000/api"
+    const API_BASE_URL = "https://found-d.onrender.com/api"
     const refreshInterval = useRef(null)
     
     // Get auth token
