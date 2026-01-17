@@ -60,7 +60,9 @@ export default function PitchUser() {
         
         const response = await fetch(`${API_BASE_URL}${endpoint}`, {
             ...options,
-            headers
+            headers,
+            mode: 'cors',
+            credentials: 'include'
         })
         
         return response.json()
@@ -141,7 +143,9 @@ export default function PitchUser() {
             const response = await fetch(`${API_BASE_URL}/pitch/user/login/`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: loginEmail, password: loginPassword })
+                body: JSON.stringify({ email: loginEmail, password: loginPassword }),
+                mode: 'cors',
+                credentials: 'include'
             })
             
             const data = await response.json()

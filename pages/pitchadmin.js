@@ -67,7 +67,9 @@ export default function PitchAdmin() {
         
         const response = await fetch(`${API_BASE_URL}${endpoint}`, {
             ...options,
-            headers
+            headers,
+            mode: 'cors',
+            credentials: 'include'
         })
         
         return response.json()
@@ -114,7 +116,9 @@ export default function PitchAdmin() {
             const response = await fetch(`${API_BASE_URL}/pitch/admin/login/`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username: loginUsername, password: loginPassword })
+                body: JSON.stringify({ username: loginUsername, password: loginPassword }),
+                mode: 'cors',
+                credentials: 'include'
             })
             
             const data = await response.json()
