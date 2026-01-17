@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import Head from "next/head"
 import Image from "next/image"
 import Link from "next/link"
@@ -18,6 +18,9 @@ export default function FoundConnect() {
     const [showMemberModal, setShowMemberModal] = useState(false)
     const [totalPages, setTotalPages] = useState(1)
     const [modalAnimation, setModalAnimation] = useState(false)
+    const [heroCollapsed, setHeroCollapsed] = useState(false)
+    const lastScrollY = useRef(0)
+    const scrollThreshold = 50 // Minimum scroll before triggering collapse
 
     const membersPerPage = 21
     const API_BASE_URL = "https://found-d.onrender.com/api"
@@ -55,6 +58,40 @@ export default function FoundConnect() {
     // Initialize - fetch members on mount
     useEffect(() => {
         fetchMembers()
+    }, [])
+
+    // Handle mobile hero collapse on scroll
+    useEffect(() => {
+        const handleScroll = () => {
+            // Only apply on mobile (lg breakpoint is 1024px)
+            if (window.innerWidth >= 1024) return
+
+            const rightPanel = document.getElementById('right-panel')
+            if (!rightPanel) return
+
+            const currentScrollY = rightPanel.scrollTop
+
+            if (currentScrollY > lastScrollY.current && currentScrollY > scrollThreshold) {
+                // Scrolling down - collapse hero
+                setHeroCollapsed(true)
+            } else if (currentScrollY < lastScrollY.current && currentScrollY < scrollThreshold) {
+                // Scrolling up near top - expand hero
+                setHeroCollapsed(false)
+            }
+
+            lastScrollY.current = currentScrollY
+        }
+
+        const rightPanel = document.getElementById('right-panel')
+        if (rightPanel) {
+            rightPanel.addEventListener('scroll', handleScroll, { passive: true })
+        }
+
+        return () => {
+            if (rightPanel) {
+                rightPanel.removeEventListener('scroll', handleScroll)
+            }
+        }
     }, [])
 
     // Handle search
@@ -391,50 +428,146 @@ export default function FoundConnect() {
                 .modal-content::-webkit-scrollbar-thumb:hover {
                   background: #2a2a2a;
                 }
+                
+                /* Mobile Hero Shutter Animation */
+                @keyframes shutterClose {
+                  from {
+                    max-height: 300px;
+                    opacity: 1;
+                    transform: translateY(0);
+                  }
+                  to {
+                    max-height: 0;
+                    opacity: 0;
+                    transform: translateY(-20px);
+                  }
+                }
+                
+                @keyframes shutterOpen {
+                  from {
+                    max-height: 0;
+                    opacity: 0;
+                    transform: translateY(-20px);
+                  }
+                  to {
+                    max-height: 300px;
+                    opacity: 1;
+                    transform: translateY(0);
+                  }
+                }
+                
+                .hero-content {
+                  overflow: hidden;
+                  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                }
+                
+                .hero-content.collapsed {
+                  max-height: 0 !important;
+                  opacity: 0;
+                  padding-top: 0 !important;
+                  padding-bottom: 0 !important;
+                  margin: 0 !important;
+                  transform: translateY(-20px);
+                }
+                
+                .hero-content.expanded {
+                  max-height: 300px;
+                  opacity: 1;
+                  transform: translateY(0);
+                }
+                
+                .collapsed-header {
+                  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                  overflow: hidden;
+                }
+                
+                .collapsed-header.show {
+                  max-height: 80px;
+                  opacity: 1;
+                }
+                
+                .collapsed-header.hide {
+                  max-height: 0;
+                  opacity: 0;
+                  padding: 0 !important;
+                }
+                
+                .mobile-hero-wrapper {
+                  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                }
             `}</style>
 
             {/* Main Split Layout */}
             <div className="flex flex-col lg:flex-row h-screen overflow-hidden">
                 {/* Left Side - Fixed Hero Content */}
-                <div className="w-full lg:w-2/5 bg-black flex flex-col h-auto lg:h-screen overflow-hidden">
-                    {/* Logo */}
-                    <div className="p-6 lg:p-8">
-                        <Link href="/">
-                            <Image
-                                src="/logo.jpg"
-                                alt="Builder's Space Logo"
-                                width={40}
-                                height={40}
-                                className="cursor-pointer opacity-90 hover:opacity-100 transition-opacity invert"
-                            />
-                        </Link>
-                    </div>
+                <div className="w-full lg:w-2/5 bg-black flex flex-col h-auto lg:h-screen overflow-hidden mobile-hero-wrapper">
 
-                    {/* Hero Content - Centered */}
-                    <div className="flex-1 flex flex-col justify-center px-4 lg:px-8 pb-4 lg:pb-8">
-                        <div className='h-fit text-white pb-6 md:pb-12 px-4 lg:pl-11 flex flex-col items-start justify-center gap-3 md:gap-5'>
-                            <h1 className='font-manrope font-bold text-3xl md:text-7xl'>hi. we are <br></br> Builder's Space.</h1>
-                            <h2 className='hidden md:block font-manrope opacity-50 text-lg md:text-2xl'>Welcome to Builder's Space-where <br></br> creativity meets chaos! <br></br> Build Cool Stuff. With Cooler People.</h2>
-                            <button className='bg-white w-full md:w-2/5 h-12 md:h-14 text-xl md:text-2xl text-black font-caveat font-bold hover:opacity-70 transition-all ease-linear hover:text-3xl' onClick={() => window.location.href = "/join-now"}>FOUND'D</button>
-                        </div>
-
-                        {/* Search Bar for Mobile/Tablet */}
-                        <div className="lg:hidden mt-8">
-                            <div className="relative">
-                                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500" />
+                    {/* Collapsed Header for Mobile - Shows when hero is collapsed */}
+                    <div className={`lg:hidden collapsed-header ${heroCollapsed ? 'show' : 'hide'}`}>
+                        <div className="flex items-center justify-between p-4 border-b border-gray-900/50 bg-black/95 backdrop-blur-sm">
+                            <Link href="/">
+                                <Image
+                                    src="/logo.jpg"
+                                    alt="Builder's Space Logo"
+                                    width={32}
+                                    height={32}
+                                    className="cursor-pointer opacity-90 hover:opacity-100 transition-opacity invert"
+                                />
+                            </Link>
+                            <div className="relative flex-1 ml-4">
+                                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500" />
                                 <input
                                     type="text"
                                     placeholder="Search members..."
-                                    className="search-input"
+                                    className="search-input py-2 text-sm"
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                 />
                             </div>
-                            {!loading && (
-                                <p className="text-gray-500 text-sm mt-3">
-                                    {filteredMembers.length} {filteredMembers.length === 1 ? 'member' : 'members'}
-                                </p>
-                            )}
+                        </div>
+                    </div>
+
+                    {/* Full Hero Section - Hides when collapsed on mobile */}
+                    <div className={`lg:block ${heroCollapsed ? 'hidden lg:flex lg:flex-col' : ''}`}>
+                        {/* Logo */}
+                        <div className="p-6 lg:p-8">
+                            <Link href="/">
+                                <Image
+                                    src="/logo.jpg"
+                                    alt="Builder's Space Logo"
+                                    width={40}
+                                    height={40}
+                                    className="cursor-pointer opacity-90 hover:opacity-100 transition-opacity invert"
+                                />
+                            </Link>
+                        </div>
+
+                        {/* Hero Content - Centered */}
+                        <div className={`hero-content flex-1 flex flex-col justify-center px-4 lg:px-8 pb-4 lg:pb-8 ${heroCollapsed ? 'collapsed lg:expanded' : 'expanded'}`}>
+                            <div className='h-fit text-white pb-6 md:pb-12 px-4 lg:pl-11 flex flex-col items-start justify-center gap-3 md:gap-5'>
+                                <h1 className='font-manrope font-bold text-3xl md:text-7xl'>hi. we are <br></br> Builder's Space.</h1>
+                                <h2 className='hidden md:block font-manrope opacity-50 text-lg md:text-2xl'>Welcome to Builder's Space-where <br></br> creativity meets chaos! <br></br> Build Cool Stuff. With Cooler People.</h2>
+                                <button className='bg-white w-full md:w-2/5 h-12 md:h-14 text-xl md:text-2xl text-black font-caveat font-bold hover:opacity-70 transition-all ease-linear hover:text-3xl' onClick={() => window.location.href = "/join-now"}>FOUND'D</button>
+                            </div>
+
+                            {/* Search Bar for Mobile/Tablet - Only when expanded */}
+                            <div className={`lg:hidden mt-8 ${heroCollapsed ? 'hidden' : ''}`}>
+                                <div className="relative">
+                                    <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500" />
+                                    <input
+                                        type="text"
+                                        placeholder="Search members..."
+                                        className="search-input"
+                                        value={searchQuery}
+                                        onChange={(e) => setSearchQuery(e.target.value)}
+                                    />
+                                </div>
+                                {!loading && (
+                                    <p className="text-gray-500 text-sm mt-3">
+                                        {filteredMembers.length} {filteredMembers.length === 1 ? 'member' : 'members'}
+                                    </p>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -442,7 +575,7 @@ export default function FoundConnect() {
                 {/* Right Side - Scrollable Members Panel */}
                 <div
                     id="right-panel"
-                    className="w-full lg:w-3/5 bg-black lg:border-l border-gray-900 overflow-y-auto h-[60vh] lg:h-screen"
+                    className={`w-full lg:w-3/5 bg-black lg:border-l border-gray-900 overflow-y-auto lg:h-screen transition-all duration-400 ${heroCollapsed ? 'h-[calc(100vh-64px)]' : 'h-[60vh]'}`}
                 >
                     {/* Search Bar Header for Desktop */}
                     <div className="hidden lg:block sticky top-0 bg-black/95 backdrop-blur-sm z-10 p-6 pb-4 border-b border-gray-900/50">
