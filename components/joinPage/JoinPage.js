@@ -20,6 +20,7 @@ function JoinPage() {
                 <h1 className='font-manrope font-bold text-4xl md:text-7xl'>hi. we are <br></br> Builder's Space.</h1>
                 <h2 className='font-manrope opacity-50 text-lg md:text-2xl'>Welcome to Builder's Space-where <br></br> creativity meets chaos! <br></br> Build Cool Stuff. With Cooler People.</h2>
                 <button className='bg-white w-full md:w-2/5 h-14 text-2xl text-black font-caveat font-bold hover:opacity-70 transition-all ease-linear hover:text-3xl' onClick={() => window.open("https://www.commudle.com/communities/builders-space/events/found-d", "_blank")}>FOUND'D</button>
+                <button className='bg-black w-full md:w-2/5 h-14 text-[1.2rem] text-white font-sans font-medium hover:opacity-70 transition-all ease-linear hover:text-3xl' onClick={() => window.location.href = "/foundconnect"}>connect</button>
             </div>
         </div>
       </div>
