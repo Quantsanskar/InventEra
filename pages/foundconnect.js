@@ -458,22 +458,37 @@ export default function FoundConnect() {
                 
                 .hero-content {
                   overflow: hidden;
-                  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
                 }
                 
-                .hero-content.collapsed {
-                  max-height: 0 !important;
-                  opacity: 0;
-                  padding-top: 0 !important;
-                  padding-bottom: 0 !important;
-                  margin: 0 !important;
-                  transform: translateY(-20px);
+                /* Mobile-only shutter animation styles */
+                @media (max-width: 1023px) {
+                  .hero-content {
+                    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                  }
+                  
+                  .hero-content.collapsed {
+                    max-height: 0 !important;
+                    opacity: 0;
+                    padding-top: 0 !important;
+                    padding-bottom: 0 !important;
+                    margin: 0 !important;
+                    transform: translateY(-20px);
+                  }
+                  
+                  .hero-content.expanded {
+                    max-height: 300px;
+                    opacity: 1;
+                    transform: translateY(0);
+                  }
                 }
                 
-                .hero-content.expanded {
-                  max-height: 300px;
-                  opacity: 1;
-                  transform: translateY(0);
+                /* Desktop - always show hero normally */
+                @media (min-width: 1024px) {
+                  .hero-content {
+                    max-height: none !important;
+                    opacity: 1 !important;
+                    transform: none !important;
+                  }
                 }
                 
                 .collapsed-header {
@@ -528,7 +543,7 @@ export default function FoundConnect() {
                     </div>
 
                     {/* Full Hero Section - Hides when collapsed on mobile */}
-                    <div className={`lg:block ${heroCollapsed ? 'hidden lg:flex lg:flex-col' : ''}`}>
+                    <div className={`flex flex-col lg:flex ${heroCollapsed ? 'hidden lg:flex' : ''}`}>
                         {/* Logo */}
                         <div className="p-6 lg:p-8">
                             <Link href="/">
@@ -543,7 +558,7 @@ export default function FoundConnect() {
                         </div>
 
                         {/* Hero Content - Centered */}
-                        <div className={`hero-content flex-1 flex flex-col justify-center px-4 lg:px-8 pb-4 lg:pb-8 ${heroCollapsed ? 'collapsed lg:expanded' : 'expanded'}`}>
+                        <div className={`hero-content flex-1 flex flex-col justify-center px-4 lg:px-8 pb-4 lg:pb-8 ${heroCollapsed ? 'collapsed' : 'expanded'}`}>
                             <div className='h-fit text-white pb-6 md:pb-12 px-4 lg:pl-11 flex flex-col items-start justify-center gap-3 md:gap-5'>
                                 <h1 className='font-manrope font-bold text-3xl md:text-7xl'>hi. we are <br></br> Builder's Space.</h1>
                                 <h2 className='hidden md:block font-manrope opacity-50 text-lg md:text-2xl'>Welcome to Builder's Space-where <br></br> creativity meets chaos! <br></br> Build Cool Stuff. With Cooler People.</h2>
