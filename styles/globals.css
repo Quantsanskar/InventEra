@@ -1,3 +1,7 @@
+/* Google Fonts Import for Campfire */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -311,5 +315,55 @@ body {
 
 .pixel-float {
   animation: pixel-float 2s ease-in-out infinite;
+}
+
+/* ===== CAMPFIRE STYLES ===== */
+
+/* Hero Title - Massive, responsive, League Spartan */
+.hero-title {
+  font-size: clamp(4.5rem, 16vw, 11rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-family: 'League Spartan', sans-serif;
+}
+
+/* Label Mono - Uppercase, spaced labels */
+.label-mono {
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+/* Prose Camp - Large body text */
+.prose-camp {
+  font-size: clamp(18px, 2vw, 20px);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* Prose Camp Small - Medium body text */
+.prose-camp-sm {
+  font-size: clamp(16px, 1.8vw, 18px);
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+/* Fade-in-up animation for Campfire hero */
+@keyframes fadeInUpCampfire {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up-campfire {
+  opacity: 0;
+  animation: fadeInUpCampfire 600ms ease-out forwards;
 }
 
