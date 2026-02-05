@@ -20,7 +20,7 @@
     "@react-three/fiber": "^8.17.12",
     "@react-three/postprocessing": "^2.19.0",
     "@shadcn/ui": "^0.0.4",
-    "@supabase/supabase-js": "^2.94.0",
+    "@supabase/supabase-js": "^2.95.1",
     "@tabler/icons-react": "^3.28.1",
     "@tsparticles/engine": "^3.7.1",
     "@tsparticles/react": "^3.0.0",
