@@ -367,3 +367,79 @@ body {
   animation: fadeInUpCampfire 600ms ease-out forwards;
 }
 
+/* F.inc Event Page Styles */
+.heading-display {
+  font-family: 'Instrument Serif', serif;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .heading-display {
+    font-size: 3rem;
+    line-height: 1;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heading-display {
+    font-size: 3.75rem;
+    line-height: 1;
+  }
+}
+
+.heading-section {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+@media (min-width: 768px) {
+  .heading-section {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+}
+
+.text-body-large {
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+@media (min-width: 768px) {
+  .text-body-large {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+}
+
+.polaroid-card {
+  background: white;
+  padding: 6px 6px 24px 6px;
+  border-radius: 2px;
+  box-shadow: 0 2px 12px -1px rgba(0, 0, 0, 0.12), 0 4px 24px -2px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.polaroid-card:hover {
+  transform: scale(1.05) rotate(0deg) translateY(-10px);
+  z-index: 10;
+  box-shadow: 0 12px 30px -3px rgba(0, 0, 0, 0.18), 0 8px 40px -4px rgba(0, 0, 0, 0.12);
+}
+
+@keyframes polaroid-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-polaroid-float {
+  animation: polaroid-float 6s ease-in-out infinite;
+}
+

@@ -43,6 +43,8 @@ module.exports = {
         caveat: ["Caveat", "cursive"],
         sans: ["Plus Jakarta Sans", "sans-serif"],
         inconsolata: ["Inconsolata", "monospace"],
+        'instrument-sans': ['Instrument Sans', 'sans-serif'],
+        'instrument-serif': ['Instrument Serif', 'serif'],
       },
 
       animation: {
@@ -54,6 +56,8 @@ module.exports = {
         "float-medium": "float-medium 6s ease-in-out infinite",
         "float-fast": "float-fast 4s ease-in-out infinite",
         "rotate": "rotate 15s linear infinite",
+        "polaroid-float": "polaroid-float 6s ease-in-out infinite",
+        "fade-in-up": "fade-in-up 0.6s ease-out",
       },
       keyframes: {
         gradient: {
@@ -92,6 +96,14 @@ module.exports = {
         rotate: {
           "0%": { transform: "rotate(0deg)" },
           "100%": { transform: "rotate(360deg)" },
+        },
+        "polaroid-float": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+        "fade-in-up": {
+          "0%": { opacity: "0", transform: "translateY(20px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
         },
 
         animation: {
@@ -136,6 +148,15 @@ module.exports = {
           card: {
             DEFAULT: "hsl(var(--card))",
             foreground: "hsl(var(--card-foreground))",
+          },
+          // f.inc design system colors
+          finc: {
+            bg: "hsl(45 20% 97%)",
+            fg: "hsl(0 0% 8%)",
+            accent: "hsl(42 100% 50%)",
+            'muted-fg': "hsl(0 0% 45%)",
+            card: "hsl(0 0% 100%)",
+            border: "hsl(0 0% 88%)",
           },
         },
         borderRadius: {
